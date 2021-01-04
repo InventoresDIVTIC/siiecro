@@ -1,0 +1,266 @@
+@page {
+    margin: 0cm 0cm;
+    font-family: Louis George Cafe;
+}
+
+@font-face {
+  font-family: 'Louis George Cafe';
+  font-style: normal;
+  font-weight: normal;
+  src: url({{ asset('fonts/Louis-George-Cafe.ttf') }}) format('truetype')
+}
+
+@font-face {
+  font-family: 'Louis George Cafe';
+  font-style: normal;
+  font-weight: bold;
+  src: url({{ asset('fonts/Louis-George-Cafe-Bold.ttf') }}) format('truetype')
+}
+
+body {
+    margin: 3cm 2cm 2cm;
+}
+
+header {
+    position: fixed;
+    top: 0cm;
+    left: 0cm;
+    right: 0cm;
+    height: 2cm;
+    color: black;
+    line-height: 20px;
+    padding: 0px 50px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0cm;
+    left: 0cm;
+    right: 0cm;
+    height: 2cm;
+    text-align: center;
+    line-height: 35px;
+}
+
+.pagenum:before {
+    content: counter(page);
+    font-size: 18px;
+}
+
+.inline-block{
+	display: inline-block;
+}
+
+.col-10{
+	width: 10%;
+}
+
+.col-20{
+	width: 20%;
+}
+
+.col-30{
+	width: 30%;
+}
+
+.col-40{
+	width: 40%;
+}
+
+.col-50{
+	width: 50%;
+}
+
+.col-60{
+	width: 60%;
+}
+
+.col-70{
+	width: 70%;
+}
+
+.col-80{
+	width: 80%;
+}
+
+.col-90{
+	width: 90%;
+}
+
+.col-100{
+	width: 100%;
+}
+
+.pull-left{
+	float: left;
+}
+
+.pull-right{
+	float: right;
+}
+
+.mt-sm{
+	margin-top: 10px;
+}
+
+.mt-md{
+	margin-top: 20px;
+}
+
+.mt-lg{
+	margin-top: 30px;
+}
+
+.mr-sm{
+	margin-right: 10px;
+}
+
+.mr-md{
+	margin-right: 20px;
+}
+
+.mr-lg{
+	margin-right: 30px;
+}
+
+.ml-sm{
+	margin-left: 10px;
+}
+
+.ml-md{
+	margin-left: 20px;
+}
+
+.ml-lg{
+	margin-left: 30px;
+}
+
+.mr-lg{
+	margin-right: 30px;
+}
+
+.mb-sm{
+	margin-bottom: 10px;
+}
+
+.mb-md{
+	margin-bottom: 20px;
+}
+
+.mb-lg{
+	margin-bottom: 30px;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.text-right{
+	text-align: right;
+}
+
+.text-left{
+	text-align: left;
+}
+
+.text-justify{
+	text-align: justify;
+}
+
+.titulo{
+	font-size: 24px;
+}
+
+.subtitulo{
+	font-size: 20px;
+}
+
+.fs-sm{
+    font-size: 15px;
+}
+
+.fs-md{
+    font-size: 18px;
+}
+
+.fs-lg{
+    font-size: 23px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
+}
+
+
+hr.semi {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #C0C0C0; /* old IE */
+    background-color: #C0C0C0; /* Modern Browsers */
+}
+
+table{
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+td {
+  padding: 5px 10px;
+}
+
+th{
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.fs-10{
+  font-size: 10px;
+}
+
+.fs-12{
+  font-size: 12px;
+}
+
+.fs-14{
+  font-size: 14px;
+}
+
+.fs-16{
+  font-size: 16px;
+}
+
+.fs-18{
+  font-size: 18px;
+}
+
+.fs-20{
+  font-size: 20px;
+}
+
+.fs-22{
+  font-size: 22px;
+}
+
+.fs-24{
+  font-size: 24px;
+}
+
+.fs-26{
+  font-size: 26px;
+}
+
+.fs-28{
+  font-size: 28px;
+}
+
+.fs-30{
+  font-size: 30px;
+}
