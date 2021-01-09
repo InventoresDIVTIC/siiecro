@@ -71,8 +71,7 @@
 						    		<th class="col-20 fs-12">Información requerida (¿Qué?)</th>
 						    		<th class="col-20 fs-12">Motivo (¿Para qué?)</th>
 						    		<th class="col-20 fs-12">Descripción muestra</th>
-						    		<th class="col-10 fs-12">Ubicación</th>
-						    		<th class="col-10 fs-12">Responsable</th>
+						    		<th class="col-20 fs-12">Ubicación</th>
 					    		</tr>
 					    	</thead>
 					    	<tbody>
@@ -84,7 +83,6 @@
 						    			<td class="fs-12">{{ nl2br($muestra->motivo) }}</td>
 						    			<td class="fs-12">{{ nl2br($muestra->descripcion_muestra) }}</td>
 						    			<td class="fs-12">{{ $muestra->ubicacion }}</td>
-						    			<td class="fs-12">POR DEFINIR</td>
 						    		</tr>
 					    		@endforeach
 					    	</tbody>

@@ -18,8 +18,15 @@
         </ol>
     </div>
     <div class="col-sm-4">
-        <a href="{{ route('dashboard.obras.imprimir-oficio', $obra->id) }}" target="_blank"><button class="btn btn-outline btn-info dim m-t-md pull-right" type="button">Oficio <i class="fa fa-file-pdf-o"></i></button></a>
-        <a href="{{ route('dashboard.obras.imprimir', $obra->id) }}" target="_blank"><button class="btn btn-outline btn-success dim m-t-md pull-right" type="button">Imprimir <i class="fa fa-print"></i></button></a>
+
+        @if (Auth::user()->rol->imprimir_condicionado)
+            <a href="{{ route('dashboard.obras.imprimir-oficio', $obra->id) }}" target="_blank"><button class="btn btn-outline btn-info dim m-t-md pull-right" type="button">Oficio <i class="fa fa-file-pdf-o"></i></button></a>
+        @endif
+
+        @if (Auth::user()->rol->imprimir_oficios)
+            <a href="{{ route('dashboard.obras.imprimir', $obra->id) }}" target="_blank"><button class="btn btn-outline btn-success dim m-t-md pull-right" type="button">Imprimir <i class="fa fa-print"></i></button></a>
+        @endif
+
     </div>
 @endsection
 

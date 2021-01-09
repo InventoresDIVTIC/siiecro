@@ -18,6 +18,12 @@ class ProyectosTemporadasTrabajoController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
+
+        $this->middleware('VerificarPermiso:imprimir_condicionado',     [
+                                                                            "only"  =>  [
+                                                                                            "imprimir"
+                                                                                        ]
+                                                                        ]);
     }
 
     public function cargarTabla(Request $request, $proyecto_id){
@@ -27,7 +33,11 @@ class ProyectosTemporadasTrabajoController extends Controller
                         ->addColumn('acciones', function($registro){
                             $editar         =   '<i onclick="editar('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Editar"></i>';
                             $eliminar       =   '<i onclick="eliminar('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Eliminar"></i>';
-                            $imprimir       =   '<a class="icon-link" href="'.route("dashboard.temporadas-trabajo.imprimir", $registro->id).'" target="_blank"><i class="fa fa-print fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Imprimir"></i></a>';
+                            $imprimir       =   '';
+
+                            if (Auth::user()->rol->imprimir_condicionado) {
+                                $imprimir   =   '<a class="icon-link" href="'.route("dashboard.temporadas-trabajo.imprimir", $registro->id).'" target="_blank"><i class="fa fa-print fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Imprimir"></i></a>';
+                            }
 
                             return $imprimir.$editar.$eliminar;
                         })

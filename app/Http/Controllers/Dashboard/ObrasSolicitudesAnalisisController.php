@@ -45,6 +45,12 @@ class ObrasSolicitudesAnalisisController extends Controller
                                                                                                     "destroy"
                                                                                                 ]
                                                                                 ]);
+
+        $this->middleware('VerificarPermiso:imprimir_condicionado',             [
+                                                                                    "only"  =>  [
+                                                                                                    "imprimir"
+                                                                                                ]
+                                                                                ]);
     }
     
 ###### SOLICITUDES ANALISIS ##################################################################################
@@ -99,7 +105,9 @@ class ObrasSolicitudesAnalisisController extends Controller
                             $rechazar           =   '';
                             $revision           =   '';
 
-                            $imprimir           =   '<a class="icon-link" href="'.route('dashboard.solicitudes-analisis.imprimir', $registro->id).'" target="_blank"><i class="fa fa-print fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Imprimir"></i></a>';
+                            if(Auth::user()->rol->imprimir_condicionado){
+                                $imprimir       =   '<a class="icon-link" href="'.route('dashboard.solicitudes-analisis.imprimir', $registro->id).'" target="_blank"><i class="fa fa-print fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Imprimir"></i></a>';
+                            }
 
                             if ($registro->estatus == 'Rechazada') {
                                 $muestra        =   '<i onclick="verMuestras('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Ver todas las muestras"></i>';

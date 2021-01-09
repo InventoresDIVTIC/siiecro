@@ -45,6 +45,16 @@ class ObrasController extends Controller
                                                                                                 "destroy"
                                                                                             ]
                                                                             ]);
+        $this->middleware('VerificarPermiso:imprimir_condicionado',         [
+                                                                                "only"  =>  [
+                                                                                                "imprimir"
+                                                                                            ]
+                                                                            ]);
+        $this->middleware('VerificarPermiso:imprimir_oficios',              [
+                                                                                "only"  =>  [
+                                                                                                "imprimirOficio"
+                                                                                            ]
+                                                                            ]);
     }
     
     public function index(){
