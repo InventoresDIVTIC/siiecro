@@ -450,7 +450,7 @@
                             <li class=""><a data-toggle="tab" href="#tab-solicitudes-analisis"> Solicitudes de ánalisis</a></li>
                         @endif
                         
-                        <li class=""><a data-toggle="tab" href="#tab-resultado-analisis">Resultado de análisis</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-resultados-analisis">Resultado de análisis</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-informes">Informes</a></li>
                     </ul>
 

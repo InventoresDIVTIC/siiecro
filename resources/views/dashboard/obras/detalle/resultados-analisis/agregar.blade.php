@@ -19,18 +19,18 @@
                         <div class="row">
                             <div class="col-md-4 div-input">
                                 <label for="nomenclatura">Nomenclatura</label>
-                                <input type="text" class="form-control" id="nomenclatura" value="{{ $solicitud->nomenclatura }}" disabled="">
+                                <input type="text" class="form-control" id="nomenclatura" value="{{ $solicitud->nomenclatura }}" disabled="" no-editar>
                             </div>
                             
                             <div class="col-md-8 div-input">
                                 <label for="tipo_analisis">Caracterización materiales</label>
-                                <input type="text" class="form-control" id="tipo_analisis" value="{{ $solicitud->nombre }}" disabled="">
+                                <input type="text" class="form-control" id="tipo_analisis" value="{{ $solicitud->nombre }}" disabled="" no-editar>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 div-input">
                                 <label for="lugar_resguardo_muestra">Lugar de resguardo de la muestra</label>
-                                <input type="text" class="form-control" id="lugar_resguardo_muestra" name="lugar_resguardo_muestra" value="{{ $registro->lugar_resguardo_muestra }}" >
+                                <input type="text" class="form-control" id="lugar_resguardo_muestra" name="lugar_resguardo_muestra" value="{{ $registro->lugar_resguardo_muestra }}" no-editar>
                             </div>
                         </div>
                     </div>
@@ -38,15 +38,24 @@
                     <hr>
 
                     <div class="form-group">
+                        <div id="btn-group-habilitar-edicion-resultados">
+                            <button onclick="toggleEdicionResultadoAnalisis(true);" type="button" class="btn btn-primary pull-right">Editar</button> 
+                        </div>
+                        <div id="btn-group-no-editar-resultados" class="hidden">
+                            <button onclick="toggleEdicionResultadoAnalisis(false);" type="button" class="btn btn-danger pull-right">Cancelar edición</button> 
+                        </div>                    
+                    </div>
+
+                    <div class="form-group">
                         <div class="row">
                             <div class="col-md-4 div-input required">
                                 <label for="fecha_analisis">Fecha del análisis</label>
-                                <input type="text" class="form-control" id="fecha_analisis" name="fecha_analisis" value="{{ $registro->fecha_analisis }}" required autocomplete="off">
+                                <input type="text" class="form-control" id="fecha_analisis" name="fecha_analisis" value="{{ $registro->fecha_analisis }}" required autocomplete="off" disabled="">
                             </div>
                             
                             <div class="col-md-8 div-input required">
                                 <label for="profesor_responsable_de_analisis_id">Asesor científico responsable</label>
-                                <select class="form-control select2" id="profesor_responsable_de_analisis_id" name="profesor_responsable_de_analisis_id" required autocomplete="off">
+                                <select class="form-control select2" id="profesor_responsable_de_analisis_id" name="profesor_responsable_de_analisis_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($asesor_cientifico_responsable as $profesor)
                                         <option {{ $profesor->id == $registro->profesor_responsable_de_analisis_id ? "selected" : "" }} value="{{ $profesor->id }}">{{ $profesor->name }}</option>
@@ -57,7 +66,7 @@
                         <div class="row">
                             <div class="col-md-6 div-input required">
                                 <label for="persona_realiza_analisis_id">Persona que realizó el análisis</label>
-                                <select class="form-control select2" id="persona_realiza_analisis_id" name="persona_realiza_analisis_id" required autocomplete="off">
+                                <select class="form-control select2" id="persona_realiza_analisis_id" name="persona_realiza_analisis_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($persona_realiza_analisis as $persona)
                                         <option {{ $persona->id == $registro->persona_realiza_analisis_id ? "selected" : "" }} value="{{ $persona->id }}">{{ $persona->name }}</option>
@@ -67,7 +76,7 @@
 
                             <div class="col-md-6 div-input required">
                                 <label for="forma_obtencion_muestra_id">Forma de obtención de la muestra</label>
-                                <select class="form-control select2" id="forma_obtencion_muestra_id" name="forma_obtencion_muestra_id" required autocomplete="off">
+                                <select class="form-control select2" id="forma_obtencion_muestra_id" name="forma_obtencion_muestra_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($formas_obtencion as $forma_obtencion)
                                         <option {{ $forma_obtencion->id == $registro->forma_obtencion_muestra_id ? "selected" : "" }} value="{{ $forma_obtencion->id }}">{{ $forma_obtencion->nombre }}</option>
@@ -83,7 +92,7 @@
                         <div class="row">
                             <div class="col-md-12 div-input required">
                                 <label for="ubicacion_de_toma_muestra">Ubicación de la toma de muestra</label>
-                                <input type="text" class="form-control" id="ubicacion_de_toma_muestra" name="ubicacion_de_toma_muestra" value="{{ $registro->ubicacion_de_toma_muestra }}" required autocomplete="off">
+                                <input type="text" class="form-control" id="ubicacion_de_toma_muestra" name="ubicacion_de_toma_muestra" value="{{ $registro->ubicacion_de_toma_muestra }}" required autocomplete="off" disabled="">
                             </div>
                         </div>
 
@@ -103,7 +112,7 @@
                         <div class="row">
                             <div class="col-md-6 div-input required">
                                 <label for="tipo_material_id">Tipo de material</label>
-                                <select class="form-control select2" id="tipo_material_id" name="tipo_material_id" required autocomplete="off">
+                                <select class="form-control select2" id="tipo_material_id" name="tipo_material_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($tipos_material as $tipo_material)
                                         <option {{ $tipo_material->id == $registro->tipo_material_id ? "selected" : "" }} value="{{ $tipo_material->id }}">{{ $tipo_material->nombre }}</option>
@@ -113,7 +122,7 @@
 
                             <div class="col-md-6 div-input">
                                 <label for="descripcion">Descripción</label>
-                                <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ $registro->descripcion }}" autocomplete="off">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ $registro->descripcion }}" autocomplete="off" disabled="">
                             </div>
                         </div>
 
@@ -132,7 +141,7 @@
                         <div class="row">
                             <div class="col-md-12 div-input">
                                 <label for="ruta_acceso_microfotografia">Ruta de acceso a microfotografía</label>
-                                <input type="text" class="form-control" id="ruta_acceso_microfotografia" name="ruta_acceso_microfotografia" value="{{ $registro->ruta_acceso_microfotografia }}" autocomplete="off">
+                                <input type="text" class="form-control" id="ruta_acceso_microfotografia" name="ruta_acceso_microfotografia" value="{{ $registro->ruta_acceso_microfotografia }}" autocomplete="off" disabled="">
                             </div>
                         </div>
 
@@ -142,7 +151,7 @@
                         <div class="row ibox">
                             <div class="col-md-6 div-input required">
                                 <label for="informacion_por_definir_id">Información por definir</label>
-                                <select class="form-control select2" id="informacion_por_definir_id" name="informacion_por_definir_id" required autocomplete="off">
+                                <select class="form-control select2" id="informacion_por_definir_id" name="informacion_por_definir_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($tipos_material_informacion_por_definir as $informacion_por_definir)
                                         <option {{ $informacion_por_definir->id == $registro->informacion_por_definir_id ? "selected" : "" }} value="{{ $informacion_por_definir->id }}">{{ $informacion_por_definir->nombre }}</option>
@@ -184,11 +193,11 @@
                         <div class="row">
                             <div class="col-md-6 div-input">
                                 <label for="conclusion_general">Conclusion general</label>
-                                <textarea class="form-control no-resize" name="conclusion_general" id="conclusion_general" rows="6" autocomplete="off"><?php echo($registro->conclusion_general); ?></textarea>
+                                <textarea class="form-control no-resize" name="conclusion_general" id="conclusion_general" rows="6" autocomplete="off" disabled=""><?php echo($registro->conclusion_general); ?></textarea>
                             </div>
                             <div class="col-md-6 div-input required">
                                 <label for="interpretacion_particular_id">Interpretación particular</label>
-                                <select class="form-control select2" id="interpretacion_particular_id" name="interpretacion_particular_id" required autocomplete="off">
+                                <select class="form-control select2" id="interpretacion_particular_id" name="interpretacion_particular_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($tipos_material_interpretacion_particular as $interpretacion_particular)
                                         <option {{ $interpretacion_particular->id == $registro->interpretacion_particular_id ? "selected" : "" }} value="{{ $interpretacion_particular->id }}">{{ $interpretacion_particular->nombre }}</option>

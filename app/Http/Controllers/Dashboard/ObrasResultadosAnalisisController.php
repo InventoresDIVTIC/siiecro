@@ -102,7 +102,7 @@ class ObrasResultadosAnalisisController extends Controller
                             $revision           =   '';
 
                             if ($registro->estatus == 'Rechazado') {
-                                // $editar      =   '<i onclick="editarResultado('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar resultado de analisis"></i>';
+                                // $editar      =   '<i onclick="editarResultado('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Mostrar resultado de analisis"></i>';
                                 
                                 if(Auth::user()->rol->eliminar_solicitud_analisis){
                                     $eliminar   =   '<i onclick="eliminarResultado('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar resultado de analisis"></i>';
@@ -113,7 +113,7 @@ class ObrasResultadosAnalisisController extends Controller
                                 }
                             }
                             elseif ($registro->estatus == 'Aprobado') {
-                                $editar         =   '<i onclick="editarResultado('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar resultado de analisis"></i>';
+                                $editar         =   '<i onclick="editarResultado('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Mostrar resultado de analisis"></i>';
 
                                 if(Auth::user()->rol->eliminar_solicitud_analisis){
                                     $eliminar   =   '<i onclick="eliminarResultado('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar resultado de analisis"></i>';
@@ -125,7 +125,7 @@ class ObrasResultadosAnalisisController extends Controller
                                 }
                             }
                             else{
-                                $editar         =   '<i onclick="editarResultado('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar resultado de analisis"></i>';
+                                $editar         =   '<i onclick="editarResultado('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Mostrar resultado de analisis"></i>';
 
                                 if(Auth::user()->rol->eliminar_solicitud_analisis){
                                     $eliminar   =   '<i onclick="eliminarResultado('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar resultado de analisis"></i>';
