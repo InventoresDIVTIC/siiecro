@@ -98,7 +98,6 @@ class ObrasSolicitudesAnalisisController extends Controller
                         })
                         ->addColumn('acciones', function($registro){
                             $muestra            =   '';
-                            $editar             =   '';
                             $imprimir           =   '';
                             $eliminar           =   '';
                             $aprobar            =   '';
@@ -123,7 +122,6 @@ class ObrasSolicitudesAnalisisController extends Controller
                             }
                             elseif ($registro->estatus == 'Aprobada') {
                                 $muestra        =   '<i onclick="verMuestras('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Ver todas las muestras"></i>';
-                                $editar         =   '<i onclick="editar('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar solicitud de analisis"></i>';
 
                                 if(Auth::user()->rol->eliminar_solicitud_analisis){
                                     $eliminar   =   '<i onclick="eliminar('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar solicitud de analisis"></i>';
@@ -137,7 +135,6 @@ class ObrasSolicitudesAnalisisController extends Controller
                             }
                             else{
                                 $muestra        =   '<i onclick="verMuestras('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Ver todas las muestras"></i>';
-                                $editar         =   '<i onclick="editar('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar solicitud de analisis"></i>';
 
                                 if(Auth::user()->rol->eliminar_solicitud_analisis){
                                     $eliminar   =   '<i onclick="eliminar('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar solicitud de analisis"></i>';
@@ -150,7 +147,7 @@ class ObrasSolicitudesAnalisisController extends Controller
                                 // $revision    =   '<i onclick="ponerEnRevisionSolicitudAnalisis('.$registro->id.')" class="fa fa-history fa-lg m-r-sm pointer inline-block disabled" aria-hidden="true" mi-tooltip="Poner en revision solicitud de analisis"></i>';
                             }
 
-                            return $muestra.$aprobar.$rechazar.$revision.$imprimir.$editar.$eliminar;
+                            return $muestra.$aprobar.$rechazar.$revision.$imprimir.$eliminar;
                         })
                         ->rawColumns(['fecha_intervencion','acciones'])
                         ->make('true');
@@ -363,9 +360,20 @@ class ObrasSolicitudesAnalisisController extends Controller
 
     public function verMuestras($id)
     {
-        $registro = ObrasSolicitudesAnalisis::findOrFail($id);
+        $registro                       = ObrasSolicitudesAnalisis::findOrFail($id);
+        $responsables_intervencion      = ObrasUsuariosAsignados::selectRaw('
+                                                                                users.id,
+                                                                                users.name
+                                                                            ')
+                                                                ->join('users', 'users.id', '=', 'obras__usuarios_asignados.usuario_id')
+                                                                ->where('users.es_responsable_intervencion', '=', 'si')
+                                                                ->where('obras__usuarios_asignados.id', '=', $registro->obra_id)
+                                                                ->get();
 
-        return view('dashboard.obras.detalle.solicitudes-analisis.ver-muestras', ['registro' => $registro] );
+        $temporadasTrabajoAsignadas     = ObrasTemporadasTrabajoAsignadas::where('obra_id', $registro->obra_id)
+                                                                        ->get();
+                                                            
+        return view('dashboard.obras.detalle.solicitudes-analisis.ver-muestras', ["registro" => $registro, 'responsables_intervencion' => $responsables_intervencion, "temporadasTrabajoAsignadas" => $temporadasTrabajoAsignadas]);
     }
 
     public function cargarMuestras(Request $request, $solicitud_analisis_id)

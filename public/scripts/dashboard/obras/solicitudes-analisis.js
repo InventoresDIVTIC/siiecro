@@ -183,6 +183,46 @@ function verMuestras(id)
                         "#modal-ver-muestras", //Nombre modal
                         "#tecnica", //Elemento al que se le dara focus una vez cargado el modal
                         function(){
+                          // MODIFICACION (UNA MASSSS)
+                          $('#obra_usuario_asignado_id, #obra_temporada_trabajo_asignada_id').select2({
+                            placeholder: "Seleccione una opción"
+                          });
+                          
+                          $("#fecha_intervencion").datepicker({
+                            language:       'es',
+                            format:         'yyyy-mm-dd',
+                         });
+
+                          $("#dropzone-solicitud-analisis").dropzone({ 
+                            url: "/dashboard/solicitudes-analisis/" + id + "/subir-esquema",
+                            uploadMultiple: false,
+                            parallelUploads: 1,
+                            maxFiles: 10,
+                            addRemoveLinks: false,
+                            acceptedFiles: 'image/*',
+                            sending: function(file, xhr, formData) {
+                               formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
+                            },
+                            error: function(file, message) {
+                               $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(message.mensaje);
+                            },
+                            success: function(file, message){
+                               var drop    =  this;
+                               setTimeout(function() {
+                                 drop.removeFile(file);
+                                 recargarImagenesEsquema(id);
+                               }, 1000);
+                            }
+                          });
+
+                          $('#carrusel-imagenes-esquema').owlCarousel({
+                            loop:      false,
+                            margin:    10,
+                            nav:       false,
+                            center:    false
+                          });
+                          // FIN DE MODIFICACION (UNA MASSS)
+                          
                           $('#nombre_obra_solicitud').text($('#nombre_obra').text());
                           $('#folio_obra_solicitud').text($('#folio_obra').text());
                           recargarImagenesEsquema(id);
@@ -206,10 +246,24 @@ function verMuestras(id)
                         "#carga-agregar", //Loading de guardar datos de formulario
                         "#div-notificacion", //Div donde mostrara el error en caso de, vacio lo muestra en toastr
                         function(){
-                            _ocultarModal("#modal-crear", function(){
+                            _ocultarModal("#modal-ver-muestras", function(){
                               _recargarTabla("#dt-datos-solicitudes-analisis");
                             });
                         });//Funcion en caso de guardar correctamente);
+}
+
+function toggleEdicionSolicitudesAnalisis(estatus){
+// True: Habilitar edicion
+// False: Deshabilitar edicion
+  if(estatus) {
+    $("#form-obras-detalle-solicitudes-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', false);
+    $("#btn-group-habilitar-edicion-analisis").addClass('hidden');
+    $("#btn-group-no-editar-analisis").removeClass('hidden');
+  } else {
+    $("#form-obras-detalle-solicitudes-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', true);
+    $("#btn-group-habilitar-edicion-analisis").removeClass('hidden');
+    $("#btn-group-no-editar-analisis").addClass('hidden');
+  }
 }
 
 function crearMuestra(id_de_solicitud)
