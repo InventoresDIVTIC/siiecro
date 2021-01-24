@@ -13,10 +13,19 @@
             @endif
                 <div class="modal-body">
                     <div class="form-group">
+                        <div id="btn-group-habilitar-edicion-resultados-analiticos">
+                            <button onclick="toggleEdicionDatosAnaliticos(true);" type="button" class="btn btn-primary pull-right">Editar</button> 
+                        </div>
+                        <div id="btn-group-no-editar-resultados-analiticos" class="hidden">
+                            <button onclick="toggleEdicionDatosAnaliticos(false);" type="button" class="btn btn-danger pull-right">Cancelar edición</button> 
+                        </div>                    
+                    </div>
+
+                    <div class="form-group">
                         <div class="row">
                             <div class="col-md-6 div-input required">
                                 <label for="analisis_a_realizar_id">Análisis a realizar</label>
-                                <select class="form-control select2" id="analisis_a_realizar_id" name="analisis_a_realizar_id" required autocomplete="off">
+                                <select class="form-control select2" id="analisis_a_realizar_id" name="analisis_a_realizar_id" required disabled="" autocomplete="off">
                                     <option value=""></option>
                                     @foreach ($analisis_a_realizar as $analisis)
                                         <option {{ $analisis->id == $registro->analisis_a_realizar_id ? "selected" : "" }} value="{{ $analisis->id }}">{{ $analisis->nombre }}</option>
@@ -25,7 +34,7 @@
                             </div>
                             <div class="col-md-6 div-input required">
                                 <label for="tecnica_analitica_id">Técnica analítica</label>
-                                <select class="form-control select2" id="tecnica_analitica_id" name="tecnica_analitica_id" required autocomplete="off">
+                                <select class="form-control select2" id="tecnica_analitica_id" name="tecnica_analitica_id" required disabled="" autocomplete="off">
                                     <option value=""></option>
                                     @foreach ($analisis_a_realizar_tecnicas as $tecnica)
                                         <option {{ $tecnica->id == $registro->tecnica_analitica_id ? "selected" : "" }} value="{{ $tecnica->id }}">{{ $tecnica->nombre }}</option>
@@ -36,31 +45,31 @@
                         <div class="row">
                             <div class="col-md-6 div-input required">
                                 <label for="descripciones">Descripciones</label>
-                                <textarea class="form-control no-resize" name="descripciones" id="descripciones" rows="6" required autocomplete="off"><?php echo($registro->descripciones); ?></textarea>
+                                <textarea class="form-control no-resize" name="descripciones" id="descripciones" rows="6" required disabled="" autocomplete="off"><?php echo($registro->descripciones); ?></textarea>
                             </div>
                             <div class="col-md-6 div-input required">
                                 <label for="interpretacion">Interpretacion</label>
-                                <textarea class="form-control no-resize" name="interpretacion" id="interpretacion" rows="6" required autocomplete="off"><?php echo($registro->interpretacion); ?></textarea>
+                                <textarea class="form-control no-resize" name="interpretacion" id="interpretacion" rows="6" required disabled="" autocomplete="off"><?php echo($registro->interpretacion); ?></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 div-input">
                                 <label for="datos">Datos</label>
-                                <input type="text" class="form-control" id="datos" name="datos" value="{{ $registro->datos }}" autocomplete="off">
+                                <input type="text" class="form-control" id="datos" name="datos" value="{{ $registro->datos }}" disabled="" autocomplete="off">
                             </div>
                             <div class="col-md-6 div-input">
                                 <label for="info_del_equipo">Información del equipo</label>
-                                <input type="text" class="form-control" id="info_del_equipo" name="info_del_equipo" value="{{ $registro->info_del_equipo }}" autocomplete="off">
+                                <input type="text" class="form-control" id="info_del_equipo" name="info_del_equipo" value="{{ $registro->info_del_equipo }}" disabled="" autocomplete="off">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 div-input">
                                 <label for="ruta_acceso_imagen">Ruta de acceso a imagen</label>
-                                <input type="text" class="form-control" id="ruta_acceso_imagen" name="ruta_acceso_imagen" value="{{ $registro->ruta_acceso_imagen }}" autocomplete="off">
+                                <input type="text" class="form-control" id="ruta_acceso_imagen" name="ruta_acceso_imagen" value="{{ $registro->ruta_acceso_imagen }}" disabled="" autocomplete="off">
                             </div>
                             <div class="col-md-6 div-input">
                                 <label for="ruta_acceso_datos">Ruta de acceso a datos</label>
-                                <input type="text" class="form-control" id="ruta_acceso_datos" name="ruta_acceso_datos" value="{{ $registro->ruta_acceso_datos }}" autocomplete="off">
+                                <input type="text" class="form-control" id="ruta_acceso_datos" name="ruta_acceso_datos" value="{{ $registro->ruta_acceso_datos }}" disabled="" autocomplete="off">
                             </div>
                         </div>
 
@@ -85,7 +94,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-primary" disabled="">Guardar Cambios</button>
                 </div>
 
                 <input type="hidden" id="resultado_analisis_id" name="resultado_analisis_id" value="{{ $registro != "[]" ? $registro->resultado_analisis_id : ''}}">

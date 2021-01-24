@@ -365,7 +365,7 @@ class ObrasResultadosAnalisisController extends Controller
                             return $imagen;
                         })
                         ->addColumn('acciones', function($registro){
-                            $editar     = '<i onclick="editarDatosAnaliticos('.$registro->id_resultado.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar resultado de analisis"></i>';
+                            $editar     = '<i onclick="editarDatosAnaliticos('.$registro->id_resultado.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar resultado de analisis"></i>';
                             // $analiticos = '<i onclick="agregarDatosAnaliticos('.$registro->id.')" class="fa fa-plus fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Agregar datos analíticos"></i>';
                             $eliminar   = '<i onclick="eliminarDatosAnaliticos('.$registro->id_resultado.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar resultado de analisis"></i>';
 
@@ -387,10 +387,6 @@ class ObrasResultadosAnalisisController extends Controller
     public function guardarResultadoAnalitico(Request $request)
     {
         if($request->ajax()){
-            // $request->merge([
-            //                     // "usuario_creo_id"   =>  Auth::id()
-            //                 ]);
-
             return BD::crear('ObrasAnalisisARealizarResultados', $request);
         }
 
@@ -402,15 +398,6 @@ class ObrasResultadosAnalisisController extends Controller
         $registro                       = ObrasAnalisisARealizarResultados::findOrFail($id);
         $analisis_a_realizar            = ObrasAnalisisARealizar::all();
         $analisis_a_realizar_tecnicas   = ObrasAnalisisARealizarTecnica::all();
-
-        // $responsables_intervencion  = ObrasUsuariosAsignados::selectRaw('
-        //                                                                 users.id,
-        //                                                                 users.name
-        //                                                                 ')
-        //                                                     ->join('users', 'users.id', '=', 'obras__usuarios_asignados.usuario_id')
-        //                                                     ->where('users.es_responsable_intervencion', '=', 'si')
-        //                                                     ->where('obras__usuarios_asignados.id', '=', $id)
-        //                                                     ->get();
                                                             
         return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
     }

@@ -177,6 +177,20 @@ function toggleEdicionResultadoAnalisis(estatus){
   }
 }
 
+function toggleEdicionDatosAnaliticos(estatus){
+// True: Habilitar edicion
+// False: Deshabilitar edicion
+  if(estatus) {
+    $("#form-obras-detalle-crear-resultados-analiticos").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', false);
+    $("#btn-group-habilitar-edicion-resultados-analiticos").addClass('hidden');
+    $("#btn-group-no-editar-resultados-analiticos").removeClass('hidden');
+  } else {
+    $("#form-obras-detalle-crear-resultados-analiticos").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', true);
+    $("#btn-group-habilitar-edicion-resultados-analiticos").removeClass('hidden');
+    $("#btn-group-no-editar-resultados-analiticos").addClass('hidden');
+  }
+}
+
 function eliminarResultado(solicitudes_analisis_muestras_id)
 {
   _mostrarFormulario("/dashboard/resultados-analisis/"+solicitudes_analisis_muestras_id+"/eliminar/", //Url solicitud de datos
