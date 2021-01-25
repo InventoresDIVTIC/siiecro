@@ -43,6 +43,7 @@
                                 
                                 <li><a href="{{ route('dashboard.obras-forma-obtencion-muestra.index') }}">Forma de Obtención de la Muestra</a></li>
                                 <li><a href="{{ route('dashboard.obras-tipo-de-material.index') }}">Tipo de Material</a></li>
+                                <li><a href="{{ route('dashboard.obras-informacion-por-definir.index') }}">Información por Definir</a></li>
                             </ul>
                         </li>
                     @endif
