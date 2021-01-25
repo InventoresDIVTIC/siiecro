@@ -187,6 +187,12 @@ Auth::routes();
 			Route::resource('obras-forma-obtencion-muestra', 			'ObrasFormaObtencionMuestraController');
 		#################################################################################
 
+	    ######## OBRAS TIPO DE MATERIAL #################################################
+			Route::get('obras-tipo-de-material/carga', 					'ObrasTipoDeMaterialController@cargarTabla');
+			Route::get('obras-tipo-de-material/{id}/eliminar', 			'ObrasTipoDeMaterialController@eliminar');
+			Route::resource('obras-tipo-de-material', 					'ObrasTipoDeMaterialController');
+		#################################################################################
+
 	});
 
 #########################################################################

@@ -2,19 +2,19 @@
 
 @section('top-body')
     <div class="col-sm-4">
-        <h2>Administración de Forma de Obtención de la Muestra</h2>
+        <h2>Administración de Tipo de Material</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ route('dashboard.dashboard.index') }}">Dashboard</a>
             </li>
             <li class="active">
-                <strong>Obras | Forma de Obtención de la Muestra</strong>
+                <strong>Obras | Tipo de Material</strong>
             </li>
         </ol>
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-            <btn onclick="crear();" class="btn btn-primary">Crear nueva Forma de Obtención de la Muestra</btn>
+            <btn onclick="crear();" class="btn btn-primary">Crear nuevo Tipo de Material</btn>
         </div>
     </div>
 @endsection
@@ -49,5 +49,5 @@
 @endsection
 
 @section('scripts')
-    {!! Html::script('scripts/dashboard/obras/forma-obtencion-muestra.js') !!}
+    {!! Html::script('scripts/dashboard/obras/tipo-de-material.js') !!}
 @endsection

@@ -3,13 +3,13 @@
     	<div class="modal-content animated bounceInRight">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Forma de Obtención de la Muestra</h4>
-                <small class="font-bold">Eliminar Forma de Obtención de la Muestra</small>
+                <h4 class="modal-title">Tipo de Material</h4>
+                <small class="font-bold">Eliminar Tipo de Material</small>
             </div>
-            {!! Form::open(['route' => ['dashboard.obras-forma-obtencion-muestra.destroy', $registro->id], 'method' => 'DELETE', 'id' => 'form-obras-forma-obtencion-muestra', 'class' => 'form-horizontal']) !!}
+            {!! Form::open(['route' => ['dashboard.obras-tipo-de-material.destroy', $registro->id], 'method' => 'DELETE', 'id' => 'form-obras-tipo-de-material', 'class' => 'form-horizontal']) !!}
             <div class="modal-body">
             	<div class="row">
-            		<p>¿Estas seguro que deseas eliminar la Forma de Obtención de la Muestra <strong>{{ $registro->nombre }}</strong>?</p>
+            		<p>¿Estas seguro que deseas eliminar la Tipo de Material <strong>{{ $registro->nombre }}</strong>?</p>
             	</div>
 
                 <div class="row m-t-md" id="div-notificacion">
