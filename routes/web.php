@@ -193,10 +193,16 @@ Auth::routes();
 			Route::resource('obras-tipo-de-material', 					'ObrasTipoDeMaterialController');
 		#################################################################################
 
-	    ######## OBRAS TIPO DE MATERIAL #################################################
+	    ######## OBRAS INFORMACIÓN POR DEFINIR ##########################################
 			Route::get('obras-informacion-por-definir/carga', 			'ObrasTipoMaterialInformacionPorDefinirController@cargarTabla');
 			Route::get('obras-informacion-por-definir/{id}/eliminar', 	'ObrasTipoMaterialInformacionPorDefinirController@eliminar');
 			Route::resource('obras-informacion-por-definir', 			'ObrasTipoMaterialInformacionPorDefinirController');
+		#################################################################################
+
+	    ######## OBRAS INTERPRETACIÓN PARTICULAR ########################################
+			Route::get('obras-interpretacion-particular/carga', 			'ObrasTipoMaterialInterpretacionParticularController@cargarTabla');
+			Route::get('obras-interpretacion-particular/{id}/eliminar', 	'ObrasTipoMaterialInterpretacionParticularController@eliminar');
+			Route::resource('obras-interpretacion-particular', 				'ObrasTipoMaterialInterpretacionParticularController');
 		#################################################################################
 
 	});
