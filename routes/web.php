@@ -200,9 +200,15 @@ Auth::routes();
 		#################################################################################
 
 	    ######## OBRAS INTERPRETACIÓN PARTICULAR ########################################
-			Route::get('obras-interpretacion-particular/carga', 			'ObrasTipoMaterialInterpretacionParticularController@cargarTabla');
-			Route::get('obras-interpretacion-particular/{id}/eliminar', 	'ObrasTipoMaterialInterpretacionParticularController@eliminar');
-			Route::resource('obras-interpretacion-particular', 				'ObrasTipoMaterialInterpretacionParticularController');
+			Route::get('obras-interpretacion-particular/carga', 		'ObrasTipoMaterialInterpretacionParticularController@cargarTabla');
+			Route::get('obras-interpretacion-particular/{id}/eliminar', 'ObrasTipoMaterialInterpretacionParticularController@eliminar');
+			Route::resource('obras-interpretacion-particular', 			'ObrasTipoMaterialInterpretacionParticularController');
+		#################################################################################
+
+	    ######## OBRAS ANÁLISIS A REALIZAR ##############################################
+			Route::get('obras-analisis-a-realizar/carga', 			'ObrasAnalisisARealizarController@cargarTabla');
+			Route::get('obras-analisis-a-realizar/{id}/eliminar', 	'ObrasAnalisisARealizarController@eliminar');
+			Route::resource('obras-analisis-a-realizar', 			'ObrasAnalisisARealizarController');
 		#################################################################################
 
 	});
