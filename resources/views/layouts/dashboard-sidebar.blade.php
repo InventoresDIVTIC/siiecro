@@ -40,6 +40,8 @@
                                 <li><a href="{{ route('dashboard.obras-temporalidad.index') }}">Temporalidad</a></li>
                                 <li><a href="{{ route('dashboard.obras-tipo-bien-cultural.index') }}">Tipo Bien Cultural</a></li>
                                 <li><a href="{{ route('dashboard.obras-tipo-objeto.index') }}">Tipo Objeto</a></li>
+                                
+                                <li><a href="{{ route('dashboard.obras-forma-obtencion-muestra.index') }}">Forma de Obtención de la Muestra</a></li>
                             </ul>
                         </li>
                     @endif

@@ -183,6 +183,12 @@ Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->group(fu
 		Route::resource('obras-temporalidad', 					'ObrasTemporalidadController');
 	#################################################################################
 
+    ######## OBRAS FORMA OBTENCION DE LA MUESTRA ####################################
+		Route::get('obras-forma-obtencion-muestra/carga', 			'ObrasFormaObtencionMuestraController@cargarTabla');
+		Route::get('obras-forma-obtencion-muestra/{id}/eliminar', 	'ObrasFormaObtencionMuestraController@eliminar');
+		Route::resource('obras-forma-obtencion-muestra', 			'ObrasFormaObtencionMuestraController');
+	#################################################################################
+
 });
 
 #########################################################################
