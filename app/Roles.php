@@ -13,11 +13,11 @@ class Roles extends Model
         'descripcion',
         
         'captura_solicitud_obra',
-        'captura_de_registro_basica',
-        'captura_de_registro_avanzada',
+        // 'captura_de_registro_basica',
+        // 'captura_de_registro_avanzada',
         'captura_de_responsables_intervencion',
-        // 'captura_de_catalogos_basica',
-        // 'captura_de_catalogos_avanzada',
+        'captura_de_catalogos_basica',
+        'captura_de_catalogos_avanzada',
         'captura_de_solicitud_analisis',
         'captura_de_resultados',
 

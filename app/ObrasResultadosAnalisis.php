@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use PDF;
 
 class ObrasResultadosAnalisis extends Model
 {
@@ -43,5 +44,26 @@ class ObrasResultadosAnalisis extends Model
 
     public function imagenes_resultados_esquema_microfotografia() {
         return $this->hasMany('App\ObrasResultadosAnalisisEsquemaMicrofotografia', 'resultado_analisis_id', 'id');
+    }
+
+    public function solicitud_analisis_muestra() {
+        return $this->hasOne('App\ObrasSolicitudesAnalisisMuestras', 'id', 'solicitudes_analisis_muestras_id');
+    }
+
+    public function profesor_responsable_analisis() {
+        return $this->hasOne('App\User', 'id', 'profesor_responsable_de_analisis_id');
+    }
+
+    public function persona_analisis() {
+        return $this->hasOne('App\User', 'id', 'persona_realiza_analisis_id');
+    }
+
+    public function forma_obtencion_muestra() {
+        return $this->hasOne('App\ObrasFormaObtencionMuestra', 'id', 'forma_obtencion_muestra_id');
+    }
+
+    public function generarPdf(){
+        $pdf            =   PDF::loadView('pdf.resultado-analisis', ["resultadoAnalisis" => $this]);
+        return $pdf;
     }
 }
