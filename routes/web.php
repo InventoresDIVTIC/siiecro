@@ -19,6 +19,7 @@ Auth::routes();
 #	Todas las rutas tendran el prefijo dashboard. en sus names 			#
 #########################################################################
 
+
 	Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->group(function () {
 	    ######## DASHBOARD ##############################################################
 			Route::get('/', 	'DashboardController@index')->name('dashboard.index');
@@ -180,6 +181,30 @@ Auth::routes();
 			Route::resource('obras-temporalidad', 					'ObrasTemporalidadController');
 		#################################################################################
 
+	    ######## OBRAS FORMA OBTENCION DE LA MUESTRA ####################################
+			Route::get('obras-forma-obtencion-muestra/carga', 			'ObrasFormaObtencionMuestraController@cargarTabla');
+			Route::get('obras-forma-obtencion-muestra/{id}/eliminar', 	'ObrasFormaObtencionMuestraController@eliminar');
+			Route::resource('obras-forma-obtencion-muestra', 			'ObrasFormaObtencionMuestraController');
+		#################################################################################
+
+	    ######## OBRAS TIPO DE MATERIAL #################################################
+			Route::get('obras-tipo-de-material/carga', 					'ObrasTipoDeMaterialController@cargarTabla');
+			Route::get('obras-tipo-de-material/{id}/eliminar', 			'ObrasTipoDeMaterialController@eliminar');
+			Route::resource('obras-tipo-de-material', 					'ObrasTipoDeMaterialController');
+		#################################################################################
+
+	    ######## OBRAS INFORMACIÓN POR DEFINIR ##########################################
+			Route::get('obras-informacion-por-definir/carga', 			'ObrasTipoMaterialInformacionPorDefinirController@cargarTabla');
+			Route::get('obras-informacion-por-definir/{id}/eliminar', 	'ObrasTipoMaterialInformacionPorDefinirController@eliminar');
+			Route::resource('obras-informacion-por-definir', 			'ObrasTipoMaterialInformacionPorDefinirController');
+		#################################################################################
+
+	    ######## OBRAS INTERPRETACIÓN PARTICULAR ########################################
+			Route::get('obras-interpretacion-particular/carga', 			'ObrasTipoMaterialInterpretacionParticularController@cargarTabla');
+			Route::get('obras-interpretacion-particular/{id}/eliminar', 	'ObrasTipoMaterialInterpretacionParticularController@eliminar');
+			Route::resource('obras-interpretacion-particular', 				'ObrasTipoMaterialInterpretacionParticularController');
+		#################################################################################
+
 	});
 
 #########################################################################
@@ -205,6 +230,5 @@ Auth::routes();
 	});
 
 #########################################################################
-# 						FIN RUTAS DASHBOARD 							#
+# 						FIN RUTAS LANDING 								#
 #########################################################################
-
