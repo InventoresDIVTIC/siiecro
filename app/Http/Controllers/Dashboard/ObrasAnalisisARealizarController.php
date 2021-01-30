@@ -12,6 +12,7 @@ use Hash;
 use Auth;
 
 use App\ObrasAnalisisARealizar;
+use App\ObrasAnalisisARealizarTecnica;
 
 class ObrasAnalisisARealizarController extends Controller
 {
@@ -34,7 +35,7 @@ class ObrasAnalisisARealizarController extends Controller
 
         return DataTables::of($registros)
                         ->addColumn('acciones', function($registro){
-                            $editar         =   '<i onclick="editar('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Editar"></i>';
+                            $editar         =   '<i onclick="editar('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver tecnicas analíticas"></i>';
                             $eliminar       =   '';
 
                             if(Auth::user()->rol->eliminar_catalogos){
@@ -92,4 +93,67 @@ class ObrasAnalisisARealizarController extends Controller
 
         return Response::json(["mensaje" => "Petición incorrecta"], 500);
     }
+
+    ##### TECNICAS ANALÍTICAS DE ANÁLISIS A REALIZAR ######################################################
+    public function cargarTecnicas($id)
+    {
+        $registros = ObrasAnalisisARealizarTecnica::where('analisis_a_realizar_id', '=', $id)->get();
+
+        return DataTables::of($registros)
+                            ->addColumn('acciones', function($registro){
+                                $editar         = '<i onclick="editarTecnicaAnalitica('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar tecnica '.$registro->nombre.'"></i>';
+                                $eliminar       = '<i onclick="eliminarTecnicaAnalitica('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar tecnica '.$registro->nombre.'"></i>';
+                                
+                                return $editar.$eliminar;
+                            })
+                            ->rawColumns(['acciones'])
+                            ->make('true');
+    }
+
+    public function crearTecnica()
+    {
+        $registro   =   new ObrasAnalisisARealizarTecnica;
+        return view('dashboard.obras.analisis-a-realizar.agregar-tecnica', ["registro" => $registro]);
+    }
+
+    public function guardarTecnica(Request $request)
+    {
+        if($request->ajax()){
+            return BD::crear('ObrasAnalisisARealizarTecnica', $request);
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function editarTecnica(Request $request, $id)
+    {
+        $registro   =   ObrasAnalisisARealizarTecnica::findOrFail($id);
+        return view('dashboard.obras.analisis-a-realizar.agregar-tecnica', ["registro" => $registro]);
+    }
+
+    public function actualizarTecnica(Request $request, $id)
+    {
+        if($request->ajax()){
+            $data   = $request->all();
+            return BD::actualiza($id, "ObrasAnalisisARealizarTecnica", $data);
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function avisoEliminarTecnica(Request $request, $id)
+    {
+        $registro   =   ObrasAnalisisARealizarTecnica::findOrFail($id);
+        return view('dashboard.obras.analisis-a-realizar.eliminar-tecnica', ["registro" => $registro]);
+    }
+
+    public function destruirTecnica(Request $request, $id)
+    {
+        if($request->ajax()){
+            return BD::elimina($id, "ObrasAnalisisARealizarTecnica");
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+    #######################################################################################################
 }

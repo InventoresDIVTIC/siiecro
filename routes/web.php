@@ -206,9 +206,18 @@ Auth::routes();
 		#################################################################################
 
 	    ######## OBRAS ANÁLISIS A REALIZAR ##############################################
-			Route::get('obras-analisis-a-realizar/carga', 			'ObrasAnalisisARealizarController@cargarTabla');
-			Route::get('obras-analisis-a-realizar/{id}/eliminar', 	'ObrasAnalisisARealizarController@eliminar');
-			Route::resource('obras-analisis-a-realizar', 			'ObrasAnalisisARealizarController');
+			Route::get('obras-analisis-a-realizar/carga', 							'ObrasAnalisisARealizarController@cargarTabla');
+			Route::get('obras-analisis-a-realizar/{id}/eliminar', 					'ObrasAnalisisARealizarController@eliminar');
+			
+			Route::get('obras-analisis-a-realizar/cargar-tecnicas/{id_analisis}', 	'ObrasAnalisisARealizarController@cargarTecnicas');
+			Route::get('obras-analisis-a-realizar/crear-tecnica', 					'ObrasAnalisisARealizarController@crearTecnica');
+			Route::post('obras-analisis-a-realizar/guardar-tecnica', 				'ObrasAnalisisARealizarController@guardarTecnica')->name('obras-analisis-a-realizar.guardar-tecnica');
+			Route::get('obras-analisis-a-realizar/editar-tecnica/{id}', 			'ObrasAnalisisARealizarController@editarTecnica');
+			Route::put('obras-analisis-a-realizar/actualizar-tecnica/{id}', 		'ObrasAnalisisARealizarController@actualizarTecnica')->name('obras-analisis-a-realizar.actualizar-tecnica');
+			Route::get('obras-analisis-a-realizar/aviso-eliminar-tecnica/{id}', 	'ObrasAnalisisARealizarController@avisoEliminarTecnica');
+			Route::delete('obras-analisis-a-realizar/destruir-tecnica/{id}', 		'ObrasAnalisisARealizarController@destruirTecnica')->name('obras-analisis-a-realizar.destruir-tecnica');
+
+			Route::resource('obras-analisis-a-realizar', 							'ObrasAnalisisARealizarController');
 		#################################################################################
 
 	});
