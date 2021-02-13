@@ -23,6 +23,12 @@
                                 <input type="text" class="form-control" id="siglas" name="siglas" value="{{ $registro->siglas }}" required autocomplete="off">
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12 div-input required">
+                                <label for="nombre">Color</label>
+                                <input type="text" class="form-control" id="color_hexadecimal" name="color_hexadecimal" value="{{ $registro->color_hexadecimal }}" required autocomplete="off">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row m-t-md" id="div-notificacion">

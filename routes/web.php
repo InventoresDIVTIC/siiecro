@@ -22,7 +22,13 @@ Auth::routes();
 
 	Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->group(function () {
 	    ######## DASHBOARD ##############################################################
-			Route::get('/', 	'DashboardController@index')->name('dashboard.index');
+			Route::get('/', 									'DashboardController@index')->name('dashboard.index');
+			Route::get('/grafica-obras-bienes-culturales', 		'DashboardController@graficasObrasBienesCulturales');
+			Route::get('/grafica-obras-tipos-objeto', 			'DashboardController@graficasObrasTiposObjeto');
+			Route::get('/grafica-obras-areas', 					'DashboardController@graficasObrasAreas');
+			Route::get('/tabla-obras', 							'DashboardController@tablaObras');
+			Route::get('/tabla-solicitudes', 					'DashboardController@tablaSolicitudesAnalisis');
+			Route::get('/tabla-resultados', 					'DashboardController@tablaResultadosAnalisis');
 		#################################################################################
 			
 	    ######## USUARIOS ###############################################################

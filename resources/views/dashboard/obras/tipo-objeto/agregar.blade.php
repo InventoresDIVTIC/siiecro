@@ -14,9 +14,13 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-12 div-input required">
+                            <div class="col-md-6 div-input required">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $registro->nombre }}" required autocomplete="off">
+                            </div>
+                            <div class="col-md-6 div-input required">
+                                <label for="nombre">Color</label>
+                                <input type="text" class="form-control" id="color_hexadecimal" name="color_hexadecimal" value="{{ $registro->color_hexadecimal }}" required autocomplete="off">
                             </div>
                         </div>
                     </div>

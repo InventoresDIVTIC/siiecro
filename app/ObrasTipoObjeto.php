@@ -8,6 +8,7 @@ class ObrasTipoObjeto extends Model
 {
     protected $table = "obras__tipo_objeto";
     protected $fillable = [
-    	'nombre'
+    	'nombre',
+    	'color_hexadecimal'
     ];
 }

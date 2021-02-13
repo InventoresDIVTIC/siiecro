@@ -77,5 +77,4 @@
 @endsection
 
 @section('scripts')
-    {!! Html::script('scripts/dashboard/areas.js') !!}
 @endsection

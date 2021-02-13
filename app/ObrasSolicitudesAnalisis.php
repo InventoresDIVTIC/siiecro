@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use PDF;
+use Auth;
 
 class ObrasSolicitudesAnalisis extends Model
 {
@@ -24,6 +25,13 @@ class ObrasSolicitudesAnalisis extends Model
         'fecha_aprobacion',
         'fecha_rechazo',
         'fecha_revision',
+    ];
+    
+    protected $dates = [
+        'fecha_intervencion',
+        'fecha_aprobacion',
+        'fecha_rechazo',
+        'fecha_revision'
     ];
 
     public function tipo_analisis() {
@@ -69,5 +77,20 @@ class ObrasSolicitudesAnalisis extends Model
         $muestras   =   $muestras->groupBy('nombre_tipo_analisis');
 
         return $muestras;
+    }
+
+    public static function obtenerSolicitudesDashboard(){
+        if (Auth::user()->rol->acceso_a_datos_avanzado) {
+            return  ObrasSolicitudesAnalisis::orderBy("fecha_intervencion", "DESC")
+                                            ->limit(10);
+        } else{
+            return  ObrasSolicitudesAnalisis::selectRaw("
+                                                            obras__solicitudes_analisis.*
+                                                        ")
+                                            ->join('obras__usuarios_asignados as asignados', 'asignados.id', 'obras__solicitudes_analisis.obra_usuario_asignado_id')
+                                            ->where('asignados.usuario_id', Auth::id())
+                                            ->groupBy('obras__solicitudes_analisis.id')
+                                            ->orderBy("obras__solicitudes_analisis.fecha_intervencion", "DESC");
+        }
     }
 }

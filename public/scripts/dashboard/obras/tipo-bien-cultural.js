@@ -17,7 +17,7 @@ function crear(){
                       "#modal-crear", //Nombre modal
                       "#nombre", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
-
+                          $("#color_hexadecimal").colorpicker();
                       }, //Funcion para el success
                       "#form-obras-tipo-bien-cultural", //ID del Formulario
                       "#carga-agregar", //Loading de guardar datos de formulario
@@ -36,6 +36,7 @@ function editar(id)
                         "#modal-crear", //Nombre modal
                         "#nombre", //Elemento al que se le dara focus una vez cargado el modal
                         function(){
+                            $("#color_hexadecimal").colorpicker();
                         }, //Funcion para el success
                         "#form-obras-tipo-bien-cultural", //ID del Formulario
                         "#carga-agregar", //Loading de guardar datos de formulario

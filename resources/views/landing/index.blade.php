@@ -1,23 +1,7 @@
 @extends('layouts.landing')
 
 @section('body')
-    <section class="banner" style="background: url({{ asset('img/landing/back.jpg') }}) no-repeat; background-position: 0 -807px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-xl-7">
-                    <div class="block">
-                        <div class="divider mb-3"></div>
-                        <span class="text-uppercase text-sm letter-spacing ">Total Health care solution</span>
-                        <h1 class="mb-3 mt-3">Your most trusted health partner</h1>
-                        
-                        <p class="mb-4 pr-5">A repudiandae ipsam labore ipsa voluptatum quidem quae laudantium quisquam aperiam maiores sunt fugit, deserunt rem suscipit placeat.</p>
-                        <div class="btn-container ">
-                            <a href="appoinment.html" target="_blank" class="btn btn-main-2 btn-icon btn-round-full">Make appoinment <i class="icofont-simple-right ml-2  "></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="banner" style="background: url({{ asset('img/landing/banner.jpg') }}) no-repeat; background-position: center;">
     </section>
 
     <section class="section about">
@@ -46,5 +30,5 @@
 @endsection
 
 @section('scripts')
-    {!! Html::script('scripts/dashboard/areas.js') !!}
+
 @endsection
