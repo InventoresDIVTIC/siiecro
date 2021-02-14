@@ -47,6 +47,16 @@ function editar(id)
                             ], // Columnas
                           );
 
+                          _cargarTabla(
+                            "#dt-datos-informaciones", // ID de la tabla
+                            "#carga-dt-informaciones", // ID elemento del progreso
+                            "/dashboard/obras-tipo-de-material/cargar-informaciones/"+id, // URL datos
+                            [
+                              { data: "nombre",   width: "65%"},
+                              { data: "acciones", width: "15%",   searchable: false,  orderable: false},
+                            ], // Columnas
+                          );
+
                         }, //Funcion para el success
                         "#form-obras-tipo-de-material", //ID del Formulario
                         "#carga-agregar", //Loading de guardar datos de formulario
@@ -151,6 +161,85 @@ function eliminarInterpretacionParticularCruzada(id_de_interpretacion_cruzada)
                       function(){
                         _ocultarModal("#modal-eliminar-interpretacion-cruzada", function(){
                           _recargarTabla("#dt-datos-interpretaciones");
+                          $('body').addClass('modal-open');
+                        });
+                      });//Funcion en caso de guardar correctamente);
+}
+
+// INFORMACIONES POR DEFINIR
+function crearInformacionPorDefinirCruzada(id_tipo_material)
+{
+  _mostrarFormulario("/dashboard/obras-tipo-de-material/crear-informacion-cruzada/" + id_tipo_material, //Url solicitud de datos
+                      "#modal-2", //Div que contendra el modal
+                      "#modal-crear-informacion-cruzada", //Nombre modal
+                      "", //Elemento al que se le dara focus una vez cargado el modal
+                      function(){
+                        $('#informacion_por_definir_cruzada_id').select2({
+                          placeholder: 'Seleccione una opcion'
+                        });
+                        $('#tipo_material_cruzada_info_id').val($('#tipo_material_cruzada_id').val());
+                        // función para evitar el frezzing del modal cuando se se cancela por medio del boton data-dismiss
+                        $(document).on('click', '[data-dismiss="modal"]', function(){
+                          $('body').addClass('modal-open');
+                        });
+                      }, //Funcion para el success
+                      "#form-obras-tipo-de-material-informacion-cruzada", //ID del Formulario
+                      "", //Loading de guardar datos de formulario
+                      "#div-notificacion-informacion-cruzada", //Div donde mostrara el error en caso de, vacio lo muestra en toastr
+                      function(){
+                          _ocultarModal("#modal-crear-informacion-cruzada", function(){
+                            _recargarTabla("#dt-datos-informaciones");
+                            // evita el freezing cuando se completa la operacion correctamente
+                            $('body').addClass('modal-open');
+                          });
+                      });//Funcion en caso de guardar correctamente);
+}
+
+function editarInformacionPorDefinirCruzada(id_de_informacion_cruzada)
+{
+  _mostrarFormulario("/dashboard/obras-tipo-de-material/editar-informacion-cruzada/"+id_de_informacion_cruzada, //Url solicitud de datos
+                      "#modal-2", //Div que contendra el modal
+                      "#modal-crear-informacion-cruzada", //Nombre modal
+                      "", //Elemento al que se le dara focus una vez cargado el modal
+                      function(){
+                        $('#informacion_por_definir_cruzada_id').select2({
+                          placeholder: 'Seleccione una opción'
+                        });
+                        $('#tipo_material_cruzada_info_id').val($('#tipo_material_cruzada_id').val());
+                        // función para evitar el frezzing del modal cuando se se cancela por medio del boton data-dismiss
+                        $(document).on('click', '[data-dismiss="modal"]', function(){
+                          $('body').addClass('modal-open');
+                        });
+                      }, //Funcion para el success
+                      "#form-obras-tipo-de-material-informacion-cruzada", //ID del Formulario
+                      "", //Loading de guardar datos de formulario
+                      "#div-notificacion-informacion-cruzada", //Div donde mostrara el error en caso de, vacio lo muestra en toastr
+                      function(){
+                          _ocultarModal("#modal-crear-informacion-cruzada", function(){
+                            _recargarTabla("#dt-datos-informaciones");
+                            // evita el freezing cuando se completa la operacion correctamente
+                            $('body').addClass('modal-open');
+                          });
+                      });//Funcion en caso de guardar correctamente);
+}
+
+function eliminarInformacionPorDefinirCruzada(id_de_informacion_cruzada)
+{
+  _mostrarFormulario("/dashboard/obras-tipo-de-material/aviso-eliminar-informacion-cruzada/"+id_de_informacion_cruzada, //Url solicitud de datos
+                      "#modal-2", //Div que contendra el modal
+                      "#modal-eliminar-informacion-cruzada", //Nombre modal
+                      "", //Elemento al que se le dara focus una vez cargado el modal
+                      function(){
+                        $(document).on('click', '[data-dismiss="modal"]', function(){
+                          $('body').addClass('modal-open');
+                        });
+                      }, //Funcion para el success
+                      "#form-obras-tipo-de-material-eliminar-informacion-cruzada", //ID del Formulario
+                      "#carga-eliminar", //Loading de guardar datos de formulario
+                      "#div-notificacion-informacion-cruzada", //Div donde mostrara el error en caso de, vacio lo muestra en toastr
+                      function(){
+                        _ocultarModal("#modal-eliminar-informacion-cruzada", function(){
+                          _recargarTabla("#dt-datos-informaciones");
                           $('body').addClass('modal-open');
                         });
                       });//Funcion en caso de guardar correctamente);

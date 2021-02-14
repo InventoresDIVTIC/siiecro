@@ -15,8 +15,8 @@ use App\ObrasTipoMaterial;
 use App\ObrasTipoMaterialInterpretacionParticular;
 use App\ObrasTipoMaterialInterCruzada;
 
-// use App\ObrasTipoMaterialInformacionPorDefinir;
-// use App\ObrasTipoMaterialInfoCruzada;
+use App\ObrasTipoMaterialInformacionPorDefinir;
+use App\ObrasTipoMaterialInfoCruzada;
 
 class ObrasTipoDeMaterialController extends Controller
 {
@@ -172,6 +172,86 @@ class ObrasTipoDeMaterialController extends Controller
     {
         if($request->ajax()){
             return BD::elimina($id, "ObrasTipoMaterialInterCruzada");
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+    #######################################################################################################
+   
+    ##### TIPO MATERIAL INFORMACIÓN POR DEFINIR #####################################################
+    public function cargarInformacionesCruzadas($id)
+    {
+        $registros = ObrasTipoMaterialInfoCruzada::selectRaw('
+                                                                obras__tipo_material__info_cruzada.id,
+                                                                ifpd_cruzada.nombre
+                                                            ')
+                                                    ->join('obras__tipo_material__informacion_por_definir as ifpd_cruzada', 'ifpd_cruzada.id', '=', 'obras__tipo_material__info_cruzada.informacion_por_definir_cruzada_id')
+                                                    ->where('obras__tipo_material__info_cruzada.tipo_material_cruzada_info_id', '=', $id)
+                                                    ->get();
+
+        return DataTables::of($registros)
+                            ->addColumn('acciones', function($registro){
+                                $editar         = '<i onclick="editarInformacionPorDefinirCruzada('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar informacion por definir '.$registro->nombre.'"></i>';
+                                $eliminar       = '<i onclick="eliminarInformacionPorDefinirCruzada('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar informacion por definir '.$registro->nombre.'"></i>';
+                                
+                                return $editar.$eliminar;
+                            })
+                            ->rawColumns(['acciones'])
+                            ->make('true');
+    }
+
+    public function crearInformacionCruzada($id)
+    {
+        $registro                           = new ObrasTipoMaterialInfoCruzada;
+        $tipo_informaciones_existentes      = ObrasTipoMaterialInfoCruzada::where('tipo_material_cruzada_info_id', '=', $id)->get();
+        $existentes                         = [];
+        
+        foreach ($tipo_informaciones_existentes as $informaciones) {
+            $existentes[] = $informaciones->informacion_por_definir_cruzada_id;
+        }
+
+        $informaciones   = ObrasTipoMaterialInformacionPorDefinir::whereNotIn('id', $existentes)->get();
+
+        return view('dashboard.obras.tipo-de-material.informacion-cruzada.agregar-informacion-cruzada', ["registro" => $registro, 'informaciones' => $informaciones]);
+    }
+
+    public function guardarInformacionCruzada(Request $request)
+    {
+        if($request->ajax()){
+            return BD::crear('ObrasTipoMaterialInfoCruzada', $request);
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function editarInformacionCruzada(Request $request, $id)
+    {
+        $registro        = ObrasTipoMaterialInfoCruzada::findOrFail($id);
+        $informaciones   = ObrasTipoMaterialInformacionPorDefinir::all();
+
+        return view('dashboard.obras.tipo-de-material.informacion-cruzada.agregar-informacion-cruzada', ["registro" => $registro, 'informaciones' => $informaciones]);
+    }
+
+    public function actualizarInformacionCruzada(Request $request, $id)
+    {
+        if($request->ajax()){
+            $data   = $request->all();
+            return BD::actualiza($id, "ObrasTipoMaterialInfoCruzada", $data);
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function avisoEliminarInformacionCruzada(Request $request, $id)
+    {
+        $registro   = ObrasTipoMaterialInfoCruzada::findOrFail($id);
+        return view('dashboard.obras.tipo-de-material.informacion-cruzada.eliminar-informacion-cruzada', ["registro" => $registro]);
+    }
+
+    public function destruirInformacionCruzada(Request $request, $id)
+    {
+        if($request->ajax()){
+            return BD::elimina($id, "ObrasTipoMaterialInfoCruzada");
         }
 
         return Response::json(["mensaje" => "Petición incorrecta"], 500);

@@ -205,6 +205,14 @@ Auth::routes();
 			Route::get('obras-tipo-de-material/aviso-eliminar-interpretacion-cruzada/{id}', 	'ObrasTipoDeMaterialController@avisoEliminarInterpretacionCruzada');
 			Route::delete('obras-tipo-de-material/destruir-interpretacion-cruzada/{id}', 		'ObrasTipoDeMaterialController@destruirInterpretacionCruzada')->name('obras-tipo-de-material.destruir-interpretacion-cruzada');
 
+			Route::get('obras-tipo-de-material/cargar-informaciones/{id_tipo_material}', 		'ObrasTipoDeMaterialController@cargarInformacionesCruzadas');
+			Route::get('obras-tipo-de-material/crear-informacion-cruzada/{id_tipo_material}',	'ObrasTipoDeMaterialController@crearInformacionCruzada');
+			Route::post('obras-tipo-de-material/guardar-informacion-cruzada', 					'ObrasTipoDeMaterialController@guardarInformacionCruzada')->name('obras-tipo-de-material.guardar-informacion-cruzada');
+			Route::get('obras-tipo-de-material/editar-informacion-cruzada/{id}', 				'ObrasTipoDeMaterialController@editarInformacionCruzada');
+			Route::put('obras-tipo-de-material/actualizar-informacion-cruzada/{id}', 			'ObrasTipoDeMaterialController@actualizarInformacionCruzada')->name('obras-tipo-de-material.actualizar-informacion-cruzada');
+			Route::get('obras-tipo-de-material/aviso-eliminar-informacion-cruzada/{id}', 		'ObrasTipoDeMaterialController@avisoEliminarInformacionCruzada');
+			Route::delete('obras-tipo-de-material/destruir-informacion-cruzada/{id}', 			'ObrasTipoDeMaterialController@destruirInformacionCruzada')->name('obras-tipo-de-material.destruir-informacion-cruzada');
+
 			Route::resource('obras-tipo-de-material', 											'ObrasTipoDeMaterialController');
 		#################################################################################
 

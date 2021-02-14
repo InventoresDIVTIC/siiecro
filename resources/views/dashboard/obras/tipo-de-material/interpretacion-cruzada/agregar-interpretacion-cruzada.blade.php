@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Obras | Tipo Material | Interpretación Paricular</h4>
-                <small class="font-bold">{{ $registro == "[]" ? "Creando nueva Técnica" : "Editando a " }} <strong>{{ $registro->nombre }}</strong></small>
+                <small class="font-bold">{{ $registro == "[]" ? "Creando nueva Interpretación Particular" : "Editando a " }} <strong>{{ $registro->nombre }}</strong></small>
             </div>
             @if ($registro == "[]")
                 {!! Form::open(['route' => ['dashboard.obras-tipo-de-material.guardar-interpretacion-cruzada'], 'method' => 'POST', 'id' => 'form-obras-tipo-de-material-interpretacion-cruzada', 'class' => 'form-horizontal']) !!}

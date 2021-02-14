@@ -63,6 +63,38 @@
                         </div>
                     </div>
                 </div>
+                <hr>
+                <h1 class="text-center"><strong>Informaciones por definir</strong></h1>
+                <br>
+                <div class="row ibox form-group">
+                    <div class="col-md-12">
+                        <button type="button" onclick="crearInformacionPorDefinirCruzada({{ $registro->id }})" class="btn btn-primary pull-right">Agregar Informacón por Definir</button>
+                    </div>
+                </div>
+                {{-- tabla de información por definir cruzada --}}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div class="progress hidden" id="carga-dt-informaciones">
+                                    <div class="progress-bar-indeterminate"></div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="dt-datos-informaciones">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <input type="hidden" name="tipo_material_cruzada_id" id="tipo_material_cruzada_id" value="{{ $registro != '[]' ? $registro->id : '' }}">
             @endif
 
