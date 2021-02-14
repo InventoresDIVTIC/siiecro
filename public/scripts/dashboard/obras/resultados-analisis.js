@@ -82,7 +82,7 @@ function editarResultado(resultado_analisis_id)
                           ], // Columnas
                         );
 
-                        $('#forma_obtencion_muestra_id, #tipo_material_id, #informacion_por_definir_id, #interpretacion_particular_id, #profesor_responsable_de_analisis_id, #persona_realiza_analisis_id').select2({
+                        $('#forma_obtencion_muestra_id, #tipo_material_id, #interpretacion_particular_id, #profesor_responsable_de_analisis_id, #persona_realiza_analisis_id').select2({
                           placeholder: "Seleccione una opción"
                         });
 
@@ -170,10 +170,12 @@ function toggleEdicionResultadoAnalisis(estatus){
     $("#form-obras-detalle-resultados-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', false);
     $("#btn-group-habilitar-edicion-resultados").addClass('hidden');
     $("#btn-group-no-editar-resultados").removeClass('hidden');
+    $(".dropzones-imagenes").removeClass('hidden');
   } else {
     $("#form-obras-detalle-resultados-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', true);
     $("#btn-group-habilitar-edicion-resultados").removeClass('hidden');
     $("#btn-group-no-editar-resultados").addClass('hidden');
+    $(".dropzones-imagenes").addClass('hidden');
   }
 }
 
@@ -184,10 +186,12 @@ function toggleEdicionDatosAnaliticos(estatus){
     $("#form-obras-detalle-crear-resultados-analiticos").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', false);
     $("#btn-group-habilitar-edicion-resultados-analiticos").addClass('hidden');
     $("#btn-group-no-editar-resultados-analiticos").removeClass('hidden');
+    $(".dropzones-imagenes").removeClass('hidden');
   } else {
     $("#form-obras-detalle-crear-resultados-analiticos").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', true);
     $("#btn-group-habilitar-edicion-resultados-analiticos").removeClass('hidden');
     $("#btn-group-no-editar-resultados-analiticos").addClass('hidden');
+    $(".dropzones-imagenes").addClass('hidden');
   }
 }
 
@@ -278,7 +282,7 @@ function crearResultadoAnalitico(id_de_resultado_analisis)
                       "#modal-crear-resultado-analitico", //Nombre modal
                       "", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
-                        $('#analisis_a_realizar_id, #tecnica_analitica_id').select2({
+                        $('#informacion_por_definir_id, #analisis_a_realizar_id, #tecnica_analitica_id').select2({
                           placeholder: "Seleccione una opción"
                         });
                         $('#resultado_analisis_id').val(id_de_resultado_analisis);
@@ -306,7 +310,7 @@ function editarDatosAnaliticos(id_de_resultado_analitico)
                       "#modal-crear-resultado-analitico", //Nombre modal
                       "", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
-                        $('#analisis_a_realizar_id, #tecnica_analitica_id').select2({
+                        $('#informacion_por_definir_id, #analisis_a_realizar_id, #tecnica_analitica_id').select2({
                           placeholder: "Seleccione una opción"
                         });
                         // $('#id').val(id_de_resultado_analitico);

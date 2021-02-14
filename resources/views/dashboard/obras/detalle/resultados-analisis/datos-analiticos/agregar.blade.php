@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div id="btn-group-habilitar-edicion-resultados-analiticos">
-                            <button onclick="toggleEdicionDatosAnaliticos(true);" type="button" class="btn btn-primary pull-right">Editar</button> 
+                            <button onclick="toggleEdicionDatosAnaliticos(true);" type="button" class="btn btn-primary pull-right" no-editar>Editar</button> 
                         </div>
                         <div id="btn-group-no-editar-resultados-analiticos" class="hidden">
                             <button onclick="toggleEdicionDatosAnaliticos(false);" type="button" class="btn btn-danger pull-right">Cancelar edición</button> 
@@ -22,6 +22,17 @@
                     </div>
 
                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12 div-input required">
+                                <label for="informacion_por_definir_id">Información por definir</label>
+                                <select class="form-control select2" id="informacion_por_definir_id" name="informacion_por_definir_id" required autocomplete="off" disabled="">
+                                    <option value=""></option>
+                                    @foreach ($tipos_material_informacion_por_definir as $informacion_por_definir)
+                                        <option {{ $informacion_por_definir->id == $registro->informacion_por_definir_id ? "selected" : "" }} value="{{ $informacion_por_definir->id }}">{{ $informacion_por_definir->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6 div-input required">
                                 <label for="analisis_a_realizar_id">Análisis a realizar</label>
@@ -43,40 +54,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 div-input required">
-                                <label for="descripciones">Descripciones</label>
-                                <textarea class="form-control no-resize" name="descripciones" id="descripciones" rows="6" required disabled="" autocomplete="off"><?php echo($registro->descripciones); ?></textarea>
-                            </div>
-                            <div class="col-md-6 div-input required">
+                            
+                            <div class="col-md-12 div-input required">
                                 <label for="interpretacion">Interpretacion</label>
-                                <textarea class="form-control no-resize" name="interpretacion" id="interpretacion" rows="6" required disabled="" autocomplete="off"><?php echo($registro->interpretacion); ?></textarea>
+                                <textarea class="form-control no-resize" name="interpretacion" id="interpretacion" rows="6" required disabled="" autocomplete="off" placeholder="Insertar el análisis y la interpretación de los datos (reacción, microfotografía, etc)"><?php echo($registro->interpretacion); ?></textarea>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 div-input">
+                            {{-- <div class="col-md-6 div-input">
                                 <label for="datos">Datos</label>
                                 <input type="text" class="form-control" id="datos" name="datos" value="{{ $registro->datos }}" disabled="" autocomplete="off">
-                            </div>
-                            <div class="col-md-6 div-input">
+                            </div> --}}
+                            <div class="col-md-12 div-input">
                                 <label for="info_del_equipo">Información del equipo</label>
                                 <input type="text" class="form-control" id="info_del_equipo" name="info_del_equipo" value="{{ $registro->info_del_equipo }}" disabled="" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 div-input">
-                                <label for="ruta_acceso_imagen">Ruta de acceso a imagen</label>
-                                <input type="text" class="form-control" id="ruta_acceso_imagen" name="ruta_acceso_imagen" value="{{ $registro->ruta_acceso_imagen }}" disabled="" autocomplete="off">
-                            </div>
-                            <div class="col-md-6 div-input">
-                                <label for="ruta_acceso_datos">Ruta de acceso a datos</label>
-                                <input type="text" class="form-control" id="ruta_acceso_datos" name="ruta_acceso_datos" value="{{ $registro->ruta_acceso_datos }}" disabled="" autocomplete="off">
                             </div>
                         </div>
 
                         @if ($registro != "[]")
                         <div class="row">
-                            <div class="col-md-12 div-input">
-                                <label for="dropzone-esquema-analiticos-microfotografia">Microfotografía</label>
+                            <div class="col-md-12 div-input hidden dropzones-imagenes">
+                                <label for="dropzone-esquema-analiticos-microfotografia">Microfotografía, imagen o datos</label>
                                 <div class="dropzone " id="dropzone-esquema-analiticos-microfotografia">
                                 </div>
                             </div>
@@ -86,6 +84,17 @@
                             @include('dashboard.obras.detalle.resultados-analisis.datos-analiticos.esquema-analiticos-microfotografia.ver', ["imagenes_esquema_analiticos_microfotografia" => $registro->esquema_analiticos_microfotografias])
                         </div>
                         @endif
+
+                        <div class="row">
+                            <div class="col-md-12 div-input">
+                                <label for="ruta_acceso_imagen">Ruta de acceso a microfotografía, imagen o datos</label>
+                                <input type="text" class="form-control" id="ruta_acceso_imagen" name="ruta_acceso_imagen" value="{{ $registro->ruta_acceso_imagen }}" disabled="" autocomplete="off" placeholder="Colocar ruta de acceso como lo indica el INST-04">
+                            </div>
+                            {{-- <div class="col-md-6 div-input">
+                                <label for="ruta_acceso_datos">Ruta de acceso a datos</label>
+                                <input type="text" class="form-control" id="ruta_acceso_datos" name="ruta_acceso_datos" value="{{ $registro->ruta_acceso_datos }}" disabled="" autocomplete="off">
+                            </div> --}}
+                        </div>
                     </div>
 
 
@@ -93,7 +102,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal" no-editar>Cerrar</button>
                     <button type="submit" class="btn btn-primary" disabled="">Guardar Cambios</button>
                 </div>
 

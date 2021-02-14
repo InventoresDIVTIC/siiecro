@@ -12,7 +12,7 @@ class ObrasResultadosAnalisis extends Model
     	'solicitudes_analisis_muestras_id',
         'forma_obtencion_muestra_id',
         'tipo_material_id',
-        'informacion_por_definir_id',
+        // 'informacion_por_definir_id',
         'interpretacion_particular_id',
         'profesor_responsable_de_analisis_id',
     	'persona_realiza_analisis_id',

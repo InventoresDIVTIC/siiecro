@@ -12,6 +12,11 @@ use Hash;
 use Auth;
 
 use App\ObrasTipoMaterial;
+use App\ObrasTipoMaterialInterpretacionParticular;
+use App\ObrasTipoMaterialInterCruzada;
+
+// use App\ObrasTipoMaterialInformacionPorDefinir;
+// use App\ObrasTipoMaterialInfoCruzada;
 
 class ObrasTipoDeMaterialController extends Controller
 {
@@ -92,4 +97,84 @@ class ObrasTipoDeMaterialController extends Controller
 
         return Response::json(["mensaje" => "Petición incorrecta"], 500);
     }
+
+    ##### TIPO MATERIAL INTERPRETACIÓN PARTICULAR #####################################################
+    public function cargarInterpretacionesCruzadas($id)
+    {
+        $registros = ObrasTipoMaterialInterCruzada::selectRaw('
+                                                                obras__tipo_material__inter_cruzada.id,
+                                                                ip_cruzada.nombre
+                                                            ')
+                                                    ->join('obras__tipo_material__interpretacion_particular as ip_cruzada', 'ip_cruzada.id', '=', 'obras__tipo_material__inter_cruzada.interpretacion_particular_cruzada_id')
+                                                    ->where('obras__tipo_material__inter_cruzada.tipo_material_cruzada_iter_id', '=', $id)
+                                                    ->get();
+
+        return DataTables::of($registros)
+                            ->addColumn('acciones', function($registro){
+                                $editar         = '<i onclick="editarInterpretacionParticularCruzada('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar interpretación particular '.$registro->nombre.'"></i>';
+                                $eliminar       = '<i onclick="eliminarInterpretacionParticularCruzada('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar interpretación particular '.$registro->nombre.'"></i>';
+                                
+                                return $editar.$eliminar;
+                            })
+                            ->rawColumns(['acciones'])
+                            ->make('true');
+    }
+
+    public function crearInterpretacionCruzada($id)
+    {
+        $registro                           = new ObrasTipoMaterialInterCruzada;
+        $tipo_interpretaciones_existentes   = ObrasTipoMaterialInterCruzada::where('tipo_material_cruzada_iter_id', '=', $id)->get();
+        $existentes                         = [];
+        
+        foreach ($tipo_interpretaciones_existentes as $interpretaciones) {
+            $existentes[] = $interpretaciones->interpretacion_particular_cruzada_id;
+        }
+
+        $interpretaciones   = ObrasTipoMaterialInterpretacionParticular::whereNotIn('id', $existentes)->get();
+
+        return view('dashboard.obras.tipo-de-material.interpretacion-cruzada.agregar-interpretacion-cruzada', ["registro" => $registro, 'interpretaciones' => $interpretaciones]);
+    }
+
+    public function guardarInterpretacionCruzada(Request $request)
+    {
+        if($request->ajax()){
+            return BD::crear('ObrasTipoMaterialInterCruzada', $request);
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function editarInterpretacionCruzada(Request $request, $id)
+    {
+        $registro           = ObrasTipoMaterialInterCruzada::findOrFail($id);
+        $interpretaciones   = ObrasTipoMaterialInterpretacionParticular::all();
+
+        return view('dashboard.obras.tipo-de-material.interpretacion-cruzada.agregar-interpretacion-cruzada', ["registro" => $registro, 'interpretaciones' => $interpretaciones]);
+    }
+
+    public function actualizarInterpretacionCruzada(Request $request, $id)
+    {
+        if($request->ajax()){
+            $data   = $request->all();
+            return BD::actualiza($id, "ObrasTipoMaterialInterCruzada", $data);
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function avisoEliminarInterpretacionCruzada(Request $request, $id)
+    {
+        $registro   = ObrasTipoMaterialInterCruzada::findOrFail($id);
+        return view('dashboard.obras.tipo-de-material.interpretacion-cruzada.eliminar-interpretacion-cruzada', ["registro" => $registro]);
+    }
+
+    public function destruirInterpretacionCruzada(Request $request, $id)
+    {
+        if($request->ajax()){
+            return BD::elimina($id, "ObrasTipoMaterialInterCruzada");
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+    #######################################################################################################
 }

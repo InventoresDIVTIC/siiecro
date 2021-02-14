@@ -259,10 +259,12 @@ function toggleEdicionSolicitudesAnalisis(estatus){
     $("#form-obras-detalle-solicitudes-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', false);
     $("#btn-group-habilitar-edicion-analisis").addClass('hidden');
     $("#btn-group-no-editar-analisis").removeClass('hidden');
+    $(".dropzones-imagenes").removeClass('hidden');
   } else {
     $("#form-obras-detalle-solicitudes-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', true);
     $("#btn-group-habilitar-edicion-analisis").removeClass('hidden');
     $("#btn-group-no-editar-analisis").addClass('hidden');
+    $(".dropzones-imagenes").addClass('hidden');
   }
 }
 

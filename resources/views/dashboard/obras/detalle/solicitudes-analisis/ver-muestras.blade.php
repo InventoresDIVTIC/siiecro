@@ -59,7 +59,7 @@
 
                     @if ($registro != "[]")
                         <div class="row">
-                            <div class="col-md-12 div-input required">
+                            <div class="col-md-12 div-input required hidden dropzones-imagenes">
                                 <label for="dropzone-solicitud-analisis">Esquema</label>
                                 <div class="dropzone " id="dropzone-solicitud-analisis">
                                 </div>

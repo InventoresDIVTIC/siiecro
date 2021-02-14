@@ -18,10 +18,13 @@ class ObrasTipoObjetoSeeder extends Seeder
             'nombre'      	=>  "Textil",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Pintura mural",
+            'nombre'      	=>  "Pintura rupestre",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Plafones",
+            'nombre'        =>  "Pintura mural",
+        ]);
+        DB::table('obras__tipo_objeto')->insert([
+            'nombre'      	=>  "Plafón",
         ]);
         DB::table('obras__tipo_objeto')->insert([
             'nombre'      	=>  "Pintura sobre lienzo",
@@ -39,49 +42,49 @@ class ObrasTipoObjetoSeeder extends Seeder
             'nombre'      	=>  "Escultura",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Escultura ligera",
+            'nombre'      	=>  "Marco",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Marcos",
+            'nombre'      	=>  "Mueble",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Muebles",
+            'nombre'      	=>  "Retablo",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Retablos",
+            'nombre'      	=>  "Manuscrito",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Manuscritos",
+            'nombre'      	=>  "Mapa",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Mapas",
-        ]);
-        DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Planos",
+            'nombre'      	=>  "Plano",
         ]);
         DB::table('obras__tipo_objeto')->insert([
             'nombre'      	=>  "Croquis",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Cartas (Cartografías)",
+            'nombre'      	=>  "Carta Cartográfica",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Carteles",
+            'nombre'      	=>  "Cartel",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Impresos",
+            'nombre'      	=>  "Impresión",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Obras gráficas",
+            'nombre'      	=>  "Obra gráfica",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Instrumento musical",
+            'nombre'      	=>  "Fotografía",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Armas blancas",
+            'nombre'        =>  "Instrumento musical",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Armas de fuego",
+            'nombre'      	=>  "Arma de filo",
+        ]);
+        DB::table('obras__tipo_objeto')->insert([
+            'nombre'      	=>  "Arma de fuego",
         ]);
         DB::table('obras__tipo_objeto')->insert([
             'nombre'      	=>  "Pintura sobre lámina",
@@ -90,10 +93,10 @@ class ObrasTipoObjetoSeeder extends Seeder
             'nombre'      	=>  "Mecánico",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Utilitario",
+            'nombre'      	=>  "Artefacto",
         ]);
         DB::table('obras__tipo_objeto')->insert([
-            'nombre'      	=>  "Científico",
+            'nombre'      	=>  "Instrumento científico",
         ]);
     }
 }

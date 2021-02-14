@@ -202,7 +202,7 @@ class ObrasResultadosAnalisisController extends Controller
         $registro                                   = ObrasResultadosAnalisis::findOrFail($id);
         $formas_obtencion                           = ObrasFormaObtencionMuestra::all();
         $tipos_material                             = ObrasTipoMaterial::all();
-        $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
+        // $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
         $tipos_material_interpretacion_particular   = ObrasTipoMaterialInterpretacionParticular::all();
 
         // se implementa el envío de la solicitud independiente de la variable registro para mostrar los datos de la muestra origen 
@@ -236,7 +236,8 @@ class ObrasResultadosAnalisisController extends Controller
                                                             ->where('obras__solicitudes_analisis.obra_id', '=', $obra_id)
                                                             ->get();
                                                             
-        return view('dashboard.obras.detalle.resultados-analisis.agregar', ["registro" => $registro, 'formas_obtencion' => $formas_obtencion, 'tipos_material' => $tipos_material, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'tipos_material_interpretacion_particular' => $tipos_material_interpretacion_particular, 'solicitud' => $solicitud, 'asesor_cientifico_responsable' => $asesor_cientifico_responsable, 'persona_realiza_analisis' => $persona_realiza_analisis]);
+        // return view('dashboard.obras.detalle.resultados-analisis.agregar', ["registro" => $registro, 'formas_obtencion' => $formas_obtencion, 'tipos_material' => $tipos_material, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'tipos_material_interpretacion_particular' => $tipos_material_interpretacion_particular, 'solicitud' => $solicitud, 'asesor_cientifico_responsable' => $asesor_cientifico_responsable, 'persona_realiza_analisis' => $persona_realiza_analisis]);
+        return view('dashboard.obras.detalle.resultados-analisis.agregar', ["registro" => $registro, 'formas_obtencion' => $formas_obtencion, 'tipos_material' => $tipos_material, 'tipos_material_interpretacion_particular' => $tipos_material_interpretacion_particular, 'solicitud' => $solicitud, 'asesor_cientifico_responsable' => $asesor_cientifico_responsable, 'persona_realiza_analisis' => $persona_realiza_analisis]);
     }
 
     public function update(Request $request, $id)
@@ -377,11 +378,12 @@ class ObrasResultadosAnalisisController extends Controller
 
     public function crearResultadoAnalitico()
     {
-        $registro                       = new ObrasAnalisisARealizarResultados;
-        $analisis_a_realizar            = ObrasAnalisisARealizar::all();
-        $analisis_a_realizar_tecnicas   = ObrasAnalisisARealizarTecnica::all();
+        $registro                                   = new ObrasAnalisisARealizarResultados;
+        $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
+        $analisis_a_realizar                        = ObrasAnalisisARealizar::all();
+        $analisis_a_realizar_tecnicas               = ObrasAnalisisARealizarTecnica::all();
 
-        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
+        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
     }
 
     public function guardarResultadoAnalitico(Request $request)
@@ -395,11 +397,12 @@ class ObrasResultadosAnalisisController extends Controller
 
     public function editarResultadoAnalitico(Request $request, $id)
     {
-        $registro                       = ObrasAnalisisARealizarResultados::findOrFail($id);
-        $analisis_a_realizar            = ObrasAnalisisARealizar::all();
-        $analisis_a_realizar_tecnicas   = ObrasAnalisisARealizarTecnica::all();
+        $registro                                   = ObrasAnalisisARealizarResultados::findOrFail($id);
+        $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
+        $analisis_a_realizar                        = ObrasAnalisisARealizar::all();
+        $analisis_a_realizar_tecnicas               = ObrasAnalisisARealizarTecnica::all();
                                                             
-        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
+        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
     }
 
     public function actualizarResultadoAnalitico(Request $request, $id)

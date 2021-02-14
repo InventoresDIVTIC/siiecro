@@ -27,12 +27,14 @@
                                 <input type="text" class="form-control" id="tipo_analisis" value="{{ $solicitud->nombre }}" disabled="" no-editar>
                             </div>
                         </div>
+                        @if ($registro != "[]")
                         <div class="row">
                             <div class="col-md-12 div-input">
                                 <label for="lugar_resguardo_muestra">Lugar de resguardo de la muestra</label>
-                                <input type="text" class="form-control" id="lugar_resguardo_muestra" name="lugar_resguardo_muestra" value="{{ $registro->lugar_resguardo_muestra }}" no-editar>
+                                <input type="text" class="form-control" id="lugar_resguardo_muestra" name="lugar_resguardo_muestra" value="{{ $registro->lugar_resguardo_muestra }}" no-editar placeholder="Colocar la clave como lo indica en INST-05">
                             </div>
                         </div>
+                        @endif
                     </div>
 
                     <hr>
@@ -97,7 +99,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12 div-input required">
+                            <div class="col-md-12 div-input required hidden dropzones-imagenes" {{-- style="display: none;" --}}>
                                 <label for="dropzone-esquema-muestra">Esquema</label>
                                 <div class="dropzone" id="dropzone-esquema-muestra">
                                 </div>
@@ -127,7 +129,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12 div-input">
+                            <div class="col-md-12 div-input hidden dropzones-imagenes" {{-- style="display: none;" --}}>
                                 <label for="dropzone-esquema-microfotografia">Microfotografía</label>
                                 <div class="dropzone" id="dropzone-esquema-microfotografia">
                                 </div>
@@ -141,7 +143,7 @@
                         <div class="row">
                             <div class="col-md-12 div-input">
                                 <label for="ruta_acceso_microfotografia">Ruta de acceso a microfotografía</label>
-                                <input type="text" class="form-control" id="ruta_acceso_microfotografia" name="ruta_acceso_microfotografia" value="{{ $registro->ruta_acceso_microfotografia }}" autocomplete="off" disabled="">
+                                <input type="text" class="form-control" id="ruta_acceso_microfotografia" name="ruta_acceso_microfotografia" value="{{ $registro->ruta_acceso_microfotografia }}" autocomplete="off" disabled="" placeholder="Colocar ruta de acceso según el INST-04">
                             </div>
                         </div>
 
@@ -149,7 +151,7 @@
                         <h1 class="text-center"><strong>Datos Analíticos | Resultados</strong></h1>
                         <br>
                         <div class="row ibox">
-                            <div class="col-md-6 div-input required">
+                            {{-- <div class="col-md-6 div-input required">
                                 <label for="informacion_por_definir_id">Información por definir</label>
                                 <select class="form-control select2" id="informacion_por_definir_id" name="informacion_por_definir_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
@@ -157,8 +159,8 @@
                                         <option {{ $informacion_por_definir->id == $registro->informacion_por_definir_id ? "selected" : "" }} value="{{ $informacion_por_definir->id }}">{{ $informacion_por_definir->nombre }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="col-md-6">
+                            </div> --}}
+                            <div class="col-md-12">
                                 <button type="button" onclick="crearResultadoAnalitico({{ $registro->id }})" class="btn btn-primary pull-right">Agregar resultados analiticos</button>
                             </div>
                         </div>
@@ -193,7 +195,7 @@
                         <div class="row">
                             <div class="col-md-6 div-input">
                                 <label for="conclusion_general">Conclusion general</label>
-                                <textarea class="form-control no-resize" name="conclusion_general" id="conclusion_general" rows="6" autocomplete="off" disabled=""><?php echo($registro->conclusion_general); ?></textarea>
+                                <textarea class="form-control no-resize" name="conclusion_general" id="conclusion_general" rows="6" autocomplete="off" disabled="" placeholder="Descripción e interpretación final de la suma y comparativa de los diferentes resultados interpretados de cada técnica analítica realizada"><?php echo($registro->conclusion_general); ?></textarea>
                             </div>
                             <div class="col-md-6 div-input required">
                                 <label for="interpretacion_particular_id">Interpretación particular</label>

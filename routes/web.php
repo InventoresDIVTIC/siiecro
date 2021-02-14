@@ -188,9 +188,18 @@ Auth::routes();
 		#################################################################################
 
 	    ######## OBRAS TIPO DE MATERIAL #################################################
-			Route::get('obras-tipo-de-material/carga', 					'ObrasTipoDeMaterialController@cargarTabla');
-			Route::get('obras-tipo-de-material/{id}/eliminar', 			'ObrasTipoDeMaterialController@eliminar');
-			Route::resource('obras-tipo-de-material', 					'ObrasTipoDeMaterialController');
+			Route::get('obras-tipo-de-material/carga', 											'ObrasTipoDeMaterialController@cargarTabla');
+			Route::get('obras-tipo-de-material/{id}/eliminar', 									'ObrasTipoDeMaterialController@eliminar');
+			
+			Route::get('obras-tipo-de-material/cargar-interpretaciones/{id_tipo_material}', 	'ObrasTipoDeMaterialController@cargarInterpretacionesCruzadas');
+			Route::get('obras-tipo-de-material/crear-interpretacion-cruzada/{id_tipo_material}','ObrasTipoDeMaterialController@crearInterpretacionCruzada');
+			Route::post('obras-tipo-de-material/guardar-interpretacion-cruzada', 				'ObrasTipoDeMaterialController@guardarInterpretacionCruzada')->name('obras-tipo-de-material.guardar-interpretacion-cruzada');
+			Route::get('obras-tipo-de-material/editar-interpretacion-cruzada/{id}', 			'ObrasTipoDeMaterialController@editarInterpretacionCruzada');
+			Route::put('obras-tipo-de-material/actualizar-interpretacion-cruzada/{id}', 		'ObrasTipoDeMaterialController@actualizarInterpretacionCruzada')->name('obras-tipo-de-material.actualizar-interpretacion-cruzada');
+			Route::get('obras-tipo-de-material/aviso-eliminar-interpretacion-cruzada/{id}', 	'ObrasTipoDeMaterialController@avisoEliminarInterpretacionCruzada');
+			Route::delete('obras-tipo-de-material/destruir-interpretacion-cruzada/{id}', 		'ObrasTipoDeMaterialController@destruirInterpretacionCruzada')->name('obras-tipo-de-material.destruir-interpretacion-cruzada');
+
+			Route::resource('obras-tipo-de-material', 											'ObrasTipoDeMaterialController');
 		#################################################################################
 
 	    ######## OBRAS INFORMACIÓN POR DEFINIR ##########################################

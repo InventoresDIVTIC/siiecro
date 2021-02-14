@@ -13,11 +13,13 @@ class ObrasAnalisisARealizarResultados extends Model
     	'analisis_a_realizar_id',
     	'tecnica_analitica_id',
     	'interpretacion',
-    	'descripciones',
-    	'datos',
+    	// 'descripciones',
+    	// 'datos',
     	'info_del_equipo',
     	'ruta_acceso_imagen',
-    	'ruta_acceso_datos',
+    	// 'ruta_acceso_datos',
+        // AGREGADO DE ULTIMA HORA (UN CAMBIO MÁS)
+        'informacion_por_definir_id',
     ];
 
     public function esquema_analiticos_microfotografias() {
