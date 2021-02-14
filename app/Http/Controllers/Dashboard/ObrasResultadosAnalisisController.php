@@ -40,6 +40,30 @@ class ObrasResultadosAnalisisController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('VerificarPermiso:captura_de_resultados');
+        $this->middleware('VerificarPermiso:administrar_registro_resultados',   [
+                                                                                        "only"  =>  [
+                                                                                                        "modalAprobarResultadoAnalisis",
+                                                                                                        "aprobarResultadoAnalisis",
+                                                                                                        "modalRechazarResultadoAnalisis",
+                                                                                                        "rechazarResultadoAnalisis",
+                                                                                                        "modalEnRevisionResultadoAnalisis",
+                                                                                                        "enRevisionResultadoAnalisis"
+                                                                                                    ]
+                                                                                    ]);
+
+        $this->middleware('VerificarPermiso:eliminar_resultados',               [
+                                                                                    "only"  =>  [
+                                                                                                    "eliminar",
+                                                                                                    "destroy"
+                                                                                                ]
+                                                                                ]);
+
+        $this->middleware('VerificarPermiso:imprimir_condicionado',             [
+                                                                                    "only"  =>  [
+                                                                                                    "imprimir"
+                                                                                                ]
+                                                                                ]);
     }
 
     public function cargarTabla(Request $request, $obra_id)
@@ -100,48 +124,59 @@ class ObrasResultadosAnalisisController extends Controller
                             $aprobar            =   '';
                             $rechazar           =   '';
                             $revision           =   '';
+                            $imprimir           =   '';
+
+                            if(Auth::user()->rol->imprimir_condicionado){
+                                $imprimir       =   '<a class="icon-link" href="'.route('dashboard.resultados-analisis.imprimir', $registro->id).'" target="_blank"><i class="fa fa-print fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Imprimir"></i></a>';
+                            }
 
                             if ($registro->estatus == 'Rechazado') {
                                 // $editar      =   '<i onclick="editarResultado('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Mostrar resultado de analisis"></i>';
                                 
-                                if(Auth::user()->rol->eliminar_solicitud_analisis){
+                                if(Auth::user()->rol->eliminar_resultados){
                                     $eliminar   =   '<i onclick="eliminarResultado('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar resultado de analisis"></i>';
                                 }
 
-                                if(Auth::user()->rol->administrar_solicitudes_analisis){
+                                if(Auth::user()->rol->administrar_registro_resultados){
                                     $revision   =   '<i onclick="ponerEnRevisionResultadoAnalisis('.$registro->id.')" class="fa fa-history fa-lg m-r-sm pointer inline-block disabled" aria-hidden="true" mi-tooltip="Poner en revision resultado de analisis"></i>';
                                 }
                             }
                             elseif ($registro->estatus == 'Aprobado') {
                                 $editar         =   '<i onclick="editarResultado('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Mostrar resultado de analisis"></i>';
 
-                                if(Auth::user()->rol->eliminar_solicitud_analisis){
+                                if(Auth::user()->rol->eliminar_resultados){
                                     $eliminar   =   '<i onclick="eliminarResultado('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar resultado de analisis"></i>';
                                 }
                                 // $aprobar     =   '<i onclick="aprobarResultadoAnalisis('.$registro->id.')" class="fa fa-check-square-o fa-lg m-r-sm pointer inline-block disabled" aria-hidden="true" mi-tooltip="Aprobar resultado de analisis"></i>';
 
-                                if(Auth::user()->rol->administrar_solicitudes_analisis){
+                                if(Auth::user()->rol->administrar_registro_resultados){
                                     $rechazar   =   '<i onclick="rechazarResultadoAnalisis('.$registro->id.')" class="fa fa-ban fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Rechazar resultado de analisis"></i>';
                                 }
                             }
                             else{
                                 $editar         =   '<i onclick="editarResultado('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Mostrar resultado de analisis"></i>';
 
-                                if(Auth::user()->rol->eliminar_solicitud_analisis){
+                                if(Auth::user()->rol->eliminar_resultados){
                                     $eliminar   =   '<i onclick="eliminarResultado('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar resultado de analisis"></i>';
                                 }
 
-                                if(Auth::user()->rol->administrar_solicitudes_analisis){
+                                if(Auth::user()->rol->administrar_registro_resultados){
                                     $aprobar    =   '<i onclick="aprobarResultadoAnalisis('.$registro->id.')" class="fa fa-check-square-o fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Aprobar resultado de analisis"></i>';
                                     $rechazar   =   '<i onclick="rechazarResultadoAnalisis('.$registro->id.')" class="fa fa-ban fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Rechazar resultado de analisis"></i>';
                                 }
                                 // $revision    =   '<i onclick="ponerEnRevisionResultadoAnalisis('.$registro->id.')" class="fa fa-history fa-lg m-r-sm pointer inline-block disabled" aria-hidden="true" mi-tooltip="Poner en revision resultado de analisis"></i>';
                             }
 
-                            return $aprobar.$rechazar.$revision.$editar.$eliminar;
+                            return $aprobar.$rechazar.$revision.$imprimir.$editar.$eliminar;
                         })
                         ->rawColumns(['imagen','fecha_analisis','acciones'])
                         ->make('true');
+    }
+
+    public function imprimir(Request $request, $resultado_analisis_id){
+        $registro                       =   ObrasResultadosAnalisis::findOrFail($resultado_analisis_id);
+
+        return $registro->generarPdf()->stream($registro->solicitud_analisis_muestra->solicitud_analisis->obra->folio."-resultado-analisis-".$registro->id.".pdf");
     }
 
     public function crear($id, $obra_id)

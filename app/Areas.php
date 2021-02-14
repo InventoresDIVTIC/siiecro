@@ -8,6 +8,7 @@ class Areas extends Model
 {
     protected $fillable = [
         'nombre',
-        'siglas'
+        'siglas',
+    	'color_hexadecimal'
     ];
 }

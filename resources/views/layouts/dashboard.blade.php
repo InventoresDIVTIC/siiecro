@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <title>{{ 'SII-ECRO'.(isset($titulo) ? " | ".$titulo : "") }}</title>
 
     {!!Html::style('css/bootstrap.min.css')!!}
@@ -70,7 +71,9 @@
     <!-- Ladda style -->
     {!!Html::style('css/plugins/ladda/ladda-themeless.min.css')!!}
 
-
+    <!-- Color picker -->
+    {!!Html::style('css/plugins/colorpicker/bootstrap-colorpicker.min.css')!!}
+    
     <!--OWL-->
     {!!Html::style('css/plugins/owl/owl.carousel.css')!!}
     {!!Html::style('css/plugins/owl/owl.theme.default.css')!!}
@@ -227,6 +230,9 @@
 
 <!-- cropper js -->
   {!!Html::script('js/plugins/cropper/cropper.min.js')!!}
+
+<!-- Color picker -->
+  {!!Html::script('js/plugins/colorpicker/bootstrap-colorpicker.min.js')!!}
 
 <!-- Ladda -->
   {!!Html::script('js/plugins/ladda/spin.min.js')!!}

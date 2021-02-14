@@ -167,10 +167,12 @@
                                                     <label for="lugar_procedencia_original">Lugar de procedencia original</label>
                                                     <input type="text" class="form-control" id="lugar_procedencia_original" name="lugar_procedencia_original" value="{{ $obra->lugar_procedencia_original }}" required autocomplete="off" disabled placeholder="Lugar de donde proviene la obra/creación." mi-tooltip="Lugar de donde proviene la obra/creación.">
                                                 </div>
-                                                <div class="col-md-2 div-input required">
-                                                    <label for="numero_inventario">No inventario</label>
-                                                    <input type="text" class="form-control" id="numero_inventario" name="numero_inventario" value="{{ $obra->numero_inventario }}" required autocomplete="off" disabled>
-                                                </div>
+                                                @if (Auth::user()->rol->acceso_a_datos_avanzado)
+                                                    <div class="col-md-2 div-input required">
+                                                        <label for="numero_inventario">No inventario</label>
+                                                        <input type="text" class="form-control" id="numero_inventario" name="numero_inventario" value="{{ $obra->numero_inventario }}" required autocomplete="off" disabled>
+                                                    </div>
+                                                @endif
 
                                                 <div class="col-md-3 div-input required">
                                                     <label for="alto">Alto (cm)</label>
@@ -220,12 +222,14 @@
 
                                         <div class="col-md-6">
 
-                                            <div class="row">
-                                                <div class="col-md-12 div-input">
-                                                    <label for="caracteristicas_descriptivas">Características descriptivas</label>
-                                                    <textarea class="form-control no-resize" name="caracteristicas_descriptivas" id="caracteristicas_descriptivas" rows="6" autocomplete="off" disabled>{{ $obra->caracteristicas_descriptivas }}</textarea>
+                                            @if (Auth::user()->rol->acceso_a_datos_avanzado)
+                                                <div class="row">
+                                                    <div class="col-md-12 div-input">
+                                                        <label for="caracteristicas_descriptivas">Características descriptivas</label>
+                                                        <textarea class="form-control no-resize" name="caracteristicas_descriptivas" id="caracteristicas_descriptivas" rows="6" autocomplete="off" disabled>{{ $obra->caracteristicas_descriptivas }}</textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                             <div class="row">
                                                 <div class="col-md-9 div-input required">
                                                     <label for="_responsables">Responsables ECRO</label>
@@ -236,15 +240,17 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col-md-3 div-input required">
-                                                    <label for="forma_ingreso">Forma de ingreso</label>
-                                                    <select class="form-control select2 full-width" id="forma_ingreso" name="forma_ingreso" required autocomplete="off" disabled>
-                                                        <option value=""></option>
-                                                        @foreach (config('valores.obras_formas_ingreso') as $forma)
-                                                            <option {{ $obra->forma_ingreso == $forma ? "selected" : "" }} value="{{ $forma }}">{{ $forma }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                                @if (Auth::user()->rol->acceso_a_datos_avanzado)
+                                                    <div class="col-md-3 div-input required">
+                                                        <label for="forma_ingreso">Forma de ingreso</label>
+                                                        <select class="form-control select2 full-width" id="forma_ingreso" name="forma_ingreso" required autocomplete="off" disabled>
+                                                            <option value=""></option>
+                                                            @foreach (config('valores.obras_formas_ingreso') as $forma)
+                                                                <option {{ $obra->forma_ingreso == $forma ? "selected" : "" }} value="{{ $forma }}">{{ $forma }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8 div-input required">
@@ -288,31 +294,33 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-md-6 div-input required">
-                                                    <label for="fecha_ingreso">Fecha ingreso</label>
-                                                    <input type="text" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{ $obra->fecha_ingreso ? $obra->fecha_ingreso->format('Y-m-d') : Carbon\Carbon::now()->format('Y-m-d') }}" required autocomplete="off" disabled>
+                                            @if (Auth::user()->rol->acceso_a_datos_avanzado)
+                                                <div class="row">
+                                                    <div class="col-md-6 div-input required">
+                                                        <label for="fecha_ingreso">Fecha ingreso</label>
+                                                        <input type="text" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{ $obra->fecha_ingreso ? $obra->fecha_ingreso->format('Y-m-d') : Carbon\Carbon::now()->format('Y-m-d') }}" required autocomplete="off" disabled>
+                                                    </div>
+                                                    <div class="col-md-6 div-input">
+                                                        <label for="fecha_salida">Fecha salida</label>
+                                                        <input type="text" class="form-control" id="fecha_salida" name="fecha_salida" value="{{ $obra->fecha_salida ? $obra->fecha_salida->format('Y-m-d') : "" }}" autocomplete="off" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6 div-input">
-                                                    <label for="fecha_salida">Fecha salida</label>
-                                                    <input type="text" class="form-control" id="fecha_salida" name="fecha_salida" value="{{ $obra->fecha_salida ? $obra->fecha_salida->format('Y-m-d') : "" }}" autocomplete="off" disabled>
+                                                <div class="row">
+                                                    <div class="col-md-6 div-input">
+                                                        <label for="area_id">Recibió</label>
+                                                        <select class="form-control select2 full-width" id="usuario_recibio_id" name="usuario_recibio_id" autocomplete="off" disabled {{ Auth::user()->rol->edicion_de_registro_avanzada_2 ? "" : "no-editar" }}>
+                                                            <option value=""></option>
+                                                            @foreach ($usuariosPuedenRecibirObras as $usuario)
+                                                                <option {{ $obra->usuario_recibio_id == $usuario->id ? "selected" : "" }} value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 div-input">
+                                                        <label for="fecha_salida">Entregó</label>
+                                                        <input type="text" class="form-control" id="persona_entrego" name="persona_entrego" value="{{ $obra->persona_entrego }}" autocomplete="off" disabled {{ Auth::user()->rol->edicion_de_registro_avanzada_2 ? "" : "no-editar" }}>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 div-input">
-                                                    <label for="area_id">Recibió</label>
-                                                    <select class="form-control select2 full-width" id="usuario_recibio_id" name="usuario_recibio_id" autocomplete="off" disabled {{ Auth::user()->rol->edicion_de_registro_avanzada_2 ? "" : "no-editar" }}>
-                                                        <option value=""></option>
-                                                        @foreach ($usuariosPuedenRecibirObras as $usuario)
-                                                            <option {{ $obra->usuario_recibio_id == $usuario->id ? "selected" : "" }} value="{{ $usuario->id }}">{{ $usuario->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 div-input">
-                                                    <label for="fecha_salida">Entregó</label>
-                                                    <input type="text" class="form-control" id="persona_entrego" name="persona_entrego" value="{{ $obra->persona_entrego }}" autocomplete="off" disabled {{ Auth::user()->rol->edicion_de_registro_avanzada_2 ? "" : "no-editar" }}>
-                                                </div>
-                                            </div>
+                                            @endif
 
                                         </div>
 
@@ -450,7 +458,10 @@
                             <li class=""><a data-toggle="tab" href="#tab-solicitudes-analisis"> Solicitudes de ánalisis</a></li>
                         @endif
                         
-                        <li class=""><a data-toggle="tab" href="#tab-resultados-analisis">Resultado de análisis</a></li>
+                        @if (Auth::user()->rol->captura_de_resultados)
+                            <li class=""><a data-toggle="tab" href="#tab-resultados-analisis">Resultado de análisis</a></li>
+                        @endif
+
                         <li class=""><a data-toggle="tab" href="#tab-informes">Informes</a></li>
                     </ul>
 
@@ -484,11 +495,13 @@
                             </div>
                         @endif
 
-                        <div id="tab-resultados-analisis" class="tab-pane">
-                            <div class="panel-body">
-                                @include('dashboard.obras.detalle.resultados-analisis.index')
+                        @if (Auth::user()->rol->captura_de_resultados)
+                            <div id="tab-resultados-analisis" class="tab-pane">
+                                <div class="panel-body">
+                                    @include('dashboard.obras.detalle.resultados-analisis.index')
+                                </div>
                             </div>
-                        </div>                    
+                        @endif                    
                         
                         <div id="tab-informes" class="tab-pane">
                             <div class="panel-body">

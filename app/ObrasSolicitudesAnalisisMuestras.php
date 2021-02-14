@@ -19,4 +19,8 @@ class ObrasSolicitudesAnalisisMuestras extends Model
     	'descripcion_muestra',
     	'ubicacion'
     ];
+
+    public function solicitud_analisis() {
+        return $this->hasOne('App\ObrasSolicitudesAnalisis', 'id', 'solicitud_analisis_id');
+    }
 }

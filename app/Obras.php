@@ -343,4 +343,28 @@ class Obras extends Model
         $pdf = PDF::loadView('pdf.obra-oficio', ["obra" => $this]);
         return $pdf;
     }
+
+    public static function obtenerObrasDashboard(){
+        if (Auth::user()->rol->acceso_a_datos_avanzado) {
+            return  Obras::selectRaw("
+                                        obras.*,
+                                        a.nombre    as nombre_area
+                                    ")
+                            ->join('areas as a', 'a.id', 'obras.area_id')
+                            ->whereNotNull('obras.fecha_aprobacion')
+                            ->orderBy('obras.fecha_aprobacion', 'DESC')
+                            ->limit(10);
+        } else{
+            return  Obras::selectRaw("
+                                        obras.*,
+                                        a.nombre    as nombre_area
+                                    ")
+                            ->join('areas as a', 'a.id', 'obras.area_id')
+                            ->join('obras__usuarios_asignados as asignados', 'asignados.obra_id', 'obras.id')
+                            ->whereNotNull('obras.fecha_aprobacion')
+                            ->where('asignados.usuario_id', Auth::id())
+                            ->groupBy('obras.id')
+                            ->orderBy('asignados.created_at', 'DESC');
+        }
+    }
 }

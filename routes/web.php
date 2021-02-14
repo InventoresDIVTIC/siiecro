@@ -22,7 +22,13 @@ Auth::routes();
 
 	Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->group(function () {
 	    ######## DASHBOARD ##############################################################
-			Route::get('/', 	'DashboardController@index')->name('dashboard.index');
+			Route::get('/', 									'DashboardController@index')->name('dashboard.index');
+			Route::get('/grafica-obras-bienes-culturales', 		'DashboardController@graficasObrasBienesCulturales');
+			Route::get('/grafica-obras-tipos-objeto', 			'DashboardController@graficasObrasTiposObjeto');
+			Route::get('/grafica-obras-areas', 					'DashboardController@graficasObrasAreas');
+			Route::get('/tabla-obras', 							'DashboardController@tablaObras');
+			Route::get('/tabla-solicitudes', 					'DashboardController@tablaSolicitudesAnalisis');
+			Route::get('/tabla-resultados', 					'DashboardController@tablaResultadosAnalisis');
 		#################################################################################
 			
 	    ######## USUARIOS ###############################################################
@@ -118,11 +124,11 @@ Auth::routes();
 			Route::get('resultados-analisis/{id}/eliminar-esquema-muestra', 				'ObrasResultadosAnalisisController@alertaEliminarEsquemaMuestra');
 			Route::delete('resultados-analisis/{id}/eliminar-esquema-muestra', 				'ObrasResultadosAnalisisController@eliminarEsquemaMuestra')->name('obras.eliminar-esquema-muestra-resultados-analisis');
 			Route::get('resultados-analisis/{id}/ver-esquema-muestra', 						'ObrasResultadosAnalisisController@verEsquemaMuestra');
-
 			Route::post('resultados-analisis/{id}/subir-esquema-microfotografia', 			'ObrasResultadosAnalisisController@subirImagenEsquemaMicrofotografia');
 			Route::get('resultados-analisis/{id}/eliminar-esquema-microfotografia', 		'ObrasResultadosAnalisisController@alertaEliminarEsquemaMicrofotografia');
 			Route::delete('resultados-analisis/{id}/eliminar-esquema-microfotografia', 		'ObrasResultadosAnalisisController@eliminarEsquemaMicrofotografia')->name('obras.eliminar-esquema-microfotografia');
 			Route::get('resultados-analisis/{id}/ver-esquema-microfotografia', 				'ObrasResultadosAnalisisController@verEsquemaMicrofotografia');
+			Route::get('resultados-analisis/imprimir/{id}', 								'ObrasResultadosAnalisisController@imprimir')->name('resultados-analisis.imprimir');
 
 			// RESULTADOS ANALITICOS
 			Route::get('resultados-analisis/carga-analisis-realizar-resultados/{id}', 		'ObrasResultadosAnalisisController@cargarAnalisisRealizarResultados');

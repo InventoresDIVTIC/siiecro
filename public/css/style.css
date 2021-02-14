@@ -8656,3 +8656,7 @@ body.md-skin {
 .fs-12{
   font-size: 12px !important;
 }
+
+.colorpicker {
+  z-index: 99999;
+}

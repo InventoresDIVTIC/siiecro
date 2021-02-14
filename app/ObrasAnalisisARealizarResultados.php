@@ -25,4 +25,12 @@ class ObrasAnalisisARealizarResultados extends Model
     public function esquema_analiticos_microfotografias() {
         return $this->hasMany('App\ObrasAnalisisARealizarMicrofotografia', 'analisis_a_realizar_resultado_id', 'id');
     }
+
+    public function analisis_realizar() {
+        return $this->hasOne('App\ObrasAnalisisARealizar', 'id', 'analisis_a_realizar_id');
+    }
+
+    public function tecnica_analitica() {
+        return $this->hasOne('App\ObrasAnalisisARealizarTecnica', 'id', 'tecnica_analitica_id');
+    }
 }

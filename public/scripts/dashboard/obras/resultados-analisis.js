@@ -1,16 +1,18 @@
 jQuery(document).ready(function($) {
-	_cargarTabla(
-			"#dt-datos-resultados-analisis", // ID de la tabla
-			"#carga-dt-resultados-analisis", // ID elemento del progreso
-			"/dashboard/resultados-analisis/carga/"+ $('#id').val(), // URL datos
-			[
+  if($("#dt-datos-resultados-analisis").length > 0){
+    _cargarTabla(
+      "#dt-datos-resultados-analisis", // ID de la tabla
+      "#carga-dt-resultados-analisis", // ID elemento del progreso
+      "/dashboard/resultados-analisis/carga/"+ $('#id').val(), // URL datos
+      [
             { data: "fecha_analisis", width: "20%"},
             { data: "nomenclatura",   width: "20%"},
             { data: "nombre",         width: "25%"},
             { data: "imagen",         width: "20%"},
-            { data: "acciones",       width: "15%", 	searchable: false, 	orderable: false},
-			], // Columnas
-		);
+            { data: "acciones",       width: "15%",   searchable: false,  orderable: false},
+      ], // Columnas
+    );
+  }
 });
 
 function agregarResultados(solicitudes_analisis_muestras_id)

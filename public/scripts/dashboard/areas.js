@@ -21,6 +21,7 @@ function crear(){
                       $('#campo').on('select2:select', function (e) {
                         generarSiglas();
                       });
+                      $("#color_hexadecimal").colorpicker();
                     }, //Funcion para el success
                     "#form-areas", //ID del Formulario
                     "#carga-agregar", //Loading de guardar datos de formulario
@@ -43,6 +44,7 @@ function editar(id)
                       $('#campo').on('select2:select', function (e) {
                         generarSiglas();
                       });
+                      $("#color_hexadecimal").colorpicker();
                     }, //Funcion para el success
                     "#form-areas", //ID del Formulario
                     "#carga-agregar", //Loading de guardar datos de formulario
