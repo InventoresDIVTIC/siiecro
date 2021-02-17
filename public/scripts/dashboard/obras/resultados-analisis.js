@@ -76,11 +76,12 @@ function editarResultado(resultado_analisis_id)
                           "/dashboard/resultados-analisis/carga-analisis-realizar-resultados/"+ resultado_analisis_id, // URL datos
                           // "/dashboard/resultados-analisis/carga-analisis-realizar-resultados/"+ $('#id').val(), // URL datos
                           [
-                                { data: "analisis_a_realizar_nombre", name: "nombre", width: "20%"},
-                                { data: "tecnica_analitica_nombre",   name: "nombre", width: "20%"},
-                                { data: "interpretacion",                             width: "25%"},
+                                { data: "analisis_a_realizar_nombre", name: "nombre", width: "15%"},
+                                { data: "tecnica_analitica_nombre",   name: "nombre", width: "15%"},
+                                { data: "informacion_por_definir",    name: "nombre", width: "20%"},
                                 { data: "imagen",                                     width: "20%"},
-                                { data: "acciones",                                   width: "15%",   searchable: false,  orderable: false},
+                                { data: "interpretacion",                             width: "20%"},
+                                { data: "acciones",                                   width: "10%",   searchable: false,  orderable: false},
                           ], // Columnas
                         );
 

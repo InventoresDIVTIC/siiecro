@@ -222,7 +222,7 @@ Auth::routes();
 			Route::resource('obras-informacion-por-definir', 			'ObrasTipoMaterialInformacionPorDefinirController');
 		#################################################################################
 
-	    ######## OBRAS INTERPRETACIÓN PARTICULAR ########################################
+	    ######## OBRAS INTERPRETACIÓN PARTICULAR RENOMBRADA A INTERPRETACIÓN MATERIAL ###
 			Route::get('obras-interpretacion-particular/carga', 		'ObrasTipoMaterialInterpretacionParticularController@cargarTabla');
 			Route::get('obras-interpretacion-particular/{id}/eliminar', 'ObrasTipoMaterialInterpretacionParticularController@eliminar');
 			Route::resource('obras-interpretacion-particular', 			'ObrasTipoMaterialInterpretacionParticularController');

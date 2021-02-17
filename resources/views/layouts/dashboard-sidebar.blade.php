@@ -44,7 +44,7 @@
                                 <li><a href="{{ route('dashboard.obras-forma-obtencion-muestra.index') }}">Forma de Obtención de la Muestra</a></li>
                                 <li><a href="{{ route('dashboard.obras-tipo-de-material.index') }}">Tipo de Material</a></li>
                                 <li><a href="{{ route('dashboard.obras-informacion-por-definir.index') }}">Información por Definir</a></li>
-                                <li><a href="{{ route('dashboard.obras-interpretacion-particular.index') }}">Interpretación Particular</a></li>
+                                <li><a href="{{ route('dashboard.obras-interpretacion-particular.index') }}">Interpretación Material</a></li>
                                 <li><a href="{{ route('dashboard.obras-analisis-a-realizar.index') }}">Análisis a Realizar</a></li>
                             </ul>
                         </li>

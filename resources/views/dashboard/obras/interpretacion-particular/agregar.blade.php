@@ -3,8 +3,8 @@
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Obras | Interpretación Particular</h4>
-                <small class="font-bold">{{ $registro == "[]" ? "Creando nueva Interpretación Particular" : "Editando a " }} <strong>{{ $registro->nombre }}</strong></small>
+                <h4 class="modal-title">Obras | Interpretación Material</h4>
+                <small class="font-bold">{{ $registro == "[]" ? "Creando nueva Interpretación Material" : "Editando a " }} <strong>{{ $registro->nombre }}</strong></small>
             </div>
             @if ($registro == "[]")
                 {!! Form::open(['route' => ['dashboard.obras-interpretacion-particular.store'], 'method' => 'POST', 'id' => 'form-obras-interpretacion-particular', 'class' => 'form-horizontal']) !!}

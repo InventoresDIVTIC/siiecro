@@ -178,8 +178,9 @@
                                                     <tr>
                                                         <th>Análisis a realizar</th>
                                                         <th>Técnica analítica</th>
-                                                        <th>Interpretación</th>
+                                                        <th>Información por definir</th>
                                                         <th>Foto</th>
+                                                        <th>Interpretación</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -198,7 +199,7 @@
                                 <textarea class="form-control no-resize" name="conclusion_general" id="conclusion_general" rows="6" autocomplete="off" disabled="" placeholder="Descripción e interpretación final de la suma y comparativa de los diferentes resultados interpretados de cada técnica analítica realizada"><?php echo($registro->conclusion_general); ?></textarea>
                             </div>
                             <div class="col-md-6 div-input required">
-                                <label for="interpretacion_particular_id">Interpretación particular</label>
+                                <label for="interpretacion_particular_id">Interpretación material</label>
                                 <select class="form-control select2" id="interpretacion_particular_id" name="interpretacion_particular_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($tipos_material_interpretacion_particular as $interpretacion_particular)

@@ -372,6 +372,7 @@ class ObrasResultadosAnalisisController extends Controller
 
         $registros  = ObrasAnalisisARealizarResultados::selectRaw('
                                                                     obras__resultados_analisis.id,
+                                                                    obras__tipo_material__informacion_por_definir.nombre AS informacion_por_definir,
                                                                     obras__analisis_a_realizar_resultados.id AS id_resultado,
                                                                     obras__analisis_a_realizar.nombre AS analisis_a_realizar_nombre,
                                                                     obras__analisis_a_realizar_tecnica.nombre AS tecnica_analitica_nombre,
@@ -380,6 +381,7 @@ class ObrasResultadosAnalisisController extends Controller
                                                     ->join('obras__resultados_analisis',                        'obras__analisis_a_realizar_resultados.resultado_analisis_id',                  '=', 'obras__resultados_analisis.id')
                                                     ->join('obras__analisis_a_realizar',                        'obras__analisis_a_realizar.id',                                                '=', 'obras__analisis_a_realizar_resultados.analisis_a_realizar_id')
                                                     ->join('obras__analisis_a_realizar_tecnica',                'obras__analisis_a_realizar_tecnica.id',                                        '=', 'obras__analisis_a_realizar_resultados.tecnica_analitica_id')
+                                                    ->join('obras__tipo_material__informacion_por_definir',     'obras__tipo_material__informacion_por_definir.id',                             '=', 'obras__analisis_a_realizar_resultados.informacion_por_definir_id')
                                                     ->where('obras__analisis_a_realizar_resultados.resultado_analisis_id', '=', $resultado_analisis_id)
                                                     ->get();
                                                     // ->toSql();

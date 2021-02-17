@@ -2,19 +2,19 @@
 
 @section('top-body')
     <div class="col-sm-4">
-        <h2>Administración de Interpretación Particular</h2>
+        <h2>Administración de Interpretación Material</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ route('dashboard.dashboard.index') }}">Dashboard</a>
             </li>
             <li class="active">
-                <strong>Obras | Interpretación Particular</strong>
+                <strong>Obras | Interpretación Material</strong>
             </li>
         </ol>
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-            <btn onclick="crear();" class="btn btn-primary">Crear nueva Interpretación Particular</btn>
+            <btn onclick="crear();" class="btn btn-primary">Crear nueva Interpretación Material</btn>
         </div>
     </div>
 @endsection

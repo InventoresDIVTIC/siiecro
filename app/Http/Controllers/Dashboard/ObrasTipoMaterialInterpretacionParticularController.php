@@ -11,6 +11,9 @@ use Response;
 use Hash;
 use Auth;
 
+// Interpretación particular se renombra por interpretación material 
+// solo en las etiquetas visibles para el usuario del sistema, ya que 
+// realizar el cambio a nivel de estructura del código y base de datos es extenso
 use App\ObrasTipoMaterialInterpretacionParticular;
 
 class ObrasTipoMaterialInterpretacionParticularController extends Controller

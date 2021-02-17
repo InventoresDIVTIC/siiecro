@@ -32,11 +32,11 @@
 
             @if ($registro != "[]")
                 <hr>
-                <h1 class="text-center"><strong>Interpretaciones particulares</strong></h1>
+                <h1 class="text-center"><strong>Interpretaciones materiales</strong></h1>
                 <br>
                 <div class="row ibox form-group">
                     <div class="col-md-12">
-                        <button type="button" onclick="crearInterpretacionParticularCruzada({{ $registro->id }})" class="btn btn-primary pull-right">Agregar Interpretacion Particular</button>
+                        <button type="button" onclick="crearInterpretacionParticularCruzada({{ $registro->id }})" class="btn btn-primary pull-right">Agregar Interpretacion Material</button>
                     </div>
                 </div>
                 {{-- tabla de interpretación particular cruzada --}}
