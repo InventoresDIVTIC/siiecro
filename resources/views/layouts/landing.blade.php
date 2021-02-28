@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="es">
 	<head>
  		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-	  	<title>SII-ECRO</title>
+    	<meta name="csrf-token" content="{{ csrf_token() }}">
+	  	<title>{{ isset($titulo) ? "SII-ECRO | ".$titulo : "SII-ECRO" }}</title>
 
 	  	<!-- Favicon -->
 	  	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
@@ -15,6 +15,7 @@
 	  	<!-- Slick Slider  CSS -->
 	  	{!!Html::style('landing/plugins/slick-carousel/slick/slick.css')!!}
 	  	{!!Html::style('landing/plugins/slick-carousel/slick/slick-theme.css')!!}
+    	{!!Html::style('font-awesome/css/font-awesome.css')!!}
 
 	  	<!-- Main Stylesheet -->
 	  	{!!Html::style('landing/css/style.css')!!}
@@ -130,7 +131,8 @@
 		</footer>
 	    
 	    <!-- Main jQuery -->
-  		{!!Html::script('landing/plugins/jquery/jquery.js')!!}
+  		{!!Html::script('js/jquery-3.1.1.min.js')!!}
+  		
 	    <!-- Bootstrap 4.3.2 -->
   		{!!Html::script('landing/plugins/bootstrap/js/popper.js')!!}
   		{!!Html::script('landing/plugins/bootstrap/js/bootstrap.min.js')!!}

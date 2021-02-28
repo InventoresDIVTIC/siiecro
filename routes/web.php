@@ -260,6 +260,11 @@ Auth::routes();
 
 	    ######## CONSULTA ###############################################################
 			Route::get('/consulta', 	'ConsultaController@index')->name('consulta.index');
+			Route::post('/consulta', 	'ConsultaController@busqueda')->name('consulta.buscar');
+
+			##### DETALLE ###############################################################
+				Route::get('/consulta/{seo}', 	'ConsultaController@detalle')->name('consulta.detalle');
+			#############################################################################
 		#################################################################################
 
 	    ######## CONTACTO ###############################################################
