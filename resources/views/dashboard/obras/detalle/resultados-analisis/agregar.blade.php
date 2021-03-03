@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <div id="btn-group-habilitar-edicion-resultados">
-                            <button onclick="toggleEdicionResultadoAnalisis(true);" type="button" class="btn btn-primary pull-right">Editar</button> 
+                            <button onclick="toggleEdicionResultadoAnalisis(true);" type="button" class="btn btn-primary pull-right" no-editar>Editar</button> 
                         </div>
                         <div id="btn-group-no-editar-resultados" class="hidden">
                             <button onclick="toggleEdicionResultadoAnalisis(false);" type="button" class="btn btn-danger pull-right">Cancelar edición</button> 
@@ -217,7 +217,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" onclick="$('#modal-crear-resultado').modal('toggle');$('body').removeClass('modal-open');">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary" disabled="">Guardar</button>
                 </div>
 
                 <input type="hidden" id="solicitudes_analisis_muestras_id" name="solicitudes_analisis_muestras_id" value="{{ $registro != "[]" ? $registro->solicitudes_analisis_muestras_id : ''}}">

@@ -170,12 +170,12 @@ function toggleEdicionResultadoAnalisis(estatus){
 // True: Habilitar edicion
 // False: Deshabilitar edicion
   if(estatus) {
-    $("#form-obras-detalle-resultados-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', false);
+    $("#form-obras-detalle-resultados-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', false);
     $("#btn-group-habilitar-edicion-resultados").addClass('hidden');
     $("#btn-group-no-editar-resultados").removeClass('hidden');
     $(".dropzones-imagenes").removeClass('hidden');
   } else {
-    $("#form-obras-detalle-resultados-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', true);
+    $("#form-obras-detalle-resultados-analisis").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar]), button:not([no-editar])').attr('disabled', true);
     $("#btn-group-habilitar-edicion-resultados").removeClass('hidden');
     $("#btn-group-no-editar-resultados").addClass('hidden');
     $(".dropzones-imagenes").addClass('hidden');
