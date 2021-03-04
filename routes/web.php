@@ -262,6 +262,10 @@ Auth::routes();
 			Route::get('/consulta', 	'ConsultaController@index')->name('consulta.index');
 			Route::post('/consulta', 	'ConsultaController@busqueda')->name('consulta.buscar');
 
+			// ESTA RUTA LA DEJO DE MUESTRA SIN COMENTAR PARA QUE VEAS COMO LA UTILICÉ 
+			// POR SI ACASO TE SIRVE VIEJÓN, IGUAL LA PUEDES BORRAR CUANDO CREAS CONVENIENTE
+			Route::get('/consulta-obra/{id_obra}', 	'ConsultaController@obtenerObrasRecomendadas');
+
 			##### DETALLE ###############################################################
 				Route::get('/consulta/{seo}', 	'ConsultaController@detalle')->name('consulta.detalle');
 			#############################################################################
