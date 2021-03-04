@@ -50,7 +50,7 @@ class CreateObrasResultadosAnalisisTable extends Migration
             // $table->foreign('informacion_por_definir_id', 'informacion_por_definir_id_foreign')->references('id')->on('obras__tipo_material__informacion_por_definir');
             $table->foreign('interpretacion_particular_id', 'interpretacion_particular_id_foreign')->references('id')->on('obras__tipo_material__interpretacion_particular');
             $table->foreign('profesor_responsable_de_analisis_id', 'profesor_responsable_de_analisis_id_foreign')->references('id')->on('users');
-            $table->foreign('persona_realiza_analisis_id', 'persona_realiza_analisis_id_foreign')->references('id')->on('obras__usuarios_asignados');
+            $table->foreign('persona_realiza_analisis_id', 'persona_realiza_analisis_id_foreign')->references('id')->on('users');
 
             // foraneas de bitacora
             $table->foreign('usuario_creo_id')->references('id')->on('users');
