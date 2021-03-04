@@ -13,7 +13,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 text-center pointer elemento-busqueda" data-tipo-busqueda="Tipo objeto">
+            <div class="col text-center pointer elemento-busqueda bg-rojo ml-2 mr-2" data-tipo-busqueda="Tipo objeto">
                 <div class="team-block">
                     <img src="{{ asset('img/landing/tipo_de_objeto.png') }}" alt=""  height="160px">
 
@@ -23,7 +23,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 text-center pointer elemento-busqueda" data-tipo-busqueda="Autor o cultura"> 
+            <div class="col text-center pointer elemento-busqueda bg-azul ml-2 mr-2" data-tipo-busqueda="Titulo">
+                <div class="team-block mb-5 mb-lg-0">
+                    <img src="{{ asset('img/landing/titulo.png') }}" alt=""  height="160px">
+
+                    <div class="content">
+                        <h4 class="mt-4 mb-0">Titulo</h4>
+                        <p><i>Ejemplo: Ecce Homo</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col text-center pointer elemento-busqueda bg-morado ml-2 mr-2" data-tipo-busqueda="Autor o cultura"> 
                 <div class="team-block mb-5 mb-lg-0">
                     <img src="{{ asset('img/landing/autor.png') }}" alt="" height="160px">
 
@@ -33,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 text-center pointer elemento-busqueda" data-tipo-busqueda="Material">
+            <div class="col text-center pointer elemento-busqueda bg-verde ml-2 mr-2" data-tipo-busqueda="Material">
                 <div class="team-block mb-5 mb-lg-0">
                     <img src="{{ asset('img/landing/material.png') }}" alt=""  height="160px">
 
@@ -43,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 text-center pointer elemento-busqueda" data-tipo-busqueda="Técnica analítica">
+            <div class="col text-center pointer elemento-busqueda bg-amarillo ml-2 mr-2" data-tipo-busqueda="Técnica analítica">
                 <div class="team-block mb-5 mb-lg-0">
                     <img src="{{ asset('img/landing/tecnica_analitica.png') }}" alt=""  height="160px">
 

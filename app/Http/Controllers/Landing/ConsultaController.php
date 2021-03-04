@@ -15,6 +15,7 @@ class ConsultaController extends Controller
 
     public function busqueda(Request $request){
     	if ($request->ajax()) {
+            sleep(3);
     		return view('landing.consulta.listado');
     	}
 

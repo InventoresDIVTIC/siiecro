@@ -9,10 +9,10 @@ jQuery(document).ready(function($) {
 
 function comportamientoElementoBusqueda(elemento){
 	// Quitamos la clase seleccionado a todos los elementos que la contengan
-	$(".elemento-busqueda-seleccionado").removeClass('elemento-busqueda-seleccionado');
+	$(".seleccionado").removeClass('seleccionado');
 
 	// Le ponemos la clase seleccionado al elemento seleccionado
-	$(elemento).addClass('elemento-busqueda-seleccionado');
+	$(elemento).addClass('seleccionado');
 
 	$("#div-busqueda").removeClass('hidden');
 	$("#txt-busqueda").html($(elemento).data("tipo-busqueda"));

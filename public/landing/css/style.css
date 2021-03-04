@@ -1502,8 +1502,28 @@ a:focus {
   border-radius: 20px 20px 20px 20px;
 }
 
-.elemento-busqueda-seleccionado, .elemento-busqueda:hover{
-  background-color: #da1a49;
+.bg-rojo.seleccionado, .bg-rojo:hover{
+  background-color: #ff5757;
+  color: #fff;
+}
+
+.bg-azul.seleccionado, .bg-azul:hover{
+  background-color: #3294cd;
+  color: #fff;
+}
+
+.bg-morado.seleccionado, .bg-morado:hover{
+  background-color: #532284;
+  color: #fff;
+}
+
+.bg-verde.seleccionado, .bg-verde:hover{
+  background-color: #79c4a4;
+  color: #fff;
+}
+
+.bg-amarillo.seleccionado, .bg-amarillo:hover{
+  background-color: #ffde59;
   color: #fff;
 }
 
