@@ -15,6 +15,7 @@ class CreateObrasTable extends Migration
     {
         Schema::create('obras', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('tags')->nullable();
             $table->integer('usuario_solicito_id')->unsigned();
             $table->integer('usuario_aprobo_id')->unsigned()->nullable();
             $table->integer('usuario_rechazo_id')->unsigned()->nullable();
