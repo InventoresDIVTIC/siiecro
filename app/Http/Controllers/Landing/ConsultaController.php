@@ -43,12 +43,12 @@ class ConsultaController extends Controller
 													obras.id AS ID_OBRAS,
 													obras.tags AS TAGS_OBRAS
 												')
+									->limit(5)
 									->get();
 
 		$base_conocimientos = json_encode($base_conocimientos, JSON_UNESCAPED_UNICODE);
-									dd($base_conocimientos);
 
-		$process = new Process(["python", "C:/wamp64/www/siiecro/public/scripts/landing/recomienda.py", "$id_obra", "$base_conocimientos"]);
+		$process = new Process([public_path()."/scripts/landing/env/Scripts/python.exe", public_path()."/scripts/landing/recomienda.py", "$id_obra", "$base_conocimientos"]);
 		$process->run();
 
 		// executes after the command finishes
@@ -62,5 +62,6 @@ class ConsultaController extends Controller
 		// Result (Array): (2,3)
 		$respuesta = json_decode($process->getOutput());
 		// Result (Array): (2,3)
+		return $respuesta;
     }
 }
