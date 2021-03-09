@@ -46,6 +46,9 @@
                                 <li class="list-inline-item"><a href="#" target="_blank"><i class="icofont-linkedin" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
+
+                        <h3 class="font-weight-normal">Te recomendamos visitar:</h3>
+                        @include('landing.consulta.recomendaciones', ["obras" => $obrasRecomendadas])
                     </div>
                 </div>
             </div>

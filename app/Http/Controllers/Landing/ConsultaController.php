@@ -26,9 +26,10 @@ class ConsultaController extends Controller
     }
 
     public function detalle(Request $request, $seo){
-    	$obra 	=	Obras::first();
+    	$obra 				=	Obras::first();
+    	$obrasRecomendadas 	=	Obras::all()->take(3);
 
-    	return view('landing.consulta.detalle', ["titulo" => $obra->nombre, "obra" => $obra]);
+    	return view('landing.consulta.detalle', ["titulo" => $obra->nombre, "obra" => $obra, "obrasRecomendadas" => $obrasRecomendadas]);
     }
 
     public function obtenerObrasRecomendadas(Request $request, $obra_id){
@@ -45,6 +46,7 @@ class ConsultaController extends Controller
 									->get();
 
 		$base_conocimientos = json_encode($base_conocimientos, JSON_UNESCAPED_UNICODE);
+									dd($base_conocimientos);
 
 		$process = new Process(["python", "C:/wamp64/www/siiecro/public/scripts/landing/recomienda.py", "$id_obra", "$base_conocimientos"]);
 		$process->run();

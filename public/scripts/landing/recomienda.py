@@ -2,6 +2,8 @@ import sys
 import json
 import pandas as pd
 import string
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import linear_kernel
 
 # Se verifica que solo vengan los parámetros necesarios para el script
 if len(sys.argv) == 3:
@@ -37,7 +39,6 @@ Support Vector Machine:
     Así que en vez de encontrar la línea óptima, 
     el SVM encuentra el hiperplano que maximiza el margen de separación entre clases.
 '''
-from sklearn.feature_extraction.text import TfidfVectorizer
 tfidf = TfidfVectorizer(stop_words='spanish')
 tfidf = TfidfVectorizer()
 
@@ -56,7 +57,6 @@ Se le pasan los parámetros para ser vectorizados
 '''
 tfidf_matrix = tfidf.fit_transform(df['ntags'])
 
-from sklearn.metrics.pairwise import linear_kernel
 '''
 Una vez vectorizadas las etiquetas 
 pedimos que nos devuelva la similaridad encontrada
