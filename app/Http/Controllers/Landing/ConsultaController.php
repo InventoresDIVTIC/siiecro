@@ -43,12 +43,13 @@ class ConsultaController extends Controller
 													obras.id AS ID_OBRAS,
 													obras.tags AS TAGS_OBRAS
 												')
-									->limit(5)
+									// ->limit(5)
 									->get();
 
 		$base_conocimientos = json_encode($base_conocimientos, JSON_UNESCAPED_UNICODE);
 
-		$process = new Process([public_path()."/scripts/landing/env/Scripts/python.exe", public_path()."/scripts/landing/recomienda.py", "$id_obra", "$base_conocimientos"]);
+		// $process = new Process([public_path()."/scripts/landing/env/Scripts/python.exe", public_path()."/scripts/landing/recomienda.py", "$id_obra", "$base_conocimientos"]);
+		$process = new Process(["python", public_path()."/scripts/landing/recomienda.py", "$id_obra", "$base_conocimientos"]);
 		$process->run();
 
 		// executes after the command finishes
