@@ -80,8 +80,9 @@
                             </div>
                         </div>
 
-                        <div class="row m-t-md">
+                        <div class="row m-t-md center-block">
                             @include('dashboard.obras.detalle.resultados-analisis.datos-analiticos.esquema-analiticos-microfotografia.ver', ["imagenes_esquema_analiticos_microfotografia" => $registro->esquema_analiticos_microfotografias])
+                            <br>
                         </div>
                         @endif
 
@@ -90,10 +91,6 @@
                                 <label for="ruta_acceso_imagen">Ruta de acceso a microfotografía, imagen o datos</label>
                                 <input type="text" class="form-control" id="ruta_acceso_imagen" name="ruta_acceso_imagen" value="{{ $registro->ruta_acceso_imagen }}" disabled="" autocomplete="off" placeholder="Colocar ruta de acceso como lo indica el INST-04">
                             </div>
-                            {{-- <div class="col-md-6 div-input">
-                                <label for="ruta_acceso_datos">Ruta de acceso a datos</label>
-                                <input type="text" class="form-control" id="ruta_acceso_datos" name="ruta_acceso_datos" value="{{ $registro->ruta_acceso_datos }}" disabled="" autocomplete="off">
-                            </div> --}}
                         </div>
                     </div>
 
