@@ -32,7 +32,7 @@
 			    		<strong>Época de la obra:</strong> {{ $obra->epoca->nombre }}<br>
 			    	@endif
 			    	
-			    	<strong>Dimensiones:</strong> {{ $obra->alto }} cm x {{ $obra->ancho }} cm x {{ $oba->profundidad ?? 0 }} cm x {{ $obra->diametro ?? 0 }} cm<br>
+			    	<strong>Dimensiones:</strong> {{ $obra->alto }} cm x {{ $obra->ancho }} cm x {{ $obra->profundidad ?? 0 }} cm x {{ $obra->diametro ?? 0 }} cm<br>
 			    	<strong>Tipo de bien cultural:</strong> {{ $obra->tipo_bien_cultural->nombre }}<br>
 			    	<strong>Tipo de objeto:</strong> {{ $obra->tipo_objeto->nombre }}<br>
 			    	<strong>Lugar de procedencia:</strong> {{ $obra->lugar_procedencia_original }}<br>

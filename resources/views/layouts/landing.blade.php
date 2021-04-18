@@ -16,6 +16,13 @@
 	  	{!!Html::style('landing/plugins/slick-carousel/slick/slick.css')!!}
 	  	{!!Html::style('landing/plugins/slick-carousel/slick/slick-theme.css')!!}
     	{!!Html::style('font-awesome/css/font-awesome.css')!!}
+    
+	    <!--OWL-->
+	    {!!Html::style('css/plugins/owl/owl.carousel.css')!!}
+	    {!!Html::style('css/plugins/owl/owl.theme.default.css')!!}
+
+	    <!-- Toastr style -->
+	    {!!Html::style('css/plugins/toastr/toastr.min.css')!!}
 
 	  	<!-- Main Stylesheet -->
 	  	{!!Html::style('landing/css/style.css')!!}
@@ -28,7 +35,7 @@
 			<nav class="navbar navbar-expand-lg navigation color-navbar" id="navbar">
 				<div class="container">
 				 	 <a href="index.html">
-					  	<img src="{{ asset('/img/sii-ecro.png') }}" alt="" class="img-fluid" style="height: 65px;">
+					  	<img src="{{ asset('/img/sii-ecro-blanco.png') }}" alt="" class="img-fluid" style="height: 65px;">
 					  </a>
 
 				  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,15 +44,20 @@
 			  
 				  <div class="collapse navbar-collapse" id="navbarmain">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active">
+						<li class="nav-item">
 							<a class="nav-link" href="{{ route('landing.index') }}">Inicio</a>
 					  	</li>
-					  	<li class="nav-item active">
+					  	<li class="nav-item">
 							<a class="nav-link" href="{{ route('consulta.index') }}">Consulta</a>
 					  	</li>
-					  	<li class="nav-item active">
+					  	<li class="nav-item">
 							<a class="nav-link" href="{{ route('contacto.index') }}">Contacto</a>
 					  	</li>
+					  	@if (Auth::check() && Auth::user()->rol != "11")
+						  	<li class="nav-item active">
+								<a class="nav-link" href="{{ route('dashboard.dashboard.index') }}">Administración</a>
+						  	</li>
+					  	@endif
 					</ul>
 				  </div>
 				</div>
@@ -63,7 +75,7 @@
 					<div class="col-lg-4 mr-auto col-sm-6">
 						<div class="widget mb-5 mb-lg-0 mt-5">
 							<div class="logo mb-4">
-								<img src="{{ asset('/img/sii-ecro.png') }}" alt="" class="img-fluid" style="height: 80px;">
+								<img src="{{ asset('/img/sii-ecro-blanco.png') }}" alt="" class="img-fluid" style="height: 80px;">
 							</div>
 						</div>
 					</div>
@@ -91,7 +103,7 @@
 									<i class="icofont-email mr-3"></i>
 									<span class="h6 mb-0">Email</span>
 								</div>
-								<h4 class="mt-2"><a href="mailto:siiecro@ecro.edu.mx">siiecro@ecro.edu.mx</a></h4>
+								<h4 class="mt-2 color-gris"><a href="mailto:siiecro@ecro.edu.mx">siiecro@ecro.edu.mx</a></h4>
 							</div>
 
 							<div class="footer-contact-block">
@@ -99,7 +111,7 @@
 									<i class="icofont-google-map mr-3"></i>
 									<span class="h6 mb-0">Dirección</span>
 								</div>
-								<h4 class="mt-2">
+								<h4 class="mt-2 color-gris">
 									<a href="https://www.google.com.mx/maps/place/Escuela+de+Conservaci%C3%B3n+y+Restauraci%C3%B3n+de+Occidente/@20.6696923,-103.3423147,17z/data=!3m1!4b1!4m5!3m4!1s0x8428b1f436fa99af:0xa67d189c0bec5193!8m2!3d20.6696873!4d-103.340126" target="_blank">
 										Analco no. 285, Col. Barrio de Analco, Guadalajara,<br>
 										Jalisco. C.P. 44450
@@ -131,19 +143,38 @@
 		</footer>
 	    
 	    <!-- Main jQuery -->
-  		{!!Html::script('js/jquery-3.1.1.min.js')!!}
+  			{!!Html::script('js/jquery-3.1.1.min.js')!!}
   		
 	    <!-- Bootstrap 4.3.2 -->
-  		{!!Html::script('landing/plugins/bootstrap/js/popper.js')!!}
-  		{!!Html::script('landing/plugins/bootstrap/js/bootstrap.min.js')!!}
-  		{{-- {!!Html::script('landing/plugins/counterup/jquery.easing.js')!!} --}}
+  			{!!Html::script('landing/plugins/bootstrap/js/popper.js')!!}
+  			{!!Html::script('landing/plugins/bootstrap/js/bootstrap.min.js')!!}
+  			{{-- {!!Html::script('landing/plugins/counterup/jquery.easing.js')!!} --}}
+
 	    <!-- Slick Slider -->
-  		{!!Html::script('landing/plugins/slick-carousel/slick/slick.min.js')!!}
+  			{!!Html::script('landing/plugins/slick-carousel/slick/slick.min.js')!!}
+
 	    <!-- Counterup -->
-  		{!!Html::script('landing/plugins/counterup/jquery.waypoints.min.js')!!}
+  			{!!Html::script('landing/plugins/counterup/jquery.waypoints.min.js')!!}
+
+		<!-- OWL -->
+	  		{!!Html::script('js/plugins/owl/owl.carousel.js')!!}
+
+	  	<!-- VALIDATE -->
+		  	{!!Html::script('js/jquery.validate.min.js')!!}
+		  	{!!Html::script('js/localization/messages_es.js')!!}
+
+		<!-- Ajax FORM-->
+		  	{!!Html::script('js/jquery.form.js')!!}
 	    
-  		{!!Html::script('landing/plugins/shuffle/shuffle.min.js')!!}
-  		{!!Html::script('landing/plugins/counterup/jquery.counterup.min.js')!!}
+			{!!Html::script('landing/plugins/shuffle/shuffle.min.js')!!}
+			{!!Html::script('landing/plugins/counterup/jquery.counterup.min.js')!!}
+
+		<!-- Toastr -->
+		  {!!Html::script('js/plugins/toastr/toastr.min.js')!!}
+
+		<!-- Comun -->
+  			{!!Html::script('scripts/dashboard/comun.js')!!}
+
 		@yield('scripts')
 	</body>
 </html>

@@ -70,6 +70,7 @@ class ObrasController extends Controller
     }
 
     public function cargarTabla(Request $request){
+        $busqueda       =   $request->input("search")["value"];
     	$registros 		= 	Obras::selectRaw("
                                                 obras.*,
                                                 obc.nombre  as tipo_bien_cultural,
@@ -102,7 +103,7 @@ class ObrasController extends Controller
         }
 
     	return DataTables::of($registros)
-    					->addColumn('folio', function($registro){
+    					->editColumn('id', function($registro){
     						return $registro->folio;
     					})
                         ->editColumn('año', function($registro){
@@ -122,6 +123,41 @@ class ObrasController extends Controller
 
                             return $editar.$eliminar;
     					})
+                        ->filter(function($query) use($busqueda){
+                            if ($busqueda != "") {
+                                $query->where(function($subquery) use($busqueda){
+                                    $subquery->whereRaw("
+                                                            CONCAT(
+                                                                LPAD(obras.id, 4, '0'),
+                                                                '-',
+                                                                IFNULL(
+                                                                    DATE_FORMAT(obras.año, '%y'),
+                                                                    '00'
+                                                                ),
+                                                                '/',
+                                                                obras.forma_ingreso,
+                                                                '-',
+                                                                IFNULL(
+                                                                    obras.modalidad,
+                                                                    ''
+                                                                ),
+                                                                IFNULL(
+                                                                    a.siglas,
+                                                                    ''
+                                                                )
+                                                            ) = '".$busqueda."'
+                                                        ")
+                                            ->orWhere("obras.id", $busqueda)
+                                            ->orWhere("obras.nombre", 'like', '%'.$busqueda.'%')
+                                            ->orWhere("a.nombre", 'like', '%'.$busqueda.'%')
+                                            ->orWhere("a.siglas", 'like', '%'.$busqueda.'%')
+                                            ->orWhere("obc.nombre", 'like', '%'.$busqueda.'%')
+                                            ->orWhere("oto.nombre", 'like', '%'.$busqueda.'%')
+                                            ->orWhere("oe.nombre", 'like', '%'.$busqueda.'%')
+                                            ->orWhere("ot.nombre", 'like', '%'.$busqueda.'%');
+                                });
+                            }
+                        })
                         ->rawColumns(['acciones'])
     					->make('true');
     }

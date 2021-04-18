@@ -5,7 +5,152 @@
         <div class="row">
             <div class="col-lg-12 mb-5">
                 <div class="single-blog-item">
-                    <div class="col-12 text-center">
+
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <img src="{{ asset('img/predeterminadas/sin_imagen.png') }}" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-6">
+                            <h5 class="mt-3 mb-3">Datos de la obra / pieza / conjunto</h5>
+                            <hr>
+                            <span>
+                                <strong>Titulo:</strong> {{ $obra->nombre }}
+                            </span><br>
+                            <span>
+                                <strong>Autor o Cultura:</strong> {{ $obra->autor ?? $obra->cultura }}
+                            </span><br>
+                            <span>
+                                <strong>Año / Época o Temproalidad:</strong> {{ $obra->tipo_bien_cultural->nombre }}
+                            </span><br>
+                            <span>
+                                <strong>Técnica:</strong> Tecnica
+                            </span><br>
+                            <span>
+                                <strong>Dimensiones:</strong> {{ $obra->cadenaDimensiones() }}
+                            </span><br>
+                            <span>
+                                <strong>Tipo de bien cultural:</strong> {{ $obra->tipo_bien_cultural->nombre }}
+                            </span><br>
+                            <span>
+                                <strong>Tipo de objeto:</strong> {{ $obra->tipo_objeto->nombre }}
+                            </span><br>
+                            <span>
+                                <strong>Lugar de procedencia original:</strong> {{ $obra->lugar_procedencia_original }}
+                            </span><br>
+                            <span>
+                                <strong>Lugar de procedencia actual:</strong> {{ $obra->lugar_procedencia_actual }}
+                            </span><br>
+                            <span>
+                                <strong>No. de inventario o código de procedencia:</strong> {{ $obra->numero_inventario }}
+                            </span><br>
+                        </div>
+
+                        <div class="col-12 mt-5">
+                            <div class="row">
+                                <div class="col-6">
+                                    <span>
+                                        <strong>No. de Registro de obra:</strong>
+                                        <small>{{ $obra->folio }}</small>
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        <strong>Proyecto ECRO:</strong>
+                                        <small>Proyecto</small>
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        <strong>No. de Proyecto ECRO:</strong>
+                                        <small>No de proyecto</small>
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        <strong>No de temporada de trabajo:</strong>
+                                        <small>{{ $obra->tipo_bien_cultural->nombre }}</small>
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        <strong>Año del proyecto:</strong>
+                                        <small>{{ $obra->tipo_bien_cultural->nombre }}</small>
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        <strong>Forma de ingreso:</strong>
+                                        <small>{{ $obra->forma_ingreso }}</small>
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        <strong>Sector:</strong>
+                                        <small>SECTOR?</small>
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        <strong>Responsables ECRO:</strong>
+                                        <small>{{ $obra->tipo_bien_cultural->nombre }}</small>
+                                    </span>
+                                </div>
+                                <div class="col-12">
+                                    <span>
+                                        <strong>Caracteristicas descriptivas:</strong><br>
+                                        <small>{{ nl2br($obra->caracteristicas_descriptivas) }}</small>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div id="acordeon">
+                                <div class="card">
+                                    <div class="card-header">
+                                      <a class="card-link" data-toggle="collapse" href="#registro-fotografico">
+                                        Registro fotográfico
+                                      </a>
+                                    </div>
+                                    <div id="registro-fotografico" class="collapse show" data-parent="#acordeon">
+                                      <div class="card-body">
+                                        Contenido Registro fotográfico
+                                      </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="collapsed card-link" data-toggle="collapse" href="#analisis-cientificos">
+                                            Análisis científicos
+                                        </a>
+                                    </div>
+                                    <div id="analisis-cientificos" class="collapse" data-parent="#acordeon">
+                                        <div class="card-body">
+                                            Contenido Análisis científicos
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="collapsed card-link" data-toggle="collapse" href="#informes-intervencion">
+                                            Informes de intervención
+                                        </a>
+                                    </div>
+                                    <div id="informes-intervencion" class="collapse" data-parent="#acordeon">
+                                        <div class="card-body">
+                                            Contenido Informes de intervención
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="col-12 text-center">
                         <img src="{{ asset('img/blog/blog-1.jpg') }}" alt="" class="img-fluid">
                     </div>
 
@@ -46,16 +191,25 @@
                                 <li class="list-inline-item"><a href="#" target="_blank"><i class="icofont-linkedin" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
-
-                        <h3 class="font-weight-normal">Te recomendamos visitar:</h3>
-                        @include('landing.consulta.recomendaciones', ["obras" => $obrasRecomendadas])
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
+
+
+        <div class="mb-5 hidden" id="div-obras-recomendadas">
+            <h3 class="font-weight-normal">Te recomendamos visitar:</h3>
+
+            <div id="respuesta-obras-recomendadas">
+                <h3 class="text-center">
+                    Buscando obras recomendadas <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                </h3>
+            </div>
+        </div>
     </div>
+    <input type="hidden" id="obra_id" value="{{ $obra->id }}">
 @endsection
 
 @section('scripts')
-    {!! Html::script('scripts/landing/consulta.js') !!}
+    {!! Html::script('scripts/landing/detalle.js') !!}
 @endsection

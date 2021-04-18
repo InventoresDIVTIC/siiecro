@@ -42,8 +42,8 @@
                         <table class="table table-striped" id="dt-obras">
                             <thead>
                                 <tr>
-                                    <th>Folio</th>
-                                    <th>Nombre</th>
+                                    <th>No registro</th>
+                                    <th>Titulo</th>
                                     <th>Área</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -70,7 +70,7 @@
                         <table class="table table-striped" id="dt-solicitudes">
                             <thead>
                                 <tr>
-                                    <th>Folio obra</th>
+                                    <th>No. registro obra</th>
                                     <th>Fecha de intervención</th>
                                     <th>Temporada de trabajo</th>
                                     <th>Acciones</th>
@@ -95,7 +95,7 @@
                         <table class="table table-striped" id="dt-resultados">
                             <thead>
                                 <tr>
-                                    <th>Folio obra</th>
+                                    <th>No. registro obra</th>
                                     <th>Fecha de análisis</th>
                                     <th>Nomenclatura</th>
                                     <th>Caracterización de materiales</th>

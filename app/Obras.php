@@ -23,6 +23,7 @@ class Obras extends Model
         'area_id',
         'responsable_id',
         'proyecto_id',
+        'seo',
         'nombre',
         'autor',
         'cultura',
@@ -60,6 +61,10 @@ class Obras extends Model
         'fecha_rechazo',
         'fecha_ingreso',
         'fecha_salida'
+    ];
+
+    protected $dispatchesEvents = [
+        'saved' => \App\Events\ObraActualizadaEvent::class,
     ];
 
     public function setAñoAttribute($value){
@@ -366,5 +371,72 @@ class Obras extends Model
                             ->groupBy('obras.id')
                             ->orderBy('asignados.created_at', 'DESC');
         }
+    }
+
+    public function generaSeo(){
+        $this->seo  =   Cadenas::generarSeo($this->nombre, $this->id);
+
+        return static::withoutEvents(function () {
+            return $this->save();
+        });
+    }
+
+    public function cadenaDimensiones(){
+        return $this->alto." cm x ".$this->ancho." cm x ".($this->profundidad ?? 0)." cm x ".($this->diametro ?? 0)." cm";
+    }
+
+    public static function consulta($busqueda, $tipo){
+        switch ($tipo) {
+            default:
+            case 'Tipo objeto':
+                $obras      =   Obras::selectRaw("
+                                                    obras.*
+                                                ")
+                                    ->join("obras__tipo_objeto as tipo", "tipo.id", "obras.tipo_objeto_id")
+                                    ->where('tipo.nombre', 'like', '%'.$busqueda.'%');
+                break;
+            case 'Titulo':
+                $obras      =   Obras::selectRaw("
+                                                    obras.*
+                                                ")
+                                    ->where('nombre', 'like', '%'.$busqueda.'%');
+                break;
+            case 'Autor o cultura':
+                $obras      =   Obras::selectRaw("
+                                                    obras.*
+                                                ")
+                                    ->where(function($query) use($busqueda){
+                                        $query->orWhere('autor', 'like', '%'.$busqueda.'%');
+                                        $query->orWhere('cultura', 'like', '%'.$busqueda.'%');
+                                    });
+                break;
+            case 'Material':
+                $obras      =   Obras::selectRaw("
+                                                    obras.*
+                                                ")
+                                    ->join("obras__solicitudes_analisis as solicitud", "solicitud.obra_id", "obras.id")
+                                    ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.solicitud_analisis_id", "solicitud.id")
+                                    ->join("obras__resultados_analisis as resultado", "resultado.solicitudes_analisis_muestras_id", "muestra.id")
+                                    ->join("obras__tipo_material as tipo", "tipo.id", "resultado.tipo_material_id")
+                                    ->where('tipo.nombre', 'like', '%'.$busqueda.'%')
+                                    ->groupBy('obras.id');
+                    break;
+            case 'Técnica analítica':
+                $obras      =   Obras::selectRaw("
+                                                    obras.*
+                                                ")
+                                    ->join("obras__solicitudes_analisis as solicitud", "solicitud.obra_id", "obras.id")
+                                    ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.solicitud_analisis_id", "solicitud.id")
+                                    ->join("obras__resultados_analisis as resultado", "resultado.solicitudes_analisis_muestras_id", "muestra.id")
+                                    ->join("obras__analisis_a_realizar_resultados as analisis_realizar_resultado", "analisis_realizar_resultado.resultado_analisis_id", "resultado.id")
+                                    ->join("obras__analisis_a_realizar_tecnica as tecnica", "tecnica.id", "analisis_realizar_resultado.tecnica_analitica_id")
+                                    ->where('solicitud.tecnica', 'like', '%'.$busqueda.'%')
+                                    ->groupBy('obras.id');
+                    break;
+        }
+
+        return $obras->whereNotNull('obras.fecha_aprobacion')
+                    ->orderBy('obras.created_at', 'DESC')
+                    ->get();
     }
 }

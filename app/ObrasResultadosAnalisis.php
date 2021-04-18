@@ -100,6 +100,9 @@ class ObrasResultadosAnalisis extends Model
                                                         ")
                                             ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.id", "obras__resultados_analisis.solicitudes_analisis_muestras_id")
                                             ->join("obras__solicitudes_analisis_tipo_analisis as tipo_analisis", "tipo_analisis.id", "muestra.tipo_analisis_id")
+                                            ->join("obras__solicitudes_analisis as solicitud_analisis", "solicitud_analisis.id", "muestra.solicitud_analisis_id")
+                                            ->join('obras', 'obras.id', 'solicitud_analisis.obra_id')
+                                            ->join('areas as a', 'a.id', 'obras.area_id')
                                             ->orderBy("obras__resultados_analisis.fecha_analisis", "DESC")
                                             ->limit(10);
         } else{
@@ -111,6 +114,9 @@ class ObrasResultadosAnalisis extends Model
                                             ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.id", "obras__resultados_analisis.solicitudes_analisis_muestras_id")
                                             ->join("obras__solicitudes_analisis_tipo_analisis as tipo_analisis", "tipo_analisis.id", "muestra.tipo_analisis_id")
                                             ->join('obras__usuarios_asignados as asignados', 'asignados.id', 'obras__resultados_analisis.persona_realiza_analisis_id')
+                                            ->join("obras__solicitudes_analisis as solicitud_analisis", "solicitud_analisis.id", "muestra.solicitud_analisis_id")
+                                            ->join('obras', 'obras.id', 'solicitud_analisis.obra_id')
+                                            ->join('areas as a', 'a.id', 'obras.area_id')
                                             ->where(function($query){
                                                 $query->orWhere("obras__resultados_analisis.persona_realiza_analisis_id", Auth::id());
                                                 $query->orWhere("obras__resultados_analisis.usuario_creo_id", Auth::id());

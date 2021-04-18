@@ -30,6 +30,7 @@ class ProyectosController extends Controller
     }
 
     public function cargarTabla(Request $request){
+        $busqueda       =   $request->input("search")["value"];
         $registros      =   Proyectos::selectRaw("
                                                     proyectos.*,
                                                     a.nombre    as nombre_area
@@ -43,9 +44,31 @@ class ProyectosController extends Controller
                         ->addColumn('acciones', function($registro){
                             $editar         =   '<i onclick="editar('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Editar"></i>';
                             $eliminar       =   '<i onclick="eliminar('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Eliminar"></i>';
-                            $ver            =   '<a class="icon-link" href="'.route('dashboard.proyectos.show', $registro->id).'" target="_blank"><i class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver temporadas trabajo"></i></a>';
+                            $ver            =   '<a class="icon-link" href="'.route('dashboard.proyectos.show', $registro->id).'"><i class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver temporadas trabajo"></i></a>';
 
                             return $ver.$editar.$eliminar;
+                        })
+                        ->filter(function($query) use($busqueda){
+                            if ($busqueda != "") {
+                                $query->where(function($subquery) use($busqueda){
+                                    $subquery->whereRaw("
+                                                            CONCAT(
+                                                                LPAD(proyectos.id, 4, '0'),
+                                                                '-',
+                                                                proyectos.forma_ingreso,
+                                                                '/',
+                                                                IFNULL(
+                                                                    a.siglas,
+                                                                    ''
+                                                                )
+                                                            ) = '".$busqueda."'
+                                                        ")
+                                            ->orWhere("proyectos.id", $busqueda)
+                                            ->orWhere("proyectos.nombre", 'like', '%'.$busqueda.'%')
+                                            ->orWhere("a.nombre", 'like', '%'.$busqueda.'%')
+                                            ->orWhere("a.siglas", 'like', '%'.$busqueda.'%');
+                                });
+                            }
                         })
                         ->rawColumns(['folio', 'acciones'])
                         ->make('true');
