@@ -55,7 +55,7 @@
                         @endif
                     </div>
 
-                    <div class="row m-t-md">
+                    <div class="row m-t-md center-block">
                         @include('dashboard.obras.detalle.solicitudes-analisis.esquema.ver', ["imagenes_esquema" => $registro->imagenes_esquema])
                     </div>
 

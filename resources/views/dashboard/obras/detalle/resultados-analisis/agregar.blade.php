@@ -52,12 +52,12 @@
                         <div class="row">
                             <div class="col-md-4 div-input required">
                                 <label for="fecha_analisis">Fecha del análisis</label>
-                                <input type="text" class="form-control" id="fecha_analisis" name="fecha_analisis" value="{{ $registro->fecha_analisis }}" required autocomplete="off" disabled="">
+                                <input type="text" class="form-control" id="fecha_analisis" name="fecha_analisis" value="{{ $registro->fecha_analisis }}" required autocomplete="off" {{-- disabled="" --}}>
                             </div>
                             
                             <div class="col-md-8 div-input required">
                                 <label for="profesor_responsable_de_analisis_id">Asesor científico responsable</label>
-                                <select class="form-control select2" id="profesor_responsable_de_analisis_id" name="profesor_responsable_de_analisis_id" required autocomplete="off" disabled="">
+                                <select class="form-control select2" id="profesor_responsable_de_analisis_id" name="profesor_responsable_de_analisis_id" required autocomplete="off" {{-- disabled="" --}}>
                                     <option value=""></option>
                                     @foreach ($asesor_cientifico_responsable as $profesor)
                                         <option {{ $profesor->id == $registro->profesor_responsable_de_analisis_id ? "selected" : "" }} value="{{ $profesor->id }}">{{ $profesor->name }}</option>
@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col-md-6 div-input required">
                                 <label for="persona_realiza_analisis_id">Persona que realizó el análisis</label>
-                                <select class="form-control select2" id="persona_realiza_analisis_id" name="persona_realiza_analisis_id" required autocomplete="off" disabled="">
+                                <select class="form-control select2" id="persona_realiza_analisis_id" name="persona_realiza_analisis_id" required autocomplete="off" {{-- disabled="" --}}>
                                     <option value=""></option>
                                     @foreach ($persona_realiza_analisis as $persona)
                                         <option {{ $persona->id == $registro->persona_realiza_analisis_id ? "selected" : "" }} value="{{ $persona->id }}">{{ $persona->name }}</option>
@@ -78,7 +78,7 @@
 
                             <div class="col-md-6 div-input required">
                                 <label for="forma_obtencion_muestra_id">Forma de obtención de la muestra</label>
-                                <select class="form-control select2" id="forma_obtencion_muestra_id" name="forma_obtencion_muestra_id" required autocomplete="off" disabled="">
+                                <select class="form-control select2" id="forma_obtencion_muestra_id" name="forma_obtencion_muestra_id" required autocomplete="off" {{-- disabled="" --}}>
                                     <option value=""></option>
                                     @foreach ($formas_obtencion as $forma_obtencion)
                                         <option {{ $forma_obtencion->id == $registro->forma_obtencion_muestra_id ? "selected" : "" }} value="{{ $forma_obtencion->id }}">{{ $forma_obtencion->nombre }}</option>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
 
-                        <div class="row m-t-md">
+                        <div class="row m-t-md center-block">
                             @include('dashboard.obras.detalle.resultados-analisis.esquema-muestra.ver', ["esquema_muestra" => $registro->imagenes_resultados_esquema_muestra])
                         </div>
                         <hr>
@@ -216,8 +216,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" onclick="$('#modal-crear-resultado').modal('toggle');$('body').removeClass('modal-open');">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" disabled="">Guardar</button>
+                    <button type="button" class="btn btn-white" onclick="$('#modal-crear-resultado').modal('toggle');$('body').removeClass('modal-open');" no-editar>Cerrar</button>
+                    <button type="submit" class="btn btn-primary" {{-- disabled="" --}}>Guardar</button>
                 </div>
 
                 <input type="hidden" id="solicitudes_analisis_muestras_id" name="solicitudes_analisis_muestras_id" value="{{ $registro != "[]" ? $registro->solicitudes_analisis_muestras_id : ''}}">

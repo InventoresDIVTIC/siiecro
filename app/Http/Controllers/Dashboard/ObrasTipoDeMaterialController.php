@@ -39,7 +39,7 @@ class ObrasTipoDeMaterialController extends Controller
 
         return DataTables::of($registros)
                         ->addColumn('acciones', function($registro){
-                            $editar         =   '<i onclick="editar('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Editar"></i>';
+                            $editar         =   '<i onclick="editar('.$registro->id.')" class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver y/o Editar"></i>';
                             $eliminar       =   '';
 
                             if(Auth::user()->rol->eliminar_catalogos){

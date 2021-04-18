@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-md-12 div-input required">
                                 <label for="motivo">Motivo</label>
-                                <input type="text" class="form-control" id="motivo" name="motivo" value="{{ $registro->motivo }}" placeholder="¿Para qué quieres determinar esa información?" required autocomplete="off">
+                                <input type="text" class="form-control" id="motivo" name="motivo" value="{{ $registro->motivo }}" placeholder="¿Para qué quieres determinar esta información?" required autocomplete="off">
                             </div>
                         </div>
                         <div class="row">

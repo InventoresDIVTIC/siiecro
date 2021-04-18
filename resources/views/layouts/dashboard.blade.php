@@ -73,6 +73,9 @@
 
     <!-- Color picker -->
     {!!Html::style('css/plugins/colorpicker/bootstrap-colorpicker.min.css')!!}
+
+    <!-- Blue imp -->
+    {!!Html::style('css/plugins/blueimp/css/blueimp-gallery.min.css')!!}
     
     <!--OWL-->
     {!!Html::style('css/plugins/owl/owl.carousel.css')!!}
@@ -124,6 +127,16 @@
               </div>
             </div>
         </div>
+    </div>
+    <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+    <div id="blueimp-gallery" class="blueimp-gallery">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
     </div>
 </body>
 <div id="modal-1"></div>
@@ -238,6 +251,10 @@
   {!!Html::script('js/plugins/ladda/spin.min.js')!!}
   {!!Html::script('js/plugins/ladda/ladda.min.js')!!}
   {!!Html::script('js/plugins/ladda/ladda.jquery.min.js')!!}
+
+<!-- blueimp gallery -->
+  {!!Html::script('js/plugins/blueimp/jquery.blueimp-gallery.min.js')!!}
+
 
 
 <!-- Comun -->

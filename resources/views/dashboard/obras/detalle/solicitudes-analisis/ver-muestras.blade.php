@@ -67,12 +67,13 @@
                         </div>
                     @endif
 
-                    <div class="row m-t-md">
+                    <div class="row m-t-md center-block">
                         @include('dashboard.obras.detalle.solicitudes-analisis.esquema.ver', ["imagenes_esquema" => $registro->imagenes_esquema])
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
+                            <br>
                             <button type="submit" class="btn btn-primary pull-right" disabled="">Guardar Cambios</button>
                         </div>
                     </div>
