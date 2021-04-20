@@ -325,112 +325,17 @@
                                         </div>
 
                                         <div class="col-md-6">
-
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-fileinput form-group-default text-center">
-                                                        <span class="fileinput-title">Vista frontal</span>
-                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                            <div class="fileinput-new thumbnail">
-                                                                @if($obra->tieneImagenFrontal())
-                                                                    <img src="{{ asset('img/obras/'.$obra->vista_frontal_chica) }}" style="max-height: 190px;"/>
-                                                                @else
-                                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=sin+imagen" />
-                                                                @endif
-                                                            </div>
-                                                            <div class="fileinput-preview fileinput-exists thumbnail" id="contenedor_imagen">
-                                                            </div>
-                                                            <div>
-                                                                <span class="btn btn-default btn-file">
-                                                                    <span class="fileinput-new">Selecciona una imagen</span>
-                                                                    <span class="fileinput-exists">Cambiar</span>
-                                                                    <input type="file" name="vista_frontal" id="vista_frontal" value="" class="" aria-invalid="false" disabled>
-                                                                </span>
-                                                  
-                                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Limpiar</a>
-                                                            </div>
-                                                        </div>
+                                                <div class="col-md-12 div-input required hidden {{-- dropzones-imagenes --}}" id="dropzone-imagenes-principales-ocultas" {{-- style="display: none;" --}}>
+                                                    <label for="dropzone-obra-imagenes-principales">Imagenes principales</label>
+                                                    <div class="dropzone" id="dropzone-obra-imagenes-principales">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-fileinput form-group-default text-center">
-                                                        <span class="fileinput-title">Vista posterior</span>
-                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                            <div class="fileinput-new thumbnail">
-                                                                @if($obra->tieneImagenPosterior())
-                                                                    <img src="{{ asset('img/obras/'.$obra->vista_posterior_chica) }}" style="max-height: 190px;"/>
-                                                                @else
-                                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=sin+imagen" />
-                                                                @endif
-                                                            </div>
-                                                            <div class="fileinput-preview fileinput-exists thumbnail" id="contenedor_imagen">
-                                                            </div>
-                                                            <div>
-                                                                <span class="btn btn-default btn-file">
-                                                                    <span class="fileinput-new">Selecciona una imagen</span>
-                                                                    <span class="fileinput-exists">Cambiar</span>
-                                                                    <input type="file" name="vista_posterior" id="vista_posterior" value="" class="" aria-invalid="false" disabled>
-                                                                </span>
-                                                  
-                                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Limpiar</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-fileinput form-group-default text-center">
-                                                        <span class="fileinput-title">Vista lateral izquierda</span>
-                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                            <div class="fileinput-new thumbnail">
-                                                                @if($obra->tieneImagenLateralIzquierda())
-                                                                    <img src="{{ asset('img/obras/'.$obra->vista_lateral_izquierda_chica) }}" style="max-height: 190px;"/>
-                                                                @else
-                                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=sin+imagen" />
-                                                                @endif
-                                                            </div>
-                                                            <div class="fileinput-preview fileinput-exists thumbnail" id="contenedor_imagen">
-                                                            </div>
-                                                            <div>
-                                                                <span class="btn btn-default btn-file">
-                                                                    <span class="fileinput-new">Selecciona una imagen</span>
-                                                                    <span class="fileinput-exists">Cambiar</span>
-                                                                    <input type="file" name="vista_lateral_izquierda" id="vista_lateral_izquierda" value="" class="" aria-invalid="false" disabled>
-                                                                </span>
-                                                  
-                                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Limpiar</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-fileinput form-group-default text-center">
-                                                        <span class="fileinput-title">Vista lateral derecha</span>
-                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                            <div class="fileinput-new thumbnail">
-                                                                @if($obra->tieneImagenLateralDerecha())
-                                                                    <img src="{{ asset('img/obras/'.$obra->vista_lateral_derecha_chica) }}" style="max-height: 190px;"/>
-                                                                @else
-                                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=sin+imagen" />
-                                                                @endif
-                                                            </div>
-                                                            <div class="fileinput-preview fileinput-exists thumbnail" id="contenedor_imagen">
-                                                            </div>
-                                                            <div>
-                                                                <span class="btn btn-default btn-file">
-                                                                    <span class="fileinput-new">Selecciona una imagen</span>
-                                                                    <span class="fileinput-exists">Cambiar</span>
-                                                                    <input type="file" name="vista_lateral_derecha" id="vista_lateral_derecha" value="" class="" aria-invalid="false" disabled>
-                                                                </span>
-                                                  
-                                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Limpiar</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </div>      
 
+                                            <div class="row m-t-md center-block">
+                                                @include('dashboard.obras.detalle.imagenes-principales.ver', ["imagenes_principales" => $obra->imagenes_principales])
+                                            </div>
                                         </div>
 
                                     </div>

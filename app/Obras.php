@@ -34,14 +34,14 @@ class Obras extends Model
         'fecha_salida',
         'modalidad',
         'persona_entrego',
-        'vista_frontal_grande',
-        'vista_frontal_chica',
-        'vista_posterior_grande',
-        'vista_posterior_chica',
-        'vista_lateral_derecha_grande',
-        'vista_lateral_derecha_chica',
-        'vista_lateral_izquierda_grande',
-        'vista_lateral_izquierda_chica',
+        // 'vista_frontal_grande',
+        // 'vista_frontal_chica',
+        // 'vista_posterior_grande',
+        // 'vista_posterior_chica',
+        // 'vista_lateral_derecha_grande',
+        // 'vista_lateral_derecha_chica',
+        // 'vista_lateral_izquierda_grande',
+        // 'vista_lateral_izquierda_chica',
         'caracteristicas_descriptivas',
         'lugar_procedencia_original',
         'forma_ingreso',
@@ -61,6 +61,10 @@ class Obras extends Model
         'fecha_ingreso',
         'fecha_salida'
     ];
+
+    public function imagenes_principales() {
+        return $this->hasMany('App\ObrasImagenesPrincipales', 'obra_id', 'id');
+    }
 
     public function setAñoAttribute($value){
         if($value){
@@ -213,104 +217,104 @@ class Obras extends Model
         return ($this->vista_frontal_grande != "" && $this->vista_frontal_chica != "");
     }
 
-    public function subirImagenVistaFrontal($file){
-        $extension                          =   $file->extension();
+    // public function subirImagenVistaFrontal($file){
+    //     $extension                          =   $file->extension();
 
-        // Eliminamos posibles imagenes anteriores
-        Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_grande);
-        Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_chica);
+    //     // Eliminamos posibles imagenes anteriores
+    //     Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_grande);
+    //     Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_chica);
 
 
-        $resultadoImagenGrande              =   Archivos::subirImagen($file, $this->id."_frontal_grande.".$extension, "img/obras", 1200);
-        $resultadoImagenChica               =   Archivos::subirImagen($file, $this->id."_frontal_chica.".$extension, "img/obras", 400);
+    //     $resultadoImagenGrande              =   Archivos::subirImagen($file, $this->id."_frontal_grande.".$extension, "img/obras", 1200);
+    //     $resultadoImagenChica               =   Archivos::subirImagen($file, $this->id."_frontal_chica.".$extension, "img/obras", 400);
 
-        // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
-        if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
-            // Eliminar imagenes
-            Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_grande);
-            Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_chica);
+    //     // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
+    //     if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
+    //         // Eliminar imagenes
+    //         Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_grande);
+    //         Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_chica);
 
-            $this->vista_frontal_grande     =   "";
-            $this->vista_frontal_chica      =   "";
-        } else{
-            $this->vista_frontal_grande     =   $this->id."_frontal_grande.".$extension;
-            $this->vista_frontal_chica      =   $this->id."_frontal_chica.".$extension;
-        }
+    //         $this->vista_frontal_grande     =   "";
+    //         $this->vista_frontal_chica      =   "";
+    //     } else{
+    //         $this->vista_frontal_grande     =   $this->id."_frontal_grande.".$extension;
+    //         $this->vista_frontal_chica      =   $this->id."_frontal_chica.".$extension;
+    //     }
 
-        $this->save();
-    }
+    //     $this->save();
+    // }
 
-    public function tieneImagenPosterior(){
-        return ($this->vista_posterior_grande != "" && $this->vista_posterior_chica != "");
-    }
+    // public function tieneImagenPosterior(){
+    //     return ($this->vista_posterior_grande != "" && $this->vista_posterior_chica != "");
+    // }
 
-    public function subirImagenVistaPosterior($file){
-        $extension                              =   "jpg";
+    // public function subirImagenVistaPosterior($file){
+    //     $extension                              =   "jpg";
 
-        $resultadoImagenGrande                  =   Archivos::subirImagen($file, $this->id."_posterior_grande.".$extension, "img/obras", 1200);
-        $resultadoImagenChica                   =   Archivos::subirImagen($file, $this->id."_posterior_chica.".$extension, "img/obras", 400);
+    //     $resultadoImagenGrande                  =   Archivos::subirImagen($file, $this->id."_posterior_grande.".$extension, "img/obras", 1200);
+    //     $resultadoImagenChica                   =   Archivos::subirImagen($file, $this->id."_posterior_chica.".$extension, "img/obras", 400);
 
-        // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
-        if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
-            // Eliminar imagen
+    //     // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
+    //     if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
+    //         // Eliminar imagen
 
-            $this->vista_posterior_grande       =   "";
-            $this->vista_posterior_chica        =   "";
-        } else{
-            $this->vista_posterior_grande       =   $this->id."_posterior_grande.".$extension;
-            $this->vista_posterior_chica        =   $this->id."_posterior_chica.".$extension;
-        }
+    //         $this->vista_posterior_grande       =   "";
+    //         $this->vista_posterior_chica        =   "";
+    //     } else{
+    //         $this->vista_posterior_grande       =   $this->id."_posterior_grande.".$extension;
+    //         $this->vista_posterior_chica        =   $this->id."_posterior_chica.".$extension;
+    //     }
 
-        $this->save();
-    }
+    //     $this->save();
+    // }
 
-    public function tieneImagenLateralIzquierda(){
-        return ($this->vista_lateral_izquierda_grande != "" && $this->vista_lateral_izquierda_chica != "");
-    }
+    // public function tieneImagenLateralIzquierda(){
+    //     return ($this->vista_lateral_izquierda_grande != "" && $this->vista_lateral_izquierda_chica != "");
+    // }
 
-    public function subirImagenVistaLateralIzquierda($file){
-        $extension                                      =   "jpg";
+    // public function subirImagenVistaLateralIzquierda($file){
+    //     $extension                                      =   "jpg";
 
-        $resultadoImagenGrande                          =   Archivos::subirImagen($file, $this->id."_lateral_izquierda_grande.".$extension, "img/obras", 1200);
-        $resultadoImagenChica                           =   Archivos::subirImagen($file, $this->id."_lateral_izquierda_chica.".$extension, "img/obras", 400);
+    //     $resultadoImagenGrande                          =   Archivos::subirImagen($file, $this->id."_lateral_izquierda_grande.".$extension, "img/obras", 1200);
+    //     $resultadoImagenChica                           =   Archivos::subirImagen($file, $this->id."_lateral_izquierda_chica.".$extension, "img/obras", 400);
 
-        // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
-        if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
-            // Eliminar imagen
+    //     // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
+    //     if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
+    //         // Eliminar imagen
 
-            $this->vista_lateral_izquierda_grande       =   "";
-            $this->vista_lateral_izquierda_chica        =   "";
-        } else{
-            $this->vista_lateral_izquierda_grande       =   $this->id."_lateral_izquierda_grande.".$extension;
-            $this->vista_lateral_izquierda_chica        =   $this->id."_lateral_izquierda_chica.".$extension;
-        }
+    //         $this->vista_lateral_izquierda_grande       =   "";
+    //         $this->vista_lateral_izquierda_chica        =   "";
+    //     } else{
+    //         $this->vista_lateral_izquierda_grande       =   $this->id."_lateral_izquierda_grande.".$extension;
+    //         $this->vista_lateral_izquierda_chica        =   $this->id."_lateral_izquierda_chica.".$extension;
+    //     }
 
-        $this->save();
-    }
+    //     $this->save();
+    // }
 
-    public function tieneImagenLateralDerecha(){
-        return ($this->vista_lateral_derecha_chica != "" && $this->vista_lateral_derecha_grande != "");
-    }
+    // public function tieneImagenLateralDerecha(){
+    //     return ($this->vista_lateral_derecha_chica != "" && $this->vista_lateral_derecha_grande != "");
+    // }
 
-    public function subirImagenVistaLateralDerecha($file){
-        $extension                                  =   "jpg";
+    // public function subirImagenVistaLateralDerecha($file){
+    //     $extension                                  =   "jpg";
 
-        $resultadoImagenGrande                      =   Archivos::subirImagen($file, $this->id."_lateral_derecha_grande.".$extension, "img/obras", 1200);
-        $resultadoImagenChica                       =   Archivos::subirImagen($file, $this->id."_lateral_derecha_chica.".$extension, "img/obras", 400);
+    //     $resultadoImagenGrande                      =   Archivos::subirImagen($file, $this->id."_lateral_derecha_grande.".$extension, "img/obras", 1200);
+    //     $resultadoImagenChica                       =   Archivos::subirImagen($file, $this->id."_lateral_derecha_chica.".$extension, "img/obras", 400);
 
-        // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
-        if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
-            // Eliminar imagen
+    //     // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
+    //     if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
+    //         // Eliminar imagen
 
-            $this->vista_lateral_derecha_grande     =   "";
-            $this->vista_lateral_derecha_chica      =   "";
-        } else{
-            $this->vista_lateral_derecha_grande     =   $this->id."_lateral_derecha_grande.".$extension;
-            $this->vista_lateral_derecha_chica      =   $this->id."_lateral_derecha_chica.".$extension;
-        }
+    //         $this->vista_lateral_derecha_grande     =   "";
+    //         $this->vista_lateral_derecha_chica      =   "";
+    //     } else{
+    //         $this->vista_lateral_derecha_grande     =   $this->id."_lateral_derecha_grande.".$extension;
+    //         $this->vista_lateral_derecha_chica      =   $this->id."_lateral_derecha_chica.".$extension;
+    //     }
 
-        $this->save();
-    }
+    //     $this->save();
+    // }
 
     public static function buscarObraValidandoPermisos($obra_id){
         $obra           =   Obras::selectRaw("obras.*")

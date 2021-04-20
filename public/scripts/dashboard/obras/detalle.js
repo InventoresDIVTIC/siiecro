@@ -1,3 +1,4 @@
+Dropzone.autoDiscover = false;
 jQuery(document).ready(function($) {
 	$("#tipo_bien_cultural_id, #tipo_objeto_id, #temporalidad_id, #epoca_id, #estatus_año, #estatus_epoca, #area_id, #_responsables, #forma_ingreso, #usuario_recibio_id").select2({
         placeholder: "Seleccione una opción"
@@ -73,6 +74,82 @@ jQuery(document).ready(function($) {
     });
 });
 
+// ID DE LA OBRA 
+var id_de_la_obra_actual = $('#id').val();
+
+// console.log(id_de_la_obra_actual);
+// recargarImagenesPrincipalesDeObra(id_de_la_obra_actual);
+// DROPZONE PARA FOTOGRAFIAS PRINCIPALES DE LA OBRA
+$("#dropzone-obra-imagenes-principales").dropzone({ 
+  url: "/dashboard/obras-imagenes-principales/" + id_de_la_obra_actual + "/subir-imagen",
+  uploadMultiple: false,
+  parallelUploads: 1,
+  maxFiles: 10,
+  addRemoveLinks: false,
+  acceptedFiles: 'image/*',
+  sending: function(file, xhr, formData) {
+    formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
+  },
+  error: function(file, message) {
+    $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(message.mensaje);
+  },
+  success: function(file, message){
+    var drop    =  this;
+    setTimeout(function() {
+      drop.removeFile(file);
+      // _recargarTabla("#dt-datos-resultados-analisis");
+      recargarImagenesPrincipalesDeObra(id_de_la_obra_actual);
+    }, 1000);
+  }
+});
+
+// CARROUSEL DE IMAGENES PRINCIPALES DE LA OBRA
+$('#carrusel-obra-imagenes-principales').owlCarousel({
+  loop:      false,
+  margin:    10,
+  nav:       false,
+  center:    false
+});
+
+// FUNCIÓN PARA RECARGAR IMÁGENES PRINCIPALES DE LA OBRA CUANDO SE AGREGAN O ELIMINAN MÁS
+function recargarImagenesPrincipalesDeObra(obra_id){
+  $.ajax({
+    url: '/dashboard/obras-imagenes-principales/' + obra_id + '/ver-imagenes',
+    type: 'GET',
+    success: function(respuesta){
+      $("#contenedor-obra-imagenes-principales").html(respuesta);
+      $('#carrusel-obra-imagenes-principales').owlCarousel({
+        loop:      false,
+        margin:    10,
+        nav:       false,
+        center:    false
+      });
+    },
+    error: function(){
+      _toast("error", "Hubo un error al obtener las imagenes, intenta de nuevo mas tarde");
+    }
+  });  
+}
+
+function eliminarImagenPrincipalDeObra(id, obra_id){
+  _mostrarFormulario("/dashboard/obras-imagenes-principales/"+id+"/eliminar-imagen/", //Url solicitud de datos
+                      "#modal-1", //Div que contendra el modal
+                      "#modal-eliminar-imagen-principal", //Nombre modal
+                      "", //Elemento al que se le dara focus una vez cargado el modal
+                      function(){
+
+                      }, //Funcion para el success
+                      "#form-eliminar-imagen-principal", //ID del Formulario
+                      "", //Loading de guardar datos de formulario
+                      "#div-notificacion-imagen-principal", //Div donde mostrara el error en caso de, vacio lo muestra en toastr
+                      function(){
+                        _ocultarModal("#modal-eliminar-imagen-principal", function(){
+                          // _recargarTabla("#dt-datos-analisis-realizar-resultados");
+                          recargarImagenesPrincipalesDeObra(obra_id);
+                        });
+                      });//Funcion en caso de guardar correctamente);
+}
+
 function comportamientoTipoBienCultural(id){
   // Obtenemos el option del id seleccionado
   var   option  =   $("#tipo-bien-cultural-" + id);
@@ -129,10 +206,12 @@ function toggleEdicionDatosIdentificacion(estatus){
     $("#form-datos-identificacion").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', false);
     $("#btn-group-habilitar-edicion-datos-identificacion").addClass('hidden');
     $("#btn-group-editar-datos-identificacion").removeClass('hidden');
+    $("#dropzone-imagenes-principales-ocultas").removeClass('hidden');
   } else{
     $("#form-datos-identificacion").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', true);
     $("#btn-group-habilitar-edicion-datos-identificacion").removeClass('hidden');
     $("#btn-group-editar-datos-identificacion").addClass('hidden');
+    $("#dropzone-imagenes-principales-ocultas").addClass('hidden');
   }
 }
 
