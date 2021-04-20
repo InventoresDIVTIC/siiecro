@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
       "#carga-dt", // ID elemento del progreso
       "/dashboard/obras/carga", // URL datos
       [
-        { data: "folio",                width: "10%"},
+        { data: "id",                   width: "10%",   name: "obras.id"},
         { data: "nombre",               width: "20%"},
         { data: "tipo_bien_cultural",   width: "15%",   name: "obc.nombre"},
         { data: "tipo_objeto",          width: "10%",   name: "oto.nombre"},

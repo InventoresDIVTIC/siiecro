@@ -81,13 +81,20 @@ class ObrasSolicitudesAnalisis extends Model
 
     public static function obtenerSolicitudesDashboard(){
         if (Auth::user()->rol->acceso_a_datos_avanzado) {
-            return  ObrasSolicitudesAnalisis::orderBy("fecha_intervencion", "DESC")
+            return  ObrasSolicitudesAnalisis::selectRaw("
+                                                            obras__solicitudes_analisis.*
+                                                        ")
+                                            ->join('obras', 'obras.id', 'obras__solicitudes_analisis.obra_id')
+                                            ->join('areas as a', 'a.id', 'obras.area_id')
+                                            ->orderBy("obras__solicitudes_analisis.fecha_intervencion", "DESC")
                                             ->limit(10);
         } else{
             return  ObrasSolicitudesAnalisis::selectRaw("
                                                             obras__solicitudes_analisis.*
                                                         ")
                                             ->join('obras__usuarios_asignados as asignados', 'asignados.id', 'obras__solicitudes_analisis.obra_usuario_asignado_id')
+                                            ->join('obras', 'obras.id', 'obras__solicitudes_analisis.obra_id')
+                                            ->join('areas as a', 'a.id', 'obras.area_id')
                                             ->where('asignados.usuario_id', Auth::id())
                                             ->groupBy('obras__solicitudes_analisis.id')
                                             ->orderBy("obras__solicitudes_analisis.fecha_intervencion", "DESC");

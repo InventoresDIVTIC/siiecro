@@ -1,5 +1,5 @@
 <div class="row mt-5">
-    <div class="col-lg-3">
+    <div class="col-lg-3 hid den">
         <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
             <div class="sidebar-widget category mb-2 pb-0">
                 <h5 class="mb-2">Año</h5>
@@ -131,21 +131,37 @@
             </div>
         </div>
         <div class="row">
+            @foreach($obras as $obra)
+                <div class="col-6">
+                    <a href="{{ route('consulta.detalle', $obra->seo) }}">
+                        <div class="service-block-detalle mb-2 mt-0">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="img/predeterminadas/sin_imagen.png" alt="" class="img-fluid">
+                                </div>
+                                <div class="col-8">
+                                    <div class="content">
+                                        <h4 class="mt-2 mb-1 title-color">{{ $obra->nombre }}</h4>
+                                        <span><strong>Bien cultural:</strong> <small>{{ $obra->tipo_bien_cultural->nombre }}</small></span><br>
+                                        <span><strong>Tipo objeto:</strong> <small>{{ $obra->tipo_objeto->nombre }}</small></span><br>
 
-            @for ($i = 1; $i < 6; $i++)
-                <div class="col-12">
-                    <a href="{{ route('consulta.detalle', "obra-1") }}">
-                        <div class="service-block mb-2 mt-0">
-                            <img src="images/service/service-1.jpg" alt="" class="img-fluid">
-                            <div class="content">
-                                <h4 class="mt-4 mb-2 title-color">Obra {{ $i }}</h4>
-                                <p class="mb-4">Contenido</p>
+                                        @if ($obra->tipo_bien_cultural->calcular_temporalidad == "si")
+                                            <span><strong>Temporalidad:</strong> <small>{{ $obra->temporalidad->nombre }}</small></span>
+                                        @else
+                                            <span><strong>Año:</strong> <small>{{ $obra->año ? $obra->año->format('Y') : "N/A" }}</small></span><br>
+                                            <span><strong>Época:</strong> <small>{{ $obra->epoca->nombre }}</small></span><br>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </a>
                 </div>
-            @endfor
+            @endforeach
 
+            @if ($obras->count() == 0)
+                <h4 class="p-5">No hay obras que coincidan con la búsqueda.</h4>
+            @endif
         </div>
     </div>
 </div>

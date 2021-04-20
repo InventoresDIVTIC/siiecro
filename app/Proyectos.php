@@ -24,7 +24,7 @@ class Proyectos extends Model
     }
 
     public function getFolioAttribute(){
-        $folio          =   str_pad($this->id, 4, "0", STR_PAD_LEFT)."/".$this->area->siglas."-".$this->forma_ingreso;
+        $folio          =   str_pad($this->id, 4, "0", STR_PAD_LEFT)."-".$this->forma_ingreso."/".$this->area->siglas;
 
         return $folio;
     }

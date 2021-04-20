@@ -38,7 +38,7 @@
                         <table class="table table-striped" id="dt-datos">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
+                                    <th>Titulo</th>
                                     <th>Tipo bien cultural</th>
                                     <th>Tipo de objeto</th>
                                     <th>Año</th>

@@ -279,6 +279,7 @@ Auth::routes();
 
 	    ######## CONTACTO ###############################################################
 			Route::get('/contacto', 	'ContactoController@index')->name('contacto.index');
+			Route::put('/contacto', 	'ContactoController@contacto')->name('contacto.contacto');
 		#################################################################################
 	});
 

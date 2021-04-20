@@ -73,7 +73,7 @@ def getRecomendations(nombre, cosine_sim = cosine_sim):
         sim_scores          = sorted(sim_scores, key = lambda x: x[1], reverse = True)
         # en esta linea se le especifica un cierto error o cantidad de términos
         # u obras encontrados como los más similares o más cercanos al término buscado
-        sim_scores          = sim_scores[1:3]
+        sim_scores          = sim_scores[1:11]
         indices_terminos    = [i[0] for i in sim_scores]
         # se encuentran los indices de los términos más cercanos encontrados
         sugeridos           = df.iloc[indices_terminos]['ID_OBRAS'].to_json(orient="records")

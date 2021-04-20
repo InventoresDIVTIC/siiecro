@@ -15,7 +15,6 @@ class CreateObrasTable extends Migration
     {
         Schema::create('obras', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('tags')->nullable();
             $table->integer('usuario_solicito_id')->unsigned();
             $table->integer('usuario_aprobo_id')->unsigned()->nullable();
             $table->integer('usuario_rechazo_id')->unsigned()->nullable();
@@ -29,6 +28,7 @@ class CreateObrasTable extends Migration
             $table->integer('usuario_recibio_id')->unsigned()->nullable();
             $table->integer('proyecto_id')->unsigned()->nullable();
 
+            $table->text('seo')->index();
             $table->string('nombre')->index();
             $table->string('autor')->index()->nullable();
             $table->string('cultura')->index()->nullable();
@@ -60,6 +60,7 @@ class CreateObrasTable extends Migration
 
             $table->datetime('fecha_aprobacion')->nullable();
             $table->datetime('fecha_rechazo')->nullable();
+            $table->text('tags')->nullable();
 
             $table->timestamps();
 

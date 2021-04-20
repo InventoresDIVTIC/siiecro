@@ -381,7 +381,7 @@ a:focus {
 #navbarmain .nav-link {
   font-weight: 600;
   padding: 10px 15px;
-  color: #222;
+  color: #fff;
   font-family: "Exo", sans-serif;
   text-transform: capitalize;
   font-size: 16px;
@@ -683,6 +683,13 @@ a:focus {
 
 .service .content {
   clear: both;
+}
+
+.service-block-detalle {
+  padding: 20px;
+  margin-top: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0 38px rgba(21, 40, 82, 0.07);
 }
 
 .service-block {
@@ -1368,6 +1375,8 @@ a:focus {
 
 .footer {
   padding-bottom: 10px;
+  background-color: #999fa2 !important;
+  color: #fff !important;
 }
 
 .footer .copyright a {
@@ -1400,7 +1409,7 @@ a:focus {
 }
 
 .widget .footer-menu a {
-  color: #6F8BA4;
+  color: #3e3e3e;
 }
 
 .widget .footer-menu a:hover {
@@ -1409,7 +1418,7 @@ a:focus {
 
 .footer-contact-block span {
   font-weight: 400;
-  color: #6F8BA4;
+  color: #3e3e3e;
 }
 
 .footer-contact-block i {
@@ -1490,7 +1499,8 @@ a:focus {
 }
 
 .color-navbar{
-  background: #f4f9fc;
+  background: #999fa2;
+  color: #fff !important;
 }
 
 .pointer{
@@ -1529,6 +1539,10 @@ a:focus {
 
 .hidden{
   display: none;
+}
+
+.color-gris, .color-gris a{
+  color: #3e3e3e !important;
 }
 
 /*# sourceMappingURL=maps/style.css.map */

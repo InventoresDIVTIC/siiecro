@@ -1,7 +1,8 @@
 @extends('layouts.landing')
 
 @section('body')
-    <section class="banner" style="background: url({{ asset('img/landing/banner.jpg') }}) no-repeat; background-position: center;">
+    <section class="text-center">
+        <img class="img-fluid" src="{{ asset('img/landing/banner.jpg') }}" alt="">
     </section>
 
     <section class="section about">
@@ -15,13 +16,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-sm-6">
                     <div class="about-img">
-                        <img src="{{ asset('img/landing/2.jpg') }}" alt="" class="img-fluid">
-                        <img src="{{ asset('img/landing/3.jpg') }}" alt="" class="img-fluid mt-4">
+                        <img src="{{ asset('img/landing/05.jpg') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('img/landing/09.jpg') }}" alt="" class="img-fluid mt-4">
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6">
                     <div class="about-img mt-4 mt-lg-0">
-                        <img src="{{ asset('img/landing/4.jpg') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('img/landing/01.jpg') }}" alt="" class="img-fluid">
                     </div>
                 </div>
             </div>

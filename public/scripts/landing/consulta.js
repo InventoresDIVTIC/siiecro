@@ -1,3 +1,5 @@
+var tipoBusqueda = "";
+
 jQuery(document).ready(function($) {
 	// Inicializamos los botones de seleccion de busqueda
 	$(".elemento-busqueda").each(function(index, el) {
@@ -17,6 +19,7 @@ function comportamientoElementoBusqueda(elemento){
 	$("#div-busqueda").removeClass('hidden');
 	$("#txt-busqueda").html($(elemento).data("tipo-busqueda"));
 	$("#input-busqueda").focus().select();
+	tipoBusqueda = $(elemento).data("tipo-busqueda");
 }
 
 function buscar(e){
@@ -30,7 +33,8 @@ function buscar(e){
 				type: 'POST',
 				data: {
 					_token: 	$('meta[name="csrf-token"]').attr('content'),
-					busqueda: 	busqueda
+					busqueda: 	busqueda,
+					tipo: 		tipoBusqueda
 				},
 				beforeSend: function(){
 					$("#div-loading").removeClass('hidden');
