@@ -32,5 +32,11 @@ class ObrasFormaObtencionMuestraSeeder extends Seeder
         DB::table('obras__forma_obtencion_muestra')->insert([
             'nombre'      	=>  "Cortes longitudinales",
         ]);
+        DB::table('obras__forma_obtencion_muestra')->insert([
+            'nombre'        =>  "Hisopo",
+        ]);
+       DB::table('obras__forma_obtencion_muestra')->insert([
+            'nombre'        =>  "Ambiente abierto",
+        ]);
     }
 }
