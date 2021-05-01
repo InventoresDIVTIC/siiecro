@@ -80,6 +80,12 @@ Auth::routes();
 			Route::put('obras/importar', 							'ObrasController@importar')->name('obras.importar');
 			Route::get('obras/imprimir/{id}', 						'ObrasController@imprimir')->name('obras.imprimir');
 			Route::get('obras/imprimir-oficio/{id}', 				'ObrasController@imprimirOficio')->name('obras.imprimir-oficio');
+			
+			Route::post('obras-imagenes-principales/{id}/subir-imagen', 		'ObrasController@subirImagenPrincipal');
+			Route::get('obras-imagenes-principales/{id}/eliminar-imagen', 		'ObrasController@alertaEliminarImagenPrincipal');
+			Route::delete('obras-imagenes-principales/{id}/eliminar-imagen', 	'ObrasController@eliminarImagenPrincipal')->name('obras.eliminar-imagen-principal');
+			Route::get('obras-imagenes-principales/{id}/ver-imagenes', 			'ObrasController@verImagenesPrincipales');
+
 			Route::resource('obras', 								'ObrasController');
 
 			###### OBRAS USUARIOS ASIGNADOS #############################################

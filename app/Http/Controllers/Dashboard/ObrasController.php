@@ -26,6 +26,7 @@ use App\ObrasTemporadasTrabajoAsignadas;
 use App\ObrasTipoBienCultural;
 use App\ObrasTipoObjeto;
 use App\User;
+use App\ObrasImagenesPrincipales;
 
 class ObrasController extends Controller
 {
@@ -495,4 +496,74 @@ class ObrasController extends Controller
 
         return $registro->generarPdfOficio()->stream($registro->folio.".pdf");
     }
+
+    ##### IMÁGENES PRINCIPALES ###########################################################################
+
+    public function verImagenesPrincipales(Request $request, $obra_id){
+        if($request->ajax()){
+            $registro   =   Obras::findOrFail($obra_id);
+            return view('dashboard.obras.detalle.imagenes-principales.ver', ["imagenes_principales" => $registro->imagenes_principales]);
+        }
+        
+        return "";
+    }
+
+    public function subirImagenPrincipal(Request $request, $obra_id){
+        if($request->ajax()){
+            DB::beginTransaction();
+
+            // se crea un nuevo registro de imagen principal para darle su nombre por id
+            $imagen_principal           = new ObrasImagenesPrincipales;
+            $imagen_principal->obra_id  = $obra_id;
+            $imagen_principal->save();
+
+            $extension                  = $request->file('file')->extension();
+            $nombre_imagen_grande       = $imagen_principal->id."_imagen_grande.".$extension;
+            $nombre_imagen_chica        = $imagen_principal->id."_imagen_chica.".$extension;
+
+            // se suben dos tamaños de la misma imagen para utilizarlos en la landing según se necesite
+            $resultado_imagen_grande    = Archivos::subirImagen($request->file('file'), $nombre_imagen_grande, "img/obras/imagenes-principales/", 1200);
+            $resultado_imagen_chica     = Archivos::subirImagen($request->file('file'), $nombre_imagen_chica, "img/obras/imagenes-principales/", 400);
+            
+            // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
+            if($resultado_imagen_grande != "" || $resultado_imagen_chica != ""){
+                // Eliminar imagenes
+                Archivos::eliminarArchivo("img/obras/imagenes-principales/".$nombre_imagen_grande);
+                Archivos::eliminarArchivo("img/obras/imagenes-principales/".$nombre_imagen_chica);
+
+                DB::rollback();
+                return Response::json(["mensaje" => "Error subiendo imagen"], 500);
+            } else{
+                $imagen_principal->imagen_grande = $nombre_imagen_grande;
+                $imagen_principal->imagen_chica  = $nombre_imagen_chica;
+                $imagen_principal->save();
+                
+                DB::commit();
+                return Response::json(["mensaje" => "Imagen subida correctamente", "id" => $imagen_principal->id, "error" => false], 200);
+            }
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function alertaEliminarImagenPrincipal(Request $request, $imagen_principal_id){
+        $imagen     =   ObrasImagenesPrincipales::findOrFail($imagen_principal_id);
+        return view('dashboard.obras.detalle.imagenes-principales.eliminar', ["registro" => $imagen]);
+    }
+
+    public function eliminarImagenPrincipal(Request $request, $imagen_principal_id){
+        if($request->ajax()){
+            $registro   =   ObrasImagenesPrincipales::find($imagen_principal_id);
+            $response   =   BD::elimina($imagen_principal_id, "ObrasImagenesPrincipales");
+
+            if($response->status() == 200){
+                Archivos::eliminarArchivo('img/obras/imagenes-principales/'.$registro->imagen_grande);
+                Archivos::eliminarArchivo('img/obras/imagenes-principales/'.$registro->imagen_chica);
+            }
+
+            return $response;
+        }
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+    #########################################################################################################
 }
