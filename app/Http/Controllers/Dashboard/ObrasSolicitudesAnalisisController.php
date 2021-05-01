@@ -46,7 +46,7 @@ class ObrasSolicitudesAnalisisController extends Controller
                                                                                                 ]
                                                                                 ]);
 
-        $this->middleware('VerificarPermiso:imprimir_condicionado',             [
+        $this->middleware('VerificarPermiso:imprimir',                          [
                                                                                     "only"  =>  [
                                                                                                     "imprimir"
                                                                                                 ]
@@ -104,7 +104,7 @@ class ObrasSolicitudesAnalisisController extends Controller
                             $rechazar           =   '';
                             $revision           =   '';
 
-                            if(Auth::user()->rol->imprimir_condicionado){
+                            if(Auth::user()->rol->imprimir){
                                 $imprimir       =   '<a class="icon-link" href="'.route('dashboard.solicitudes-analisis.imprimir', $registro->id).'" target="_blank"><i class="fa fa-print fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Imprimir"></i></a>';
                             }
 

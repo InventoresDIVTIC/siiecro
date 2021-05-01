@@ -80,7 +80,7 @@ class RolesController extends Controller
             $request->merge(['consulta_externa'                     => (($request->has('consulta_externa'))                         ? ( ($request->input('consulta_externa') == 'on')                       ? 1 : 0 ) : 0)]);
             $request->merge(['consulta_estadistica'                 => (($request->has('consulta_estadistica'))                     ? ( ($request->input('consulta_estadistica') == 'on')                   ? 1 : 0 ) : 0)]);
             
-            $request->merge(['imprimir_condicionado'                => (($request->has('imprimir_condicionado'))                    ? ( ($request->input('imprimir_condicionado') == 'on')                  ? 1 : 0 ) : 0)]);
+            $request->merge(['imprimir'                             => (($request->has('imprimir'))                                 ? ( ($request->input('imprimir') == 'on')                               ? 1 : 0 ) : 0)]);
             $request->merge(['imprimir_oficios'                     => (($request->has('imprimir_oficios'))                         ? ( ($request->input('imprimir_oficios') == 'on')                       ? 1 : 0 ) : 0)]);
             
             $request->merge(['creacion_usuarios_permisos'           => (($request->has('creacion_usuarios_permisos'))               ? ( ($request->input('creacion_usuarios_permisos') == 'on')             ? 1 : 0 ) : 0)]);
@@ -132,7 +132,7 @@ class RolesController extends Controller
             $request->merge(['consulta_externa'                     => (($request->has('consulta_externa'))                         ? ( ($request->input('consulta_externa') == 'on')                       ? 1 : 0 ) : 0)]);
             $request->merge(['consulta_estadistica'                 => (($request->has('consulta_estadistica'))                     ? ( ($request->input('consulta_estadistica') == 'on')                   ? 1 : 0 ) : 0)]);
             
-            $request->merge(['imprimir_condicionado'                => (($request->has('imprimir_condicionado'))                    ? ( ($request->input('imprimir_condicionado') == 'on')                  ? 1 : 0 ) : 0)]);
+            $request->merge(['imprimir'                             => (($request->has('imprimir'))                                 ? ( ($request->input('imprimir') == 'on')                               ? 1 : 0 ) : 0)]);
             $request->merge(['imprimir_oficios'                     => (($request->has('imprimir_oficios'))                         ? ( ($request->input('imprimir_oficios') == 'on')                       ? 1 : 0 ) : 0)]);
             
             $request->merge(['creacion_usuarios_permisos'           => (($request->has('creacion_usuarios_permisos'))               ? ( ($request->input('creacion_usuarios_permisos') == 'on')             ? 1 : 0 ) : 0)]);

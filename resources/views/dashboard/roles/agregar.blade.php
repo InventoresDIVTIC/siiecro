@@ -189,7 +189,7 @@
                                 </tr>
                                 {{-- ACCESO --}}
                                 <tr>
-                                    <th rowspan="5">ACCESO</th>
+                                    <th rowspan="4">ACCESO</th>
                                 </tr>
                                 <tr>
                                     <td>
@@ -204,12 +204,12 @@
                                     <td>
                                         <div class="i-checks">
                                             <label>
-                                                <input type="checkbox" name="acceso_a_lista_solicitudes_obras"  {{ (($registro->acceso_a_lista_solicitudes_obras == 1) ? 'checked=""' : '') }} ><i></i> Acceso a listado de solicitudes de obras
+                                                <input type="checkbox" name="acceso_a_lista_solicitudes_obras"  {{ (($registro->acceso_a_lista_solicitudes_obras == 1) ? 'checked=""' : '') }} ><i></i> Acceso a listado de obras
                                             </label>
                                         </div>                            
                                     </td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td>
                                         <div class="i-checks">
                                             <label>
@@ -217,7 +217,7 @@
                                             </label>
                                         </div>                            
                                     </td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <td>
                                         <div class="i-checks">
@@ -275,7 +275,7 @@
                                     <td>
                                         <div class="i-checks">
                                             <label>
-                                                <input type="checkbox" name="imprimir_condicionado"  {{ (($registro->imprimir_condicionado == 1) ? 'checked=""' : '') }} ><i></i> Imprimir condicionado
+                                                <input type="checkbox" name="imprimir"  {{ (($registro->imprimir == 1) ? 'checked=""' : '') }} ><i></i> Imprimir 
                                             </label>
                                         </div>                            
                                     </td>
@@ -284,7 +284,7 @@
                                     <td>
                                         <div class="i-checks">
                                             <label>
-                                                <input type="checkbox" name="imprimir_oficios"  {{ (($registro->imprimir_oficios == 1) ? 'checked=""' : '') }} ><i></i> Imprimir
+                                                <input type="checkbox" name="imprimir_oficios"  {{ (($registro->imprimir_oficios == 1) ? 'checked=""' : '') }} ><i></i> Imprimir condicionado
                                             </label>
                                         </div>                            
                                     </td>
