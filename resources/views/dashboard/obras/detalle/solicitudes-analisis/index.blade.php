@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <button type="button" onclick="crear()" class="btn btn-primary pull-right">Nueva solicitud de análisis</button> 
+        <button type="button" onclick="crear()" class="btn btn-primary pull-right">Capturar nueva solicitud</button> 
     </div>    
 </div>
 <br>

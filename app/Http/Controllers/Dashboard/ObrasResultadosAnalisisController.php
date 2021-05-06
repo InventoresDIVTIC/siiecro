@@ -24,6 +24,7 @@ use App\ObrasFormaObtencionMuestra;
 
 use App\ObrasTipoMaterial;
 use App\ObrasTipoMaterialInformacionPorDefinir;
+use App\ObrasTipoMaterialInfoCruzada;
 use App\ObrasTipoMaterialInterpretacionParticular;
 
 use App\ObrasAnalisisARealizarResultados;
@@ -416,11 +417,12 @@ class ObrasResultadosAnalisisController extends Controller
     public function crearResultadoAnalitico()
     {
         $registro                                   = new ObrasAnalisisARealizarResultados;
-        $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
+        // $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
         $analisis_a_realizar                        = ObrasAnalisisARealizar::all();
-        $analisis_a_realizar_tecnicas               = ObrasAnalisisARealizarTecnica::all();
+        // $analisis_a_realizar_tecnicas               = ObrasAnalisisARealizarTecnica::all();
 
-        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
+        // return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
+        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'analisis_a_realizar' => $analisis_a_realizar]);
     }
 
     public function guardarResultadoAnalitico(Request $request)
@@ -435,11 +437,12 @@ class ObrasResultadosAnalisisController extends Controller
     public function editarResultadoAnalitico(Request $request, $id)
     {
         $registro                                   = ObrasAnalisisARealizarResultados::findOrFail($id);
-        $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
+        // $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
         $analisis_a_realizar                        = ObrasAnalisisARealizar::all();
-        $analisis_a_realizar_tecnicas               = ObrasAnalisisARealizarTecnica::all();
+        // $analisis_a_realizar_tecnicas               = ObrasAnalisisARealizarTecnica::all();
                                                             
-        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
+        // return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
+        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'analisis_a_realizar' => $analisis_a_realizar]);
     }
 
     public function actualizarResultadoAnalitico(Request $request, $id)
@@ -463,6 +466,99 @@ class ObrasResultadosAnalisisController extends Controller
     {
         if($request->ajax()){
             return BD::elimina($id, "ObrasAnalisisARealizarResultados");
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function informacionPorDefinirSelect2(Request $request){
+        if($request->ajax()){
+            $tipo_material_id       = $request->input('tipo_material_id');
+            $editando_informacion   = false;
+            
+            if ($request->has('resultado_analitico_id')) {
+                $resultado_analitico_id = $request->input('resultado_analitico_id');
+                $resultado_analitico    = ObrasAnalisisARealizarResultados::find($resultado_analitico_id);
+                $editando_informacion   = true;
+            }
+
+            $informaciones_por_definir  = ObrasTipoMaterialInfoCruzada::selectRaw("
+                                            obras__tipo_material__info_cruzada.informacion_por_definir_cruzada_id AS id,
+                                            obras__tipo_material__informacion_por_definir.nombre
+                                        ")
+                                        ->join('obras__tipo_material__informacion_por_definir', 'obras__tipo_material__informacion_por_definir.id', '=', 'obras__tipo_material__info_cruzada.informacion_por_definir_cruzada_id')
+                                        ->where('obras__tipo_material__info_cruzada.tipo_material_cruzada_info_id', '=', $tipo_material_id)
+                                        ->get();
+
+            $array              = [];
+
+            $a                  = [];
+            $a["id"]            = "";
+            $a["text"]          = "";
+            $a["selected"]      = false;
+            array_push($array, $a);
+
+            foreach($informaciones_por_definir as $informacion_por_definir) {
+                $a              = [];
+                $a["id"]        = $informacion_por_definir->id;
+                $a["text"]      = $informacion_por_definir->nombre;
+                $a["selected"]  = false;
+
+                if ($editando_informacion == true) {
+                    if ($informacion_por_definir->id == $resultado_analitico->informacion_por_definir_id) {
+                        $a["selected"] = true;
+                    }
+                }
+
+                array_push($array, $a);
+            }
+
+            return json_encode($array);
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function tecnicaAnaliticaSelect2(Request $request){
+        if($request->ajax()){
+            $analisis_a_realizar_id = $request->input('analisis_a_realizar_id');
+            $editando_tecnica       = false;
+            
+            if ($request->has('resultado_analitico_id')) {
+                $resultado_analitico_id = $request->input('resultado_analitico_id');
+                $resultado_analitico    = ObrasAnalisisARealizarResultados::find($resultado_analitico_id);
+                $editando_tecnica       = true;
+            }
+
+            $tecnicas                   = ObrasAnalisisARealizarTecnica::selectRaw("
+                                            *
+                                        ")
+                                        ->where('obras__analisis_a_realizar_tecnica.analisis_a_realizar_id', '=', $analisis_a_realizar_id)
+                                        ->get();
+
+            $array              = [];
+
+            $a                  = [];
+            $a["id"]            = "";
+            $a["text"]          = "";
+            $a["selected"]      = false;
+            array_push($array, $a);
+
+            foreach ($tecnicas as $tecnica) {
+                $a              = [];
+                $a["id"]        = $tecnica->id;
+                $a["text"]      = $tecnica->nombre;
+
+                if ($editando_tecnica == true) {
+                    if ($tecnica->id == $resultado_analitico->tecnica_analitica_id) {
+                        $a["selected"] = true;
+                    }
+                }
+
+                array_push($array, $a);
+            }
+
+            return json_encode($array);
         }
 
         return Response::json(["mensaje" => "Petición incorrecta"], 500);
