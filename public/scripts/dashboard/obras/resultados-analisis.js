@@ -85,8 +85,22 @@ function editarResultado(resultado_analisis_id)
                           ], // Columnas
                         );
 
-                        $('#forma_obtencion_muestra_id, #tipo_material_id, #interpretacion_particular_id, #profesor_responsable_de_analisis_id, #persona_realiza_analisis_id').select2({
+                        $('#forma_obtencion_muestra_id, #tipo_material_id, #profesor_responsable_de_analisis_id, #persona_realiza_analisis_id').select2({
                           placeholder: "Seleccione una opción"
+                        });
+
+                        // llena tecnica analitica con la técnica que estaba elegida anteriormente basado en el resultado analitico
+                        _llenarSelect2Estatico("#interpretaciones_particulares_id", "/dashboard/resultados-analisis/interpretaciones-particulares/select2", {
+                              tipo_material_id:       $("#tipo_material_id").val(),
+                              resultado_analisis_id:  resultado_analisis_id
+                          }, false);
+
+                        $('#tipo_material_id').on('select2:select', function (e) {
+                          // para llenado condicionado por analisis_a_realizar_id basado en el resultado analítico 
+                          _llenarSelect2Estatico("#interpretaciones_particulares_id", "/dashboard/resultados-analisis/interpretaciones-particulares/select2", {
+                              tipo_material_id:       $("#tipo_material_id").val(),
+                              resultado_analisis_id:  resultado_analisis_id
+                          }, true);
                         });
 
                         $("#fecha_analisis").datepicker({
@@ -283,7 +297,7 @@ function crearResultadoAnalitico(id_de_resultado_analisis)
   _mostrarFormulario("/dashboard/resultados-analisis/crear-resultado-analitico", //Url solicitud de datos
                       "#modal-2", //Div que contendra el modal
                       "#modal-crear-resultado-analitico", //Nombre modal
-                      "informacion_por_definir_id", //Elemento al que se le dara focus una vez cargado el modal
+                      "interpretacion", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
                         $('#analisis_a_realizar_id, #tecnica_analitica_id').select2({
                           placeholder: "Seleccione una opción"
@@ -324,7 +338,7 @@ function editarDatosAnaliticos(id_de_resultado_analitico)
   _mostrarFormulario("/dashboard/resultados-analisis/editar-resultado-analitico/"+id_de_resultado_analitico, //Url solicitud de datos
                       "#modal-2", //Div que contendra el modal
                       "#modal-crear-resultado-analitico", //Nombre modal
-                      "informacion_por_definir_id", //Elemento al que se le dara focus una vez cargado el modal
+                      "interpretacion", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
                         $('#analisis_a_realizar_id, #tecnica_analitica_id').select2({
                           placeholder: "Seleccione una opción"

@@ -326,8 +326,10 @@
 
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <div class="col-md-12 div-input required hidden {{-- dropzones-imagenes --}}" id="dropzone-imagenes-principales-ocultas" {{-- style="display: none;" --}}>
+                                                <div class="col-md-12">
                                                     <label for="dropzone-obra-imagenes-principales">Imagenes principales</label>
+                                                </div>
+                                                <div class="col-md-12 div-input required hidden {{-- dropzones-imagenes --}}" id="dropzone-imagenes-principales-ocultas" {{-- style="display: none;" --}}>
                                                     <div class="dropzone" id="dropzone-obra-imagenes-principales">
                                                     </div>
                                                 </div>
@@ -422,8 +424,8 @@
 @endsection
 
 @section('scripts')
-    {!! Html::script('scripts/dashboard/obras/detalle.js') !!}
-    {!! Html::script('scripts/dashboard/obras/resultados-analisis.js') !!}
-    {!! Html::script('scripts/dashboard/obras/solicitudes-analisis.js') !!}
-    {!! Html::script('scripts/dashboard/obras/usuarios-asignados.js') !!}
+    {!! Html::script('scripts/dashboard/obras/detalle.js'.env('SEMILLA', '?=1')) !!}
+    {!! Html::script('scripts/dashboard/obras/resultados-analisis.js'.env('SEMILLA', '?=1')) !!}
+    {!! Html::script('scripts/dashboard/obras/solicitudes-analisis.js'.env('SEMILLA', '?=1')) !!}
+    {!! Html::script('scripts/dashboard/obras/usuarios-asignados.js'.env('SEMILLA', '?=1')) !!}
 @endsection

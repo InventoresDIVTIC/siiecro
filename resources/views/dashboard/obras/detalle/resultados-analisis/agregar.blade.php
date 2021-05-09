@@ -194,12 +194,10 @@
                                 <textarea class="form-control no-resize" name="conclusion_general" id="conclusion_general" rows="6" autocomplete="off" disabled="" placeholder="Descripción e interpretación final de la suma y comparativa de los diferentes resultados interpretados de cada técnica analítica realizada"><?php echo($registro->conclusion_general); ?></textarea>
                             </div>
                             <div class="col-md-6 div-input required">
-                                <label for="interpretacion_particular_id">Interpretación material</label>
-                                <select class="form-control select2" id="interpretacion_particular_id" name="interpretacion_particular_id" required autocomplete="off" {{-- multiple="" --}} disabled="">
+                                <label for="interpretaciones_particulares_id">Interpretación material</label>
+                                <select class="form-control select2" id="interpretaciones_particulares_id" name="interpretaciones_particulares_id[]" required autocomplete="off" multiple="" disabled="">
                                     <option value=""></option>
-                                    @foreach ($tipos_material_interpretacion_particular as $interpretacion_particular)
-                                        <option {{ $interpretacion_particular->id == $registro->interpretacion_particular_id ? "selected" : "" }} value="{{ $interpretacion_particular->id }}">{{ $interpretacion_particular->nombre }}</option>
-                                    @endforeach
+                                    {{-- LLENADO DINÁMICAMENTE CON EL SELECT2 CONDICIONADO POR TIPO DE MATERIAL --}}
                                 </select>
                             </div>
                         </div>

@@ -135,6 +135,7 @@ Auth::routes();
 			Route::delete('resultados-analisis/{id}/eliminar-esquema-microfotografia', 		'ObrasResultadosAnalisisController@eliminarEsquemaMicrofotografia')->name('obras.eliminar-esquema-microfotografia');
 			Route::get('resultados-analisis/{id}/ver-esquema-microfotografia', 				'ObrasResultadosAnalisisController@verEsquemaMicrofotografia');
 			Route::get('resultados-analisis/imprimir/{id}', 								'ObrasResultadosAnalisisController@imprimir')->name('resultados-analisis.imprimir');
+			Route::get('resultados-analisis/interpretaciones-particulares/select2',			'ObrasResultadosAnalisisController@interpretacionesParticularesSelect2');
 
 			// RESULTADOS ANALITICOS
 			Route::get('resultados-analisis/carga-analisis-realizar-resultados/{id}', 		'ObrasResultadosAnalisisController@cargarAnalisisRealizarResultados');
