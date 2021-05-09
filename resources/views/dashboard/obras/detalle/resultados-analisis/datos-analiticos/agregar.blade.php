@@ -27,9 +27,7 @@
                                 <label for="informacion_por_definir_id">Información por definir</label>
                                 <select class="form-control select2" id="informacion_por_definir_id" name="informacion_por_definir_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
-                                    @foreach ($tipos_material_informacion_por_definir as $informacion_por_definir)
-                                        <option {{ $informacion_por_definir->id == $registro->informacion_por_definir_id ? "selected" : "" }} value="{{ $informacion_por_definir->id }}">{{ $informacion_por_definir->nombre }}</option>
-                                    @endforeach
+                                    {{-- SE LLENA DE MANERA DINÁMICA CON EL SELECT2 CONDICIONADO --}}
                                 </select>
                             </div>
                         </div>
@@ -47,9 +45,7 @@
                                 <label for="tecnica_analitica_id">Técnica analítica</label>
                                 <select class="form-control select2" id="tecnica_analitica_id" name="tecnica_analitica_id" required disabled="" autocomplete="off">
                                     <option value=""></option>
-                                    @foreach ($analisis_a_realizar_tecnicas as $tecnica)
-                                        <option {{ $tecnica->id == $registro->tecnica_analitica_id ? "selected" : "" }} value="{{ $tecnica->id }}">{{ $tecnica->nombre }}</option>
-                                    @endforeach
+                                    {{-- SE LLENA DE MANERA DINÁMICA CON EL SELECT2 CONDICIONADO --}}
                                 </select>
                             </div>
                         </div>
@@ -61,10 +57,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            {{-- <div class="col-md-6 div-input">
-                                <label for="datos">Datos</label>
-                                <input type="text" class="form-control" id="datos" name="datos" value="{{ $registro->datos }}" disabled="" autocomplete="off">
-                            </div> --}}
                             <div class="col-md-12 div-input">
                                 <label for="info_del_equipo">Información del equipo</label>
                                 <input type="text" class="form-control" id="info_del_equipo" name="info_del_equipo" value="{{ $registro->info_del_equipo }}" disabled="" autocomplete="off">
@@ -73,8 +65,10 @@
 
                         @if ($registro != "[]")
                         <div class="row">
-                            <div class="col-md-12 div-input hidden dropzones-imagenes">
+                            <div class="col-md-12">
                                 <label for="dropzone-esquema-analiticos-microfotografia">Microfotografía, imagen o datos</label>
+                            </div>
+                            <div class="col-md-12 div-input hidden dropzones-imagenes">
                                 <div class="dropzone " id="dropzone-esquema-analiticos-microfotografia">
                                 </div>
                             </div>

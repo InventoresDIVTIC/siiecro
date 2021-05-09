@@ -99,8 +99,10 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-md-12">
+                                <label for="dropzone-esquema-muestra">Esquema de toma de muestras</label>
+                            </div>
                             <div class="col-md-12 div-input required hidden dropzones-imagenes" {{-- style="display: none;" --}}>
-                                <label for="dropzone-esquema-muestra">Esquema</label>
                                 <div class="dropzone" id="dropzone-esquema-muestra">
                                 </div>
                             </div>
@@ -129,8 +131,10 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12 div-input hidden dropzones-imagenes" {{-- style="display: none;" --}}>
+                            <div class="col-md-12">
                                 <label for="dropzone-esquema-microfotografia">Microfotografía</label>
+                            </div>
+                            <div class="col-md-12 div-input hidden dropzones-imagenes" {{-- style="display: none;" --}}>
                                 <div class="dropzone" id="dropzone-esquema-microfotografia">
                                 </div>
                             </div>
@@ -151,17 +155,8 @@
                         <h1 class="text-center"><strong>Datos Analíticos | Resultados</strong></h1>
                         <br>
                         <div class="row ibox">
-                            {{-- <div class="col-md-6 div-input required">
-                                <label for="informacion_por_definir_id">Información por definir</label>
-                                <select class="form-control select2" id="informacion_por_definir_id" name="informacion_por_definir_id" required autocomplete="off" disabled="">
-                                    <option value=""></option>
-                                    @foreach ($tipos_material_informacion_por_definir as $informacion_por_definir)
-                                        <option {{ $informacion_por_definir->id == $registro->informacion_por_definir_id ? "selected" : "" }} value="{{ $informacion_por_definir->id }}">{{ $informacion_por_definir->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
                             <div class="col-md-12">
-                                <button type="button" onclick="crearResultadoAnalitico({{ $registro->id }})" class="btn btn-primary pull-right">Agregar resultados analiticos</button>
+                                <button type="button" onclick="crearResultadoAnalitico({{ $registro->id }})" class="btn btn-primary pull-right" disabled="">Agregar resultados analiticos</button>
                             </div>
                         </div>
                         {{-- tabla de datos analiticos --}}
@@ -199,12 +194,10 @@
                                 <textarea class="form-control no-resize" name="conclusion_general" id="conclusion_general" rows="6" autocomplete="off" disabled="" placeholder="Descripción e interpretación final de la suma y comparativa de los diferentes resultados interpretados de cada técnica analítica realizada"><?php echo($registro->conclusion_general); ?></textarea>
                             </div>
                             <div class="col-md-6 div-input required">
-                                <label for="interpretacion_particular_id">Interpretación material</label>
-                                <select class="form-control select2" id="interpretacion_particular_id" name="interpretacion_particular_id" required autocomplete="off" disabled="">
+                                <label for="interpretaciones_particulares_id">Interpretación material</label>
+                                <select class="form-control select2" id="interpretaciones_particulares_id" name="interpretaciones_particulares_id[]" required autocomplete="off" multiple="" disabled="">
                                     <option value=""></option>
-                                    @foreach ($tipos_material_interpretacion_particular as $interpretacion_particular)
-                                        <option {{ $interpretacion_particular->id == $registro->interpretacion_particular_id ? "selected" : "" }} value="{{ $interpretacion_particular->id }}">{{ $interpretacion_particular->nombre }}</option>
-                                    @endforeach
+                                    {{-- LLENADO DINÁMICAMENTE CON EL SELECT2 CONDICIONADO POR TIPO DE MATERIAL --}}
                                 </select>
                             </div>
                         </div>
@@ -217,7 +210,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" onclick="$('#modal-crear-resultado').modal('toggle');$('body').removeClass('modal-open');" no-editar>Cerrar</button>
-                    <button type="submit" class="btn btn-primary" {{-- disabled="" --}}>Guardar</button>
+                    <button type="submit" class="btn btn-primary" disabled="">Guardar</button>
                 </div>
 
                 <input type="hidden" id="solicitudes_analisis_muestras_id" name="solicitudes_analisis_muestras_id" value="{{ $registro != "[]" ? $registro->solicitudes_analisis_muestras_id : ''}}">

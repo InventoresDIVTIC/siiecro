@@ -135,6 +135,7 @@ Auth::routes();
 			Route::delete('resultados-analisis/{id}/eliminar-esquema-microfotografia', 		'ObrasResultadosAnalisisController@eliminarEsquemaMicrofotografia')->name('obras.eliminar-esquema-microfotografia');
 			Route::get('resultados-analisis/{id}/ver-esquema-microfotografia', 				'ObrasResultadosAnalisisController@verEsquemaMicrofotografia');
 			Route::get('resultados-analisis/imprimir/{id}', 								'ObrasResultadosAnalisisController@imprimir')->name('resultados-analisis.imprimir');
+			Route::get('resultados-analisis/interpretaciones-particulares/select2',			'ObrasResultadosAnalisisController@interpretacionesParticularesSelect2');
 
 			// RESULTADOS ANALITICOS
 			Route::get('resultados-analisis/carga-analisis-realizar-resultados/{id}', 		'ObrasResultadosAnalisisController@cargarAnalisisRealizarResultados');
@@ -145,6 +146,8 @@ Auth::routes();
 			Route::put('resultados-analisis/actualizar-resultado-analitico/{id}', 			'ObrasResultadosAnalisisController@actualizarResultadoAnalitico')->name('resultados-analisis.actualizar-resultado-analitico');
 			Route::get('resultados-analisis/aviso-eliminar-resultado-analitico/{id}', 		'ObrasResultadosAnalisisController@avisoEliminarResultadoAnalitico');
 			Route::delete('resultados-analisis/destruir-resultado-analitico/{id}', 			'ObrasResultadosAnalisisController@destruirResultadoAnalitico')->name('resultados-analisis.destruir-resultado-analitico');
+			Route::get('resultados-analisis/informacion-por-definir/select2',				'ObrasResultadosAnalisisController@informacionPorDefinirSelect2');
+			Route::get('resultados-analisis/tecnica-analitica/select2',						'ObrasResultadosAnalisisController@tecnicaAnaliticaSelect2');
 			
 			// RESULTADOS ANALITICOS MICROFOTOGRAFIA
 			Route::post('resultados-analisis/{id}/subir-esquema-analiticos-microfotografia', 		'ObrasResultadosAnalisisController@subirImagenEsquemaAnaliticosMicrofotografia');

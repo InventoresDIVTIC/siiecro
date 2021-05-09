@@ -49,13 +49,17 @@ class ObrasAnalisisARealizarTecnicaSeeder extends Seeder
             'analisis_a_realizar_id'   	=>  3,
             'nombre'      				=>  "XRF/FRX",
         ]);
+
         // child
         DB::table('obras__analisis_a_realizar_tecnica')->insert([
-            'analisis_a_realizar_id'   	=>  3,
-            'nombre'      				=>  "FTIR",
+            'analisis_a_realizar_id'   	=>  4,
+            'nombre'      				=>  "FTIR-ATR",
         ]);
-
-
+        // child
+        DB::table('obras__analisis_a_realizar_tecnica')->insert([
+            'analisis_a_realizar_id'    =>  4,
+            'nombre'                    =>  "FTIR-Módulo frontal",
+        ]);
         // child
         DB::table('obras__analisis_a_realizar_tecnica')->insert([
             'analisis_a_realizar_id'   	=>  4,
@@ -77,7 +81,6 @@ class ObrasAnalisisARealizarTecnicaSeeder extends Seeder
             'nombre'      				=>  "DRX",
         ]);
 
-
         // child
         DB::table('obras__analisis_a_realizar_tecnica')->insert([
             'analisis_a_realizar_id'   	=>  5,
@@ -89,6 +92,23 @@ class ObrasAnalisisARealizarTecnicaSeeder extends Seeder
         DB::table('obras__analisis_a_realizar_tecnica')->insert([
             'analisis_a_realizar_id'   	=>  6,
             'nombre'      				=>  "Tinción",
+        ]);
+
+
+        // child
+        DB::table('obras__analisis_a_realizar_tecnica')->insert([
+            'analisis_a_realizar_id'    =>  7,
+            'nombre'                    =>  "Pirólisis",
+        ]);
+        // child
+        DB::table('obras__analisis_a_realizar_tecnica')->insert([
+            'analisis_a_realizar_id'    =>  7,
+            'nombre'                    =>  "Fundición",
+        ]);
+        // child
+        DB::table('obras__analisis_a_realizar_tecnica')->insert([
+            'analisis_a_realizar_id'    =>  7,
+            'nombre'                    =>  "Calentamiento",
         ]);
     }
 }

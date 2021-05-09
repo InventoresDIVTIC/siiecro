@@ -45,13 +45,16 @@ class ObrasTipoMaterialSeeder extends Seeder
             'nombre'      	=>  "Aglutinante",
         ]);
         DB::table('obras__tipo_material')->insert([
-            'nombre'      	=>  "Capas de superficie",
+            'nombre'      	=>  "Recubrimiento",
         ]);
         DB::table('obras__tipo_material')->insert([
-            'nombre'      	=>  "Adhesivo",
+            'nombre'      	=>  "Adhesivo / Consolidante",
         ]);
         DB::table('obras__tipo_material')->insert([
             'nombre'      	=>  "Sal",
+        ]);
+        DB::table('obras__tipo_material')->insert([
+            'nombre'        =>  "Productos de corrosión",
         ]);
     }
 }

@@ -41,5 +41,10 @@ class ObrasAnalisisARealizarSeeder extends Seeder
             'id'            =>  6,
             'nombre'        =>  "Tinción",
         ]);
+        // parent
+        DB::table('obras__analisis_a_realizar')->insert([
+            'id'            =>  7,
+            'nombre'        =>  "Térmico",
+        ]);
     }
 }
