@@ -15,7 +15,7 @@ class ObrasAnalisisARealizarResultados extends Model
     	'interpretacion',
     	// 'descripciones',
     	// 'datos',
-    	'info_del_equipo',
+    	'info_del_equipo_id',
     	'ruta_acceso_imagen',
     	// 'ruta_acceso_datos',
         // AGREGADO DE ULTIMA HORA (UN CAMBIO MÁS)

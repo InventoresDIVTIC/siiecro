@@ -60,6 +60,7 @@
                         <li><a href="{{ route('dashboard.obras-informacion-por-definir.index') }}">Información por Definir</a></li>
                         <li><a href="{{ route('dashboard.obras-interpretacion-particular.index') }}">Interpretación Material</a></li>
                         <li><a href="{{ route('dashboard.obras-analisis-a-realizar.index') }}">Análisis a Realizar</a></li>
+                        <li><a href="{{ route('dashboard.obras-informacion-del-equipo.index') }}">Información del equipo</a></li>
                     </ul>
                 </li>
             @endif

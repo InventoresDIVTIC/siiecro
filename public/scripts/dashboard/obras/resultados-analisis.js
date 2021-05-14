@@ -20,7 +20,7 @@ function agregarResultados(solicitudes_analisis_muestras_id)
   _mostrarFormulario("/dashboard/resultados-analisis/crear/" + solicitudes_analisis_muestras_id + "/" + $('#id').val(), //Url solicitud de datos
                       "#modal-2", //Div que contendra el modal
                       "#modal-crear-resultado", //Nombre modal
-                      "#fecha_analisis", //Elemento al que se le dara focus una vez cargado el modal
+                      "#name", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
                         $('#ventana-resultados-nombre_obra_solicitud').text($('#nombre_obra').text());
                         $('#ventana-resultados-folio_obra_solicitud').text($('#folio_obra').text());
@@ -64,7 +64,7 @@ function editarResultado(resultado_analisis_id)
   _mostrarFormulario("/dashboard/resultados-analisis/editar/" + resultado_analisis_id + "/" + $('#id').val(), //Url solicitud de datos
                       "#modal-1", //Div que contendra el modal
                       "#modal-crear-resultado", //Nombre modal
-                      "", //Elemento al que se le dara focus una vez cargado el modal
+                      "name", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
                         // $('#solicitudes_analisis_muestras_id').val(solicitudes_analisis_muestras_id);
                         $('#ventana-resultados-nombre_obra_solicitud').text($('#nombre_obra').text());
@@ -299,7 +299,7 @@ function crearResultadoAnalitico(id_de_resultado_analisis)
                       "#modal-crear-resultado-analitico", //Nombre modal
                       "interpretacion", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
-                        $('#analisis_a_realizar_id, #tecnica_analitica_id').select2({
+                        $('#analisis_a_realizar_id, #tecnica_analitica_id, #info_del_equipo_id').select2({
                           placeholder: "Seleccione una opción"
                         });
 
@@ -340,7 +340,7 @@ function editarDatosAnaliticos(id_de_resultado_analitico)
                       "#modal-crear-resultado-analitico", //Nombre modal
                       "interpretacion", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
-                        $('#analisis_a_realizar_id, #tecnica_analitica_id').select2({
+                        $('#analisis_a_realizar_id, #tecnica_analitica_id, #info_del_equipo_id').select2({
                           placeholder: "Seleccione una opción"
                         });
 

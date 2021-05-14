@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ObrasTipoMaterialInterpretacionParticularSeeder::class);
         $this->call(ObrasAnalisisARealizarSeeder::class);
         $this->call(ObrasAnalisisARealizarTecnicaSeeder::class);
+        $this->call(ObrasAnalisisARealizarInformacionDelEquipoSeeder::class);
     }
 }

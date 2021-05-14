@@ -57,9 +57,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 div-input">
-                                <label for="info_del_equipo">Información del equipo</label>
-                                <input type="text" class="form-control" id="info_del_equipo" name="info_del_equipo" value="{{ $registro->info_del_equipo }}" disabled="" autocomplete="off">
+                            <div class="col-md-6 div-input required">
+                                <label for="info_del_equipo_id">Información del equipo</label>
+                                <select class="form-control select2" id="info_del_equipo_id" name="info_del_equipo_id" required disabled="" autocomplete="off">
+                                    <option value=""></option>
+                                    @foreach ($analisis_a_realizar_informacion_del_equipo as $informacion_del_equipo)
+                                        <option {{ $informacion_del_equipo->id == $registro->info_del_equipo_id ? "selected" : "" }} value="{{ $informacion_del_equipo->id }}">{{ $informacion_del_equipo->nombre }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

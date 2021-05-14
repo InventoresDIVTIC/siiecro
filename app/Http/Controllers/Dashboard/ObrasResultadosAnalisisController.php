@@ -34,6 +34,7 @@ use App\ObrasAnalisisARealizarResultados;
 use App\ObrasAnalisisARealizar;
 use App\ObrasAnalisisARealizarTecnica;
 use App\ObrasAnalisisARealizarMicrofotografia;
+use App\ObrasAnalisisARealizarInformacionDelEquipo;
 
 use App\ObrasUsuariosAsignados;
 use App\User;
@@ -492,10 +493,10 @@ class ObrasResultadosAnalisisController extends Controller
         $registro                                   = new ObrasAnalisisARealizarResultados;
         // $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
         $analisis_a_realizar                        = ObrasAnalisisARealizar::all();
-        // $analisis_a_realizar_tecnicas               = ObrasAnalisisARealizarTecnica::all();
+        $analisis_a_realizar_informacion_del_equipo = ObrasAnalisisARealizarInformacionDelEquipo::all();
 
         // return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
-        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'analisis_a_realizar' => $analisis_a_realizar]);
+        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_informacion_del_equipo' => $analisis_a_realizar_informacion_del_equipo]);
     }
 
     public function guardarResultadoAnalitico(Request $request)
@@ -512,10 +513,10 @@ class ObrasResultadosAnalisisController extends Controller
         $registro                                   = ObrasAnalisisARealizarResultados::findOrFail($id);
         // $tipos_material_informacion_por_definir     = ObrasTipoMaterialInformacionPorDefinir::all();
         $analisis_a_realizar                        = ObrasAnalisisARealizar::all();
-        // $analisis_a_realizar_tecnicas               = ObrasAnalisisARealizarTecnica::all();
+        $analisis_a_realizar_informacion_del_equipo = ObrasAnalisisARealizarInformacionDelEquipo::all();
                                                             
         // return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'tipos_material_informacion_por_definir' => $tipos_material_informacion_por_definir, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_tecnicas' => $analisis_a_realizar_tecnicas]);
-        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'analisis_a_realizar' => $analisis_a_realizar]);
+        return view('dashboard.obras.detalle.resultados-analisis.datos-analiticos.agregar', ['registro' => $registro, 'analisis_a_realizar' => $analisis_a_realizar, 'analisis_a_realizar_informacion_del_equipo' => $analisis_a_realizar_informacion_del_equipo]);
     }
 
     public function actualizarResultadoAnalitico(Request $request, $id)
