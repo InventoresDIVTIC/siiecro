@@ -53,7 +53,7 @@
 					  	<li class="nav-item">
 							<a class="nav-link" href="{{ route('contacto.index') }}">Contacto</a>
 					  	</li>
-					  	@if (Auth::check() && Auth::user()->rol != "11")
+					  	@if (Auth::check() && Auth::user()->rol_id != "10")
 						  	<li class="nav-item active">
 								<a class="nav-link" href="{{ route('dashboard.dashboard.index') }}">Administración</a>
 						  	</li>

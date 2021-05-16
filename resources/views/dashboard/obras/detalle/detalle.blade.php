@@ -361,7 +361,7 @@
                         <li class=""><a data-toggle="tab" href="#tab-restauracion-conservacion">Restauración/Conservación</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-registro-fotografico">Registro fotográfico</a></li>
 
-                        @if (Auth::user()->rol->acceso_a_lista_solicitudes_analisis)
+                        @if (Auth::user()->rol->captura_de_solicitud_analisis)
                             <li class=""><a data-toggle="tab" href="#tab-solicitudes-analisis"> Solicitudes de ánalisis</a></li>
                         @endif
                         
@@ -394,7 +394,7 @@
                             </div>
                         </div>
 
-                        @if (Auth::user()->rol->acceso_a_lista_solicitudes_analisis)
+                        @if (Auth::user()->rol->captura_de_solicitud_analisis)
                             <div id="tab-solicitudes-analisis" class="tab-pane">
                                 <div class="panel-body">
                                     @include('dashboard.obras.detalle.solicitudes-analisis.index')

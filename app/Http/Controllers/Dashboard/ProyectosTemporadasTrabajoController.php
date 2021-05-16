@@ -19,7 +19,7 @@ class ProyectosTemporadasTrabajoController extends Controller
     public function __construct(){
         $this->middleware('auth');
 
-        $this->middleware('VerificarPermiso:imprimir',     [
+        $this->middleware('VerificarPermiso:imprimir_oficios',          [
                                                                             "only"  =>  [
                                                                                             "imprimir"
                                                                                         ]
@@ -35,7 +35,7 @@ class ProyectosTemporadasTrabajoController extends Controller
                             $eliminar       =   '<i onclick="eliminar('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Eliminar"></i>';
                             $imprimir       =   '';
 
-                            if (Auth::user()->rol->imprimir) {
+                            if (Auth::user()->rol->imprimir_oficios) {
                                 $imprimir   =   '<a class="icon-link" href="'.route("dashboard.temporadas-trabajo.imprimir", $registro->id).'" target="_blank"><i class="fa fa-print fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Imprimir"></i></a>';
                             }
 

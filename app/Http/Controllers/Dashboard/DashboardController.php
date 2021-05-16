@@ -257,8 +257,10 @@ class DashboardController extends Controller
                                                             ) = '".$busqueda."'
                                                         ")
                                             ->orWhere("obras.id", $busqueda)
-                                            ->orWhere("obras.nombre", 'like', '%'.$busqueda.'%')
-                                            ->orWhere("a.nombre", 'like', '%'.$busqueda.'%');
+                                            ->orWhere("obras.nombre",       'like',     '%'.$busqueda.'%')
+                                            ->orWhere("user_asesor.name",   'like',     '%'.$busqueda.'%')
+                                            ->orWhere("user_persona.name",  'like',     '%'.$busqueda.'%')
+                                            ->orWhere("a.nombre",           'like',     '%'.$busqueda.'%');
                                 });
                             }
                         })

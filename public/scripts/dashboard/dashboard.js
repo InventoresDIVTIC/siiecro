@@ -35,11 +35,12 @@ jQuery(document).ready(function($) {
 		"#carga-dt-resultados", // ID elemento del progreso
 		"/dashboard/tabla-resultados", // URL datos
 		[
-			{ data: "obra", 			width: "20%", 	searchable: false, 	orderable: false},
-			{ data: "fecha_analisis", 	width: "25%"},
+			{ data: "obra", 			width: "15%", 	searchable: false, 	orderable: false},
+			{ data: "fecha_analisis", 	width: "15%"},
 			{ data: "nomenclatura",     width: "15%", 	name: 'muestra.nomenclatura'},
-			{ data: "caracterizacion", 	width: "25%", 	name: 'tipo_analisis.nombre'},
-			{ data: "acciones", 		width: "15%", 	searchable: false, 	orderable: false},
+			{ data: "asesor", 			width: "25%", 	name: 'user_asesor.name'},
+			{ data: "persona", 			width: "25%", 	name: 'user_persona.name'},
+			{ data: "acciones", 		width: "5%", 	searchable: false, 	orderable: false},
 		], // Columnas
 	);
 });

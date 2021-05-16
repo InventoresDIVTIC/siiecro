@@ -32,6 +32,12 @@ class ObrasController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
+        $this->middleware('VerificarPermiso:captura_solicitud_obra',            [
+                                                                                    "only" => [
+                                                                                                    "solicitudesIntervencion"
+                                                                                                ]
+                                                                                ]);
+
         $this->middleware('VerificarPermiso:administrar_solicitudes_obras',     [
                                                                                     "only" => [
                                                                                                     "modalAprobar", 

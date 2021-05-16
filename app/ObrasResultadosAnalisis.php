@@ -92,12 +92,16 @@ class ObrasResultadosAnalisis extends Model
     }
 
     public static function obtenerResultadosDashboard(){
-        if (Auth::user()->rol->acceso_a_datos_avanzado) {
+        if (Auth::user()->rol->acceso_a_lista_solicitudes_analisis) {
             return  ObrasResultadosAnalisis::selectRaw("
                                                             obras__resultados_analisis.*,
                                                             muestra.nomenclatura        as nomenclatura,
-                                                            tipo_analisis.nombre        as caracterizacion
+                                                            tipo_analisis.nombre        as caracterizacion,
+                                                            user_asesor.name            as asesor,
+                                                            user_persona.name           as persona
                                                         ")
+                                            ->join('users as user_asesor', 'user_asesor.id', 'obras__resultados_analisis.profesor_responsable_de_analisis_id')
+                                            ->join('users as user_persona', 'user_persona.id', 'obras__resultados_analisis.persona_realiza_analisis_id')
                                             ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.id", "obras__resultados_analisis.solicitudes_analisis_muestras_id")
                                             ->join("obras__solicitudes_analisis_tipo_analisis as tipo_analisis", "tipo_analisis.id", "muestra.tipo_analisis_id")
                                             ->join("obras__solicitudes_analisis as solicitud_analisis", "solicitud_analisis.id", "muestra.solicitud_analisis_id")
@@ -109,8 +113,12 @@ class ObrasResultadosAnalisis extends Model
             return  ObrasResultadosAnalisis::selectRaw("
                                                             obras__resultados_analisis.*,
                                                             muestra.nomenclatura        as nomenclatura,
-                                                            tipo_analisis.nombre        as caracterizacion
+                                                            tipo_analisis.nombre        as caracterizacion,
+                                                            user_asesor.name            as asesor,
+                                                            user_persona.name           as persona
                                                         ")
+                                            ->join('users as user_asesor', 'user_asesor.id', 'obras__resultados_analisis.profesor_responsable_de_analisis_id')
+                                            ->join('users as user_persona', 'user_persona.id', 'obras__resultados_analisis.persona_realiza_analisis_id')
                                             ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.id", "obras__resultados_analisis.solicitudes_analisis_muestras_id")
                                             ->join("obras__solicitudes_analisis_tipo_analisis as tipo_analisis", "tipo_analisis.id", "muestra.tipo_analisis_id")
                                             ->join('obras__usuarios_asignados as asignados', 'asignados.id', 'obras__resultados_analisis.persona_realiza_analisis_id')

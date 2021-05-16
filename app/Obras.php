@@ -354,7 +354,7 @@ class Obras extends Model
     }
 
     public static function obtenerObrasDashboard(){
-        if (Auth::user()->rol->acceso_a_datos_avanzado) {
+        if (Auth::user()->rol->acceso_a_lista_solicitudes_obras) {
             return  Obras::selectRaw("
                                         obras.*,
                                         a.nombre    as nombre_area
