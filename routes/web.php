@@ -252,6 +252,11 @@ Auth::routes();
 			Route::resource('obras-analisis-a-realizar', 							'ObrasAnalisisARealizarController');
 		#################################################################################
 
+	    ######## OBRAS INFORMACIÓN DEL EQUIPO ###########################################
+			Route::get('obras-informacion-del-equipo/carga', 			'ObrasAnalisisARealizarInformacionDelEquipoController@cargarTabla');
+			Route::get('obras-informacion-del-equipo/{id}/eliminar', 	'ObrasAnalisisARealizarInformacionDelEquipoController@eliminar');
+			Route::resource('obras-informacion-del-equipo', 			'ObrasAnalisisARealizarInformacionDelEquipoController');
+		#################################################################################
 	});
 
 #########################################################################

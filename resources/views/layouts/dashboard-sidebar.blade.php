@@ -47,7 +47,7 @@
 
             @if (Auth::user()->rol->captura_de_catalogos_basica || Auth::user()->rol->captura_de_catalogos_avanzada)
                 <li class="{{ in_array($menu, ["tipo-objeto", "tipo-bien-cultural", "temporalidad", "epoca", "area"]) ? "active" : "" }}">
-                    <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Catálogos <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-book" aria-hidden="true"></i><span class="nav-label">Catálogos</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse" style="height: 0px;">
                         @if (Auth::user()->rol->captura_de_catalogos_avanzada)
                             <li><a href="{{ route('dashboard.areas.index') }}">Áreas de la ECRO</a></li>
@@ -62,6 +62,7 @@
                         <li><a href="{{ route('dashboard.obras-informacion-por-definir.index') }}">Información por Definir</a></li>
                         <li><a href="{{ route('dashboard.obras-interpretacion-particular.index') }}">Interpretación Material</a></li>
                         <li><a href="{{ route('dashboard.obras-analisis-a-realizar.index') }}">Análisis a Realizar</a></li>
+                        <li><a href="{{ route('dashboard.obras-informacion-del-equipo.index') }}">Información del equipo</a></li>
                     </ul>
                 </li>
             @endif
