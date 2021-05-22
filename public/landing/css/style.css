@@ -452,7 +452,7 @@ a:focus {
 }
 
 .bg-1 {
-  background: url("../images/bg/22.jpg") no-repeat 50% 50%;
+  background: url("../../img/landing/16.png") no-repeat 50% 30%;
   background-size: cover;
   position: relative;
 }

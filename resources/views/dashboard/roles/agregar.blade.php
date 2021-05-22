@@ -67,7 +67,7 @@
                                     <td>
                                         <div class="i-checks">
                                             <label>
-                                                <input type="checkbox" name="captura_de_responsables_intervencion"  {{ (($registro->captura_de_responsables_intervencion == 1) ? 'checked=""' : '') }} ><i></i> Captura de responsables de intervención
+                                                <input type="checkbox" name="captura_de_responsables_intervencion"  {{ (($registro->captura_de_responsables_intervencion == 1) ? 'checked=""' : '') }} ><i></i> Captura de usuarios asignados
                                             </label>
                                         </div>                            
                                     </td>
@@ -195,7 +195,7 @@
                                     <td>
                                         <div class="i-checks">
                                             <label>
-                                                <input type="checkbox" name="acceso_a_lista_solicitudes_analisis"  {{ (($registro->acceso_a_lista_solicitudes_analisis == 1) ? 'checked=""' : '') }} ><i></i> Acceso a listado de solicitudes de análisis
+                                                <input type="checkbox" name="acceso_a_lista_solicitudes_analisis"  {{ (($registro->acceso_a_lista_solicitudes_analisis == 1) ? 'checked=""' : '') }} ><i></i> Acceso a listado de solicitudes y registro de análisis
                                             </label>
                                         </div>                            
                                     </td>

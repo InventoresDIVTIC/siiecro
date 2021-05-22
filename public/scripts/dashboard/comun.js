@@ -1,3 +1,7 @@
+jQuery(document).ready(function($) {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 function _toast(tipo, mensaje, titulo = null){
     toastr.options.escapeHtml       = true; // Acepta html
     toastr.options.closeButton      = true; // Con boton para cerrar

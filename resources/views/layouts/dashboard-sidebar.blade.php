@@ -75,6 +75,10 @@
                     <a href="{{ route('dashboard.roles.index') }}"><i class="fa fa-lock"></i> <span class="nav-label">Roles</span></a>
                 </li>
             @endif
+
+            <li class="landing_link">
+                <a href="{{ route('consulta.index') }}"><i class="fa fa-search" aria-hidden="true"></i> <span class="nav-label">Consulta</span></a>
+            </li>
         </ul>
     </div>
 </nav>

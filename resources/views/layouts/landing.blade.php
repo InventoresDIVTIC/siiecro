@@ -34,7 +34,7 @@
 		<header>
 			<nav class="navbar navbar-expand-lg navigation color-navbar" id="navbar">
 				<div class="container">
-				 	 <a href="index.html">
+				 	 <a href="{{ route('landing.index') }}">
 					  	<img src="{{ asset('/img/sii-ecro-blanco.png') }}" alt="" class="img-fluid" style="height: 65px;">
 					  </a>
 
@@ -61,7 +61,7 @@
 					  		@endif
 
 						  	<li class="nav-item">
-								<a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icofont-logout"></i></a>
+								<a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" data-toggle="tooltip" data-placement="top" title="Cerrar sesión"><i class="icofont-logout"></i></a>
 						  	</li>
 					  	@endif
 					</ul>
@@ -83,12 +83,15 @@
 							<div class="logo mb-4">
 								<img src="{{ asset('/img/sii-ecro-blanco.png') }}" alt="" class="img-fluid" style="height: 80px;">
 							</div>
+							<div class="logo">
+								<img src="{{ asset('/img/ecro_blanco.png') }}" alt="" class="img-fluid" style="height: 80px;">
+							</div>
 						</div>
 					</div>
 
 					<div class="col-lg-2 col-md-6 col-sm-6">
 						<div class="widget mb-5 mb-lg-0">
-							<h4 class="text-capitalize mb-3">Teléfonos</h4>
+							<h4 class="text-capitalize mb-3" style="color: #225854;">Teléfonos</h4>
 							<div class="divider mb-4"></div>
 
 							<ul class="list-unstyled footer-menu lh-35">
@@ -101,7 +104,7 @@
 
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="widget widget-contact mb-5 mb-lg-0">
-							<h4 class="text-capitalize mb-3">Contáctanos</h4>
+							<h4 class="text-capitalize mb-3" style="color: #225854;">Contáctanos</h4>
 							<div class="divider mb-4"></div>
 
 							<div class="footer-contact-block mb-4">
@@ -132,7 +135,7 @@
 					<div class="row align-items-center justify-content-between">
 						<div class="col-lg-12 text-center">
 							<div class="copyright">
-								Copyright <span class="text-color">ECRO</span> &copy; {{ date('Y') }} - {{ date('Y',strtotime('4 year')) }}
+								Copyright <span class="text-color" style="color: #225854;">ECRO</span> &copy; {{ date('Y') }} - {{ date('Y',strtotime('4 year')) }}
 							</div>
 						</div>
 					</div>
