@@ -114,7 +114,7 @@
                         <hr>
                         <h1 class="text-center"><strong>Características de Observación preliminar (Microscopio estereoscópico)</strong></h1>
                         <div class="row">
-                            <div class="col-md-6 div-input required">
+                            <div class="col-md-4 div-input required">
                                 <label for="tipo_material_id">Tipo de material</label>
                                 <select class="form-control select2" id="tipo_material_id" name="tipo_material_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
@@ -124,9 +124,9 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-6 div-input">
+                            <div class="col-md-8 div-input">
                                 <label for="descripcion">Descripción</label>
-                                <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ $registro->descripcion }}" autocomplete="off" disabled="">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ $registro->descripcion }}" autocomplete="off" disabled="" placeholder="Anotar las características cualitativas de la muestra o punto de muestreo">
                             </div>
                         </div>
 
