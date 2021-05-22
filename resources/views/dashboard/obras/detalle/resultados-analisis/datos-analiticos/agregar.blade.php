@@ -53,13 +53,13 @@
                             
                             <div class="col-md-12 div-input required">
                                 <label for="interpretacion">Interpretacion</label>
-                                <textarea class="form-control no-resize" name="interpretacion" id="interpretacion" rows="6" required disabled="" autocomplete="off" placeholder="Insertar el análisis y la interpretación de los datos (reacción, microfotografía, etc)"><?php echo($registro->interpretacion); ?></textarea>
+                                <textarea class="form-control no-resize" name="interpretacion" id="interpretacion" rows="6" required disabled="" autocomplete="off" placeholder="Realizar la descripción e interpretación detallada de los datos analíticos (reacción, microfotografía, etc)"><?php echo($registro->interpretacion); ?></textarea>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 div-input required">
+                            <div class="col-md-6 div-input">
                                 <label for="info_del_equipo_id">Información del equipo</label>
-                                <select class="form-control select2" id="info_del_equipo_id" name="info_del_equipo_id" required disabled="" autocomplete="off">
+                                <select class="form-control select2" id="info_del_equipo_id" name="info_del_equipo_id" disabled="" autocomplete="off">
                                     <option value=""></option>
                                     @foreach ($analisis_a_realizar_informacion_del_equipo as $informacion_del_equipo)
                                         <option {{ $informacion_del_equipo->id == $registro->info_del_equipo_id ? "selected" : "" }} value="{{ $informacion_del_equipo->id }}">{{ $informacion_del_equipo->nombre }}</option>
