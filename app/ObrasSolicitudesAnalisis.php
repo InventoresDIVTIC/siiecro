@@ -80,7 +80,7 @@ class ObrasSolicitudesAnalisis extends Model
     }
 
     public static function obtenerSolicitudesDashboard(){
-        if (Auth::user()->rol->acceso_a_datos_avanzado) {
+        if (Auth::user()->rol->acceso_a_lista_solicitudes_analisis) {
             return  ObrasSolicitudesAnalisis::selectRaw("
                                                             obras__solicitudes_analisis.*
                                                         ")

@@ -53,9 +53,15 @@
 					  	<li class="nav-item">
 							<a class="nav-link" href="{{ route('contacto.index') }}">Contacto</a>
 					  	</li>
-					  	@if (Auth::check() && Auth::user()->rol != "11")
-						  	<li class="nav-item active">
-								<a class="nav-link" href="{{ route('dashboard.dashboard.index') }}">Administración</a>
+					  	@if (Auth::check())
+					  		@if (Auth::user()->rol_id != "10")
+							  	<li class="nav-item active">
+									<a class="nav-link" href="{{ route('dashboard.dashboard.index') }}">Administración</a>
+							  	</li>
+					  		@endif
+
+						  	<li class="nav-item">
+								<a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icofont-logout"></i></a>
 						  	</li>
 					  	@endif
 					</ul>
@@ -177,5 +183,8 @@
 
 		@yield('scripts')
 	</body>
+	<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+    </form>
 </html>
    

@@ -33,7 +33,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <h2 class="text-center">Obras {{ Auth::user()->rol->acceso_a_datos_avanzado ? "recientes" : "asignadas" }}</h2>
+                    <h2 class="text-center">Obras {{ Auth::user()->rol->acceso_a_lista_solicitudes_obras ? "recientes" : "asignadas" }}</h2>
                     <div class="sk-spinner sk-spinner-double-bounce" id="carga-dt-obras">
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
@@ -61,7 +61,7 @@
         <div class="col-sm-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <h2 class="text-center">Solicitudes de análisis {{ Auth::user()->rol->acceso_a_datos_avanzado ? "recientes" : "asignadas" }}</h2>
+                    <h2 class="text-center">Solicitudes de análisis {{ Auth::user()->rol->acceso_a_lista_solicitudes_analisis ? "recientes" : "asignadas" }}</h2>
                     <div class="sk-spinner sk-spinner-double-bounce" id="carga-dt-solicitudes">
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
@@ -86,7 +86,7 @@
         <div class="col-sm-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <h2 class="text-center">Resultados de análisis {{ Auth::user()->rol->acceso_a_datos_avanzado ? "recientes" : "asignadas" }}</h2>
+                    <h2 class="text-center">Resultados de análisis {{ Auth::user()->rol->acceso_a_lista_solicitudes_analisis ? "recientes" : "asignadas" }}</h2>
                     <div class="sk-spinner sk-spinner-double-bounce" id="carga-dt-resultados">
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
@@ -98,7 +98,8 @@
                                     <th>No. registro obra</th>
                                     <th>Fecha de análisis</th>
                                     <th>Nomenclatura</th>
-                                    <th>Caracterización de materiales</th>
+                                    <th>Asesor científico</th>
+                                    <th>Persona realizó análisis</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>

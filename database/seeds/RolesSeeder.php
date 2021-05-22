@@ -12,41 +12,45 @@ class RolesSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-            'nombre'      	=>  "Director Académico",
-            'descripcion'   =>  "Director académico de la ECRO",
+            'nombre'      	=>  "Director ECRO",
+            'descripcion'   =>  "Director de la ECRO",
         ]);
-        DB::table('roles')->insert([
-            'nombre'      	=>  "Director General",
-            'descripcion' 	=>  "Director general de la ECRO",
-        ]);
+
         DB::table('roles')->insert([
             'nombre'      	=>  "Secretaria",
             'descripcion' 	=>  "Secretaria general de la ECRO",
         ]);
+
         DB::table('roles')->insert([
             'nombre'      	=>  "Seminarios-Taller",
             'descripcion' 	=>  "Seminarios-Taller de Restauración y Conservación",
         ]);
+
         DB::table('roles')->insert([
             'nombre'      	=>  "Laboratorios",
             'descripcion' 	=>  "Laboratoristas de la ECRO",
         ]);
+
         DB::table('roles')->insert([
             'nombre'      	=>  "Alumno",
             'descripcion' 	=>  "Alumno de la ECRO",
         ]);
+
         DB::table('roles')->insert([
             'nombre'      	=>  "Maestro de Restauración",
             'descripcion' 	=>  "Maestro del STR",
         ]);
+
         DB::table('roles')->insert([
             'nombre'      	=>  "Asesor Cientifico",
             'descripcion' 	=>  "Asesor científico de la ECRO",
         ]);
+
         DB::table('roles')->insert([
             'nombre'      	=>  "Servicio Social SIIECRO",
             'descripcion' 	=>  "Prestador de servicio Social del SIIECRO",
         ]);
+
         DB::table('roles')->insert([
             'nombre'                                =>  "Administrador",
             'descripcion' 	                        =>  "Administrador de la sistema del SIIECRO",
@@ -72,13 +76,14 @@ class RolesSeeder extends Seeder
             'consulta_general_avanzada'             =>  "1",
             'consulta_externa'                      =>  "1",
             'consulta_estadistica'                  =>  "1",
-            'imprimir_condicionado'                 =>  "1",
+            'imprimir'                              =>  "1",
             'imprimir_oficios'                      =>  "1",
             'creacion_usuarios_permisos'            =>  "1",
             'administrar_solicitudes_obras'         =>  "1",
             'administrar_solicitudes_analisis'      =>  "1",
             'administrar_registro_resultados'       =>  "1"
         ]);
+        
         DB::table('roles')->insert([
             'nombre'        =>  "Externo",
             'descripcion'   =>  "Usuario externo al sistema SIIECRO",

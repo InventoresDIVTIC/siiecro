@@ -64,7 +64,7 @@ class ObrasResultadosAnalisisController extends Controller
                                                                                                 ]
                                                                                 ]);
 
-        $this->middleware('VerificarPermiso:imprimir_condicionado',             [
+        $this->middleware('VerificarPermiso:imprimir',                          [
                                                                                     "only"  =>  [
                                                                                                     "imprimir"
                                                                                                 ]
@@ -131,7 +131,7 @@ class ObrasResultadosAnalisisController extends Controller
                             $revision           =   '';
                             $imprimir           =   '';
 
-                            if(Auth::user()->rol->imprimir_condicionado){
+                            if(Auth::user()->rol->imprimir){
                                 $imprimir       =   '<a class="icon-link" href="'.route('dashboard.resultados-analisis.imprimir', $registro->id).'" target="_blank"><i class="fa fa-print fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Imprimir"></i></a>';
                             }
 

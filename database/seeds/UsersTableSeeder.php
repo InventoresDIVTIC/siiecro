@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
             'name'                          =>  "Luis Alberto García Rodriguez",
             'email'                         =>  "correo@correo.com",
             'password'                      =>  Hash::make('1234'),
-            'rol_id'                        =>  10,
+            'rol_id'                        =>  9,
             'es_responsable_ecro'           =>  "si",
             "es_responsable_intervencion"   =>  "si",
             "puede_recibir_obras"           =>  "si"
@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
             'name'                          =>  "Esteban Bocardo Medel",
             'email'                         =>  "esteban@gmail.com",
             'password'                      =>  Hash::make('asdasd'),
-            'rol_id'                        =>  10,
+            'rol_id'                        =>  9,
             'es_responsable_ecro'           =>  "si",
             "es_responsable_intervencion"   =>  "si",
             "puede_recibir_obras"           =>  "si"
@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
             'name'                          =>  "Kevin Arnold Sahagun",
             'email'                         =>  "kevin@correo.com",
             'password'                      =>  Hash::make('1234'),
-            'rol_id'                        =>  10,
+            'rol_id'                        =>  9,
             'es_responsable_ecro'           =>  "si",
             "es_responsable_intervencion"   =>  "si",
             "puede_recibir_obras"           =>  "si"
@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
             'name'                          =>  "Usuario Admin",
             'email'                         =>  "usuario@correo.com",
             'password'                      =>  Hash::make('1234'),
-            'rol_id'                        =>  10,
+            'rol_id'                        =>  9,
             'es_responsable_ecro'           =>  "si",
             "es_responsable_intervencion"   =>  "si",
             "puede_recibir_obras"           =>  "si"

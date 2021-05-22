@@ -28,9 +28,11 @@
             <li class="{{ in_array($menu, ["obras", "solicitudes-intervencion"]) ? "active" : "" }}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Obras</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li class="{{ $menu == "solicitudes-intervencion" ? "active" : "" }}">
-                        <a href="{{ route('dashboard.obras.solicitudes') }}">Solicitudes</a>
-                    </li>
+                    @if (Auth::user()->rol->captura_solicitud_obra)
+                        <li class="{{ $menu == "solicitudes-intervencion" ? "active" : "" }}">
+                            <a href="{{ route('dashboard.obras.solicitudes') }}">Solicitudes</a>
+                        </li>
+                    @endif
                     <li class="{{ $menu == "obras" ? "active" : "" }}">
                         <a href="{{ route('dashboard.obras.index') }}">Listado</a>
                     </li>

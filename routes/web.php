@@ -20,7 +20,7 @@ Auth::routes();
 #########################################################################
 
 
-	Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->group(function () {
+	Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->middleware(['VerDashboard'])->group(function () {
 	    ######## DASHBOARD ##############################################################
 			Route::get('/', 									'DashboardController@index')->name('dashboard.index');
 			Route::get('/grafica-obras-bienes-culturales', 		'DashboardController@graficasObrasBienesCulturales');

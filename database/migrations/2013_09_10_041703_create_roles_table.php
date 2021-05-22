@@ -46,7 +46,7 @@ class CreateRolesTable extends Migration
             $table->tinyInteger('consulta_externa')                         ->unsigned()->default(0);
             $table->tinyInteger('consulta_estadistica')                     ->unsigned()->default(0);
             
-            $table->tinyInteger('imprimir_condicionado')                    ->unsigned()->default(0);
+            $table->tinyInteger('imprimir')                                 ->unsigned()->default(0);
             $table->tinyInteger('imprimir_oficios')                         ->unsigned()->default(0);
             
             $table->tinyInteger('creacion_usuarios_permisos')               ->unsigned()->default(0);
