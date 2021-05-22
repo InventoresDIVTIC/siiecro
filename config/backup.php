@@ -19,8 +19,10 @@ return [
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => [
-                    base_path(),
-                    // base_path('/../siiecro.ssbjalisco.com.mx/'),
+                    // base_path(),
+                    // RESPALDO DEL SERVER :
+                    base_path('/../public_html/landing/images/'),
+                    base_path('/../public_html/img/'),
                 ],
 
                 /*
