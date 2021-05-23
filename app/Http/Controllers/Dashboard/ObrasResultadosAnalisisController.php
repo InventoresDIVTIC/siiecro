@@ -197,12 +197,14 @@ class ObrasResultadosAnalisisController extends Controller
                                                                 // ->toSql();
                                                                 ->first();
 
-        // Rol 8 es asesor científico
+        // Rol 8 es asesor científico..... NOTA: Se deja de buscar por id de rol, por que suelen cambiar los id
+        // y se busca ahora por LIKE con la cadena cientific por si llegan a poner cinetifico o cientifica :V
         $asesor_cientifico_responsable  = User::selectRaw('
                                                             users.id,
                                                             users.name
                                                             ')
-                                                ->where('users.rol_id', '=', 8)
+                                                ->join('roles', 'roles.id','=','users.rol_id')
+                                                ->where('roles.nombre', 'LIKE', '%cientific%')
                                                 ->get();
 
         // usuarios asignados a la obra que estén activos
@@ -255,12 +257,14 @@ class ObrasResultadosAnalisisController extends Controller
                                             ->where('obras__resultados_analisis.id', '=', $id)
                                             ->first();
 
-        // Rol 8 es asesor científico
+        // Rol 8 es asesor científico..... NOTA: Se deja de buscar por id de rol, por que suelen cambiar los id
+        // y se busca ahora por LIKE con la cadena cientific por si llegan a poner cinetifico o cientifica :V
         $asesor_cientifico_responsable  = User::selectRaw('
                                                             users.id,
                                                             users.name
                                                             ')
-                                                ->where('users.rol_id', '=', 8)
+                                                ->join('roles', 'roles.id','=','users.rol_id')
+                                                ->where('roles.nombre', 'LIKE', '%cientific%')
                                                 ->get();
 
         // usuarios asignados a la obra que estén activos

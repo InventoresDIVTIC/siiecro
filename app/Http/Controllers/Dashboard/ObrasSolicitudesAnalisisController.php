@@ -367,7 +367,7 @@ class ObrasSolicitudesAnalisisController extends Controller
                                                                             ')
                                                                 ->join('users', 'users.id', '=', 'obras__usuarios_asignados.usuario_id')
                                                                 ->where('users.es_responsable_intervencion', '=', 'si')
-                                                                ->where('obras__usuarios_asignados.id', '=', $registro->obra_id)
+                                                                ->where('obras__usuarios_asignados.obra_id', '=', $registro->obra_id)
                                                                 ->get();
 
         $temporadasTrabajoAsignadas     = ObrasTemporadasTrabajoAsignadas::where('obra_id', $registro->obra_id)
