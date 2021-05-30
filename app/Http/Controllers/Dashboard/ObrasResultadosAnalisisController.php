@@ -476,7 +476,7 @@ class ObrasResultadosAnalisisController extends Controller
                             $imagen = '<a href="'.asset('img/predeterminadas/sin_imagen.png').'" data-gallery=""><img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'"></a>';
                             
                             if ($img != NULL) {
-                                $imagen = '<a href="'.asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen).'" data-gallery=""><img src="'.asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen).'" height="'.$altura.'"></a>';
+                                $imagen = '<a href="'. asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen) .'" '. (stripos($img->imagen, '.pdf') == true ? 'target="_blank"' : 'data-gallery=""') .' ><img src="'.asset('img/'. (stripos($img->imagen, '.pdf') == true ? 'predeterminadas/imagen-pdf.png' : 'obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen ) ).'" height="'.$altura.'"></a>';
                             }
                             
                             return $imagen;
@@ -775,7 +775,8 @@ class ObrasResultadosAnalisisController extends Controller
                 $imagenEsquema->analisis_a_realizar_resultado_id    =   $analisis_a_realizar_resultado_id;
                 $imagenEsquema->imagen                              =   "temp";
                 $imagenEsquema->save();
-
+                // dd($request->file('file')->getMimeType());
+                // dd(public_path());
                 $extension                                          =   $request->file('file')->extension();
                 $nombre                                             =   $imagenEsquema->id.".".$extension;
 
