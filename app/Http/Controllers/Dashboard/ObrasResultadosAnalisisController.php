@@ -115,10 +115,10 @@ class ObrasResultadosAnalisisController extends Controller
                             $img    = ObrasResultadosAnalisisEsquemaMuestra::where('resultado_analisis_id',$registro->id)->first();
                             $altura = 40;
                             
-                            $imagen = '<img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'">';
+                            $imagen = '<a href="'.asset('img/predeterminadas/sin_imagen.png').'" data-gallery=""><img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'"></a>';
                             
                             if ($img != NULL) {
-                                $imagen = '<img src="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" height="'.$altura.'">';
+                                $imagen = '<a href="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" data-gallery=""><img src="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" height="'.$altura.'"></a>';
                             }
                             
                             return $imagen;
@@ -473,10 +473,10 @@ class ObrasResultadosAnalisisController extends Controller
                             $img    = ObrasAnalisisARealizarMicrofotografia::where('analisis_a_realizar_resultado_id',$registro->id_resultado)->first();
                             $altura = 40;
 
-                            $imagen = '<img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'">';
+                            $imagen = '<a href="'.asset('img/predeterminadas/sin_imagen.png').'" data-gallery=""><img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'"></a>';
                             
                             if ($img != NULL) {
-                                $imagen = '<img src="'.asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen).'" height="'.$altura.'">';
+                                $imagen = '<a href="'.asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen).'" data-gallery=""><img src="'.asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen).'" height="'.$altura.'"></a>';
                             }
                             
                             return $imagen;
