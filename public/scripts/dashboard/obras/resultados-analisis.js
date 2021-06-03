@@ -376,7 +376,7 @@ function editarDatosAnaliticos(id_de_resultado_analitico)
                           parallelUploads: 1,
                           maxFiles: 10,
                           addRemoveLinks: false,
-                          acceptedFiles: 'image/*',
+                          acceptedFiles: 'image/*,application/pdf',
                           sending: function(file, xhr, formData) {
                             formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
                           },

@@ -115,10 +115,10 @@ class ObrasResultadosAnalisisController extends Controller
                             $img    = ObrasResultadosAnalisisEsquemaMuestra::where('resultado_analisis_id',$registro->id)->first();
                             $altura = 40;
                             
-                            $imagen = '<img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'">';
+                            $imagen = '<a href="'.asset('img/predeterminadas/sin_imagen.png').'" data-gallery=""><img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'"></a>';
                             
                             if ($img != NULL) {
-                                $imagen = '<img src="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" height="'.$altura.'">';
+                                $imagen = '<a href="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" data-gallery=""><img src="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" height="'.$altura.'"></a>';
                             }
                             
                             return $imagen;
@@ -197,12 +197,14 @@ class ObrasResultadosAnalisisController extends Controller
                                                                 // ->toSql();
                                                                 ->first();
 
-        // Rol 8 es asesor científico
+        // Rol 8 es asesor científico..... NOTA: Se deja de buscar por id de rol, por que suelen cambiar los id
+        // y se busca ahora por LIKE con la cadena cientific por si llegan a poner cinetifico o cientifica :V
         $asesor_cientifico_responsable  = User::selectRaw('
                                                             users.id,
                                                             users.name
                                                             ')
-                                                ->where('users.rol_id', '=', 8)
+                                                ->join('roles', 'roles.id','=','users.rol_id')
+                                                ->where('roles.nombre', 'LIKE', '%cientific%')
                                                 ->get();
 
         // usuarios asignados a la obra que estén activos
@@ -255,12 +257,14 @@ class ObrasResultadosAnalisisController extends Controller
                                             ->where('obras__resultados_analisis.id', '=', $id)
                                             ->first();
 
-        // Rol 8 es asesor científico
+        // Rol 8 es asesor científico..... NOTA: Se deja de buscar por id de rol, por que suelen cambiar los id
+        // y se busca ahora por LIKE con la cadena cientific por si llegan a poner cinetifico o cientifica :V
         $asesor_cientifico_responsable  = User::selectRaw('
                                                             users.id,
                                                             users.name
                                                             ')
-                                                ->where('users.rol_id', '=', 8)
+                                                ->join('roles', 'roles.id','=','users.rol_id')
+                                                ->where('roles.nombre', 'LIKE', '%cientific%')
                                                 ->get();
 
         // usuarios asignados a la obra que estén activos
@@ -469,10 +473,10 @@ class ObrasResultadosAnalisisController extends Controller
                             $img    = ObrasAnalisisARealizarMicrofotografia::where('analisis_a_realizar_resultado_id',$registro->id_resultado)->first();
                             $altura = 40;
 
-                            $imagen = '<img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'">';
+                            $imagen = '<a href="'.asset('img/predeterminadas/sin_imagen.png').'" data-gallery=""><img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'"></a>';
                             
                             if ($img != NULL) {
-                                $imagen = '<img src="'.asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen).'" height="'.$altura.'">';
+                                $imagen = '<a href="'. asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen) .'" '. (stripos($img->imagen, '.pdf') == true ? 'target="_blank"' : 'data-gallery=""') .' ><img src="'.asset('img/'. (stripos($img->imagen, '.pdf') == true ? 'predeterminadas/imagen-pdf.png' : 'obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen ) ).'" height="'.$altura.'"></a>';
                             }
                             
                             return $imagen;
@@ -771,7 +775,8 @@ class ObrasResultadosAnalisisController extends Controller
                 $imagenEsquema->analisis_a_realizar_resultado_id    =   $analisis_a_realizar_resultado_id;
                 $imagenEsquema->imagen                              =   "temp";
                 $imagenEsquema->save();
-
+                // dd($request->file('file')->getMimeType());
+                // dd(public_path());
                 $extension                                          =   $request->file('file')->extension();
                 $nombre                                             =   $imagenEsquema->id.".".$extension;
 
