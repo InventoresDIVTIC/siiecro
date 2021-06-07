@@ -28,7 +28,7 @@
 			    	<strong>Titulo de la obra:</strong> {{ $solicitudAnalisis->obra->nombre }}<br>
 
 			    	@if ($solicitudAnalisis->obra->tipo_bien_cultural->calcular_temporalidad == "si")
-			    		<strong>Temporalidad:</strong> {{ $solicitudAnalisis->obra->temporalidad->nombre }}<br>
+			    		<strong>Temporalidad:</strong> {{ $solicitudAnalisis->obra->temporalidad ? $solicitudAnalisis->obra->temporalidad->nombre : "N/A" }}<br>
 			    	@else
 			    		<strong>Año de la obra:</strong> {{ $solicitudAnalisis->obra->año ? $solicitudAnalisis->obra->año->format('Y') : "N/A" }}<br>
 			    		<strong>Época de la obra:</strong> {{ $solicitudAnalisis->obra->epoca->nombre }}<br>

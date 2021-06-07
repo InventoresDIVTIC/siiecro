@@ -108,7 +108,8 @@ $('#carrusel-obra-imagenes-principales').owlCarousel({
   loop:      false,
   margin:    10,
   nav:       false,
-  center:    false
+  center:    false,
+  items:     4
 });
 
 // FUNCIÓN PARA RECARGAR IMÁGENES PRINCIPALES DE LA OBRA CUANDO SE AGREGAN O ELIMINAN MÁS
@@ -122,7 +123,8 @@ function recargarImagenesPrincipalesDeObra(obra_id){
         loop:      false,
         margin:    10,
         nav:       false,
-        center:    false
+        center:    false,
+        items:     4
       });
     },
     error: function(){
@@ -192,10 +194,12 @@ function toggleEdicionDatosGenerales(estatus){
     $("#form-general").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', false);
     $("#btn-group-habilitar-edicion").addClass('hidden');
     $("#btn-group-editar").removeClass('hidden');
+    $("#dropzone-imagenes-principales-ocultas").removeClass('hidden');
   } else{
     $("#form-general").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', true);
     $("#btn-group-habilitar-edicion").removeClass('hidden');
     $("#btn-group-editar").addClass('hidden');
+    $("#dropzone-imagenes-principales-ocultas").addClass('hidden');
   }
 }
 
@@ -206,12 +210,10 @@ function toggleEdicionDatosIdentificacion(estatus){
     $("#form-datos-identificacion").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', false);
     $("#btn-group-habilitar-edicion-datos-identificacion").addClass('hidden');
     $("#btn-group-editar-datos-identificacion").removeClass('hidden');
-    $("#dropzone-imagenes-principales-ocultas").removeClass('hidden');
   } else{
     $("#form-datos-identificacion").find('input:not([no-editar]), textarea:not([no-editar]), select:not([no-editar])').attr('disabled', true);
     $("#btn-group-habilitar-edicion-datos-identificacion").removeClass('hidden');
     $("#btn-group-editar-datos-identificacion").addClass('hidden');
-    $("#dropzone-imagenes-principales-ocultas").addClass('hidden');
   }
 }
 

@@ -51,7 +51,7 @@
 				    			<td>{{ $obra->nombre }}</td>
 				    			<td>
 				    				@if($obra->tipo_bien_cultural->calcular_temporalidad == "si")
-				    					{{ $obra->temporalidad->nombre }}
+				    					{{ $obra->temporalidad ? $obra->temporalidad->nombre : "N/A" }}
 				    				@else
 				    					{{ $obra->año->format('Y') }} / {{ $obra->epoca->nombre }}
 				    				@endif

@@ -26,7 +26,7 @@
 			    	<strong>Titulo:</strong> {{ $obra->nombre }}<br>
 
 			    	@if ($obra->tipo_bien_cultural->calcular_temporalidad == "si")
-			    		<strong>Temporalidad:</strong> {{ $obra->temporalidad->nombre }}<br>
+			    		<strong>Temporalidad:</strong> {{ $obra->temporalidad ? $obra->temporalidad->nombre : "N/A" }}<br>
 			    	@else
 			    		<strong>Año de la obra:</strong> {{ $obra->año ? $obra->año->format('Y') : "N/A" }}<br>
 			    		<strong>Época de la obra:</strong> {{ $obra->epoca->nombre }}<br>
@@ -37,7 +37,9 @@
 			    	<strong>Tipo de objeto:</strong> {{ $obra->tipo_objeto->nombre }}<br>
 			    	<strong>Lugar de procedencia:</strong> {{ $obra->lugar_procedencia_original }}<br>
 			    	<strong>Lugar de procedencia actual (ubicación o custodio):</strong> {{ $obra->lugar_procedencia_actual }}<br>
-			    	<strong>No. de inventarios o códigos de procedencia:</strong> {{ $obra->numero_inventario }}
+			    	@if (Auth::user()->rol->acceso_a_datos_avanzado)
+			    		<strong>No. de inventarios o códigos de procedencia:</strong> {{ $obra->numero_inventario }}
+			    	@endif
 			    </div>
 	    	</div>
 		    <hr class="semi">
@@ -63,10 +65,14 @@
 		    <hr class="semi">
 	    	<div class="col-100 mt-md">
 			    <div class="text-left">
-			    	<strong>Forma de ingreso:</strong> {{ $obra->forma_ingreso }}<br>
+			    	@if (Auth::user()->rol->acceso_a_datos_avanzado)
+			    		<strong>Forma de ingreso:</strong> {{ $obra->forma_ingreso }}<br>
+			    	@endif
 			    	<strong>Área:</strong> {{ $obra->area->nombre }}<br>
 			    	<strong>Responsables ECRO:</strong> {{ $obra->responsables_asignados->implode("name", ", ") }}<br>
-			    	<strong>Caracteristicas descriptivas:</strong> {!! nl2br($obra->caracteristicas_descriptivas) !!}
+			    	@if (Auth::user()->rol->acceso_a_datos_avanzado)
+			    		<strong>Caracteristicas descriptivas:</strong> {!! nl2br($obra->caracteristicas_descriptivas) !!}
+			    	@endif
 			    </div>
 	    	</div>
 		    <hr class="semi">
@@ -74,10 +80,12 @@
 	    		<div class="col-50 inline-block">
 	    			<strong>Disponible para consulta externa:</strong> Si/No
 	    		</div>
-	    		<div class="col-50 inline-block text-right">
-	    			<strong>Fecha de entrada:</strong> {{ $obra->fecha_ingreso->format('d/m/Y') }} <br>
-	    			<strong>Fecha de salida:</strong> {{ $obra->fecha_salida->format('d/m/Y') }}
-	    		</div>
+	    		@if (Auth::user()->rol->acceso_a_datos_avanzado)
+		    		<div class="col-50 inline-block text-right">
+		    			<strong>Fecha de entrada:</strong> {{ $obra->fecha_ingreso->format('d/m/Y') }} <br>
+		    			<strong>Fecha de salida:</strong> {{ $obra->fecha_salida->format('d/m/Y') }}
+		    		</div>
+	    		@endif
 	    	</div>
 
 		</main>

@@ -191,6 +191,22 @@
                                                     <input type="number" class="form-control" min="0" id="diametro" name="diametro" value="{{ $obra->diametro }}" autocomplete="off" disabled>
                                                 </div>
 
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label for="dropzone-obra-imagenes-principales">Imagenes principales</label>
+                                                        </div>
+                                                        <div class="col-md-12 div-input required hidden {{-- dropzones-imagenes --}}" id="dropzone-imagenes-principales-ocultas" {{-- style="display: none;" --}}>
+                                                            <div class="dropzone" id="dropzone-obra-imagenes-principales">
+                                                            </div>
+                                                        </div>
+                                                    </div>      
+
+                                                    <div class="row m-t-md center-block">
+                                                        @include('dashboard.obras.detalle.imagenes-principales.ver', ["imagenes_principales" => $obra->imagenes_principales])
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     <input type="hidden" id="calcular-temporalidad" name="calcular-temporalidad">
@@ -220,7 +236,7 @@
                                     <hr>
                                     <div class="row">
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
 
                                             @if (Auth::user()->rol->acceso_a_datos_avanzado)
                                                 <div class="row">
@@ -322,22 +338,6 @@
                                                 </div>
                                             @endif
 
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label for="dropzone-obra-imagenes-principales">Imagenes principales</label>
-                                                </div>
-                                                <div class="col-md-12 div-input required hidden {{-- dropzones-imagenes --}}" id="dropzone-imagenes-principales-ocultas" {{-- style="display: none;" --}}>
-                                                    <div class="dropzone" id="dropzone-obra-imagenes-principales">
-                                                    </div>
-                                                </div>
-                                            </div>      
-
-                                            <div class="row m-t-md center-block">
-                                                @include('dashboard.obras.detalle.imagenes-principales.ver', ["imagenes_principales" => $obra->imagenes_principales])
-                                            </div>
                                         </div>
 
                                     </div>

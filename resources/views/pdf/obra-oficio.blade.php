@@ -32,7 +32,7 @@
 			    	<strong>Titulo:</strong> {{ $obra->nombre }}<br>
 
 			    	@if ($obra->tipo_bien_cultural->calcular_temporalidad == "si")
-			    		<strong>Temporalidad:</strong> {{ $obra->temporalidad->nombre }}<br>
+			    		<strong>Temporalidad:</strong> {{ $obra->temporalidad ? $obra->temporalidad->nombre : "N/A" }}<br>
 			    	@else
 			    		<strong>Año de la obra:</strong> {{ $obra->año ? $obra->año->format('Y') : "N/A" }}<br>
 			    		<strong>Época de la obra:</strong> {{ $obra->epoca->nombre }}<br>
