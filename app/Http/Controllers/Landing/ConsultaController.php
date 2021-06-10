@@ -32,9 +32,9 @@ class ConsultaController extends Controller
     }
 
     public function obtenerObrasRecomendadas(Request $request, $id_obra){
-    	if ($request->ajax()) {
+    	if ($request->ajax() || true) {
     		$base_conocimientos 	= 	Obras::selectRaw('
-															id 	AS ID_OBRAS,
+															id 		AS ID_OBRAS,
 															tags 	AS TAGS_OBRAS
 														')
 												->whereNotNull("tags")

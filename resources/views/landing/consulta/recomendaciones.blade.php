@@ -2,7 +2,7 @@
 	<div class="owl-carousel mt-4" id="carrusel-recomendaciones">
 		@foreach ($obras as $obra)
 			<div class="item">
-				<a href="#">
+				<a href="{{ route('consulta.detalle', $obra->seo) }}">
 					<div class="team-block">
 						<div style="height: 250px;">
 							<img src="{{ asset('img/predeterminadas/sin_imagen.png') }}" style="height: auto; width: 100%;">
@@ -14,7 +14,7 @@
 	                        <span><strong>Tipo objeto:</strong> <small>{{ $obra->tipo_objeto->nombre }}</small></span><br>
 
 	                        @if ($obra->tipo_bien_cultural->calcular_temporalidad == "si")
-	                        	<span><strong>Temporalidad:</strong> <small>{{ $obra->temporalidad->nombre }}</small></span>
+	                        	<span><strong>Temporalidad:</strong> <small>{{ $obra->temporalidad ? $obra->temporalidad->nombre : "N/A" }}</small></span>
 	                        @else
 		                        <span><strong>Año:</strong> <small>{{ $obra->año ? $obra->año->format('Y') : "N/A" }}</small></span><br>
 		                        <span><strong>Época:</strong> <small>{{ $obra->epoca->nombre }}</small></span><br>
