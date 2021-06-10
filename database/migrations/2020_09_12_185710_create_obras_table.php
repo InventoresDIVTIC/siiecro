@@ -28,7 +28,7 @@ class CreateObrasTable extends Migration
             $table->integer('usuario_recibio_id')->unsigned()->nullable();
             $table->integer('proyecto_id')->unsigned()->nullable();
 
-            $table->text('seo')->index();
+            $table->text('seo');
             $table->string('nombre')->index();
             $table->string('autor')->index()->nullable();
             $table->string('cultura')->index()->nullable();
