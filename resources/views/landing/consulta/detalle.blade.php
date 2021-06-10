@@ -8,7 +8,12 @@
 
                     <div class="row">
                         <div class="col-6 text-center">
-                            <img src="{{ asset('img/predeterminadas/sin_imagen.png') }}" alt="" class="img-fluid">
+                            @if ($obra->imagenes_principales->count())
+                                <img src="{{ asset('/img/obras/imagenes-principales/'.$obra->imagenes_principales->first()->imagen_chica) }}" alt="" class="img-fluid">
+                            @else
+                                <img src="{{ asset('img/predeterminadas/sin_imagen.png') }}" alt="" class="img-fluid">
+                            @endif
+                            
                         </div>
                         <div class="col-6">
                             <h5 class="mt-3 mb-3">Datos de la obra / pieza / conjunto</h5>

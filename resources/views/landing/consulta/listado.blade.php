@@ -137,7 +137,11 @@
                         <div class="service-block-detalle mb-2 mt-0">
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="img/predeterminadas/sin_imagen.png" alt="" class="img-fluid">
+                                    @if ($obra->imagenes_principales->count())
+                                        <img src="{{ asset('/img/obras/imagenes-principales/'.$obra->imagenes_principales->first()->imagen_chica) }}" alt="" class="img-fluid">
+                                    @else
+                                        <img src="img/predeterminadas/sin_imagen.png" alt="" class="img-fluid">
+                                    @endif
                                 </div>
                                 <div class="col-8">
                                     <div class="content">

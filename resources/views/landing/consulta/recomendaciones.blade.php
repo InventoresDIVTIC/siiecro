@@ -4,8 +4,12 @@
 			<div class="item">
 				<a href="{{ route('consulta.detalle', $obra->seo) }}">
 					<div class="team-block">
-						<div style="height: 250px;">
-							<img src="{{ asset('img/predeterminadas/sin_imagen.png') }}" style="height: auto; width: 100%;">
+						<div style="height: 220px;">
+                            @if ($obra->imagenes_principales->count())
+                                <img src="{{ asset('/img/obras/imagenes-principales/'.$obra->imagenes_principales->first()->imagen_chica) }}" alt="" style="height: 200px; width: auto; margin: auto;">
+                            @else
+								<img src="{{ asset('img/predeterminadas/sin_imagen.png') }}" style="height: 200px; width: auto; margin: auto;">
+                            @endif
 						</div>
 
 	                    <div class="content">

@@ -21,8 +21,8 @@ return [
                 'include' => [
                     // base_path(),
                     // RESPALDO DEL SERVER :
-                    base_path('/../public_html/landing/images/'),
-                    base_path('/../public_html/img/'),
+                    # base_path('/../public/landing/images/'),
+                    # base_path('/../public/img/'),
                 ],
 
                 /*
