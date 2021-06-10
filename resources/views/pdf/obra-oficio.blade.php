@@ -22,8 +22,8 @@
 		    <hr>
 	    	<div class="col-100">
 	    		<div class="text-left">
-	    			<strong>Área a la que ingresa:</strong> {{ $obra->area->nombre }}<br>
-	    			<strong>Fecha de entrada:</strong> {{ $obra->fecha_ingreso->format('Y-m-d h:i A') }}<br>
+	    			<strong>Área a la que ingresa:</strong> {{ $obra->area ? $obra->area->nombre : "Sin asignar" }}<br>
+	    			<strong>Fecha de entrada:</strong> {{ $obra->fecha_ingreso ? $obra->fecha_ingreso->format('Y-m-d h:i A') : "N/A" }}<br>
 	    		</div>
 	    	</div>
 	    	<div class="col-100">

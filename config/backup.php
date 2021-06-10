@@ -23,6 +23,7 @@ return [
                     // RESPALDO DEL SERVER :
                     # base_path('/../public/landing/images/'),
                     # base_path('/../public/img/'),
+                    public_path()."/img/obras",
                 ],
 
                 /*

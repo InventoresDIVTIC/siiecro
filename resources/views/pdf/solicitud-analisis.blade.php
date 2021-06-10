@@ -24,7 +24,7 @@
 	    		<div class="text-left">
 			    	<span class="subtitulo">Datos generales de la obra:</span><br>
 			    	<strong>No. de registro de la obra:</strong> {{ $solicitudAnalisis->obra->folio }}<br>
-			    	<strong>Área de la obra:</strong> {{ $solicitudAnalisis->obra->area->nombre }}<br>
+			    	<strong>Área de la obra:</strong> {{ $solicitudAnalisis->obra->area ? $solicitudAnalisis->obra->area->nombre ? "Sin asignar" }}<br>
 			    	<strong>Titulo de la obra:</strong> {{ $solicitudAnalisis->obra->nombre }}<br>
 
 			    	@if ($solicitudAnalisis->obra->tipo_bien_cultural->calcular_temporalidad == "si")
