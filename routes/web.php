@@ -78,6 +78,7 @@ Auth::routes();
 			Route::put('obras/{id}/rechazar', 						'ObrasController@rechazar')->name('obras.rechazar');
 			Route::get('obras/importar', 							'ObrasController@modalImportar');
 			Route::put('obras/importar', 							'ObrasController@importar')->name('obras.importar');
+			Route::get('obras/exportar/{mostrar_ids}', 				'ObrasController@exportar')->name('obras.exportar');
 			Route::get('obras/imprimir/{id}', 						'ObrasController@imprimir')->name('obras.imprimir');
 			Route::get('obras/imprimir-oficio/{id}', 				'ObrasController@imprimirOficio')->name('obras.imprimir-oficio');
 			

@@ -15,7 +15,15 @@
     
     @if (Auth::user()->rol->edicion_de_registro_avanzada_2)
         <div class="col-sm-8">
-            <button class="btn btn-outline btn-success dim m-t-md pull-right" type="button" onclick="importarObras();">Importar <i class="fa fa-upload"></i></button>
+            <div class="btn-group m-t-md pull-right">
+                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="false">Exportar / importar <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ route('dashboard.obras.exportar', 1) }}">Exportar</a></li>
+                    <li><a href="{{ route('dashboard.obras.exportar', 0) }}" class="font-bold">Exportar traducido</a></li>
+                    <li class="divider"></li>
+                    <li><a href="javascript:importarObras();">Importar</a></li>
+                </ul>
+            </div>
         </div>
     @endif
 @endsection

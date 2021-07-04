@@ -19,6 +19,10 @@
     </div>
     <div class="col-sm-4">
 
+        <div class="m-t-md pull-right">
+            <input id="disponible_consulta" type="checkbox" class="js-switch" {{ $obra->disponible_consulta ? "checked" : "" }} onchange="cambiarEstatusObra({{ $obra->id }});" />
+        </div>
+
         @if (Auth::user()->rol->imprimir_oficios)
             <a href="{{ route('dashboard.obras.imprimir-oficio', $obra->id) }}" target="_blank"><button class="btn btn-outline btn-info dim m-t-md pull-right" type="button">Oficio <i class="fa fa-file-pdf-o"></i></button></a>
         @endif

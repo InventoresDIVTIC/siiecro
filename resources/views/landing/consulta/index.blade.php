@@ -8,7 +8,7 @@
                     <div class="section-title text-center">
                         <h2 class="mb-4">Consulta</h2>
                         <div class="divider mx-auto my-4"></div>
-                        <p>Puedes realizar la consulta por cualquiera de estos 4 criterios.</p>
+                        <p>Puedes realizar la consulta por cualquiera de estos 5 criterios.</p>
                     </div>
                 </div>
             </div>

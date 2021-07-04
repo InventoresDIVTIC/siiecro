@@ -68,6 +68,9 @@
     <!--Cropper js-->
     {!!Html::style('css/plugins/cropper/cropper.min.css')!!}
 
+    {{-- Switchery --}}
+    {!!Html::style('css/plugins/switchery/switchery.css')!!}
+
     <!-- Ladda style -->
     {!!Html::style('css/plugins/ladda/ladda-themeless.min.css')!!}
 
@@ -243,6 +246,9 @@
 
 <!-- cropper js -->
   {!!Html::script('js/plugins/cropper/cropper.min.js')!!}
+
+ <!-- Switchery -->
+  {!!Html::script('js/plugins/switchery/switchery.js')!!}
 
 <!-- Color picker -->
   {!!Html::script('js/plugins/colorpicker/bootstrap-colorpicker.min.js')!!}

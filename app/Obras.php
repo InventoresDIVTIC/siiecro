@@ -35,14 +35,6 @@ class Obras extends Model
         'fecha_salida',
         'modalidad',
         'persona_entrego',
-        // 'vista_frontal_grande',
-        // 'vista_frontal_chica',
-        // 'vista_posterior_grande',
-        // 'vista_posterior_chica',
-        // 'vista_lateral_derecha_grande',
-        // 'vista_lateral_derecha_chica',
-        // 'vista_lateral_izquierda_grande',
-        // 'vista_lateral_izquierda_chica',
         'caracteristicas_descriptivas',
         'lugar_procedencia_original',
         'forma_ingreso',
@@ -53,6 +45,7 @@ class Obras extends Model
         'año',
         'fecha_aprobacion',
         'fecha_rechazo',
+        'disponible_consulta',
     ];
     
     protected $dates = [
@@ -437,6 +430,10 @@ class Obras extends Model
                                     ->where('solicitud.tecnica', 'like', '%'.$busqueda.'%')
                                     ->groupBy('obras.id');
                     break;
+        }
+
+        if (Auth::user()->rol->esExterno()) {
+            $obras          =   $obras->where('disponible_consulta', 1);
         }
 
         return $obras->whereNotNull('obras.fecha_aprobacion')

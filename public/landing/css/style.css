@@ -1545,4 +1545,12 @@ a:focus {
   color: #3e3e3e !important;
 }
 
+.texto-verde{
+  color:  #28a745;
+}
+
+.texto-rojo{
+  color:  #dc3545;
+}
+
 /*# sourceMappingURL=maps/style.css.map */

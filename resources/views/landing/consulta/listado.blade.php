@@ -146,14 +146,20 @@
                                 <div class="col-8">
                                     <div class="content">
                                         <h4 class="mt-2 mb-1 title-color">{{ $obra->nombre }}</h4>
+
+                                        <span></span><br>
                                         <span><strong>Bien cultural:</strong> <small>{{ $obra->tipo_bien_cultural->nombre }}</small></span><br>
                                         <span><strong>Tipo objeto:</strong> <small>{{ $obra->tipo_objeto->nombre }}</small></span><br>
 
                                         @if ($obra->tipo_bien_cultural->calcular_temporalidad == "si")
-                                            <span><strong>Temporalidad:</strong> <small>{{ $obra->temporalidad ? $obra->temporalidad->nombre : "N/A" }}</small></span>
+                                            <span><strong>Temporalidad:</strong> <small>{{ $obra->temporalidad ? $obra->temporalidad->nombre : "N/A" }}</small></span><br>
                                         @else
                                             <span><strong>Año:</strong> <small>{{ $obra->año ? $obra->año->format('Y') : "N/A" }}</small></span><br>
                                             <span><strong>Época:</strong> <small>{{ $obra->epoca->nombre }}</small></span><br>
+                                        @endif
+
+                                        @if (!Auth::user()->rol->esExterno())
+                                            <strong>Disponible para consulta:</strong> {!! $obra->disponible_consulta ? "<span class='texto-verde'>Si</span>" : "<span class='texto-rojo'>No</span>" !!}
                                         @endif
                                     </div>
                                 </div>

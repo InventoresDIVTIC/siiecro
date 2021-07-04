@@ -1,4 +1,5 @@
 Dropzone.autoDiscover = false;
+var switchery_disponible_consulta = null;
 jQuery(document).ready(function($) {
 	$("#tipo_bien_cultural_id, #tipo_objeto_id, #temporalidad_id, #epoca_id, #estatus_año, #estatus_epoca, #area_id, #_responsables, #forma_ingreso, #usuario_recibio_id").select2({
         placeholder: "Seleccione una opción"
@@ -72,6 +73,8 @@ jQuery(document).ready(function($) {
     $('#proyecto_id').on('select2:unselect', function (e) {
         comportamientoSelectProyecto(true);
     });
+
+    switchery_disponible_consulta   =   new Switchery(document.querySelector('#disponible_consulta'), { color: '#1AB394' });
 });
 
 // ID DE LA OBRA 
@@ -236,4 +239,25 @@ function comportamientoSelectProyecto(ocultar = false, limpiar = true){
             proyecto_id:    $("#proyecto_id").val()
         }, limpiar, false);
     }
+}
+
+function cambiarEstatusObra(obra_id){
+  $.ajax({
+    url: '/dashboard/obras/' + obra_id,
+    type: 'PUT',
+    data: {
+      disponible_consulta:  switchery_disponible_consulta.isChecked() ? 1 : 0,
+      _token:               $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function(response){
+      if (response.error) {
+        _toast("error", response.mensaje, "Ocurrio un error al cambiar el estatus.");
+      } else{
+        _toast("exito", "Estatus actualizado con éxito.");
+      }
+    },
+    error: function(){
+      alert("Ocurrio un error intenta de nuevo mas tardee");
+    }
+  })
 }

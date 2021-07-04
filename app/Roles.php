@@ -47,4 +47,41 @@ class Roles extends Model
         'administrar_solicitudes_analisis',
         'administrar_registro_resultados',
     ];
+
+    public function esExterno(){
+        if (
+                $this->captura_solicitud_obra                   ||
+                $this->captura_de_responsables_intervencion     ||
+                $this->captura_de_catalogos_basica              ||
+                $this->captura_de_catalogos_avanzada            ||
+                $this->captura_de_solicitud_analisis            ||
+                $this->captura_de_resultados                    ||
+                $this->edicion_de_registro_basica               ||
+                $this->edicion_de_registro_avanzada_1           ||
+                $this->edicion_de_registro_avanzada_2           ||
+                $this->eliminar_solicitud_obra                  ||
+                $this->eliminar_registro                        ||
+                $this->eliminar_solicitud_analisis              ||
+                $this->eliminar_resultados                      ||
+                $this->eliminar_catalogos                       ||
+                $this->acceso_a_lista_solicitudes_analisis      ||
+                $this->acceso_a_lista_solicitudes_obras         ||
+                $this->acceso_a_datos_basico                    ||
+                $this->acceso_a_datos_avanzado                  ||
+                $this->consulta_general_basica                  ||
+                $this->consulta_general_avanzada                ||
+                $this->consulta_externa                         ||
+                $this->consulta_estadistica                     ||
+                $this->imprimir                                 ||
+                $this->imprimir_oficios                         ||
+                $this->creacion_usuarios_permisos               ||
+                $this->administrar_solicitudes_obras            ||
+                $this->administrar_solicitudes_analisis         ||
+                $this->administrar_registro_resultados
+            ){
+            return false;
+        }
+
+        return true;
+    }
 }

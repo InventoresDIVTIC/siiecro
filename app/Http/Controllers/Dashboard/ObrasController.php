@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 
+use App\Exports\ObrasExport;
 use App\Imports\ObrasImport;
 
 use DataTables;
@@ -486,6 +487,10 @@ class ObrasController extends Controller
         }
 
         return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function exportar($mostrarIds){
+        return Excel::download(new ObrasExport($mostrarIds), 'obras.xlsx');
     }
 
     public function eliminar(Request $request, $id){
