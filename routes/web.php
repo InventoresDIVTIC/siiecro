@@ -21,6 +21,10 @@ Auth::routes();
 
 
 	Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->middleware(['VerDashboard'])->group(function () {
+	    Route::get('/clear-cache', function() {
+			$exitCode = Artisan::call('cache:clear');
+			return 'cache cleared';
+		});
 	    ######## DASHBOARD ##############################################################
 			Route::get('/', 									'DashboardController@index')->name('dashboard.index');
 			Route::get('/grafica-obras-bienes-culturales', 		'DashboardController@graficasObrasBienesCulturales');
@@ -174,6 +178,14 @@ Auth::routes();
 		#################################################################################
 	    
 	    ######## OBRAS TIPO BIEN CULTURAL ###############################################
+			Route::get('obras-tipo-bien-cultural/cargar-terminos-relacionados/{id_tipo_bien_cultural}', 'ObrasTipoBienCulturalController@cargarTerminosRelacionados');
+			Route::get('obras-tipo-bien-cultural/crear-terminos-relacionados',							'ObrasTipoBienCulturalController@crearTerminosRelacionados');
+			Route::post('obras-tipo-bien-cultural/guardar-terminos-relacionados', 						'ObrasTipoBienCulturalController@guardarTerminosRelacionados')->name('obras-tipo-bien-cultural.guardar-terminos-relacionados');
+			Route::get('obras-tipo-bien-cultural/editar-terminos-relacionados/{id}', 					'ObrasTipoBienCulturalController@editarTerminosRelacionados');
+			Route::put('obras-tipo-bien-cultural/actualizar-terminos-relacionados/{id}', 				'ObrasTipoBienCulturalController@actualizarTerminosRelacionados')->name('obras-tipo-bien-cultural.actualizar-terminos-relacionados');
+			Route::get('obras-tipo-bien-cultural/aviso-eliminar-terminos-relacionados/{id}', 			'ObrasTipoBienCulturalController@avisoEliminarTerminosRelacionados');
+			Route::delete('obras-tipo-bien-cultural/destruir-terminos-relacionados/{id}', 				'ObrasTipoBienCulturalController@destruirTerminosRelacionados')->name('obras-tipo-bien-cultural.destruir-terminos-relacionados');
+
 			Route::get('obras-tipo-bien-cultural/carga', 			'ObrasTipoBienCulturalController@cargarTabla');
 			Route::get('obras-tipo-bien-cultural/{id}/eliminar', 	'ObrasTipoBienCulturalController@eliminar');
 			Route::resource('obras-tipo-bien-cultural', 			'ObrasTipoBienCulturalController');
