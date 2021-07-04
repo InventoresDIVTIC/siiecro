@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
 
     protected function tareasProgramadas(Schedule $schedule){
 
-        if (env("APP_DEBUG")) {        
+        if (env("APP_DEBUG") || true) {        
             $schedule->call('App\Http\Controllers\RespaldosController@realizarTransferenciaClouds')->everyMinute();
             $schedule->call('App\Http\Controllers\RespaldosController@eliminarArchivosDeDriveMayor30Dias')->everyMinute();
         } else{

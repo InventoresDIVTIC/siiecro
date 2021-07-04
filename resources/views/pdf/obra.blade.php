@@ -68,7 +68,7 @@
 			    	@if (Auth::user()->rol->acceso_a_datos_avanzado)
 			    		<strong>Forma de ingreso:</strong> {{ $obra->forma_ingreso }}<br>
 			    	@endif
-			    	<strong>Área:</strong> {{ $obra->area->nombre }}<br>
+			    	<strong>Área:</strong> {{ $obra->area ? $obra->area->nombre : "Sin asignar" }}<br>
 			    	<strong>Responsables ECRO:</strong> {{ $obra->responsables_asignados->implode("name", ", ") }}<br>
 			    	@if (Auth::user()->rol->acceso_a_datos_avanzado)
 			    		<strong>Caracteristicas descriptivas:</strong> {!! nl2br($obra->caracteristicas_descriptivas) !!}
@@ -82,8 +82,8 @@
 	    		</div>
 	    		@if (Auth::user()->rol->acceso_a_datos_avanzado)
 		    		<div class="col-50 inline-block text-right">
-		    			<strong>Fecha de entrada:</strong> {{ $obra->fecha_ingreso->format('d/m/Y') }} <br>
-		    			<strong>Fecha de salida:</strong> {{ $obra->fecha_salida->format('d/m/Y') }}
+		    			<strong>Fecha de entrada:</strong> {{ $obra->fecha_ingreso ? $obra->fecha_ingreso->format('d/m/Y') : "N/A" }} <br>
+		    			<strong>Fecha de salida:</strong> {{ $obra->fecha_salida ? $obra->fecha_salida->format('d/m/Y') : "N/A" }}
 		    		</div>
 	    		@endif
 	    	</div>

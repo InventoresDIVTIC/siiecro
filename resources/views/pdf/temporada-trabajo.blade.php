@@ -18,7 +18,7 @@
 		<main>
 	    	<div class="col-100">
 	    		<div class="text-left">
-	    			<strong>Área a la que ingresa:</strong> {{ $temporada->proyecto->area->nombre }}<br>
+	    			<strong>Área a la que ingresa:</strong> {{ $temporada->proyecto->area ? $temporada->proyecto->area->nombre : "Sin asignar" }}<br>
 	    			<strong>Fecha de entrada:</strong> {{ $temporada->created_at->format('Y-m-d h:i A') }}<br>
 	    		</div>
 	    	</div>

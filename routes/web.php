@@ -180,6 +180,14 @@ Auth::routes();
 		#################################################################################
 
 	    ######## OBRAS TIPO OBJETO ######################################################
+			Route::get('obras-tipo-objeto/cargar-terminos-relacionados/{id_tipo_objeto}', 		'ObrasTipoObjetoController@cargarTerminosRelacionados');
+			Route::get('obras-tipo-objeto/crear-terminos-relacionados',							'ObrasTipoObjetoController@crearTerminosRelacionados');
+			Route::post('obras-tipo-objeto/guardar-terminos-relacionados', 						'ObrasTipoObjetoController@guardarTerminosRelacionados')->name('obras-tipo-objeto.guardar-terminos-relacionados');
+			Route::get('obras-tipo-objeto/editar-terminos-relacionados/{id}', 					'ObrasTipoObjetoController@editarTerminosRelacionados');
+			Route::put('obras-tipo-objeto/actualizar-terminos-relacionados/{id}', 				'ObrasTipoObjetoController@actualizarTerminosRelacionados')->name('obras-tipo-objeto.actualizar-terminos-relacionados');
+			Route::get('obras-tipo-objeto/aviso-eliminar-terminos-relacionados/{id}', 			'ObrasTipoObjetoController@avisoEliminarTerminosRelacionados');
+			Route::delete('obras-tipo-objeto/destruir-terminos-relacionados/{id}', 				'ObrasTipoObjetoController@destruirTerminosRelacionados')->name('obras-tipo-objeto.destruir-terminos-relacionados');
+
 			Route::get('obras-tipo-objeto/carga', 					'ObrasTipoObjetoController@cargarTabla');
 			Route::get('obras-tipo-objeto/{id}/eliminar', 			'ObrasTipoObjetoController@eliminar');
 			Route::resource('obras-tipo-objeto', 					'ObrasTipoObjetoController');
