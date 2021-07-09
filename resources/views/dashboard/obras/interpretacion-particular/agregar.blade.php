@@ -29,6 +29,43 @@
                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                 </div>
             {!! Form::close() !!}
+
+            @if ($registro != "[]")
+            <hr>
+            <h1 class="text-center"><strong>Tesauros</strong></h1>
+            <br>
+            <div class="row ibox">
+                <div class="col-md-12">
+                    <button type="button" onclick="crearTerminoRelacionado({{ $registro->id }})" class="btn btn-primary pull-right">Agregar término relacionado</button>
+                </div>
+            </div>
+            {{-- tabla de terminos relacionados --}}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="progress hidden" id="carga-dt-terminos-relacionados">
+                                <div class="progress-bar-indeterminate"></div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="dt-datos-terminos-relacionados">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="id_interpretacion_particular" name="id_interpretacion_particular" value="{{ $registro != '[]' ? $registro->id : '' }}">
+            @endif
+
         </div>
     </div>
 </div>
