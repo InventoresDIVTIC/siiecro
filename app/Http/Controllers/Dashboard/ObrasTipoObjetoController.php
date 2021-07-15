@@ -101,8 +101,8 @@ class ObrasTipoObjetoController extends Controller
 
         return DataTables::of($registros)
                             ->addColumn('acciones', function($registro){
-                                $editar         = '<i onclick="editarTerminoRelacionado('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar interpretación particular '.$registro->nombre.'"></i>';
-                                $eliminar       = '<i onclick="eliminarTerminoRelacionado('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar interpretación particular '.$registro->nombre.'"></i>';
+                                $editar         = '<i onclick="editarTerminoRelacionado('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar término relacionado '.$registro->nombre.'"></i>';
+                                $eliminar       = '<i onclick="eliminarTerminoRelacionado('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar término relacionado '.$registro->nombre.'"></i>';
                                 
                                 return $editar.$eliminar;
                             })

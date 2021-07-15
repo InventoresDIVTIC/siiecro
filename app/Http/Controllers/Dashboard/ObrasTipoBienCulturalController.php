@@ -12,6 +12,7 @@ use Hash;
 use Auth;
 
 use App\ObrasTipoBienCultural;
+use App\ObrasTipoBienCulturalTesauros;
 
 class ObrasTipoBienCulturalController extends Controller
 {
@@ -106,4 +107,67 @@ class ObrasTipoBienCulturalController extends Controller
 
         return Response::json(["mensaje" => "Petición incorrecta"], 500);
     }
+
+    ##### TIPO OBJETO TÉRMINOS RELACIONADOS TESAUROS #####################################################
+    public function cargarTerminosRelacionados($id)
+    {
+        $registros = ObrasTipoBienCulturalTesauros::where('tipo_bien_cultural_id', '=', $id)->get();
+
+        return DataTables::of($registros)
+                            ->addColumn('acciones', function($registro){
+                                $editar         = '<i onclick="editarTerminoRelacionado('.$registro->id.')" class="fa fa-pencil fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Editar término relacionado '.$registro->nombre.'"></i>';
+                                $eliminar       = '<i onclick="eliminarTerminoRelacionado('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true"  mi-tooltip="Eliminar término relacionado '.$registro->nombre.'"></i>';
+                                
+                                return $editar.$eliminar;
+                            })
+                            ->rawColumns(['acciones'])
+                            ->make('true');
+    }
+
+    public function crearTerminosRelacionados()
+    {
+        $registro = new ObrasTipoBienCulturalTesauros;
+        return view('dashboard.obras.tipo-bien-cultural.tesauros.agregar-termino', ["registro" => $registro]);
+    }
+
+    public function guardarTerminosRelacionados(Request $request)
+    {
+        if($request->ajax()){
+            return BD::crear('ObrasTipoBienCulturalTesauros', $request);
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function editarTerminosRelacionados(Request $request, $id)
+    {
+        $registro = ObrasTipoBienCulturalTesauros::findOrFail($id);
+        return view('dashboard.obras.tipo-bien-cultural.tesauros.agregar-termino', ["registro" => $registro]);
+    }
+
+    public function actualizarTerminosRelacionados(Request $request, $id)
+    {
+        if($request->ajax()){
+            $data = $request->all();
+            return BD::actualiza($id, "ObrasTipoBienCulturalTesauros", $data);
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+
+    public function avisoEliminarTerminosRelacionados(Request $request, $id)
+    {
+        $registro = ObrasTipoBienCulturalTesauros::findOrFail($id);
+        return view('dashboard.obras.tipo-bien-cultural.tesauros.eliminar-termino', ["registro" => $registro]);
+    }
+
+    public function destruirTerminosRelacionados(Request $request, $id)
+    {
+        if($request->ajax()){
+            return BD::elimina($id, "ObrasTipoBienCulturalTesauros");
+        }
+
+        return Response::json(["mensaje" => "Petición incorrecta"], 500);
+    }
+    #######################################################################################################
 }

@@ -21,6 +21,10 @@ Auth::routes();
 
 
 	Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->middleware(['VerDashboard'])->group(function () {
+	    Route::get('/clear-cache', function() {
+			$exitCode = Artisan::call('cache:clear');
+			return 'cache cleared';
+		});
 	    ######## DASHBOARD ##############################################################
 			Route::get('/', 									'DashboardController@index')->name('dashboard.index');
 			Route::get('/grafica-obras-bienes-culturales', 		'DashboardController@graficasObrasBienesCulturales');
@@ -174,6 +178,14 @@ Auth::routes();
 		#################################################################################
 	    
 	    ######## OBRAS TIPO BIEN CULTURAL ###############################################
+			Route::get('obras-tipo-bien-cultural/cargar-terminos-relacionados/{id_tipo_bien_cultural}', 'ObrasTipoBienCulturalController@cargarTerminosRelacionados');
+			Route::get('obras-tipo-bien-cultural/crear-terminos-relacionados',							'ObrasTipoBienCulturalController@crearTerminosRelacionados');
+			Route::post('obras-tipo-bien-cultural/guardar-terminos-relacionados', 						'ObrasTipoBienCulturalController@guardarTerminosRelacionados')->name('obras-tipo-bien-cultural.guardar-terminos-relacionados');
+			Route::get('obras-tipo-bien-cultural/editar-terminos-relacionados/{id}', 					'ObrasTipoBienCulturalController@editarTerminosRelacionados');
+			Route::put('obras-tipo-bien-cultural/actualizar-terminos-relacionados/{id}', 				'ObrasTipoBienCulturalController@actualizarTerminosRelacionados')->name('obras-tipo-bien-cultural.actualizar-terminos-relacionados');
+			Route::get('obras-tipo-bien-cultural/aviso-eliminar-terminos-relacionados/{id}', 			'ObrasTipoBienCulturalController@avisoEliminarTerminosRelacionados');
+			Route::delete('obras-tipo-bien-cultural/destruir-terminos-relacionados/{id}', 				'ObrasTipoBienCulturalController@destruirTerminosRelacionados')->name('obras-tipo-bien-cultural.destruir-terminos-relacionados');
+
 			Route::get('obras-tipo-bien-cultural/carga', 			'ObrasTipoBienCulturalController@cargarTabla');
 			Route::get('obras-tipo-bien-cultural/{id}/eliminar', 	'ObrasTipoBienCulturalController@eliminar');
 			Route::resource('obras-tipo-bien-cultural', 			'ObrasTipoBienCulturalController');
@@ -231,6 +243,14 @@ Auth::routes();
 			Route::get('obras-tipo-de-material/aviso-eliminar-informacion-cruzada/{id}', 		'ObrasTipoDeMaterialController@avisoEliminarInformacionCruzada');
 			Route::delete('obras-tipo-de-material/destruir-informacion-cruzada/{id}', 			'ObrasTipoDeMaterialController@destruirInformacionCruzada')->name('obras-tipo-de-material.destruir-informacion-cruzada');
 
+			Route::get('obras-tipo-de-material/cargar-terminos-relacionados/{id_tipo_material}','ObrasTipoDeMaterialController@cargarTerminosRelacionados');
+			Route::get('obras-tipo-de-material/crear-terminos-relacionados',					'ObrasTipoDeMaterialController@crearTerminosRelacionados');
+			Route::post('obras-tipo-de-material/guardar-terminos-relacionados', 				'ObrasTipoDeMaterialController@guardarTerminosRelacionados')->name('obras-tipo-de-material.guardar-terminos-relacionados');
+			Route::get('obras-tipo-de-material/editar-terminos-relacionados/{id}', 				'ObrasTipoDeMaterialController@editarTerminosRelacionados');
+			Route::put('obras-tipo-de-material/actualizar-terminos-relacionados/{id}', 			'ObrasTipoDeMaterialController@actualizarTerminosRelacionados')->name('obras-tipo-de-material.actualizar-terminos-relacionados');
+			Route::get('obras-tipo-de-material/aviso-eliminar-terminos-relacionados/{id}', 		'ObrasTipoDeMaterialController@avisoEliminarTerminosRelacionados');
+			Route::delete('obras-tipo-de-material/destruir-terminos-relacionados/{id}', 		'ObrasTipoDeMaterialController@destruirTerminosRelacionados')->name('obras-tipo-de-material.destruir-terminos-relacionados');
+
 			Route::resource('obras-tipo-de-material', 											'ObrasTipoDeMaterialController');
 		#################################################################################
 
@@ -241,9 +261,17 @@ Auth::routes();
 		#################################################################################
 
 	    ######## OBRAS INTERPRETACIÓN PARTICULAR RENOMBRADA A INTERPRETACIÓN MATERIAL ###
-			Route::get('obras-interpretacion-particular/carga', 		'ObrasTipoMaterialInterpretacionParticularController@cargarTabla');
-			Route::get('obras-interpretacion-particular/{id}/eliminar', 'ObrasTipoMaterialInterpretacionParticularController@eliminar');
-			Route::resource('obras-interpretacion-particular', 			'ObrasTipoMaterialInterpretacionParticularController');
+			Route::get('obras-interpretacion-particular/cargar-terminos-relacionados/{id_interpretacion_particular}',	'ObrasTipoMaterialInterpretacionParticularController@cargarTerminosRelacionados');
+			Route::get('obras-interpretacion-particular/crear-terminos-relacionados',									'ObrasTipoMaterialInterpretacionParticularController@crearTerminosRelacionados');
+			Route::post('obras-interpretacion-particular/guardar-terminos-relacionados', 								'ObrasTipoMaterialInterpretacionParticularController@guardarTerminosRelacionados')->name('obras-interpretacion-particular.guardar-terminos-relacionados');
+			Route::get('obras-interpretacion-particular/editar-terminos-relacionados/{id}', 							'ObrasTipoMaterialInterpretacionParticularController@editarTerminosRelacionados');
+			Route::put('obras-interpretacion-particular/actualizar-terminos-relacionados/{id}', 						'ObrasTipoMaterialInterpretacionParticularController@actualizarTerminosRelacionados')->name('obras-interpretacion-particular.actualizar-terminos-relacionados');
+			Route::get('obras-interpretacion-particular/aviso-eliminar-terminos-relacionados/{id}', 					'ObrasTipoMaterialInterpretacionParticularController@avisoEliminarTerminosRelacionados');
+			Route::delete('obras-interpretacion-particular/destruir-terminos-relacionados/{id}', 						'ObrasTipoMaterialInterpretacionParticularController@destruirTerminosRelacionados')->name('obras-interpretacion-particular.destruir-terminos-relacionados');
+
+			Route::get('obras-interpretacion-particular/carga', 														'ObrasTipoMaterialInterpretacionParticularController@cargarTabla');
+			Route::get('obras-interpretacion-particular/{id}/eliminar', 												'ObrasTipoMaterialInterpretacionParticularController@eliminar');
+			Route::resource('obras-interpretacion-particular', 															'ObrasTipoMaterialInterpretacionParticularController');
 		#################################################################################
 
 	    ######## OBRAS ANÁLISIS A REALIZAR ##############################################

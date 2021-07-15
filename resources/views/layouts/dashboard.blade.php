@@ -195,7 +195,7 @@
 
 <!--Datatables-->
   {!!Html::script('js/plugins/dataTables/datatables.min.js')!!}
-  {!!Html::script('js/plugins/dataTables/español.json')!!}
+  {!!Html::script('js/plugins/dataTables/espaniol.json')!!}
 
 <!-- Datepicker -->
   {!!Html::script('js/plugins/datapicker/bootstrap-datepicker.js')!!}
