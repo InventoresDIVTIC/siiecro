@@ -27,7 +27,7 @@
 			    	<strong>Titulo de la obra:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->nombre }}<br>
 
 			    	@if ($resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->tipo_bien_cultural->calcular_temporalidad == "si")
-			    		<strong>Temporalidad:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->temporalidad->nombre }}<br>
+			    		<strong>Temporalidad:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->temporalidad ? $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->temporalidad->nombre : "N/A" }}<br>
 			    	@else
 			    		<strong>Año de la obra:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->año ? $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->año->format('Y') : "N/A" }}<br>
 			    		<strong>Época de la obra:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->epoca->nombre }}<br>
@@ -75,7 +75,7 @@
 	    	<div class="col-100">
 	    		<div class="text-left">
 			    	<span class="subtitulo">Características de observación preliminar:</span> <br>
-			    	<strong>Tipo de material:</strong> {{ $resultadoAnalisis->tipo_material->nombre }}<br>
+			    	<strong>Tipo de material:</strong> {{ $resultadoAnalisis->tipo_material ? $resultadoAnalisis->tipo_material->nombre : "N/A" }}<br>
 			    	<strong>Descripción:</strong> {{ $resultadoAnalisis->descripcion }}<br>
 			    	<strong>Ruta de acceso a microfotografía:</strong> {{ $resultadoAnalisis->ruta_acceso_microfotografia }}<br>
 			    	@foreach ($resultadoAnalisis->imagenes_resultados_esquema_microfotografia as $imagen_muestra)
@@ -90,7 +90,7 @@
 	    	<div class="col-100">
 	    		<div class="text-left">
 			    	<span class="subtitulo">Datos analíticos (resultados):</span> <br>
-			    	<strong>Información por definir:</strong> {{ $resultadoAnalisis->informacion_por_definir->nombre }}<br>
+			    	<strong>Información por definir:</strong> {{ $resultadoAnalisis->informacion_por_definir ? $resultadoAnalisis->informacion_por_definir->nombre : "N/A" }}<br>
 			    	<table>
 			    		<thead>
 				    		<tr>
@@ -133,7 +133,7 @@
 	    		<div class="text-left">
 			    	<span class="subtitulo">Conclusión general:</span> <br>
 			    	<p>{!! nl2br($resultadoAnalisis->conclusion_general) !!}</p>
-			    	<strong>Interpretación particular:</strong> {{ $resultadoAnalisis->interpretacion_particular->nombre }}<br>
+			    	<strong>Interpretación particular:</strong> {{ $resultadoAnalisis->interpretacion_particular ? $resultadoAnalisis->interpretacion_particular->nombre : "N/A" }}<br>
 			    </div>
 	    	</div>
 		</main>

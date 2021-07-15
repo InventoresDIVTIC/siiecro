@@ -88,7 +88,7 @@
                         <div class="row">
                             <div class="col-md-12 div-input">
                                 <label for="ruta_acceso_imagen">Ruta de acceso a microfotografía, imagen o datos</label>
-                                <input type="text" class="form-control" id="ruta_acceso_imagen" name="ruta_acceso_imagen" value="{{ $registro->ruta_acceso_imagen }}" disabled="" autocomplete="off" placeholder="Colocar ruta de acceso como lo indica el INST-04">
+                                <input type="text" class="form-control" {{ Auth::user()->rol->acceso_a_datos_avanzado ? "" : "no-editar" }} id="ruta_acceso_imagen" name="ruta_acceso_imagen" value="{{ $registro->ruta_acceso_imagen }}" disabled="" autocomplete="off" placeholder="Colocar ruta de acceso como lo indica el INST-04">
                             </div>
                         </div>
                     </div>

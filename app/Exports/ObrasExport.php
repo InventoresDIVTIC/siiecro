@@ -6,10 +6,13 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 use App\Obras;
 
-class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMapping
+class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMapping, ShouldAutoSize, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -91,5 +94,16 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
             $registro->forma_ingreso,
             $registro->disponible_consulta
         ];
-    } 
+    }
+
+    public function styles(Worksheet $sheet){
+        $sheet->getStyle('A1:Z1')->getFont()->setBold(true);
+
+        for ($i = 'A'; $i < 'Z'; $i++) { 
+            $sheet->getStyle('A1:'.$i.'1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $sheet->getStyle('A1:'.$i.'1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $sheet->getStyle('A1:'.$i.'1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $sheet->getStyle('A1:'.$i.'1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        }
+    }
 }

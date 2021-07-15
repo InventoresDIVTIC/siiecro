@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-12 div-input">
                                 <label for="lugar_resguardo_muestra">Lugar de resguardo de la muestra</label>
-                                <input type="text" class="form-control" id="lugar_resguardo_muestra" name="lugar_resguardo_muestra" value="{{ $registro->lugar_resguardo_muestra }}" no-editar placeholder="Colocar la clave como lo indica en INST-05">
+                                <input type="text" class="form-control" {{ Auth::user()->rol->acceso_a_datos_avanzado ? "" : "no-editar" }} id="lugar_resguardo_muestra" name="lugar_resguardo_muestra" value="{{ $registro->lugar_resguardo_muestra }}" placeholder="Colocar la clave como lo indica en INST-05" disabled>
                             </div>
                         </div>
                         @endif
@@ -52,12 +52,12 @@
                         <div class="row">
                             <div class="col-md-4 div-input required">
                                 <label for="fecha_analisis">Fecha del análisis</label>
-                                <input type="text" class="form-control" id="fecha_analisis" name="fecha_analisis" value="{{ $registro->fecha_analisis }}" required autocomplete="off" {{-- disabled="" --}}>
+                                <input type="text" class="form-control" id="fecha_analisis" name="fecha_analisis" value="{{ $registro->fecha_analisis }}" required autocomplete="off" disabled="">
                             </div>
                             
                             <div class="col-md-8 div-input required">
                                 <label for="profesor_responsable_de_analisis_id">Asesor científico responsable</label>
-                                <select class="form-control select2" id="profesor_responsable_de_analisis_id" name="profesor_responsable_de_analisis_id" required autocomplete="off" {{-- disabled="" --}}>
+                                <select class="form-control select2" id="profesor_responsable_de_analisis_id" name="profesor_responsable_de_analisis_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($asesor_cientifico_responsable as $profesor)
                                         <option {{ $profesor->id == $registro->profesor_responsable_de_analisis_id ? "selected" : "" }} value="{{ $profesor->id }}">{{ $profesor->name }}</option>
@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col-md-6 div-input required">
                                 <label for="persona_realiza_analisis_id">Persona que realizó el análisis</label>
-                                <select class="form-control select2" id="persona_realiza_analisis_id" name="persona_realiza_analisis_id" required autocomplete="off" {{-- disabled="" --}}>
+                                <select class="form-control select2" id="persona_realiza_analisis_id" name="persona_realiza_analisis_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($persona_realiza_analisis as $persona)
                                         <option {{ $persona->id == $registro->persona_realiza_analisis_id ? "selected" : "" }} value="{{ $persona->id }}">{{ $persona->name }}</option>
@@ -78,7 +78,7 @@
 
                             <div class="col-md-6 div-input required">
                                 <label for="forma_obtencion_muestra_id">Forma de obtención de la muestra</label>
-                                <select class="form-control select2" id="forma_obtencion_muestra_id" name="forma_obtencion_muestra_id" required autocomplete="off" {{-- disabled="" --}}>
+                                <select class="form-control select2" id="forma_obtencion_muestra_id" name="forma_obtencion_muestra_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
                                     @foreach ($formas_obtencion as $forma_obtencion)
                                         <option {{ $forma_obtencion->id == $registro->forma_obtencion_muestra_id ? "selected" : "" }} value="{{ $forma_obtencion->id }}">{{ $forma_obtencion->nombre }}</option>
@@ -147,7 +147,7 @@
                         <div class="row">
                             <div class="col-md-12 div-input">
                                 <label for="ruta_acceso_microfotografia">Ruta de acceso a microfotografía</label>
-                                <input type="text" class="form-control" id="ruta_acceso_microfotografia" name="ruta_acceso_microfotografia" value="{{ $registro->ruta_acceso_microfotografia }}" autocomplete="off" disabled="" placeholder="Colocar ruta de acceso según el INST-04">
+                                <input type="text" class="form-control" {{ Auth::user()->rol->acceso_a_datos_avanzado ? "" : "no-editar" }} id="ruta_acceso_microfotografia" name="ruta_acceso_microfotografia" value="{{ $registro->ruta_acceso_microfotografia }}" autocomplete="off" disabled="" placeholder="Colocar ruta de acceso según el INST-04">
                             </div>
                         </div>
 

@@ -61,7 +61,7 @@ class ObrasImport implements ToModel, WithHeadingRow
         }
 
         try {
-            $obra                                   =   Obras::find($row["id"])->first();
+            $obra                                   =   Obras::find($row["id"]);
 
             if (is_null($obra)) {
                 $obra                               =   new Obras;
