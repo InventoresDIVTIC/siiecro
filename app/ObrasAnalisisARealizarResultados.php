@@ -33,4 +33,12 @@ class ObrasAnalisisARealizarResultados extends Model
     public function tecnica_analitica() {
         return $this->hasOne('App\ObrasAnalisisARealizarTecnica', 'id', 'tecnica_analitica_id');
     }
+
+    public function informacion_del_equipo() {
+        return $this->hasOne('App\ObrasAnalisisARealizarInformacionDelEquipo', 'id', 'info_del_equipo_id');
+    }
+
+    public function informacion_por_definir() {
+        return $this->hasOne('App\ObrasTipoMaterialInformacionPorDefinir', 'id', 'informacion_por_definir_id');
+    }
 }

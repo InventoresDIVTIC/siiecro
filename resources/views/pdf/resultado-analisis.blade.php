@@ -5,9 +5,9 @@
 	<body>
 		<header>
 		    <img class="pull-left mt-sm" src="{{ asset('img/ecro.jpg') }}" height="50px">
-		    <span class="pull-right fs-sm text-right">
+		    <span class="pull-right fs-6 text-right">
 		    	Generado por: {{ Auth::user()->name }}<br>
-		    	{{ Carbon\Carbon::now() }}
+		    	<strong>{{ Carbon\Carbon::now() }}</strong>
 		    </span>
 		</header>
 
@@ -34,7 +34,7 @@
 			    	@endif
 			    	
 			    	<strong>Tecnica:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->tipo_objeto->nombre }}<br>
-			    	<strong>Dimensiones:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->alto }} cm x {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->ancho }} cm x {{ $oba->profundidad ?? 0 }} cm x {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->diametro ?? 0 }} cm<br>
+			    	<strong>Dimensiones:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra->etiquetaDimensiones() }}<br>
 			    	<strong>Año de la temporada de trabajo:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra_temporada_trabajo->temporada_trabajo->año }}<br>
 			    	<strong>Temporada de trabajo:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra_temporada_trabajo->temporada_trabajo->numero_temporada }}<br>
 			    	<strong>Proyecto ECRO:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->solicitud_analisis->obra_temporada_trabajo->temporada_trabajo->proyecto->nombre }}<br>
@@ -48,8 +48,8 @@
 	    	<div class="col-100">
 	    		<div class="text-left">
 			    	<span class="subtitulo">Datos de identificación de la muestra:</span> <br>
-			    	<strong>Caracterización del tipo de análisis:</strong> <br>
-			    	<strong>Nomenclatura de la muestra:</strong> <br>
+			    	<strong>Caracterización del tipo de análisis:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->tipo_analisis->nombre }} <br>
+			    	<strong>Nomenclatura de la muestra:</strong> {{ $resultadoAnalisis->solicitud_analisis_muestra->nomenclatura }} <br>
 			    	<strong>Lugar de resguardo de la muestra:</strong> {{ $resultadoAnalisis->lugar_resguardo_muestra }}<br>
 			    	<strong>Fecha del Análisis Científico:</strong> {{ $resultadoAnalisis->fecha_analisis }}<br>
 			    	<strong>Profesor responsable del Análisis Científico:</strong> {{ $resultadoAnalisis->profesor_responsable_analisis->name }}<br>
@@ -90,32 +90,27 @@
 	    	<div class="col-100">
 	    		<div class="text-left">
 			    	<span class="subtitulo">Datos analíticos (resultados):</span> <br>
-			    	<strong>Información por definir:</strong> {{ $resultadoAnalisis->informacion_por_definir ? $resultadoAnalisis->informacion_por_definir->nombre : "N/A" }}<br>
 			    	<table>
 			    		<thead>
 				    		<tr>
+					    		<th class="col-10 fs-6">Información por definir</th>
 					    		<th class="col-10 fs-6">Análisis a realizar</th>
 					    		<th class="col-10 fs-6">Técnica analítica</th>
-					    		<th class="col-15 fs-6">Descripciones</th>
-					    		<th class="col-15 fs-6">Interpretación</th>
-					    		<th class="col-10 fs-6">Datos</th>
-					    		<th class="col-10 fs-6">Información del equipo</th>
-					    		<th class="col-10 fs-6">Ruta de acceso a imagen</th>
-					    		<th class="col-10 fs-6">Ruta de acceso a datos</th>
+					    		<th class="col-10 fs-6">Interpretación</th>
+					    		<th class="col-15 fs-6">Información del equipo</th>
+					    		<th class="col-10 fs-6">Ruta de acceso</th>
 					    		<th class="col-10 fs-6">Microfotografía</th>
 				    		</tr>
 				    	</thead>
 				    	<tbody>
 				    		@foreach ($resultadoAnalisis->resultados as $resultado)
 				    			<tr>
+				    				<td class="fs-6">{{ $resultado->informacion_por_definir->nombre }}</td>
 				    				<td class="fs-6">{{ $resultado->analisis_realizar->nombre }}</td>
 				    				<td class="fs-6">{{ $resultado->tecnica_analitica->nombre }}</td>
-				    				<td class="fs-6">{!! nl2br($resultado->descripciones) !!}</td>
 				    				<td class="fs-6">{!! nl2br($resultado->interpretacion) !!}</td>
-				    				<td class="fs-6">{{ $resultado->datos }}</td>
-				    				<td class="fs-6">{{ $resultado->informacion_del_equipo }}</td>
+				    				<td class="fs-6">{{ $resultado->informacion_del_equipo ? $resultado->informacion_del_equipo->nombre : "N/A" }}</td>
 				    				<td class="fs-6">{{ $resultado->ruta_acceso_imagen }}</td>
-				    				<td class="fs-6">{{ $resultado->ruta_acceso_datos }}</td>
 				    				<td class="fs-6">
 				    					@foreach ($resultado->esquema_analiticos_microfotografias as $imagen)
 				    						<img src="{{ asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$imagen->imagen) }}" height="50px"><br>
@@ -133,7 +128,7 @@
 	    		<div class="text-left">
 			    	<span class="subtitulo">Conclusión general:</span> <br>
 			    	<p>{!! nl2br($resultadoAnalisis->conclusion_general) !!}</p>
-			    	<strong>Interpretación particular:</strong> {{ $resultadoAnalisis->interpretacion_particular ? $resultadoAnalisis->interpretacion_particular->nombre : "N/A" }}<br>
+			    	<strong>Interpretación material:</strong> {{ $resultadoAnalisis->cadenaInterpretacionesParticulares() }}<br>
 			    </div>
 	    	</div>
 		</main>

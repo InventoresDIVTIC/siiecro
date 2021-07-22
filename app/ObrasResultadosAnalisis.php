@@ -58,6 +58,10 @@ class ObrasResultadosAnalisis extends Model
         return $this->hasMany('App\ObrasAnalisisARealizarResultados', 'resultado_analisis_id', 'id');
     }
 
+    public function interpretaciones_particulares() {
+        return $this->hasMany('App\ObrasResultadosAnalisisInterpretacionesParticulares', 'obras__resultados_analisis_id', 'id');
+    }
+
     public function solicitud_analisis_muestra() {
         return $this->hasOne('App\ObrasSolicitudesAnalisisMuestras', 'id', 'solicitudes_analisis_muestras_id');
     }
@@ -131,6 +135,16 @@ class ObrasResultadosAnalisis extends Model
                                                 $query->orWhere("asignados.usuario_id", Auth::id());
                                             })
                                             ->orderBy("obras__resultados_analisis.fecha_analisis", "DESC");
+        }
+    }
+
+    public function cadenaInterpretacionesParticulares(){
+        if ($this->interpretaciones_particulares->count()) {
+            return $this->interpretaciones_particulares->map(function($registro){
+                        return $registro->interpretacion_particular->nombre;
+                    })->implode(",");
+        } else{
+            return "";
         }
     }
 }

@@ -5,9 +5,9 @@
 	<body>
 		<header>
 		    <img class="pull-left mt-sm" src="{{ asset('img/ecro.jpg') }}" height="50px">
-		    <span class="pull-right fs-sm text-right">
+		    <span class="pull-right fs-6 text-right">
 		    	Generado por: {{ Auth::user()->name }}<br>
-		    	{{ Carbon\Carbon::now() }}
+		    	<strong>{{ Carbon\Carbon::now() }}</strong>
 		    </span>
 		</header>
 
@@ -36,7 +36,7 @@
 			    	
 			    	<strong>Tipo de objeto:</strong> {{ $solicitudAnalisis->obra->tipo_objeto->nombre }}<br>
 			    	<strong>Tecnica:</strong> {{ $solicitudAnalisis->obra->tipo_objeto->nombre }}<br>
-			    	<strong>Dimensiones:</strong> {{ $solicitudAnalisis->obra->alto }} cm x {{ $solicitudAnalisis->obra->ancho }} cm x {{ $oba->profundidad ?? 0 }} cm x {{ $solicitudAnalisis->obra->diametro ?? 0 }} cm<br>
+			    	<strong>Dimensiones:</strong> {{ $solicitudAnalisis->obra->etiquetaDimensiones() }}<br>
 			    	<strong>Año de la temporada de trabajo:</strong> {{ $solicitudAnalisis->obra_temporada_trabajo->temporada_trabajo->año }}<br>
 			    	<strong>Temporada de trabajo:</strong> {{ $solicitudAnalisis->obra_temporada_trabajo->temporada_trabajo->numero_temporada }}<br>
 			    	<strong>Responsable de intervención:</strong> {{ $solicitudAnalisis->reponsable_solicitud->usuario->name }}<br>

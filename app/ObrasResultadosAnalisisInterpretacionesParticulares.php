@@ -12,4 +12,8 @@ class ObrasResultadosAnalisisInterpretacionesParticulares extends Model
     	'obras__resultados_analisis_id',
         'obras__tipo_material__interpretacion_particular_id',
     ];
+
+    public function interpretacion_particular() {
+        return $this->hasOne('App\ObrasTipoMaterialInterpretacionParticular', 'id', 'obras__tipo_material__interpretacion_particular_id');
+    }
 }

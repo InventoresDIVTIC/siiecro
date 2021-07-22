@@ -5,9 +5,9 @@
 	<body>
 		<header>
 		    <img class="pull-left mt-sm" src="{{ asset('img/ecro.jpg') }}" height="50px">
-		    <span class="pull-right fs-sm text-right">
+		    <span class="pull-right fs-6 text-right">
 		    	Generado por: {{ Auth::user()->name }}<br>
-		    	{{ Carbon\Carbon::now() }}
+		    	<strong>{{ Carbon\Carbon::now() }}</strong>
 		    </span>
 		</header>
 

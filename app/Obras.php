@@ -129,15 +129,19 @@ class Obras extends Model
     }
 
     public function usuario_aprobo() {
-        return $this->hasOne('App\Users', 'id', 'usuario_aprobo_id');
+        return $this->hasOne('App\User', 'id', 'usuario_aprobo_id');
     }
 
     public function usuario_rechazo() {
-        return $this->hasOne('App\Users', 'id', 'usuario_rechazo_id');
+        return $this->hasOne('App\User', 'id', 'usuario_rechazo_id');
     }
 
     public function usuario_solicito() {
-        return $this->hasOne('App\Users', 'id', 'usuario_solicito_id');
+        return $this->hasOne('App\User', 'id', 'usuario_solicito_id');
+    }
+
+    public function usuario_recibio() {
+        return $this->hasOne('App\User', 'id', 'usuario_recibio_id');
     }
 
     public function epoca() {
@@ -362,9 +366,15 @@ class Obras extends Model
                                         a.nombre    as nombre_area
                                     ")
                             ->join('areas as a', 'a.id', 'obras.area_id')
-                            ->join('obras__usuarios_asignados as asignados', 'asignados.obra_id', 'obras.id')
+                            ->leftJoin('obras__usuarios_asignados as asignados', 'asignados.obra_id', 'obras.id')
                             ->whereNotNull('obras.fecha_aprobacion')
-                            ->where('asignados.usuario_id', Auth::id())
+                            ->where(function($query){
+                                $query->orWhere('asignados.usuario_id', Auth::id());
+
+                                if (Auth::user()->area_id) {
+                                    $query->orWhere('a.id', Auth::user()->area_id);
+                                }
+                            })
                             ->groupBy('obras.id')
                             ->orderBy('asignados.created_at', 'DESC');
         }
@@ -439,5 +449,9 @@ class Obras extends Model
         return $obras->whereNotNull('obras.fecha_aprobacion')
                     ->orderBy('obras.created_at', 'DESC')
                     ->get();
+    }
+
+    public function etiquetaDimensiones(){
+        return $this->alto." cm x ".$this->ancho." cm".($this->profundidad ? (" x ".$this->profundidad." cm") : "").($this->diametro ? (" x ".$this->diametro." cm") : "");
     }
 }

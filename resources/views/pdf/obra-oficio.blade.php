@@ -5,9 +5,9 @@
 	<body>
 		<header>
 		    <img class="pull-left mt-sm" src="{{ asset('img/ecro.jpg') }}" height="50px">
-		    <span class="pull-right fs-sm text-right">
+		    <span class="pull-right fs-6 text-right">
 		    	Generado por: {{ Auth::user()->name }}<br>
-		    	{{ Carbon\Carbon::now() }}
+		    	<strong>{{ Carbon\Carbon::now() }}</strong>
 		    </span>
 		</header>
 
@@ -38,7 +38,7 @@
 			    		<strong>Época de la obra:</strong> {{ $obra->epoca->nombre }}<br>
 			    	@endif
 			    	
-			    	<strong>Dimensiones:</strong> {{ $obra->alto }} cm x {{ $obra->ancho }} cm x {{ $obra->profundidad ?? 0 }} cm x {{ $obra->diametro ?? 0 }} cm<br>
+			    	<strong>Dimensiones:</strong> {{ $obra->etiquetaDimensiones() }}<br>
 			    	<strong>Tipo de bien cultural:</strong> {{ $obra->tipo_bien_cultural->nombre }}<br>
 			    	<strong>Tipo de objeto:</strong> {{ $obra->tipo_objeto->nombre }}<br>
 			    	<strong>Lugar de procedencia:</strong> {{ $obra->lugar_procedencia_original }}<br>
@@ -61,12 +61,12 @@
 		    <hr class="semi">
 	    	<div class="col-100 mt-lg text-center">
 			    <div class="col-50 inline-block">
-			    	<strong>Recibió<br></strong>
-			    	Nombre y firma
+			    	<strong>Recibió</strong><br>
+			    	<small>{{ $obra->usuario_recibio ? $obra->usuario_recibio->name : "N/A" }}</small>
 			    </div>
 			    <div class="col-50 inline-block">
-			    	<strong>Entregó<br></strong>
-			    	Nombre y firma
+			    	<strong>Entregó</strong><br>
+			    	<small>{{ $obra->persona_entrego != "" ? $obra->persona_entrego : "N/A" }}</small>
 			    </div>
 	    	</div>
 	    	<div class="col-100 mt-md text-center">

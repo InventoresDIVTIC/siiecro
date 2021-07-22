@@ -26,7 +26,7 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
 
     public function collection()
     {
-        return Obras::all();
+        return Obras::whereNotNull('fecha_aprobacion')->get();
     }
 
     public function headings(): array

@@ -47,22 +47,22 @@ class ObrasController extends Controller
                                                                                                     "rechazar"
                                                                                                 ]
                                                                                 ]);
-        $this->middleware('VerificarPermiso:eliminar_solicitudes_obras',    [
-                                                                                "only"  =>  [
-                                                                                                "eliminar", 
-                                                                                                "destroy"
-                                                                                            ]
-                                                                            ]);
-        $this->middleware('VerificarPermiso:imprimir',                      [
-                                                                                "only"  =>  [
-                                                                                                "imprimir"
-                                                                                            ]
-                                                                            ]);
-        $this->middleware('VerificarPermiso:imprimir_oficios',              [
-                                                                                "only"  =>  [
-                                                                                                "imprimirOficio"
-                                                                                            ]
-                                                                            ]);
+        $this->middleware('VerificarPermiso:eliminar_solicitud_obra',           [
+                                                                                    "only"  =>  [
+                                                                                                    "eliminar", 
+                                                                                                    "destroy"
+                                                                                                ]
+                                                                                ]);
+        $this->middleware('VerificarPermiso:imprimir',                          [
+                                                                                    "only"  =>  [
+                                                                                                    "imprimir"
+                                                                                                ]
+                                                                                ]);
+        $this->middleware('VerificarPermiso:imprimir_oficios',                  [
+                                                                                    "only"  =>  [
+                                                                                                    "imprimirOficio"
+                                                                                                ]
+                                                                                ]);
     }
     
     public function index(){
@@ -330,32 +330,35 @@ class ObrasController extends Controller
 
             // Si calcular temporalidad es si entonces ponemos null los campos de autor, año y epoca
             // Si no entonces ponemos null los campos de cultura y temporalidad
-            if($request->input('calcular-temporalidad') == "si"){
-                $request->merge([
-                                    "autor"             =>  NULL,
-                                    "año"               =>  NULL,
-                                    "estatus_año"       =>  NULL,
-                                    "epoca"             =>  NULL, 
-                                    "estatus_epoca"     =>  NULL
-                                ]);
-            } else{
-                $request->merge([
-                                    "cultura"           =>  NULL,
-                                    "temporalidad_id"   =>  NULL
-                                ]);
-
-                // Si el estatus de la epoca es aproximado no debe de tener año
-                if($request->input('estatus_epoca') == "Aproximado"){
+            if ($request->has('calcular-temporalidad')) {
+                if($request->input('calcular-temporalidad') == "si"){
                     $request->merge([
-                                        "año"           =>  NULL,
-                                        "estatus_año"   =>  NULL
+                                        "autor"             =>  NULL,
+                                        "año"               =>  NULL,
+                                        "estatus_año"       =>  NULL,
+                                        "epoca"             =>  NULL, 
+                                        "estatus_epoca"     =>  NULL
                                     ]);
                 } else{
                     $request->merge([
-                                        "año"           =>  $request->input("año")."-01-01"
+                                        "cultura"           =>  NULL,
+                                        "temporalidad_id"   =>  NULL
                                     ]);
+
+                    // Si el estatus de la epoca es aproximado no debe de tener año
+                    if($request->input('estatus_epoca') == "Aproximado"){
+                        $request->merge([
+                                            "año"           =>  NULL,
+                                            "estatus_año"   =>  NULL
+                                        ]);
+                    } else{
+                        $request->merge([
+                                            "año"           =>  $request->input("año")."-01-01"
+                                        ]);
+                    }
                 }
             }
+            
 
             $request->merge([
                                 "usuario_solicito_id"   =>  Auth::id()
@@ -367,26 +370,14 @@ class ObrasController extends Controller
             if(!$respuesta->getData()->error){
                 $obra           =   Obras::find($id);
 
-                // Re asignamos los responsables ECRO a la obra
-                ObrasResponsablesAsignados::reAsignarResponsables($id, $request->input('_responsables'));
-
-                // Re asignamos las epocas de trabajo recibidas
-                ObrasTemporadasTrabajoAsignadas::reAsignarTemporadas($id, $request->input('_temporadas_trabajo'));
-
-                if($request->file('vista_frontal')){
-                    $obra->subirImagenVistaFrontal($request->file('vista_frontal'));
+                if ($request->has('_responsables')) {
+                    // Re asignamos los responsables ECRO a la obra
+                    ObrasResponsablesAsignados::reAsignarResponsables($id, $request->input('_responsables'));
                 }
 
-                if($request->file('vista_posterior')){
-                    $obra->subirImagenVistaPosterior($request->file('vista_posterior'));
-                }
-
-                if($request->file('vista_lateral_izquierda')){
-                    $obra->subirImagenVistaLateralIzquierda($request->file('vista_lateral_izquierda'));
-                }
-
-                if($request->file('vista_lateral_derecha')){
-                    $obra->subirImagenVistaLateralDerecha($request->file('vista_lateral_derecha'));
+                if ($request->has('_temporadas_trabajo')) {
+                    // Re asignamos las epocas de trabajo recibidas
+                    ObrasTemporadasTrabajoAsignadas::reAsignarTemporadas($id, $request->input('_temporadas_trabajo'));
                 }
 
                 // $id_obra = $respuesta->getData()->id;
@@ -512,6 +503,7 @@ class ObrasController extends Controller
             abort(404);
         }
 
+        $accion                         =   NULL;
         $tiposBienCultural              =   ObrasTipoBienCultural::all();
         $tiposObjeto                    =   ObrasTipoObjeto::all();
         $epocas                         =   ObrasEpoca::all();
@@ -520,7 +512,14 @@ class ObrasController extends Controller
         $usuariosPuedenRecibirObras     =   User::where('puede_recibir_obras', 'si')->get();
         $responsablesEcro               =   User::where('es_responsable_ecro', 'si')->get();
         $titulo                         =   $registro->folio;
-        return view('dashboard.obras.detalle.detalle', ["titulo" => $titulo, "obra" => $registro, "tiposBienCultural" => $tiposBienCultural, "tiposObjeto" => $tiposObjeto, "epocas" => $epocas, "temporalidades" => $temporalidades, "areas" => $areas, "usuariosPuedenRecibirObras" => $usuariosPuedenRecibirObras, "responsablesEcro" => $responsablesEcro]);
+
+        if ($request->get('solicitud-analisis') != "") {
+            $accion                     =   "solicitud-analisis|".$request->get('solicitud-analisis');
+        } else if($request->get('resultado-analisis') != "") {
+            $accion                     =   "resultado-analisis|".$request->get('resultado-analisis');
+        }
+
+        return view('dashboard.obras.detalle.detalle', ["titulo" => $titulo, "obra" => $registro, "tiposBienCultural" => $tiposBienCultural, "tiposObjeto" => $tiposObjeto, "epocas" => $epocas, "temporalidades" => $temporalidades, "areas" => $areas, "usuariosPuedenRecibirObras" => $usuariosPuedenRecibirObras, "responsablesEcro" => $responsablesEcro, "accion" => $accion]);
     }
 
     public function imprimir(Request $request, $obra_id){

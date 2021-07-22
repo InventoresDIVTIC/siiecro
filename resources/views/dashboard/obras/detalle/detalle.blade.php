@@ -1,6 +1,7 @@
 @extends('layouts.dashboard', ['menu' => "obras"])
 
 @section('top-body')
+    <input type="hidden" id="accion" value="{{ $accion }}">
     <div class="col-sm-8">
         {{-- span id folio_obra obra se usa para obtener el folio y pasarlo al listado de muestras de las solicitudes de analisis con jquery --}}
         <h2>Detalle de obra <strong><span id="folio_obra">{{ $obra->folio }}</span></strong></h2>
@@ -18,10 +19,11 @@
         </ol>
     </div>
     <div class="col-sm-4">
-
-        <div class="m-t-md pull-right">
-            <input id="disponible_consulta" type="checkbox" class="js-switch" {{ $obra->disponible_consulta ? "checked" : "" }} onchange="cambiarEstatusObra({{ $obra->id }});" />
-        </div>
+        @if (Auth::user()->rol->edicion_de_registro_avanzada_2)
+            <div class="m-t-md pull-right">
+                <input id="disponible_consulta" type="checkbox" class="js-switch" {{ $obra->disponible_consulta ? "checked" : "" }} onchange="cambiarEstatusObra({{ $obra->id }});" />
+            </div>
+        @endif
 
         @if (Auth::user()->rol->imprimir_oficios)
             <a href="{{ route('dashboard.obras.imprimir-oficio', $obra->id) }}" target="_blank"><button class="btn btn-outline btn-info dim m-t-md pull-right" type="button">Oficio <i class="fa fa-file-pdf-o"></i></button></a>

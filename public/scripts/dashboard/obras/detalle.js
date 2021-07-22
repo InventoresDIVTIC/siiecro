@@ -1,6 +1,8 @@
-Dropzone.autoDiscover = false;
-var switchery_disponible_consulta = null;
+Dropzone.autoDiscover               =   false;
+var switchery_disponible_consulta   =   null;
+var accion                          =   null;
 jQuery(document).ready(function($) {
+  accion                            =   $("#accion").val();
 	$("#tipo_bien_cultural_id, #tipo_objeto_id, #temporalidad_id, #epoca_id, #estatus_año, #estatus_epoca, #area_id, #_responsables, #forma_ingreso, #usuario_recibio_id").select2({
         placeholder: "Seleccione una opción"
     });
@@ -75,6 +77,20 @@ jQuery(document).ready(function($) {
     });
 
     switchery_disponible_consulta   =   new Switchery(document.querySelector('#disponible_consulta'), { color: '#1AB394' });
+
+    if (accion != "" && accion != null) {
+      partes  =   accion.split("|");
+
+      if (partes[0] == "resultado-analisis") {
+        setTimeout(function() {
+          editarResultado(partes[1]);
+        }, 100);
+      } else if(partes[0] == "solicitud-analisis"){
+        setTimeout(function() {
+          verMuestras(partes[1]);
+        }, 100);
+      }
+    }
 });
 
 // ID DE LA OBRA 

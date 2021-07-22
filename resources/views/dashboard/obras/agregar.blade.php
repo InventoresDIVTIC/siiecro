@@ -82,7 +82,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4 div-input">
-                                <label for="estatus_epoca">Estatus</label>
+                                <label for="estatus_epoca">Estatus época</label>
                                 <select class="form-control select2 full-width" name="estatus_epoca" id="estatus_epoca">
                                     <option value=""></option>
                                     @foreach (config('valores.status_años_obras') as $status)
@@ -99,7 +99,7 @@
                                 <input type="text" class="form-control" id="año" name="año" value="{{ $registro->año ? $registro->año->format('Y') : '' }}" required autocomplete="off">
                             </div>
                             <div class="col-md-4 div-input">
-                                <label for="estatus_año">Estatus</label>
+                                <label for="estatus_año">Estatus año</label>
                                 <select class="form-control select2 full-width" name="estatus_año" id="estatus_año">
                                     <option value=""></option>
                                     @foreach (config('valores.status_años_obras') as $status)
