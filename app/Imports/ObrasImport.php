@@ -113,7 +113,7 @@ class ObrasImport implements ToModel, WithHeadingRow
             $obra->usuario_solicito_id          =   Auth::id();
             $obra->usuario_aprobo_id            =   Auth::id();
             $obra->usuario_recibio_id           =   Auth::id();
-            $obra->numero_inventario            =   $row["numero_inventario"];
+            $obra->numero_inventario            =   $row["numero_inventario"] ?? "S/N";
             $obra->fecha_aprobacion             =   Carbon::now();
         }
 
