@@ -132,7 +132,7 @@ class DashboardController extends Controller
                                                                 LPAD(obras.id, 4, '0'),
                                                                 '-',
                                                                 IFNULL(
-                                                                    DATE_FORMAT(obras.año, '%y'),
+                                                                    DATE_FORMAT(obras.fecha_ingreso, '%y'),
                                                                     '00'
                                                                 ),
                                                                 '/',
@@ -188,7 +188,7 @@ class DashboardController extends Controller
                                                                 LPAD(obras.id, 4, '0'),
                                                                 '-',
                                                                 IFNULL(
-                                                                    DATE_FORMAT(obras.año, '%y'),
+                                                                    DATE_FORMAT(obras.fecha_ingreso, '%y'),
                                                                     '00'
                                                                 ),
                                                                 '/',
@@ -240,7 +240,7 @@ class DashboardController extends Controller
                                                                 LPAD(obras.id, 4, '0'),
                                                                 '-',
                                                                 IFNULL(
-                                                                    DATE_FORMAT(obras.año, '%y'),
+                                                                    DATE_FORMAT(obras.fecha_ingreso, '%y'),
                                                                     '00'
                                                                 ),
                                                                 '/',

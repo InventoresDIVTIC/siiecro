@@ -107,8 +107,8 @@ class Obras extends Model
     public function getFolioAttribute(){
         $folio          =   str_pad($this->id, 4, "0", STR_PAD_LEFT);
 
-        if($this->año){
-            $folio      .=  "-".$this->año->format('y')."/";
+        if($this->fecha_ingreso){
+            $folio      .=  "-".$this->fecha_ingreso->format('y')."/";
         }else{
             $folio      .=  "-00/";
         }

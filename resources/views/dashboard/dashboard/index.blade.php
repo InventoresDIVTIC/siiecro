@@ -16,14 +16,14 @@
 @section('body')
 
     @if (Auth::user()->rol->acceso_a_datos_avanzado)
-        <div class="row">
-            <div class="col-sm-4">
+        <div class="row owl-carousel" id="carrusel-graficas">
+            <div class="item">
                 <canvas id="obras-bienes-culturales"></canvas>
             </div>
-            <div class="col-sm-4">
+            <div class="item">
                 <canvas id="obras-areas"></canvas>
-            </div>  
-            <div class="col-sm-4">
+            </div>
+            <div class="item">
                 <canvas id="obras-tipos-objeto"></canvas>
             </div>
         </div>

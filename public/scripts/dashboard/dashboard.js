@@ -43,6 +43,15 @@ jQuery(document).ready(function($) {
 			{ data: "acciones", 		width: "5%", 	searchable: false, 	orderable: false},
 		], // Columnas
 	);
+
+	if ($('#carrusel-graficas').length) {
+		$('#carrusel-graficas').owlCarousel({
+		    loop: 		false,
+		    margin: 	10,
+		    items: 		1,
+		    nav: 		true
+		})
+	}
 });
 
 function cargarCraficaObrasBienesCulturales(){
