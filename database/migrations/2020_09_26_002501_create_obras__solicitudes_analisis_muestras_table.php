@@ -28,7 +28,7 @@ class CreateObrasSolicitudesAnalisisMuestrasTable extends Migration
             $table->string('ubicacion');
             $table->timestamps();
 
-            $table->foreign('solicitud_analisis_id', 'solicitud_id_foreign')->references('id')->on('obras__solicitudes_analisis');
+            $table->foreign('solicitud_analisis_id', 'solicitud_id_foreign')->references('id')->on('obras__solicitudes_analisis')->onDelete('cascade');
             $table->foreign('usuario_creo_id')->references('id')->on('users');    
             $table->foreign('tipo_analisis_id', 'obras__solicitudes_tipo_analisis_id_foreign')->references('id')->on('obras__solicitudes_analisis_tipo_analisis');    
             // $table->foreign('usuario_responsable_id')->references('id')->on('users');    

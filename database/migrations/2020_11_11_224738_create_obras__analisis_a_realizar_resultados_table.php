@@ -28,7 +28,7 @@ class CreateObrasAnalisisARealizarResultadosTable extends Migration
             // $table->string('ruta_acceso_datos')->nullable();
             $table->timestamps();
 
-            $table->foreign('resultado_analisis_id', 'resultado_analisis_id_foreign')->references('id')->on('obras__resultados_analisis');
+            $table->foreign('resultado_analisis_id', 'resultado_analisis_id_foreign')->references('id')->on('obras__resultados_analisis')->onDelete('cascade');
             $table->foreign('analisis_a_realizar_id', 'analisis_a_realizar_resultados_id_foreign')->references('id')->on('obras__analisis_a_realizar');
             $table->foreign('tecnica_analitica_id', 'tecnica_analitica_id_foreign')->references('id')->on('obras__analisis_a_realizar_tecnica');
             $table->foreign('informacion_por_definir_id', 'informacion_por_definir_id_foreign')->references('id')->on('obras__tipo_material__informacion_por_definir');

@@ -239,6 +239,7 @@ return [
         'Archivos' => App\Clases\Archivos::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Date' => Jenssegers\Date\Date::class,
     ],
 
 ];

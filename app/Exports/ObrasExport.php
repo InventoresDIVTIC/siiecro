@@ -31,34 +31,70 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
 
     public function headings(): array
     {
-        return [
-            $this->mostrarIds     ?   'id'                        :   'No Registro',
-            $this->mostrarIds     ?   'tipo_objeto_id'            :   'tipo_objeto',
-            $this->mostrarIds     ?   'tipo_bien_cultural_id'     :   'tipo_bien_cultural',
-            $this->mostrarIds     ?   'epoca_id'                  :   'epoca',
-            $this->mostrarIds     ?   'temporalidad_id'           :   'temporalidad',
-            $this->mostrarIds     ?   'area_id'                   :   'area',
-            $this->mostrarIds     ?   'proyecto_id'               :   'proyecto',
-            'nombre',
-            'autor',
-            'cultura',
-            'lugar_procedencia_actual',
-            'numero_inventario',
-            'año',
-            'estatus_año',
-            'estatus_epoca',
-            'alto',
-            'diametro',
-            'profundidad',
-            'ancho',
-            'fecha_ingreso',
-            'fecha_salida',
-            'modalidad',
-            'caracteristicas_descriptivas',
-            'lugar_procedencia_original',
-            'forma_ingreso',
-            'consulta_externa'
-        ];
+        if ($this->mostrarIds) {
+            return [
+                'id',
+                'tipo_objeto_id',
+                'tipo_bien_cultural_id',
+                'epoca_id',
+                'temporalidad_id',
+                'area_id',
+                'proyecto_id',
+                'nombre',
+                'autor',
+                'cultura',
+                'lugar_procedencia_actual',
+                'numero_inventario',
+                'ano',
+                'estatus_ano',
+                'estatus_epoca',
+                'alto',
+                'diametro',
+                'profundidad',
+                'ancho',
+                'fecha_ingreso',
+                'fecha_salida',
+                'modalidad',
+                'caracteristicas_descriptivas',
+                'lugar_procedencia_original',
+                'forma_ingreso',
+                'consulta_externa',
+                'responsables_ecro'
+            ];
+        } else{
+            return [
+                'No Registro',
+                'tipo_objeto',
+                'tipo_bien_cultural',
+                'epoca',
+                'temporalidad',
+                'area',
+                'proyecto',
+                'temporadas_trabajo',
+                'nombre',
+                'autor',
+                'cultura',
+                'lugar_procedencia_actual',
+                'numero_inventario',
+                'año',
+                'estatus_año',
+                'estatus_epoca',
+                'alto',
+                'diametro',
+                'profundidad',
+                'ancho',
+                'fecha_ingreso',
+                'persona_entrego',
+                'fecha_salida',
+                'modalidad',
+                'caracteristicas_descriptivas',
+                'lugar_procedencia_original',
+                'responsables_ecro',
+                'forma_ingreso',
+                'consulta_externa'
+            ];
+        }
+        
     }
 
     public function title(): string{
@@ -66,44 +102,91 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
     }
 
     public function map($registro): array{
-        return [
-            $this->mostrarIds     ?   $registro->id                        :   $registro->folio,
-            $this->mostrarIds     ?   $registro->tipo_objeto_id            :   ($registro->tipo_objeto         ?   $registro->tipo_objeto->nombre          :   "N/A"),
-            $this->mostrarIds     ?   $registro->tipo_bien_cultural_id     :   ($registro->tipo_bien_cultural  ?   $registro->tipo_bien_cultural->nombre   :   "N/A"),
-            $this->mostrarIds     ?   $registro->epoca_id                  :   ($registro->epoca               ?   $registro->epoca->nombre                :   "N/A"),
-            $this->mostrarIds     ?   $registro->temporalidad_id           :   ($registro->temporalidad        ?   $registro->temporalidad->nombre         :   "N/A"),
-            $this->mostrarIds     ?   $registro->area_id                   :   ($registro->area                ?   $registro->area->nombre                 :   "N/A"),
-            $this->mostrarIds     ?   $registro->proyecto_id               :   ($registro->proyecto            ?   $registro->proyecto->nombre             :   "N/A"),
-            $registro->nombre,
-            $registro->autor,
-            $registro->cultura,
-            $registro->lugar_procedencia_actual,
-            $registro->numero_inventario,
-            $registro->año,
-            $registro->estatus_año,
-            $registro->estatus_epoca,
-            $registro->alto,
-            $registro->diametro,
-            $registro->profundidad,
-            $registro->ancho,
-            $registro->fecha_ingreso,
-            $registro->fecha_salida,
-            $registro->modalidad,
-            $registro->caracteristicas_descriptivas,
-            $registro->lugar_procedencia_original,
-            $registro->forma_ingreso,
-            $registro->disponible_consulta
-        ];
+        if ($this->mostrarIds) {
+            $responsablesEcro       =   $registro->responsables_asignados->pluck('id')->implode(",");
+
+            return [
+                $registro->id,
+                $registro->tipo_objeto_id,
+                $registro->tipo_bien_cultural_id,
+                $registro->epoca_id,
+                $registro->temporalidad_id,
+                $registro->area_id,
+                $registro->proyecto_id,
+                $registro->nombre,
+                $registro->autor,
+                $registro->cultura,
+                $registro->lugar_procedencia_actual,
+                $registro->numero_inventario,
+                $registro->año,
+                $registro->estatus_año,
+                $registro->estatus_epoca,
+                $registro->alto,
+                $registro->diametro,
+                $registro->profundidad,
+                $registro->ancho,
+                $registro->fecha_ingreso,
+                $registro->fecha_salida,
+                $registro->modalidad,
+                $registro->caracteristicas_descriptivas,
+                $registro->lugar_procedencia_original,
+                $registro->forma_ingreso,
+                $registro->disponible_consulta,
+                $responsablesEcro
+            ];
+        } else{
+            $responsablesEcro       =   $registro->responsables_asignados->pluck('name')->implode(", ");
+            $temporadasTrabajo      =   $registro->temporadas_trabajo_asignadas->pluck('año')->implode(", ");
+
+            return [
+                $registro->folio,
+                ($registro->tipo_objeto         ?   $registro->tipo_objeto->nombre          :   "N/A"),
+                ($registro->tipo_bien_cultural  ?   $registro->tipo_bien_cultural->nombre   :   "N/A"),
+                ($registro->epoca               ?   $registro->epoca->nombre                :   "N/A"),
+                ($registro->temporalidad        ?   $registro->temporalidad->nombre         :   "N/A"),
+                ($registro->area                ?   $registro->area->nombre                 :   "N/A"),
+                ($registro->proyecto            ?   $registro->proyecto->nombre             :   "N/A"),
+                $temporadasTrabajo,
+                $registro->nombre,
+                $registro->autor,
+                $registro->cultura,
+                $registro->lugar_procedencia_actual,
+                $registro->numero_inventario,
+                $registro->año,
+                $registro->estatus_año,
+                $registro->estatus_epoca,
+                $registro->alto,
+                $registro->diametro,
+                $registro->profundidad,
+                $registro->ancho,
+                $registro->fecha_ingreso,
+                $registro->persona_aprobo,
+                $registro->fecha_salida,
+                $registro->modalidad,
+                $registro->caracteristicas_descriptivas,
+                $registro->lugar_procedencia_original,
+                $responsablesEcro,
+                $registro->forma_ingreso,
+                $registro->disponible_consulta
+            ];
+        }
+        
     }
 
     public function styles(Worksheet $sheet){
-        $sheet->getStyle('A1:Z1')->getFont()->setBold(true);
+        if ($this->mostrarIds) {
+            $columnas   =   ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z', 'AA'];
+        } else{
+            $columnas   =   ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z', 'AA', 'AB', 'AC'];
+        }
 
-        for ($i = 'A'; $i < 'Z'; $i++) { 
-            $sheet->getStyle('A1:'.$i.'1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            $sheet->getStyle('A1:'.$i.'1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            $sheet->getStyle('A1:'.$i.'1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            $sheet->getStyle('A1:'.$i.'1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        $sheet->getStyle('A1:'.$columnas[count($columnas) - 1].'1')->getFont()->setBold(true);
+
+        foreach ($columnas as $col) {
+            $sheet->getStyle('A1:'.$col.'1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $sheet->getStyle('A1:'.$col.'1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $sheet->getStyle('A1:'.$col.'1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $sheet->getStyle('A1:'.$col.'1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
         }
     }
 }

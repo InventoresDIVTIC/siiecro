@@ -8660,3 +8660,20 @@ body.md-skin {
 .colorpicker {
   z-index: 99999;
 }
+
+.carousel-wrap {
+  padding: 50px 50px;
+  margin: auto;
+  position: relative;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, 
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #2caae1;
+  margin-top: 50px;
+}
+
+
+.owl-carousel .item {
+  text-align: center;
+}

@@ -32,7 +32,7 @@ class CreateObrasSolicitudesAnalisisTable extends Migration
             $table->datetime('fecha_revision')->nullable();
             $table->timestamps();
 
-            $table->foreign('obra_id')->references('id')->on('obras');
+            $table->foreign('obra_id')->references('id')->on('obras')->onDelete('cascade');
             $table->foreign('obra_temporada_trabajo_asignada_id', 'obra_temporada_trabajo_foreign')->references('id')->on('obras__temporadas_trabajo_asignadas');
             $table->foreign('creo_usuario_id')->references('id')->on('users');
             $table->foreign('usuario_aprobo_id')->references('id')->on('users');

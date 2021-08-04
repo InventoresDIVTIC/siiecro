@@ -1,6 +1,10 @@
 <?php
 
 return 	[
+			"status_operativos" 		=> 	[
+												"Habilitado",
+												"Deshabilitado"
+											],
 			"roles" 					=> 	[
 												"Director Académico",
 												"Director General",

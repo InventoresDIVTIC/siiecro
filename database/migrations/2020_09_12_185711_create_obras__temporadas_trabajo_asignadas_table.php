@@ -19,7 +19,7 @@ class CreateObrasTemporadasTrabajoAsignadasTable extends Migration
             $table->integer('proyecto_temporada_trabajo_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('obra_id')->references('id')->on('obras');
+            $table->foreign('obra_id')->references('id')->on('obras')->onDelete('cascade');
             $table->foreign('proyecto_temporada_trabajo_id', 'obra_proyecto_temporada_trabajo_id_foreign')->references('id')->on('proyectos__temporadas_trabajo');
         });
     }

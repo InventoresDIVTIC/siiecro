@@ -14,17 +14,54 @@
 @endsection
 
 @section('body')
-
     @if (Auth::user()->rol->acceso_a_datos_avanzado)
-        <div class="row owl-carousel" id="carrusel-graficas">
-            <div class="item">
-                <canvas id="obras-bienes-culturales"></canvas>
+        <div class="row">
+            <div class="col-12 carousel-wrap">
+                <div class="owl-carousel  owl-theme" id="carrusel-graficas">
+                    <div class="item">
+                        <canvas id="obras-bienes-culturales"></canvas>
+                    </div>
+                    <div class="item">
+                        <canvas id="obras-areas"></canvas>
+                    </div>
+                    <div class="item">
+                        <canvas id="obras-tipos-objeto"></canvas>
+                    </div>
+                </div>
             </div>
-            <div class="item">
-                <canvas id="obras-areas"></canvas>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Obras registradas en el sistema.</h5>
+                        <small class="pull-right"><strong>{{ $objTotalesObras->total_mes }}</strong> en {{ Date::now()->format('F') }}.</small>
+                    </div>
+                    <div class="ibox-content text-center">
+                        <h1 class="no-margins">{{ $objTotalesObras->total }}</h1>
+                    </div>
+                </div>
             </div>
-            <div class="item">
-                <canvas id="obras-tipos-objeto"></canvas>
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Obras disponibles en consulta.</h5>
+                    </div>
+                    <div class="ibox-content text-center">
+                        <h1 class="no-margins">{{ $objTotalesObras->total_disponible }} / {{ $objTotalesObras->total_no_disponible }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Obras por tipo.</h5>
+                    </div>
+                    <div class="ibox-content text-center">
+                        <h1 class="no-margins">{{ $objTotalesObras->total_interno }} / {{ $objTotalesObras->total_externo }}</h1>
+                    </div>
+                </div>
             </div>
         </div>
     @endif

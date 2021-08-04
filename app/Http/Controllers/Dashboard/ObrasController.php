@@ -122,11 +122,16 @@ class ObrasController extends Controller
                             return NULL;
                         })
     					->addColumn('acciones', function($registro){
-                            $editar         =   '<a class="icon-link" href="'.route("dashboard.obras.show", $registro->id).'"><i class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver detalle"></i></a>';
-                            $eliminar   	=   '';
+                            $editar                 =   '<a class="icon-link" href="'.route("dashboard.obras.show", $registro->id).'"><i class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver detalle"></i></a>';
+                            $eliminar               =   '';
 
                             if(Auth::user()->rol->eliminar_registro){
-                                $eliminar   =   '<i onclick="eliminar('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Eliminar"></i>';
+                                if ($registro->status_operativo == "Habilitado") {
+                                    $eliminar       =   '<i onclick="deshabilitar('.$registro->id.')" class="fa fa-ban fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Deshabilitar"></i>';
+                                } else{
+
+                                    $eliminar       =   '<i onclick="eliminar('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Eliminar"></i>';
+                                }
                             }
 
                             return $editar.$eliminar;
@@ -482,6 +487,11 @@ class ObrasController extends Controller
 
     public function exportar($mostrarIds){
         return Excel::download(new ObrasExport($mostrarIds), 'obras.xlsx');
+    }
+
+    public function deshabilitar(Request $request, $id){
+        $registro   =   Obras::findOrFail($id);
+        return view('dashboard.obras.deshabilitar', ["registro" => $registro]);
     }
 
     public function eliminar(Request $request, $id){

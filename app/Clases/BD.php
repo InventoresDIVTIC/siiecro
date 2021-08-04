@@ -80,33 +80,11 @@ class BD
             $error_code 					= 	$e->errorInfo[1];
             DB::rollback();
 
-            if($error_code==1451){
-            	$registro  					= 	$model::find($idEliminar);
-            	$deshabilitado 				=  	'';
-            	if (isset($registro->status)) // Si el registro tiene la opcion de deshabilitarse
-            	{
-            		if($registro->status=='Enabled'){
-                		$registro->status 	= 	'Disabled';
-                		$deshabilitado  	= 	'El registro fue deshabilitado.';
-                		$registro->save();
-                	}else{
-                		$registro->status 	= 	'Disabled';
-                	}
-                	$registro->save();
-            	}
-            	else
-            	{
-            		$deshabilitado 			= 	"Change the relations in your system beofre delete this ".$modelo;
-            	}
-
-                return Response::json(["mensaje" => "El registro no pudo ser eliminado porque <br/>hay información relacionada a el.<br/>".$deshabilitado, "id" => $registro->id, "error" => false], 200);
+            $error 							= 	BD::descripcionDelError($error_code);
+            if($error!='No se encontró la descripción del error.'){
+                return Response::json(["mensaje" => $error, "error" => true], 200);
             }else{
-            	$error 						= 	BD::descripcionDelError($error_code);
-                if($error!='No se encontró la descripción del error.'){
-                    return Response::json(["mensaje" => $error, "error" => true], 200);
-                }else{
-                    return Response::json(["mensaje" => $e->getMessage(), "error" => true], 200);
-                }
+                return Response::json(["mensaje" => $e->getMessage(), "error" => true], 200);
             }
 
         }

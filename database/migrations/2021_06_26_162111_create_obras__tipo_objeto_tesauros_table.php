@@ -19,7 +19,7 @@ class CreateObrasTipoObjetoTesaurosTable extends Migration
             $table->string('nombre')->nullable();
             $table->timestamps();
 
-            $table->foreign('tipo_objeto_id', 'tipo_objeto_id_tesauro_foreign')->references('id')->on('obras__tipo_objeto');
+            $table->foreign('tipo_objeto_id', 'tipo_objeto_id_tesauro_foreign')->references('id')->on('obras__tipo_objeto')->onDelete('cascade');
         });
     }
 

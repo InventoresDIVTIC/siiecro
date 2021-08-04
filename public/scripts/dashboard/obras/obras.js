@@ -17,6 +17,25 @@ jQuery(document).ready(function($) {
     );
 });
 
+function deshabilitar(id)
+{
+  _mostrarFormulario("/dashboard/obras/"+id+"/deshabilitar/", //Url solicitud de datos
+                  "#modal-1", //Div que contendra el modal
+                  "#modal-deshabilitar", //Nombre modal
+                  "", //Elemento al que se le dara focus una vez cargado el modal
+                  function(){
+
+                  }, //Funcion para el success
+                  "#form-deshabilitar", //ID del Formulario
+                  "#carga-deshabilitar", //Loading de guardar datos de formulario
+                  "#div-notificacion", //Div donde mostrara el error en caso de, vacio lo muestra en toastr
+                  function(){
+                    _ocultarModal("#modal-deshabilitar", function(){
+                      _recargarTabla("#dt-datos");
+                    });
+                  });//Funcion en caso de guardar correctamente);
+}
+
 function eliminar(id)
 {
   _mostrarFormulario("/dashboard/obras/"+id+"/eliminar/", //Url solicitud de datos

@@ -27,5 +27,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ObrasAnalisisARealizarSeeder::class);
         $this->call(ObrasAnalisisARealizarTecnicaSeeder::class);
         $this->call(ObrasAnalisisARealizarInformacionDelEquipoSeeder::class);
+
+        // Proyectos
+        $this->call(ProyectosTableSeeder::class);
+        $this->call(ProyectosTemporadasTrabajoSeeder::class);
     }
 }

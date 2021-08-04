@@ -182,4 +182,33 @@ class ProyectosController extends Controller
 
         return Response::json(["mensaje" => "Petición incorrecta"], 500);
     }
+
+    public function seeder(){
+        if (Auth::user()->rol->nombre == "Administrador") {
+            $proyectos          =   Proyectos::all();
+
+            echo "[<br>";
+
+            foreach ($proyectos as $proyecto) {
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;[<br>";
+
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id' => ".$proyecto->id.",";
+                echo "<br>";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'area_id' => ".$proyecto->area_id.",";
+                echo "<br>";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'nombre' => '".$proyecto->nombre."',";
+                echo "<br>";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'seo' => '".$proyecto->seo."',";
+                echo "<br>";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'forma_ingreso' => '".$proyecto->forma_ingreso."',";
+                echo "<br>";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status' => 'Abierto',";
+                echo "<br>";
+
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;],<br>";
+            }
+
+            echo "<br>]";
+        }
+    }
 }

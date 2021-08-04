@@ -19,7 +19,7 @@ class CreateObrasAnalisisARealizarTecnicaTable extends Migration
             $table->string('nombre');
 
             $table->timestamps();
-            $table->foreign('analisis_a_realizar_id', 'analisis_a_realizar_id_foreign')->references('id')->on('obras__analisis_a_realizar');
+            $table->foreign('analisis_a_realizar_id', 'analisis_a_realizar_id_foreign')->references('id')->on('obras__analisis_a_realizar')->onDelete('cascade');
         });
     }
 

@@ -19,7 +19,7 @@ class CreateObrasResponsablesAsignadosTable extends Migration
             $table->integer('usuario_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('obra_id')->references('id')->on('obras');
+            $table->foreign('obra_id')->references('id')->on('obras')->onDelete('cascade');
             $table->foreign('usuario_id')->references('id')->on('users');    
         });
     }

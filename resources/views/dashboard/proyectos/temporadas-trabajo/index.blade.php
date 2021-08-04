@@ -1,7 +1,7 @@
 @extends('layouts.dashboard', ["menu" => "area"])
 
 @section('top-body')
-    <div class="col-sm-4">
+    <div class="col-sm-12">
         <h2>Temporadas de trabajo del proyecto <strong>{{ $proyecto->nombre }}</strong></h2>
         <ol class="breadcrumb">
             <li>
@@ -18,7 +18,7 @@
             </li>
         </ol>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-12">
         <div class="title-action">
             <btn onclick="crear({{ $proyecto->id }});" class="btn btn-primary">Crear nueva temporada de trabajo</btn>
         </div>

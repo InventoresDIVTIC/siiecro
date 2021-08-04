@@ -119,4 +119,29 @@ class ProyectosTemporadasTrabajoController extends Controller
         
         return $registro->generarPdf()->stream($registro->proyecto->folio."-".$registro->año."-".$registro->numero_temporada.".pdf");
     }
+
+    public function seeder(){
+        if (Auth::user()->rol->nombre == "Administrador") {
+            $temporadas         =   ProyectosTemporadasTrabajo::all();
+
+            echo "[<br>";
+
+            foreach ($temporadas as $temporada) {
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;[<br>";
+
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id' => ".$temporada->id.",";
+                echo "<br>";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'proyecto_id' => ".$temporada->proyecto_id.",";
+                echo "<br>";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'año' => '".$temporada->año."',";
+                echo "<br>";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'numero_temporada' => '".$temporada->numero_temporada."',";
+                echo "<br>";
+
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;],<br>";
+            }
+
+            echo "<br>]";
+        }
+    }
 }

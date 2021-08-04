@@ -49,7 +49,8 @@ jQuery(document).ready(function($) {
 		    loop: 		false,
 		    margin: 	10,
 		    items: 		1,
-		    nav: 		true
+		    nav: 		false,
+		    autoplay: 	true,
 		})
 	}
 });

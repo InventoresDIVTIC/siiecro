@@ -18,7 +18,7 @@ class CreateObrasResultadosAnalisisEsquemaMuestraTable extends Migration
             $table->integer('resultado_analisis_id')->unsigned();
             $table->string('imagen');
             $table->timestamps();
-            $table->foreign('resultado_analisis_id', 'resultado_analisis_esquema_muestra_id_foreign')->references('id')->on('obras__resultados_analisis');
+            $table->foreign('resultado_analisis_id', 'resultado_analisis_esquema_muestra_id_foreign')->references('id')->on('obras__resultados_analisis')->onDelete('cascade');
         });
     }
 

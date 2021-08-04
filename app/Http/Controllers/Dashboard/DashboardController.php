@@ -22,7 +22,8 @@ class DashboardController extends Controller
     }
 
 	public function index(){
-    	return view('dashboard.dashboard.index');
+        $objTotalesObras    =   Obras::obtenerObjetoTotalesDashboard();
+    	return view('dashboard.dashboard.index', ["objTotalesObras" => $objTotalesObras]);
     }
 
     public function graficasObrasBienesCulturales(Request $request){
@@ -30,7 +31,7 @@ class DashboardController extends Controller
     		$obras 		=	Obras::selectRaw("
                                                 count(obras.id)                                                 as cantidad,
                                                 CONCAT(bien_cultural.nombre, ' (', count(obras.id), ')')        as bien_cultural,
-                                                CONCAT(bien_cultural.color_hexadecimal, '60')                   as color
+                                                bien_cultural.color_hexadecimal                                 as color
     										")
 									->join("obras__tipo_bien_cultural as bien_cultural", "bien_cultural.id", "obras.tipo_bien_cultural_id")
 									->groupBy('bien_cultural.id')
@@ -59,7 +60,7 @@ class DashboardController extends Controller
     		$obras 		=	Obras::selectRaw("
                                                 count(obras.id)                                             as cantidad,
                                                 CONCAT(tipo_objeto.nombre, ' (', count(obras.id), ')')      as tipo_objeto,
-                                                CONCAT(tipo_objeto.color_hexadecimal, '60')                 as color
+                                                tipo_objeto.color_hexadecimal                               as color
     										")
 									->join("obras__tipo_objeto as tipo_objeto", "tipo_objeto.id", "obras.tipo_objeto_id")
 									->groupBy('tipo_objeto.id')
@@ -88,7 +89,7 @@ class DashboardController extends Controller
     		$obras 		=	Obras::selectRaw("
                                                 count(obras.id)                                 as cantidad,
                                                 CONCAT(a.siglas, ' (', count(obras.id), ')')    as area,
-                                                CONCAT(a.color_hexadecimal, '60')               as color
+                                                a.color_hexadecimal                             as color
     										")
 									->join("areas as a", "a.id", "obras.area_id")
 									->groupBy('a.id')

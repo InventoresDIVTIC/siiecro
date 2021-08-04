@@ -19,7 +19,7 @@ class CreateObrasTipoBienCulturalTesaurosTable extends Migration
             $table->string('nombre')->nullable();
             $table->timestamps();
 
-            $table->foreign('tipo_bien_cultural_id', 'tipo_bien_cultural_id_tesauro_foreign')->references('id')->on('obras__tipo_bien_cultural');
+            $table->foreign('tipo_bien_cultural_id', 'tipo_bien_cultural_id_tesauro_foreign')->references('id')->on('obras__tipo_bien_cultural')->onDelete('cascade');
         });
     }
 

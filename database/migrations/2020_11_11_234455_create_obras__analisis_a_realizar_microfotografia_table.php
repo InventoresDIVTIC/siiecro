@@ -18,7 +18,7 @@ class CreateObrasAnalisisARealizarMicrofotografiaTable extends Migration
             $table->integer('analisis_a_realizar_resultado_id')->unsigned();
             $table->string('imagen');
             $table->timestamps();
-            $table->foreign('analisis_a_realizar_resultado_id', 'analisis_a_realizar_resultado_id_foreign')->references('id')->on('obras__analisis_a_realizar_resultados');
+            $table->foreign('analisis_a_realizar_resultado_id', 'analisis_a_realizar_resultado_id_foreign')->references('id')->on('obras__analisis_a_realizar_resultados')->onDelete('cascade');
         });
     }
 

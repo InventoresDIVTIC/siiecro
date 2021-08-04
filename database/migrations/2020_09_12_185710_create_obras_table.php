@@ -49,6 +49,7 @@ class CreateObrasTable extends Migration
             $table->text('caracteristicas_descriptivas')->nullable();
             $table->string('lugar_procedencia_original')->nullable();
             $table->enum('forma_ingreso', config('valores.obras_formas_ingreso'))->default(config('valores.obras_formas_ingreso')[0]);
+            $table->enum('status_operativo', config('valores.status_operativos'))->default(config('valores.status_operativos')[0]);
 
             $table->datetime('fecha_aprobacion')->nullable();
             $table->datetime('fecha_rechazo')->nullable();

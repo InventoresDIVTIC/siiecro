@@ -18,7 +18,7 @@ class CreateObrasResultadosAnalisisInterpretacionesParticularesTable extends Mig
             $table->integer('obras__resultados_analisis_id')->unsigned()->nullable();
             $table->integer('obras__tipo_material__interpretacion_particular_id')->unsigned()->nullable();
             $table->timestamps();
-            $table->foreign('obras__resultados_analisis_id', 'obs__resultados_analisis_foreign')->references('id')->on('obras__resultados_analisis');
+            $table->foreign('obras__resultados_analisis_id', 'obs__resultados_analisis_foreign')->references('id')->on('obras__resultados_analisis')->onDelete('cascade');
             $table->foreign('obras__tipo_material__interpretacion_particular_id', 'obs_tipmat_interpretacion_particular_foreign')->references('id')->on('obras__tipo_material__interpretacion_particular');
         });
     }

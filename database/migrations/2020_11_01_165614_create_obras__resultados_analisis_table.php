@@ -44,7 +44,7 @@ class CreateObrasResultadosAnalisisTable extends Migration
             $table->string('conclusion_general')->nullable();
             
             $table->timestamps();
-            $table->foreign('solicitudes_analisis_muestras_id', 'solicitudes_analisis_muestras_id_foreign')->references('id')->on('obras__solicitudes_analisis_muestras');
+            $table->foreign('solicitudes_analisis_muestras_id', 'solicitudes_analisis_muestras_id_foreign')->references('id')->on('obras__solicitudes_analisis_muestras')->onDelete('cascade');
             $table->foreign('forma_obtencion_muestra_id', 'forma_obtencion_muestra_id_foreign')->references('id')->on('obras__forma_obtencion_muestra');
             $table->foreign('tipo_material_id', 'tipo_material_id_foreign')->references('id')->on('obras__tipo_material');
             // $table->foreign('informacion_por_definir_id', 'informacion_por_definir_id_foreign')->references('id')->on('obras__tipo_material__informacion_por_definir');

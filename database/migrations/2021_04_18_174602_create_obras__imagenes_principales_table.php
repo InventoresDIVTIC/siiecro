@@ -19,7 +19,7 @@ class CreateObrasImagenesPrincipalesTable extends Migration
             $table->string('imagen_grande')->nullable();
             $table->string('imagen_chica')->nullable();
             $table->timestamps();
-            $table->foreign('obra_id', 'imagen_obra_id_foreign')->references('id')->on('obras');
+            $table->foreign('obra_id', 'imagen_obra_id_foreign')->references('id')->on('obras')->onDelete('cascade');
 
         });
     }

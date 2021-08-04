@@ -18,7 +18,7 @@ class CreateObrasSolicitudesAnalisisImagenesEsquemaTable extends Migration
             $table->integer('solicitud_analisis_id')->unsigned();
             $table->string('imagen');
             $table->timestamps();
-            $table->foreign('solicitud_analisis_id', 'imagen_esquema_solicitud_id_foreign')->references('id')->on('obras__solicitudes_analisis');
+            $table->foreign('solicitud_analisis_id', 'imagen_esquema_solicitud_id_foreign')->references('id')->on('obras__solicitudes_analisis')->onDelete('cascade');
         });
     }
 

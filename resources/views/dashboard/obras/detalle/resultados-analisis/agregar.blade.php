@@ -70,9 +70,13 @@
                                 <label for="persona_realiza_analisis_id">Persona que realizó el análisis</label>
                                 <select class="form-control select2" id="persona_realiza_analisis_id" name="persona_realiza_analisis_id" required autocomplete="off" disabled="">
                                     <option value=""></option>
-                                    @foreach ($persona_realiza_analisis as $persona)
-                                        <option {{ $persona->id == $registro->persona_realiza_analisis_id ? "selected" : "" }} value="{{ $persona->id }}">{{ $persona->name }}</option>
-                                    @endforeach
+                                    @if ($persona_realiza_analisis->count())
+                                        @foreach ($persona_realiza_analisis as $persona)
+                                            <option {{ $persona->id == $registro->persona_realiza_analisis_id ? "selected" : "" }} value="{{ $persona->id }}">{{ $persona->name }}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="{{ $registro->persona_realiza_analisis_id }}" selected="">{{ $registro->persona_analisis->name }}</option>
+                                    @endif
                                 </select>
                             </div>
 

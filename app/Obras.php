@@ -46,6 +46,7 @@ class Obras extends Model
         'fecha_aprobacion',
         'fecha_rechazo',
         'disponible_consulta',
+        'status_operativo',
     ];
     
     protected $dates = [
@@ -453,5 +454,19 @@ class Obras extends Model
 
     public function etiquetaDimensiones(){
         return $this->alto." cm x ".$this->ancho." cm".($this->profundidad ? (" x ".$this->profundidad." cm") : "").($this->diametro ? (" x ".$this->diametro." cm") : "");
+    }
+
+    public static function obtenerObjetoTotalesDashboard(){
+        $obras                          =   Obras::select(['id', 'disponible_consulta', 'forma_ingreso']);
+        $obj                            =   new \StdClass;
+
+        $obj->total                     =   $obras->count();
+        $obj->total_mes                 =   Obras::where('fecha_aprobacion', '>', Carbon::now()->firstOfMonth())->count();
+        $obj->total_disponible          =   $obras->where('disponible_consulta')->count();
+        $obj->total_no_disponible       =   $obras->where('disponible_consulta', 0)->count();
+        $obj->total_externo             =   $obras->where('forma_ingreso', 'EXT')->count();
+        $obj->total_interno             =   $obras->where('forma_ingreso', 'INT')->count();
+
+        return $obj;
     }
 }

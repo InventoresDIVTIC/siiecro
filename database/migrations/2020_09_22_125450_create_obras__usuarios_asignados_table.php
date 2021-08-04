@@ -20,7 +20,7 @@ class CreateObrasUsuariosAsignadosTable extends Migration
             $table->enum('status', config('valores.status_usuarios'));
             $table->timestamps();
 
-            $table->foreign('obra_id')->references('id')->on('obras');
+            $table->foreign('obra_id')->references('id')->on('obras')->onDelete('cascade');
             $table->foreign('usuario_id')->references('id')->on('users');    
         });
     }
