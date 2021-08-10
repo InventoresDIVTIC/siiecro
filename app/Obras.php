@@ -202,6 +202,26 @@ class Obras extends Model
         );
     }
 
+    public function etiquetaFolio(){
+        $clase              =   "";
+        $tooltip            =   "";
+
+        if($this->status_operativo == "Deshabilitado"){
+            $clase          =   "danger";
+            $tooltip        =   $this->status_operativo;
+        } else{
+            if ($this->disponible_consulta) {
+                $clase      =   "primary";
+                $tooltip    =   "Disponible para consulta";
+            } else{
+                $tooltip    =   "NO disponible para consulta";
+            }
+            
+        }
+
+        return "<span class='label label-".$clase."' mi-tooltip='".$tooltip."' data-placement='right'>".$this->folio."</span>";
+    }
+
     public function etiquetaStatus(){
         $clase          =   "";
 
@@ -359,6 +379,7 @@ class Obras extends Model
                                     ")
                             ->join('areas as a', 'a.id', 'obras.area_id')
                             ->whereNotNull('obras.fecha_aprobacion')
+                            ->where('obras.status_operativo', 'Habilitado')
                             ->orderBy('obras.fecha_aprobacion', 'DESC')
                             ->limit(10);
         } else{
@@ -376,6 +397,7 @@ class Obras extends Model
                                     $query->orWhere('a.id', Auth::user()->area_id);
                                 }
                             })
+                            ->where('obras.status_operativo', 'Habilitado')
                             ->groupBy('obras.id')
                             ->orderBy('asignados.created_at', 'DESC');
         }
@@ -457,7 +479,7 @@ class Obras extends Model
     }
 
     public static function obtenerObjetoTotalesDashboard(){
-        $obras                          =   Obras::select(['id', 'disponible_consulta', 'forma_ingreso']);
+        $obras                          =   Obras::select(['id', 'disponible_consulta', 'forma_ingreso'])->get();
         $obj                            =   new \StdClass;
 
         $obj->total                     =   $obras->count();
@@ -466,7 +488,7 @@ class Obras extends Model
         $obj->total_no_disponible       =   $obras->where('disponible_consulta', 0)->count();
         $obj->total_externo             =   $obras->where('forma_ingreso', 'EXT')->count();
         $obj->total_interno             =   $obras->where('forma_ingreso', 'INT')->count();
-
+        
         return $obj;
     }
 }

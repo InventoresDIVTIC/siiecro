@@ -38,7 +38,7 @@
                         <h5>Obras registradas en el sistema.</h5>
                         <small class="pull-right"><strong>{{ $objTotalesObras->total_mes }}</strong> en {{ Date::now()->format('F') }}.</small>
                     </div>
-                    <div class="ibox-content text-center">
+                    <div class="ibox-content text-center h-100">
                         <h1 class="no-margins">{{ $objTotalesObras->total }}</h1>
                     </div>
                 </div>
@@ -48,8 +48,18 @@
                     <div class="ibox-title">
                         <h5>Obras disponibles en consulta.</h5>
                     </div>
-                    <div class="ibox-content text-center">
-                        <h1 class="no-margins">{{ $objTotalesObras->total_disponible }} / {{ $objTotalesObras->total_no_disponible }}</h1>
+                    <div class="ibox-content text-center h-100">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 class="no-margins">{{ $objTotalesObras->total_disponible }}</h1>
+                                <div class="font-bold text-navy">Disponibles</div>
+                            </div>
+                            <div class="col-md-6">
+                                <h1 class="no-margins">{{ $objTotalesObras->total_no_disponible }}</h1>
+                                <div class="font-bold text-danger">No disponibles</div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -58,8 +68,17 @@
                     <div class="ibox-title">
                         <h5>Obras por tipo.</h5>
                     </div>
-                    <div class="ibox-content text-center">
-                        <h1 class="no-margins">{{ $objTotalesObras->total_interno }} / {{ $objTotalesObras->total_externo }}</h1>
+                    <div class="ibox-content text-center h-100">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 class="no-margins">{{ $objTotalesObras->total_interno }}</h1>
+                                <div class="font-bold text-navy">Internas</div>
+                            </div>
+                            <div class="col-md-6">
+                                <h1 class="no-margins">{{ $objTotalesObras->total_externo }}</h1>
+                                <div class="font-bold text-danger">Externas</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

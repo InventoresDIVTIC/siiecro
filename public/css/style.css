@@ -1593,6 +1593,9 @@ a.list-group-item.active:focus {
 .fh-200 {
   height: 200px;
 }
+.h-100 {
+  min-height: 100px;
+}
 .h-150 {
   min-height: 150px;
 }

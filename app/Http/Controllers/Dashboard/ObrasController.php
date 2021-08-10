@@ -53,6 +53,12 @@ class ObrasController extends Controller
                                                                                                     "destroy"
                                                                                                 ]
                                                                                 ]);
+        $this->middleware('VerificarPermiso:administrar_solicitudes_obras',     [
+                                                                                    "only"  =>  [
+                                                                                                    "deshabilitar",
+                                                                                                    "habilitar"
+                                                                                                ]
+                                                                                ]);
         $this->middleware('VerificarPermiso:imprimir',                          [
                                                                                     "only"  =>  [
                                                                                                     "imprimir"
@@ -110,9 +116,13 @@ class ObrasController extends Controller
                                         });
         }
 
+        if (!Auth::user()->rol->administrar_solicitudes_obras) {
+            $registros  =   $registros->where('status_operativo', 'Habilitado');
+        }
+
     	return DataTables::of($registros)
     					->editColumn('id', function($registro){
-    						return $registro->folio;
+    						return $registro->etiquetaFolio();
     					})
                         ->editColumn('año', function($registro){
                             if($registro->año){
@@ -122,19 +132,25 @@ class ObrasController extends Controller
                             return NULL;
                         })
     					->addColumn('acciones', function($registro){
-                            $editar                 =   '<a class="icon-link" href="'.route("dashboard.obras.show", $registro->id).'"><i class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver detalle"></i></a>';
-                            $eliminar               =   '';
+                            $editar                         =   '<a class="icon-link" href="'.route("dashboard.obras.show", $registro->id).'"><i class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver detalle"></i></a>';
+                            $eliminar                       =   '';
+                            $habilitarDeshabilitar          =   '';
 
-                            if(Auth::user()->rol->eliminar_registro){
-                                if ($registro->status_operativo == "Habilitado") {
-                                    $eliminar       =   '<i onclick="deshabilitar('.$registro->id.')" class="fa fa-ban fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Deshabilitar"></i>';
-                                } else{
+                            if($registro->status_operativo == "Deshabilitado"){
+                                if (Auth::user()->rol->eliminar_registro) {
+                                    $eliminar               =   '<i onclick="eliminar('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Eliminar"></i>';
+                                }
 
-                                    $eliminar       =   '<i onclick="eliminar('.$registro->id.')" class="fa fa-trash fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Eliminar"></i>';
+                                if (Auth::user()->rol->administrar_solicitudes_obras) {
+                                    $habilitarDeshabilitar  =   '<i onclick="habilitar('.$registro->id.')" class="fa fa-check fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Habilitar"></i>';
                                 }
                             }
 
-                            return $editar.$eliminar;
+                            if (Auth::user()->rol->administrar_solicitudes_obras && $registro->status_operativo == "Habilitado") {
+                                $habilitarDeshabilitar      =   '<i onclick="deshabilitar('.$registro->id.')" class="fa fa-ban fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Deshabilitar"></i>';
+                            }
+
+                            return $editar.$eliminar.$habilitarDeshabilitar;
     					})
                         ->filter(function($query) use($busqueda){
                             if ($busqueda != "") {
@@ -171,7 +187,7 @@ class ObrasController extends Controller
                                 });
                             }
                         })
-                        ->rawColumns(['acciones'])
+                        ->rawColumns(['id', 'acciones'])
     					->make('true');
     }
 
@@ -492,6 +508,11 @@ class ObrasController extends Controller
     public function deshabilitar(Request $request, $id){
         $registro   =   Obras::findOrFail($id);
         return view('dashboard.obras.deshabilitar', ["registro" => $registro]);
+    }
+
+    public function habilitar(Request $request, $id){
+        $registro   =   Obras::findOrFail($id);
+        return view('dashboard.obras.habilitar', ["registro" => $registro]);
     }
 
     public function eliminar(Request $request, $id){

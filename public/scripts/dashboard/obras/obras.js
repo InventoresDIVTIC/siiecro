@@ -36,6 +36,25 @@ function deshabilitar(id)
                   });//Funcion en caso de guardar correctamente);
 }
 
+function habilitar(id)
+{
+  _mostrarFormulario("/dashboard/obras/"+id+"/habilitar/", //Url solicitud de datos
+                  "#modal-1", //Div que contendra el modal
+                  "#modal-habilitar", //Nombre modal
+                  "", //Elemento al que se le dara focus una vez cargado el modal
+                  function(){
+
+                  }, //Funcion para el success
+                  "#form-habilitar", //ID del Formulario
+                  "#carga-habilitar", //Loading de guardar datos de formulario
+                  "#div-notificacion", //Div donde mostrara el error en caso de, vacio lo muestra en toastr
+                  function(){
+                    _ocultarModal("#modal-habilitar", function(){
+                      _recargarTabla("#dt-datos");
+                    });
+                  });//Funcion en caso de guardar correctamente);
+}
+
 function eliminar(id)
 {
   _mostrarFormulario("/dashboard/obras/"+id+"/eliminar/", //Url solicitud de datos

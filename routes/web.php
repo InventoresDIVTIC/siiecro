@@ -78,6 +78,7 @@ Auth::routes();
 			Route::get('obras/solicitudes-intervencion', 			'ObrasController@solicitudesIntervencion')->name('obras.solicitudes');
 			Route::get('obras/solicitudes-intervencion/carga', 		'ObrasController@cargarSolicitudesIntervencion');
 			Route::get('obras/{id}/deshabilitar', 					'ObrasController@deshabilitar');
+			Route::get('obras/{id}/habilitar', 						'ObrasController@habilitar');
 			Route::get('obras/{id}/eliminar', 						'ObrasController@eliminar');
 			Route::get('obras/{id}/aprobar', 						'ObrasController@modalAprobar');
 			Route::put('obras/{id}/aprobar', 						'ObrasController@aprobar')->name('obras.aprobar');
