@@ -131,6 +131,15 @@ class ObrasController extends Controller
 
                             return NULL;
                         })
+                        ->editColumn('nombre_area', function($registro){
+                            return $registro->area ? $registro->area->siglas : "";
+                        })
+                        ->editColumn('fecha_ingreso', function($registro){
+                            return $registro->fecha_ingreso ? $registro->fecha_ingreso->format('Y-m-d') : "";
+                        })
+                        ->editColumn('fecha_salida', function($registro){
+                            return $registro->fecha_salida ? $registro->fecha_salida->format('Y-m-d') : "";
+                        })
     					->addColumn('acciones', function($registro){
                             $editar                         =   '<a class="icon-link" href="'.route("dashboard.obras.show", $registro->id).'"><i class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver detalle"></i></a>';
                             $eliminar                       =   '';
@@ -569,6 +578,15 @@ class ObrasController extends Controller
         }
 
         return $registro->generarPdfOficio()->stream($registro->folio.".pdf");
+    }
+
+    public function imprimirOficioSalida(Request $request, $obra_id){
+        $registro                       =   Obras::buscarObraValidandoPermisos($obra_id);
+        if(is_null($registro)){
+            abort(404);
+        }
+
+        return $registro->generarPdfOficioSalida()->stream($registro->folio.".pdf");
     }
 
     ##### IMÁGENES PRINCIPALES ###########################################################################

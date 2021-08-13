@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
 		    margin: 	10,
 		    items: 		1,
 		    nav: 		false,
-		    autoplay: 	true,
+		    autoplay: 	false,
 		})
 	}
 });

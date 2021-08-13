@@ -371,6 +371,11 @@ class Obras extends Model
         return $pdf;
     }
 
+    public function generarPdfOficioSalida(){
+        $pdf = PDF::loadView('pdf.obra-oficio-salida', ["obra" => $this]);
+        return $pdf;
+    }
+
     public static function obtenerObrasDashboard(){
         if (Auth::user()->rol->acceso_a_lista_solicitudes_obras) {
             return  Obras::selectRaw("

@@ -6,13 +6,15 @@ jQuery(document).ready(function($) {
       [
         { data: "id",                   width: "10%",   name: "obras.id"},
         { data: "nombre",               width: "20%"},
-        { data: "tipo_bien_cultural",   width: "15%",   name: "obc.nombre"},
+        { data: "tipo_bien_cultural",   width: "10%",   name: "obc.nombre"},
         { data: "tipo_objeto",          width: "10%",   name: "oto.nombre"},
         { data: "año",                  width: "5%"},
         { data: "epoca",                width: "10%",   name: "oe.nombre"},
         { data: "temporalidad",         width: "10%",   name: "ot.nombre"},
-        { data: "nombre_area",          width: "20%",   name: "a.nombre"},
-        { data: "acciones",             width: "15%",   searchable: false,  orderable: false},
+        { data: "nombre_area",          width: "5%",    name: "a.nombre"},
+        { data: "fecha_ingreso",        width: "7%",      name: "obras.fecha_ingreso"},
+        { data: "fecha_salida",         width: "7%",      name: "obras.fecha_salida"},
+        { data: "acciones",             width: "5%",    searchable: false,  orderable: false},
       ], // Columnas
     );
 });
