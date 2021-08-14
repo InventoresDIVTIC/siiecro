@@ -401,7 +401,9 @@ class Obras extends Model
                                                     obras.*
                                                 ")
                                     ->join("obras__tipo_objeto as tipo", "tipo.id", "obras.tipo_objeto_id")
-                                    ->where('tipo.nombre', 'like', '%'.$busqueda.'%');
+                                    ->join('obras__tipo_objeto_tesauros as tipo_tesauro', 'tipo_tesauro.tipo_objeto_id', 'tipo.id')
+                                    ->where('tipo.nombre', 'like', '%'.$busqueda.'%')
+                                    ->orWhere('tipo_tesauro.nombre', 'like', '%'.$busqueda.'%');
                 break;
             case 'Titulo':
                 $obras      =   Obras::selectRaw("
@@ -438,7 +440,7 @@ class Obras extends Model
                                     ->join("obras__resultados_analisis as resultado", "resultado.solicitudes_analisis_muestras_id", "muestra.id")
                                     ->join("obras__analisis_a_realizar_resultados as analisis_realizar_resultado", "analisis_realizar_resultado.resultado_analisis_id", "resultado.id")
                                     ->join("obras__analisis_a_realizar_tecnica as tecnica", "tecnica.id", "analisis_realizar_resultado.tecnica_analitica_id")
-                                    ->where('solicitud.tecnica', 'like', '%'.$busqueda.'%')
+                                    ->where('tecnica.nombre', 'like', '%'.$busqueda.'%')
                                     ->groupBy('obras.id');
                     break;
         }

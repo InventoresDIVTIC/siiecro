@@ -155,7 +155,7 @@
                                             <span><strong>Temporalidad:</strong> <small>{{ $obra->temporalidad ? $obra->temporalidad->nombre : "N/A" }}</small></span><br>
                                         @else
                                             <span><strong>Año:</strong> <small>{{ $obra->año ? $obra->año->format('Y') : "N/A" }}</small></span><br>
-                                            <span><strong>Época:</strong> <small>{{ $obra->epoca->nombre }}</small></span><br>
+                                            <span><strong>Época:</strong> <small>{{ $obra->epoca ? $obra->epoca->nombre : "SIN EPOCA" }}</small></span><br>
                                         @endif
 
                                         @if (!Auth::user()->rol->esExterno())
