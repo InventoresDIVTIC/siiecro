@@ -50,6 +50,8 @@
                                     <th>Época</th>
                                     <th>Temporalidad</th>
                                     <th>Área</th>
+                                    <th>Fecha ingreso</th>
+                                    <th>Fecha salida</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>

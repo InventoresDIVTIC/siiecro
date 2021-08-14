@@ -61,7 +61,8 @@ Auth::routes();
 				Route::get('proyectos/temporadas-trabajo/{id}/eliminar', 				'ProyectosTemporadasTrabajoController@eliminar');
 				Route::get('proyectos/temporadas-trabajo/create/{proyecto_id}', 		'ProyectosTemporadasTrabajoController@create');
 				Route::get('proyectos/temporadas-trabajo/select2', 						'ProyectosTemporadasTrabajoController@select2');
-				Route::get('proyectos/temporadas-trabajo/imprimir/{id}', 				'ProyectosTemporadasTrabajoController@imprimir')->name('temporadas-trabajo.imprimir');
+				Route::get('proyectos/temporadas-trabajo/imprimir-entrada/{id}', 		'ProyectosTemporadasTrabajoController@imprimirEntrada')->name('temporadas-trabajo.imprimir-entrada');
+				Route::get('proyectos/temporadas-trabajo/imprimir-salida/{id}', 		'ProyectosTemporadasTrabajoController@imprimirSalida')->name('temporadas-trabajo.imprimir-salida');
 				Route::get('proyectos/temporadas-trabajo/seeder', 						'ProyectosTemporadasTrabajoController@seeder');
 				Route::resource('proyectos/temporadas-trabajo', 						'ProyectosTemporadasTrabajoController');
 			#############################################################################
@@ -78,6 +79,7 @@ Auth::routes();
 			Route::get('obras/solicitudes-intervencion', 			'ObrasController@solicitudesIntervencion')->name('obras.solicitudes');
 			Route::get('obras/solicitudes-intervencion/carga', 		'ObrasController@cargarSolicitudesIntervencion');
 			Route::get('obras/{id}/deshabilitar', 					'ObrasController@deshabilitar');
+			Route::get('obras/{id}/habilitar', 						'ObrasController@habilitar');
 			Route::get('obras/{id}/eliminar', 						'ObrasController@eliminar');
 			Route::get('obras/{id}/aprobar', 						'ObrasController@modalAprobar');
 			Route::put('obras/{id}/aprobar', 						'ObrasController@aprobar')->name('obras.aprobar');
@@ -88,6 +90,7 @@ Auth::routes();
 			Route::get('obras/exportar/{mostrar_ids}', 				'ObrasController@exportar')->name('obras.exportar');
 			Route::get('obras/imprimir/{id}', 						'ObrasController@imprimir')->name('obras.imprimir');
 			Route::get('obras/imprimir-oficio/{id}', 				'ObrasController@imprimirOficio')->name('obras.imprimir-oficio');
+			Route::get('obras/imprimir-oficio-salida/{id}', 		'ObrasController@imprimirOficioSalida')->name('obras.imprimir-oficio-salida');
 			Route::resource('obras', 								'ObrasController');
 
 			#### OBRAS IMAGENES #########################################################

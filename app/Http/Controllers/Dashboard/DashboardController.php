@@ -120,7 +120,7 @@ class DashboardController extends Controller
 
             return DataTables::of($registros)
                         ->addColumn('folio', function($registro){
-                            return $registro->folio;
+                            return $registro->etiquetaFolio();
                         })
                         ->addColumn('acciones', function($registro){
                             return '<a class="icon-link" href="'.route("dashboard.obras.show", $registro->id).'"><i class="fa fa-search fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Ver"></i></a>';
@@ -155,7 +155,7 @@ class DashboardController extends Controller
                                 });
                             }
                         })
-                        ->rawColumns(['acciones'])
+                        ->rawColumns(['folio', 'acciones'])
                         ->make('true');
         }
 

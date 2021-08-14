@@ -97,9 +97,11 @@
 					    		<th class="col-10 fs-6">Análisis a realizar</th>
 					    		<th class="col-10 fs-6">Técnica analítica</th>
 					    		<th class="col-10 fs-6">Interpretación</th>
+					    		<th class="col-10 fs-6">Microfotografía, datos ó imagen</th>
 					    		<th class="col-15 fs-6">Información del equipo</th>
-					    		<th class="col-10 fs-6">Ruta de acceso</th>
-					    		<th class="col-10 fs-6">Microfotografía</th>
+								@if (Auth::user()->rol->acceso_a_datos_avanzado)
+					    			<th class="col-10 fs-6">Ruta de acceso</th>
+								@endif
 				    		</tr>
 				    	</thead>
 				    	<tbody>
@@ -109,13 +111,15 @@
 				    				<td class="fs-6">{{ $resultado->analisis_realizar->nombre }}</td>
 				    				<td class="fs-6">{{ $resultado->tecnica_analitica->nombre }}</td>
 				    				<td class="fs-6">{!! nl2br($resultado->interpretacion) !!}</td>
-				    				<td class="fs-6">{{ $resultado->informacion_del_equipo ? $resultado->informacion_del_equipo->nombre : "N/A" }}</td>
-				    				<td class="fs-6">{{ $resultado->ruta_acceso_imagen }}</td>
-				    				<td class="fs-6">
+									<td class="fs-6">
 				    					@foreach ($resultado->esquema_analiticos_microfotografias as $imagen)
 				    						<img src="{{ asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$imagen->imagen) }}" height="50px"><br>
 				    					@endforeach
 				    				</td>
+				    				<td class="fs-6">{{ $resultado->informacion_del_equipo ? $resultado->informacion_del_equipo->nombre : "N/A" }}</td>
+									@if (Auth::user()->rol->acceso_a_datos_avanzado)
+				    					<td class="fs-6">{{ $resultado->ruta_acceso_imagen }}</td>
+									@endif
 				    			</tr>
 				    		@endforeach
 				    	</tbody>

@@ -36,10 +36,18 @@ class ProyectosTemporadasTrabajoController extends Controller
                             $imprimir       =   '';
 
                             if (Auth::user()->rol->imprimir_oficios) {
-                                $imprimir   =   '<a class="icon-link" href="'.route("dashboard.temporadas-trabajo.imprimir", $registro->id).'" target="_blank"><i class="fa fa-print fa-lg m-r-sm pointer inline-block" aria-hidden="true" mi-tooltip="Imprimir"></i></a>';
+                                $imprimir   =   '
+                                                    <div class="btn-group pull-right">
+                                                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="false">Imprimir <span class="caret"></span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a target="_blank" href="'.route("dashboard.temporadas-trabajo.imprimir-entrada", $registro->id).'">Entrada</a></li>
+                                                            <li><a target="_blank" href="'.route("dashboard.temporadas-trabajo.imprimir-salida", $registro->id).'">Salida</a></li>
+                                                        </ul>
+                                                    </div>
+                                                ';
                             }
 
-                            return $imprimir.$editar.$eliminar;
+                            return $editar.$eliminar.$imprimir;
                         })
                         ->rawColumns(['acciones'])
                         ->make('true');
@@ -114,10 +122,16 @@ class ProyectosTemporadasTrabajoController extends Controller
         return Response::json(["mensaje" => "Petición incorrecta"], 500);
     }
 
-    public function imprimir(Request $request, $temporada_id){
+    public function imprimirEntrada(Request $request, $temporada_id){
         $registro   =   ProyectosTemporadasTrabajo::findOrFail($temporada_id);
         
-        return $registro->generarPdf()->stream($registro->proyecto->folio."-".$registro->año."-".$registro->numero_temporada.".pdf");
+        return $registro->generarPdfEntrada()->stream($registro->proyecto->folio."-".$registro->año."-".$registro->numero_temporada.".pdf");
+    }
+
+    public function imprimirSalida(Request $request, $temporada_id){
+        $registro   =   ProyectosTemporadasTrabajo::findOrFail($temporada_id);
+        
+        return $registro->generarPdfSalida()->stream($registro->proyecto->folio."-".$registro->año."-".$registro->numero_temporada.".pdf");
     }
 
     public function seeder(){

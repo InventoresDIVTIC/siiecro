@@ -18,8 +18,8 @@
 		<main>
 	    	<div class="col-100">
 	    		<div class="text-left">
-	    			<strong>Área a la que ingresa:</strong> {{ $temporada->proyecto->area ? $temporada->proyecto->area->nombre : "Sin asignar" }}<br>
-	    			<strong>Fecha de entrada:</strong> {{ $temporada->created_at->format('Y-m-d h:i A') }}<br>
+	    			<strong>Área:</strong> {{ $temporada->proyecto->area ? $temporada->proyecto->area->nombre : "Sin asignar" }}<br>
+	    			<strong>Fecha de salida:</strong> @if ($temporada->obras_asignadas->whereNotNull('fecha_salida')->count()) {{ $temporada->obras_asignadas->whereNotNull('fecha_salida')->first()->fecha_salida->format('Y-m-d') }} @endif<br>
 	    		</div>
 	    	</div>
 		    <hr class="semi">
@@ -45,7 +45,7 @@
 			    		</tr>
 			    	</thead>
 			    	<tbody>
-			    		@foreach ($temporada->obras_asignadas as $obra)
+			    		@foreach ($temporada->obras_asignadas->whereNotNull('fecha_salida') as $obra)
 				    		<tr>
 				    			<td>{{ $obra->folio }}</td>
 				    			<td>{{ $obra->nombre }}</td>
@@ -53,7 +53,11 @@
 				    				@if($obra->tipo_bien_cultural->calcular_temporalidad == "si")
 				    					{{ $obra->temporalidad ? $obra->temporalidad->nombre : "N/A" }}
 				    				@else
-				    					{{ $obra->año->format('Y') }} / {{ $obra->epoca->nombre }}
+										@if ($obra->estatus_epoca == "Aproximado")
+											{{ $obra->epoca->nombre }}
+										@else
+											{{ $obra->año->format('Y') }} / {{ $obra->epoca->nombre }}
+										@endif
 				    				@endif
 				    			</td>
 				    			<td>{{ $obra->tipo_objeto->nombre }}</td>
@@ -66,20 +70,28 @@
 		    <hr class="semi">
 	    	<div class="col-100 mt-lg text-center">
 			    <div class="col-50 inline-block">
-			    	<strong>Recibió<br></strong>
-			    	Nombre y firma
+			    	<strong>Recibió</strong><br>
+					@if (isset($obra))
+						<small>{{ $obra->persona_entrego != "" ? $obra->persona_entrego : "N/A" }}</small>
+					@endif
 			    </div>
 			    <div class="col-50 inline-block">
-			    	<strong>Entregó<br></strong>
-			    	Nombre y firma
+			    	<strong>Entregó</strong><br>
+					@if (isset($obra))
+						<small>{{ $obra->usuario_recibio ? $obra->usuario_recibio->name : "N/A" }}</small>
+					@endif
 			    </div>
 	    	</div>
 	    	<div class="col-100 mt-md text-center">
 			    <div class="col-50 inline-block">
-			    	<strong>Vo.Bo</strong>
+			    	<strong>Vo.Bo</strong><br>
+					Lic. Miriam Limón Gallegos<br>
+					<small><strong>Coordinadora de carrera</strong></small>
 			    </div>
 			    <div class="col-50 inline-block">
-			    	<strong>Vo.Bo</strong>
+			    	<strong>Vo.Bo</strong><br>
+					Mtra. Gilda María Pasco Saldaña<br>
+					<small><strong>Directora académica</strong></small>
 			    </div>
 	    	</div>
 
