@@ -25,7 +25,8 @@ class CreateObrasTable extends Migration
             $table->integer('epoca_id')->unsigned()->nullable();
             $table->integer('temporalidad_id')->unsigned()->nullable();
             $table->integer('area_id')->unsigned()->nullable();
-            $table->integer('usuario_recibio_id')->unsigned()->nullable();
+            $table->integer('usuario_recibio_id')->unsigned()->nullable()->comment("Usuario que realizó la entrada");
+            $table->integer('usuario_entrego_id')->unsigned()->nullable()->comment("Usuario que realizó la salida");
             $table->integer('proyecto_id')->unsigned()->nullable();
 
             $table->text('seo');
@@ -43,7 +44,8 @@ class CreateObrasTable extends Migration
             $table->integer('ancho')->unsigned();
 
             $table->datetime('fecha_ingreso')->nullable();
-            $table->string('persona_entrego')->nullable();
+            $table->string('persona_entrego')->nullable()->comment("Persona que entrego a la ECRO");
+            $table->string('persona_recibio')->nullable()->comment("Persona que recibio cuando salio");
             $table->string('fecha_salida')->nullable();
             $table->string('modalidad')->nullable();
             $table->text('caracteristicas_descriptivas')->nullable();
@@ -63,6 +65,7 @@ class CreateObrasTable extends Migration
             $table->foreign('usuario_aprobo_id')->references('id')->on('users');
             $table->foreign('usuario_rechazo_id')->references('id')->on('users');
             $table->foreign('usuario_recibio_id')->references('id')->on('users');
+            $table->foreign('usuario_saco_id')->references('id')->on('users');
             $table->foreign('tipo_objeto_id')->references('id')->on('obras__tipo_objeto');
             $table->foreign('tipo_bien_cultural_id')->references('id')->on('obras__tipo_bien_cultural');
             $table->foreign('epoca_id')->references('id')->on('obras__epoca');

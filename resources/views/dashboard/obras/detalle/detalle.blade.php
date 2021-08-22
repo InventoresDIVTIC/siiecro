@@ -330,7 +330,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6 div-input">
-                                                        <label for="area_id">Recibió</label>
+                                                        <label for="area_id">Usuario que recibió (entrada)</label>
                                                         <select class="form-control select2 full-width" id="usuario_recibio_id" name="usuario_recibio_id" autocomplete="off" disabled {{ Auth::user()->rol->edicion_de_registro_avanzada_2 ? "" : "no-editar" }}>
                                                             <option value=""></option>
                                                             @foreach ($usuariosPuedenRecibirObras as $usuario)
@@ -339,8 +339,23 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 div-input">
-                                                        <label for="fecha_salida">Entregó</label>
+                                                        <label for="fecha_salida">Persona que entregó (entrada)</label>
                                                         <input type="text" class="form-control" id="persona_entrego" name="persona_entrego" value="{{ $obra->persona_entrego }}" autocomplete="off" disabled {{ Auth::user()->rol->edicion_de_registro_avanzada_2 ? "" : "no-editar" }}>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 div-input">
+                                                        <label for="fecha_salida">Persona que recibió (salida)</label>
+                                                        <input type="text" class="form-control" id="persona_recibio" name="persona_recibio" value="{{ $obra->persona_recibio }}" autocomplete="off" disabled {{ Auth::user()->rol->edicion_de_registro_avanzada_2 ? "" : "no-editar" }}>
+                                                    </div>
+                                                    <div class="col-md-6 div-input">
+                                                        <label for="area_id">Usuario que entregó (salida)</label>
+                                                        <select class="form-control select2 full-width" id="usuario_entrego_id" name="usuario_entrego_id" autocomplete="off" disabled {{ Auth::user()->rol->edicion_de_registro_avanzada_2 ? "" : "no-editar" }}>
+                                                            <option value=""></option>
+                                                            @foreach ($usuariosPuedenRecibirObras as $usuario)
+                                                                <option {{ $obra->usuario_entrego_id == $usuario->id ? "selected" : "" }} value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             @endif

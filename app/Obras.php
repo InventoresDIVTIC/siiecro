@@ -15,7 +15,8 @@ class Obras extends Model
         'usuario_solicito_id',
         'usuario_aprobo_id',
         'usuario_rechazo_id',
-        'usuario_recibio_id',
+        'usuario_recibio_id', // Para entrada
+        'usuario_entrego_id', // Para salia
         'epoca_id',
         'temporalidad_id',
         'tipo_objeto_id',
@@ -34,7 +35,8 @@ class Obras extends Model
         'fecha_ingreso',
         'fecha_salida',
         'modalidad',
-        'persona_entrego',
+        'persona_entrego', // Para entrada
+        'persona_recibio', // Para salida
         'caracteristicas_descriptivas',
         'lugar_procedencia_original',
         'forma_ingreso',
@@ -143,6 +145,10 @@ class Obras extends Model
 
     public function usuario_recibio() {
         return $this->hasOne('App\User', 'id', 'usuario_recibio_id');
+    }
+
+    public function usuario_entrego() {
+        return $this->hasOne('App\User', 'id', 'usuario_entrego_id');
     }
 
     public function epoca() {

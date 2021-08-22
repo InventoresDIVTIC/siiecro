@@ -63,11 +63,11 @@
 	    	<div class="col-100 mt-lg text-center">
 			    <div class="col-50 inline-block">
 			    	<strong>Recibió</strong><br>
-			    	<small>{{ $obra->persona_entrego != "" ? $obra->persona_entrego : "N/A" }}</small>
+			    	<small>{{ $obra->persona_recibio != "" ? $obra->persona_recibio : "N/A" }}</small>
 			    </div>
 			    <div class="col-50 inline-block">
 			    	<strong>Entregó</strong><br>
-			    	<small>{{ $obra->usuario_recibio ? $obra->usuario_recibio->name : "N/A" }}</small>
+			    	<small>{{ $obra->usuario_entrego ? $obra->usuario_entrego->name : "N/A" }}</small>
 			    </div>
 	    	</div>
 
