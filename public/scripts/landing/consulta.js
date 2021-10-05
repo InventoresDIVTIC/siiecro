@@ -20,6 +20,7 @@ function comportamientoElementoBusqueda(elemento){
 	$("#txt-busqueda").html($(elemento).data("tipo-busqueda"));
 	$("#input-busqueda").focus().select();
 	tipoBusqueda = $(elemento).data("tipo-busqueda");
+	$("#div-resultados-busqueda").html('');
 }
 
 function buscar(e){
@@ -37,11 +38,17 @@ function buscar(e){
 					tipo: 		tipoBusqueda
 				},
 				beforeSend: function(){
+					$("#div-resultados-busqueda").html('');
 					$("#div-loading").removeClass('hidden');
 				},
 				success: function(response){
+					// console.log(response);
 					$("#div-resultados-busqueda").html(response);
 					$("#div-loading").addClass('hidden');
+					$('#no-registro, #area, #responsable-ecro, #no-proyecto-ecro, #proyecto-ecro, #temporada-ecro, #profe-responsable, #persona-realiza-analisis').select2({
+						placeholder: 'Elige una opción',
+						width: '100%'
+					});
 				},
 				error: function(){
 					alert("error");
@@ -52,3 +59,62 @@ function buscar(e){
 		}
     }
 }
+
+$(document.body).on('change',".filtros-administrativos", function (e) {
+	let no_registro              = $('#no-registro').val();
+	let area                     = $('#area').val().trim();
+	let responsable_ecro         = $('#responsable-ecro').val().trim();
+	let no_proyecto              = $('#no-proyecto-ecro').val();
+	let proyecto                 = $('#proyecto-ecro').val().trim();
+	let temporada                = $('#temporada-ecro').val();
+	let profe_responsable        = $('#profe-responsable').val();
+	let nomenclatura_muestra     = $('#nomenclatura-muestra').val();
+	let persona_realiza_analisis = $('#persona-realiza-analisis').val();
+
+   const filtros = {
+		no_registro: no_registro,
+		area: area,
+		responsable_ecro: responsable_ecro,
+		no_proyecto: no_proyecto,
+		proyecto: proyecto,
+		temporada: temporada,
+		profe_responsable: profe_responsable,
+		nomenclatura_muestra: nomenclatura_muestra,
+		persona_realiza_analisis: persona_realiza_analisis,
+   }
+
+	// console.log(this.value);
+	var busqueda 		= 	$.trim($("#input-busqueda").val());
+	$.ajax({
+		url: '/consulta',
+		type: 'POST',
+		data: {
+			_token: 	$('meta[name="csrf-token"]').attr('content'),
+			busqueda: 	busqueda,
+			tipo: 		tipoBusqueda, 
+			filtros: 	filtros
+		},
+		beforeSend: function(){
+			$("#div-resultados-busqueda").html('');
+			$("#div-loading").removeClass('hidden');
+
+			// if ( proyecto ) {
+			// 	_llenarSelect2Estatico("#temporada-ecro", "/dashboard/proyectos/temporadas-trabajo/select2", {
+			// 	   proyecto_id:    proyecto
+			// 	}, false, false, true);
+			// }	
+		},
+		success: function(response){
+			$("#div-resultados-busqueda").html(response);
+			$("#div-loading").addClass('hidden');
+			$('#no-registro, #area, #responsable-ecro, #no-proyecto-ecro, #proyecto-ecro, #temporada-ecro, #profe-responsable, #persona-realiza-analisis').select2({
+				placeholder: 'Elige una opción',
+				width: '100%'
+			});
+		},
+		error: function(){
+			alert("error");
+			$("#div-loading").addClass('hidden');
+		}
+	});
+});

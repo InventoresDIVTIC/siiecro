@@ -323,6 +323,7 @@ Auth::routes();
 	    ######## CONSULTA ###############################################################
 			Route::get('/consulta', 	'ConsultaController@index')->name('consulta.index');
 			Route::post('/consulta', 	'ConsultaController@busqueda')->name('consulta.buscar');
+			Route::post('/filtrado', 	'ConsultaController@filtrado')->name('consulta.filtrado');
 
 			// ESTA RUTA LA DEJO DE MUESTRA SIN COMENTAR PARA QUE VEAS COMO LA UTILICÉ 
 			// POR SI ACASO TE SIRVE VIEJÓN, IGUAL LA PUEDES BORRAR CUANDO CREAS CONVENIENTE

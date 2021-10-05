@@ -27,6 +27,9 @@
 	  	<!-- Main Stylesheet -->
 	  	{!!Html::style('landing/css/style.css')!!}
 
+	  	<!--SELECT 2 -->
+    	{!!Html::style('css/plugins/select2/select2.min.css')!!}
+
 	</head>
 
 	<body id="top">
@@ -183,6 +186,9 @@
 
 		<!-- Comun -->
   			{!!Html::script('scripts/dashboard/comun.js')!!}
+
+  		<!-- SELECT 2 -->
+  			{!!Html::script('js/plugins/select2/select2.full.min.js')!!}
 
 		@yield('scripts')
 	</body>
