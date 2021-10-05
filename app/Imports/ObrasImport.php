@@ -9,7 +9,8 @@ use App\ObrasTemporalidad;
 use App\ObrasTipoObjeto;
 use App\ObrasTipoBienCultural;
 use App\ObrasResponsablesAsignados;
-
+use App\ObrasTemporadasTrabajoAsignadas;
+use App\ProyectosTemporadasTrabajo;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -194,6 +195,39 @@ class ObrasImport implements ToModel, WithHeadingRow
                 $eliminados                                 =   ObrasResponsablesAsignados::where('obra_id', $obra->id)
                                                                                             ->whereNotIn('usuario_id', $responsablesEcro)
                                                                                             ->delete();
+            ############################################################################
+
+            ##### TEMPORADAS TRABAJO ####################################################
+                $temporadas                                                                 =   explode(",", $row["temporadas_trabajo"]);
+                if ($obra->proyecto) {
+                    foreach ($temporadas as $temporada_trabajo) {
+                        if (is_numeric($temporada_trabajo)) {
+                            // Buscamos la temporada para el proyecto, si no existe no hacemos nada
+                            $temporada                                                      =   ProyectosTemporadasTrabajo::where('proyecto_id', $obra->proyecto_id)
+                                                                                                                        ->where('año', $temporada_trabajo)
+                                                                                                                        ->first();
+                            if (!is_null($temporada)) {
+                                $temporadaAsignada                                          =   ObrasTemporadasTrabajoAsignadas::where("proyecto_temporada_trabajo_id", $temporada->id)
+                                                                                                                                ->where("obra_id", $obra->id)
+                                                                                                                                ->first();
+    
+                                if (is_null($temporadaAsignada)) {
+                                    $temporadaAsignada                                      =   new ObrasResponsablesAsignados;
+                                    $temporadaAsignada->proyecto_temporada_trabajo_id       =   $temporada->id;
+                                    $temporadaAsignada->obra_id                             =   $obra->id;
+                                    $temporadaAsignada->save();
+                                }
+                            }
+                            
+                        }
+                    }
+    
+                    // Eliminamos todos los responsables asignados que no esten en el array del explode
+                    // $eliminados                             =   ObrasResponsablesAsignados::where('obra_id', $obra->id)
+                    //                                                                             ->whereNotIn('usuario_id', $responsablesEcro)
+                    //                                                                             ->delete();
+                }
+                
             ############################################################################
         } catch (\Exception $e) {
             // dd($e, $row);

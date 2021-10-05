@@ -40,6 +40,7 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
                 'temporalidad_id',
                 'area_id',
                 'proyecto_id',
+                'temporadas_trabajo',
                 'nombre',
                 'autor',
                 'cultura',
@@ -104,6 +105,7 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
     public function map($registro): array{
         if ($this->mostrarIds) {
             $responsablesEcro       =   $registro->responsables_asignados->pluck('id')->implode(",");
+            $temporadasTrabajo      =   $registro->temporadas_trabajo_asignadas->pluck('año')->implode(", ");
 
             return [
                 $registro->id,
@@ -113,6 +115,7 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
                 $registro->temporalidad_id,
                 $registro->area_id,
                 $registro->proyecto_id,
+                $temporadasTrabajo,
                 $registro->nombre,
                 $registro->autor,
                 $registro->cultura,
