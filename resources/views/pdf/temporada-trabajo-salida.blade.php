@@ -73,25 +73,27 @@
 			    	<strong>Recibió</strong><br>
 					@if (isset($obra))
 						<small>{{ $obra->persona_recibio != "" ? $obra->persona_recibio : "N/A" }}</small>
-					@endif
+					@endif<br>
+					<small><strong>Propietario o custodio</strong></small>
 			    </div>
 			    <div class="col-50 inline-block">
 			    	<strong>Entregó</strong><br>
 					@if (isset($obra))
 						<small>{{ $obra->usuario_entrego ? $obra->usuario_entrego->name : "N/A" }}</small>
-					@endif
+					@endif<br>
+					<small><strong>Profesor(a) STR</strong></small>
 			    </div>
 	    	</div>
 	    	<div class="col-100 mt-md text-center">
 			    <div class="col-50 inline-block">
 			    	<strong>Vo.Bo</strong><br>
-					Lic. Miriam Limón Gallegos<br>
-					<small><strong>Coordinadora de carrera</strong></small>
+					{{ $configuracion->director_general }}<br>
+					<small><strong>Director(a) general</strong></small>
 			    </div>
 			    <div class="col-50 inline-block">
 			    	<strong>Vo.Bo</strong><br>
-					Mtra. Gilda María Pasco Saldaña<br>
-					<small><strong>Directora académica</strong></small>
+					{{ $configuracion->director_academico }}<br>
+					<small><strong>Director(a) académica</strong></small>
 			    </div>
 	    	</div>
 

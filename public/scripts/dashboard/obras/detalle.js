@@ -3,7 +3,7 @@ var switchery_disponible_consulta   =   null;
 var accion                          =   null;
 jQuery(document).ready(function($) {
   accion                            =   $("#accion").val();
-	$("#tipo_bien_cultural_id, #tipo_objeto_id, #temporalidad_id, #epoca_id, #estatus_año, #estatus_epoca, #area_id, #_responsables, #forma_ingreso, #usuario_recibio_id").select2({
+	$("#tipo_bien_cultural_id, #tipo_objeto_id, #temporalidad_id, #epoca_id, #estatus_año, #estatus_epoca, #area_id, #_responsables, #forma_ingreso, #usuario_recibio_id, #usuario_entrego_id").select2({
         placeholder: "Seleccione una opción"
     });
 

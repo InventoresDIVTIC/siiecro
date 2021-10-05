@@ -98,7 +98,7 @@
                         <div class="row">
                             <div class="col-md-12 div-input required">
                                 <label for="ubicacion_de_toma_muestra">Ubicación de la toma de muestra</label>
-                                <input type="text" class="form-control" id="ubicacion_de_toma_muestra" name="ubicacion_de_toma_muestra" value="{{ $registro->ubicacion_de_toma_muestra }}" required autocomplete="off" disabled="">
+                                <input type="text" class="form-control" id="ubicacion_de_toma_muestra" name="ubicacion_de_toma_muestra" value="{{ $registro->ubicacion_de_toma_muestra ?? ($registro->solicitud_analisis_muestra ? $registro->solicitud_analisis_muestra->ubicacion : "") }}" required autocomplete="off" disabled="">
                             </div>
                         </div>
 
@@ -106,7 +106,7 @@
                             <div class="col-md-12">
                                 <label for="dropzone-esquema-muestra">Esquema de toma de muestras</label>
                             </div>
-                            <div class="col-md-12 div-input required hidden dropzones-imagenes" {{-- style="display: none;" --}}>
+                            <div class="col-md-12 div-input hidden dropzones-imagenes" {{-- style="display: none;" --}}>
                                 <div class="dropzone" id="dropzone-esquema-muestra">
                                 </div>
                             </div>

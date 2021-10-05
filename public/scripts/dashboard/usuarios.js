@@ -4,8 +4,9 @@ jQuery(document).ready(function($) {
 			"#carga-dt", // ID elemento del progreso
 			"/dashboard/usuarios/carga", // URL datos
 			[
+				{ data: "id", 		    width: "5%"},
 				{ data: "name", 		  width: "30%"},
-				{ data: "email",      width: "30%"},
+				{ data: "email",      width: "25%"},
         { data: "rol",        width: "15%"},
         { data: "area",       width: "15%"},
 				{ data: "acciones", 	width: "10%", 	searchable: false, 	orderable: false},

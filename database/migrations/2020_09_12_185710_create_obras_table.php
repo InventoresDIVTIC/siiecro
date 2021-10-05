@@ -65,7 +65,7 @@ class CreateObrasTable extends Migration
             $table->foreign('usuario_aprobo_id')->references('id')->on('users');
             $table->foreign('usuario_rechazo_id')->references('id')->on('users');
             $table->foreign('usuario_recibio_id')->references('id')->on('users');
-            $table->foreign('usuario_saco_id')->references('id')->on('users');
+            $table->foreign('usuario_entrego_id')->references('id')->on('users');
             $table->foreign('tipo_objeto_id')->references('id')->on('obras__tipo_objeto');
             $table->foreign('tipo_bien_cultural_id')->references('id')->on('obras__tipo_bien_cultural');
             $table->foreign('epoca_id')->references('id')->on('obras__epoca');

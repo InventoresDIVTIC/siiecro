@@ -373,12 +373,14 @@ class Obras extends Model
     }
 
     public function generarPdfOficio(){
-        $pdf = PDF::loadView('pdf.obra-oficio', ["obra" => $this]);
+        $configuracion  =   Configuraciones::first();
+        $pdf            =   PDF::loadView('pdf.obra-oficio', ["obra" => $this, "configuracion" => $configuracion]);
         return $pdf;
     }
 
     public function generarPdfOficioSalida(){
-        $pdf = PDF::loadView('pdf.obra-oficio-salida', ["obra" => $this]);
+        $configuracion  =   Configuraciones::first();
+        $pdf            =   PDF::loadView('pdf.obra-oficio-salida', ["obra" => $this, "configuracion" => $configuracion]);
         return $pdf;
     }
 

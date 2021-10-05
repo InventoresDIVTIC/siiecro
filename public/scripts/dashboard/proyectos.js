@@ -4,10 +4,10 @@ jQuery(document).ready(function($) {
 			"#carga-dt", // ID elemento del progreso
 			"/dashboard/proyectos/carga", // URL datos
 			[
-        { data: "folio",        width: "15%",   searchable: false,  orderable: false},
+        { data: "id",           width: "15%",   searchable: false,  orderable: true},
         { data: "nombre",       width: "40%",   name: 'proyectos.nombre'},
         { data: "nombre_area",  width: "30%",   name: 'a.nombre'},
-				{ data: "acciones", 	 width: "15%", 	searchable: false, 	orderable: false},
+				{ data: "acciones", 	  width: "15%", 	searchable: false, 	orderable: false},
 			], // Columnas
 		);
 });

@@ -14,7 +14,7 @@
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-            <btn onclick="crear();" class="btn btn-primary">Crear nuevo usuario</btn>
+            <button onclick="crear();" class="btn btn-primary">Crear nuevo usuario</button>
         </div>
     </div>
 @endsection
@@ -33,6 +33,7 @@
                         <table class="table table-striped" id="dt-datos">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Correo</th>
                                     <th>Rol</th>

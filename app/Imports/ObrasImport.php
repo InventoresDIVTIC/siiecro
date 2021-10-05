@@ -212,7 +212,7 @@ class ObrasImport implements ToModel, WithHeadingRow
                                                                                                                                 ->first();
     
                                 if (is_null($temporadaAsignada)) {
-                                    $temporadaAsignada                                      =   new ObrasResponsablesAsignados;
+                                    $temporadaAsignada                                      =   new ObrasTemporadasTrabajoAsignadas;
                                     $temporadaAsignada->proyecto_temporada_trabajo_id       =   $temporada->id;
                                     $temporadaAsignada->obra_id                             =   $obra->id;
                                     $temporadaAsignada->save();

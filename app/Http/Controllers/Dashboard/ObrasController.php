@@ -19,6 +19,7 @@ use Auth;
 use Archivos;
 
 use App\Areas;
+use App\Configuraciones;
 use App\Obras;
 use App\ObrasEpoca;
 use App\ObrasResponsablesAsignados;

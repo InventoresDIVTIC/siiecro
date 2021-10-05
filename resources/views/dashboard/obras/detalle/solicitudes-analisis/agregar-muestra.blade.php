@@ -52,7 +52,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 div-input required">
-                                <label for="ubicacion">Ubicación</label>
+                                <label for="ubicacion">Ubicación de la toma de muestra</label>
                                 <input type="text" class="form-control" id="ubicacion" name="ubicacion" value="{{ $registro->ubicacion }}" placeholder="Ubicación de toma de muestra, con coordenadas o sectores." required autocomplete="off">
                             </div>
                         </div>

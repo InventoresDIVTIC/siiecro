@@ -1,3 +1,4 @@
+
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
@@ -73,6 +74,12 @@
                 </li>
                 <li class="{{ $menu == "roles" ? "active" : "" }}">
                     <a href="{{ route('dashboard.roles.index') }}"><i class="fa fa-lock"></i> <span class="nav-label">Roles</span></a>
+                </li>
+            @endif
+
+            @if (Auth::user()->rol->captura_de_catalogos_avanzada)
+                <li class="{{ $menu == "configuraciones" ? "active" : "" }}">
+                    <a href="{{ route('dashboard.configuraciones.index') }}"><i class="fa fa-wrench"></i> <span class="nav-label">Parametros del sistema</span></a>
                 </li>
             @endif
 

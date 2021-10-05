@@ -33,12 +33,14 @@ class ProyectosTemporadasTrabajo extends Model
     }
 
     public function generarPdfEntrada(){
-        $pdf    =  PDF::loadView('pdf.temporada-trabajo-entrada', ["temporada" => $this]);
+        $configuracion  =   Configuraciones::first();
+        $pdf            =  PDF::loadView('pdf.temporada-trabajo-entrada', ["temporada" => $this, "configuracion" => $configuracion]);
         return $pdf;
     }
 
     public function generarPdfSalida(){
-        $pdf    =  PDF::loadView('pdf.temporada-trabajo-salida', ["temporada" => $this]);
+        $configuracion  =   Configuraciones::first();
+        $pdf            =  PDF::loadView('pdf.temporada-trabajo-salida', ["temporada" => $this, "configuracion" => $configuracion]);
         return $pdf;
     }
 }

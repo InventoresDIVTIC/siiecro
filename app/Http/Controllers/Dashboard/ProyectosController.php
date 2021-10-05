@@ -38,7 +38,7 @@ class ProyectosController extends Controller
                                         ->join('areas as a', 'a.id', 'proyectos.area_id');
 
         return DataTables::of($registros)
-                        ->addColumn('folio', function($registro){
+                        ->editColumn('id', function($registro){
                             return $registro->etiquetaFolio();
                         })
                         ->addColumn('acciones', function($registro){
@@ -70,7 +70,7 @@ class ProyectosController extends Controller
                                 });
                             }
                         })
-                        ->rawColumns(['folio', 'acciones'])
+                        ->rawColumns(['id', 'acciones'])
                         ->make('true');
     }
 

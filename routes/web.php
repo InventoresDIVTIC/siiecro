@@ -34,6 +34,10 @@ Auth::routes();
 			Route::get('/tabla-solicitudes', 					'DashboardController@tablaSolicitudesAnalisis');
 			Route::get('/tabla-resultados', 					'DashboardController@tablaResultadosAnalisis');
 		#################################################################################
+
+	    ######## Configuraciones ##############################################################
+			Route::resource('configuraciones', 			'ConfiguracionesController');
+		#################################################################################
 			
 	    ######## USUARIOS ###############################################################
 			Route::get('usuarios/carga', 			'UsuariosController@cargarTabla');
