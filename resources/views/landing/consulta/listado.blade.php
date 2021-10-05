@@ -103,34 +103,107 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    <select class="form-control" id="">
-                      <option>Área</option>
+                    <label for="area">No. Registro</label>
+                    <select class="form-control filtros-administrativos" id="no-registro">
+                        <option></option>
+                        @foreach($obras_all as $obra_all)
+                            <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['no_registro'] ==  $obra_all->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $obra_all->id }}">{{ $obra_all->folio }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <select class="form-control" id="">
-                      <option>Responsable ECRO</option>
+                    <label for="area">Area</label>
+                    <select class="form-control filtros-administrativos" id="area">
+                        <option></option>
+                        @foreach($areas as $area)
+                            <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['area'] ==  $area->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $area->id }}">{{ $area->nombre }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <select class="form-control" id="">
-                      <option>Proyecto ECRO</option>
+                    <label for="responsable-ecro">Responsable ECRO</label>
+                    <select class="form-control filtros-administrativos" id="responsable-ecro">
+                        <option></option>
+                        @foreach($responsables as $responsable)
+                            <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['responsable_ecro'] ==  $responsable->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $responsable->id }}">{{ $responsable->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="col-3">
+                <label for="proyecto-ecro">Proyecto ECRO</label>
                 <div class="form-group">
-                    <select class="form-control" id="">
-                      <option>Año de la temporada de trabajo</option>
+                    <select class="form-control filtros-administrativos" id="proyecto-ecro">
+                        <option></option>
+                        @foreach($proyectos as $proyecto)
+                            <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['proyecto'] ==  $proyecto->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $proyecto->id }}">{{ $proyecto->nombre }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
+            <div class="col-3">
+                <label for="proyecto-ecro">No. Proyecto</label>
+                <div class="form-group">
+                    <select class="form-control filtros-administrativos" id="no-proyecto-ecro">
+                        <option></option>
+                        @foreach($proyectos as $proyecto)
+                            <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['no_proyecto'] ==  $proyecto->folio ? 'selected' : '' ) : '' ) : '' }} value="{{ $proyecto->folio }}">{{ $proyecto->folio }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-3">
+                <label for="temporada-ecro">Temporada de trabajo</label>
+                <div class="form-group">
+                    <select class="form-control filtros-administrativos" id="temporada-ecro">
+                        <option></option>
+                        @foreach($temporadas as $temporada)
+                            <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['temporada'] ==  $temporada->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $temporada->id }}">{{ $temporada->año .' - '. $temporada->numero_temporada }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-3 {{ $filtro_visible != '[]' ? $filtro_visible : '' }}">
+                <label for="profe-responsable">Responsable del análisis</label>
+                <div class="form-group">
+                    <select class="form-control filtros-administrativos" id="profe-responsable">
+                        <option></option>
+                        @foreach($profes_responsables as $profe_responsable)
+                            <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['profe_responsable'] ==  $profe_responsable->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $profe_responsable->id }}">{{ $profe_responsable->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-3 {{ $filtro_visible != '[]' ? $filtro_visible : '' }}">
+                <label for="nomenclatura-muestra">Nomenclatura de la muestra</label>
+                <div class="form-group">
+                    <input type="text" class="form-control filtros-administrativos" id="nomenclatura-muestra" value="{{ $filtros != null ? ($filtros != '[]' ? $filtros['nomenclatura_muestra'] : '' ) : '' }}">
+                </div>
+            </div>
+
+            <div class="col-3 {{ $filtro_visible != '[]' ? $filtro_visible : '' }}">
+                <label for="persona-realiza-analisis">Persona que realiza análisis</label>
+                <div class="form-group">
+                    <select class="form-control filtros-administrativos" id="persona-realiza-analisis">
+                        <option></option>
+                        @foreach($personas_realizan_analisis as $persona_analiza)
+                            <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['persona_realiza_analisis'] ==  $persona_analiza->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $persona_analiza->id }}">{{ $persona_analiza->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
         </div>
+        
         <div class="row">
+            <h4 class="p-5">OBRAS ENCONTRADAS {{ $obras->count() }}</h4>
             @foreach($obras as $obra)
                 <div class="col-6">
                     <a href="{{ route('consulta.detalle', $obra->seo) }}">

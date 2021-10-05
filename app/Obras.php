@@ -420,56 +420,107 @@ class Obras extends Model
         return $this->alto." cm x ".$this->ancho." cm x ".($this->profundidad ?? 0)." cm x ".($this->diametro ?? 0)." cm";
     }
 
-    public static function consulta($busqueda, $tipo){
+    public static function consulta($busqueda, $tipo, $filtros){
+        // dd($busqueda, $tipo, $filtros);
         switch ($tipo) {
             default:
+
             case 'Tipo objeto':
-                $obras      =   Obras::selectRaw("
+                $obras      =   Obras::selectRaw("  DISTINCT
                                                     obras.*
                                                 ")
-                                    ->join("obras__tipo_objeto as tipo", "tipo.id", "obras.tipo_objeto_id")
-                                    ->join('obras__tipo_objeto_tesauros as tipo_tesauro', 'tipo_tesauro.tipo_objeto_id', 'tipo.id')
-                                    ->where('tipo.nombre', 'like', '%'.$busqueda.'%')
-                                    ->orWhere('tipo_tesauro.nombre', 'like', '%'.$busqueda.'%');
+                                ->join("obras__tipo_objeto as tipo", "tipo.id", "obras.tipo_objeto_id")
+                                ->join('areas', 'areas.id', 'obras.area_id')
+                                ->join('proyectos', 'proyectos.id', 'obras.proyecto_id')
+                                ->leftJoin('obras__tipo_objeto_tesauros as tipo_tesauro', 'tipo_tesauro.tipo_objeto_id', 'tipo.id');
+                
+                $obras->where(function( $query ) use ($busqueda) {
+                    $query->where('tipo.nombre', 'like', '%'.$busqueda.'%')
+                        ->orWhere('tipo_tesauro.nombre', 'like', '%'.$busqueda.'%');
+                });
+
+                if (is_array($filtros)) {
+                    $obras = Obras::filtrosAdministrativos($filtros, $obras);
+                }
+
+                // dd($obras->toSql());
                 break;
+
             case 'Titulo':
                 $obras      =   Obras::selectRaw("
+                                                    DISTINCT
                                                     obras.*
                                                 ")
-                                    ->where('nombre', 'like', '%'.$busqueda.'%');
+                                    ->join('areas', 'areas.id', 'obras.area_id')
+                                    ->join('proyectos', 'proyectos.id', 'obras.proyecto_id')
+                                    ->where('obras.nombre', 'like', '%'.$busqueda.'%');
+
+                if (is_array($filtros)) {
+                    $obras = Obras::filtrosAdministrativos($filtros, $obras);
+                }
+
+                // dd($obras->toSql());
                 break;
+
             case 'Autor o cultura':
                 $obras      =   Obras::selectRaw("
+                                                    DISTINCT
                                                     obras.*
                                                 ")
+                                    ->join('areas', 'areas.id', 'obras.area_id')
+                                    ->join('proyectos', 'proyectos.id', 'obras.proyecto_id')
                                     ->where(function($query) use($busqueda){
                                         $query->orWhere('autor', 'like', '%'.$busqueda.'%');
                                         $query->orWhere('cultura', 'like', '%'.$busqueda.'%');
                                     });
+
+                if (is_array($filtros)) {
+                    $obras = Obras::filtrosAdministrativos($filtros, $obras);
+                }
+
                 break;
+
             case 'Material':
                 $obras      =   Obras::selectRaw("
+                                                    DISTINCT
                                                     obras.*
                                                 ")
+                                    ->join('areas', 'areas.id', 'obras.area_id')
+                                    ->join('proyectos', 'proyectos.id', 'obras.proyecto_id')
+
                                     ->join("obras__solicitudes_analisis as solicitud", "solicitud.obra_id", "obras.id")
                                     ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.solicitud_analisis_id", "solicitud.id")
                                     ->join("obras__resultados_analisis as resultado", "resultado.solicitudes_analisis_muestras_id", "muestra.id")
                                     ->join("obras__tipo_material as tipo", "tipo.id", "resultado.tipo_material_id")
-                                    ->where('tipo.nombre', 'like', '%'.$busqueda.'%')
-                                    ->groupBy('obras.id');
-                    break;
+                                    ->where('tipo.nombre', 'like', '%'.$busqueda.'%');
+                                    // ->groupBy('obras.id')
+
+                if (is_array($filtros)) {
+                    $obras = Obras::filtrosAdministrativos($filtros, $obras);
+                }
+
+                break;
             case 'Técnica analítica':
                 $obras      =   Obras::selectRaw("
+                                                    DISTINCT
                                                     obras.*
                                                 ")
+                                    ->join('areas', 'areas.id', 'obras.area_id')
+                                    ->join('proyectos', 'proyectos.id', 'obras.proyecto_id')
+
                                     ->join("obras__solicitudes_analisis as solicitud", "solicitud.obra_id", "obras.id")
                                     ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.solicitud_analisis_id", "solicitud.id")
                                     ->join("obras__resultados_analisis as resultado", "resultado.solicitudes_analisis_muestras_id", "muestra.id")
                                     ->join("obras__analisis_a_realizar_resultados as analisis_realizar_resultado", "analisis_realizar_resultado.resultado_analisis_id", "resultado.id")
                                     ->join("obras__analisis_a_realizar_tecnica as tecnica", "tecnica.id", "analisis_realizar_resultado.tecnica_analitica_id")
-                                    ->where('tecnica.nombre', 'like', '%'.$busqueda.'%')
-                                    ->groupBy('obras.id');
-                    break;
+                                    ->where('tecnica.nombre', 'like', '%'.$busqueda.'%');
+                                    // ->groupBy('obras.id')
+                
+                if (is_array($filtros)) {
+                    $obras = Obras::filtrosAdministrativos($filtros, $obras);
+                }
+
+                break;
         }
 
         if (Auth::user()->rol->esExterno()) {
@@ -479,6 +530,63 @@ class Obras extends Model
         return $obras->whereNotNull('obras.fecha_aprobacion')
                     ->orderBy('obras.created_at', 'DESC')
                     ->get();
+    }
+
+    public static function filtrosAdministrativos($filtros, $obras)
+    {
+        if (is_array($filtros)) {
+            if ($filtros['no_registro'] != '') {
+                $obras->where('obras.id', $filtros['no_registro']);
+            }
+
+            if ($filtros['responsable_ecro'] != '') {
+                $obras->join("obras__responsables_asignados as responsables", "responsables.obra_id", "obras.id")
+                        ->join('users', 'users.id', 'responsables.usuario_id')
+                        ->where('users.id', '=', $filtros['responsable_ecro']);
+            }
+
+            if ($filtros['area'] != '') {
+                $obras->where('obras.area_id', '=', $filtros['area']);
+            }
+
+            if ($filtros['temporada'] != '') {
+                $obras->join('proyectos__temporadas_trabajo as temporada', 'temporada.proyecto_id', 'proyectos.id')
+                        ->where('temporada.id', '=', $filtros['temporada']);
+            }
+
+            if ($filtros['no_proyecto'] != '') {
+                $obras->whereRaw("
+                                    CONCAT(
+                                        LPAD(proyectos.id, 4, '0'),
+                                        '-',
+                                        proyectos.forma_ingreso,
+                                        '/',
+                                        IFNULL(
+                                            areas.siglas,
+                                            ''
+                                        )
+                                    ) = '".$filtros['no_proyecto']."'
+                                ");
+            }
+
+            if ($filtros['proyecto'] != '') {
+                $obras->where('obras.proyecto_id', '=', $filtros['proyecto']);
+            }
+
+            if ($filtros['profe_responsable'] != '') {
+                $obras->where('resultado.profesor_responsable_de_analisis_id', '=', $filtros['profe_responsable']);
+            }
+
+            if ($filtros['nomenclatura_muestra'] != '') {
+                $obras->where('muestra.nomenclatura', '=', $filtros['nomenclatura_muestra']);
+            }
+
+            if ($filtros['persona_realiza_analisis'] != '') {
+                $obras->where('resultado.persona_realiza_analisis_id', '=', $filtros['persona_realiza_analisis']);
+            }
+
+            return $obras;
+        }
     }
 
     public function etiquetaDimensiones(){
