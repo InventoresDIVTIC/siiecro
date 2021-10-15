@@ -14,12 +14,10 @@ use DataTables;
 use BD;
 use DB;
 use Response;
-use Hash;
 use Auth;
 use Archivos;
 
 use App\Areas;
-use App\Configuraciones;
 use App\Obras;
 use App\ObrasEpoca;
 use App\ObrasResponsablesAsignados;
@@ -512,7 +510,7 @@ class ObrasController extends Controller
     }
 
     public function exportar($mostrarIds){
-        return Excel::download(new ObrasExport($mostrarIds), 'obras.xlsx');
+        return Excel::download(new ObrasExport($mostrarIds), 'obras_'.Carbon::now()->format('d-m-y_H-i').'.xlsx');
     }
 
     public function deshabilitar(Request $request, $id){
