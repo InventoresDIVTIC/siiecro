@@ -46,7 +46,7 @@
                 </div>
 
                 @isset ($obra_id)
-                    <input type="hidden" name="obra_id" value="{{ $obra_id }}">}
+                    <input type="hidden" name="obra_id" value="{{ $obra_id }}">
                 @endisset
             {!! Form::close() !!}
         </div>

@@ -59,6 +59,7 @@
 			    </div>
 	    	</div>
 		    <hr class="semi">
+			<div style="height: 50px"></div>
             {{-- Como es oficio de salida, quien recibe es quien entrego realmente, osea se cambian --}}
 	    	<div class="col-100 mt-lg text-center">
 			    <div class="col-50 inline-block">
@@ -73,7 +74,7 @@
 			    </div>
 	    	</div>
 
-	    	<div class="col-100 mt-md text-center">
+	    	<div class="col-100 mt-lg text-center">
 			    <div class="col-50 inline-block">
 			    	<strong>Vo.Bo</strong><br>
 					{{ $configuracion->director_general }}<br>
@@ -82,7 +83,7 @@
 			    <div class="col-50 inline-block">
 			    	<strong>Vo.Bo</strong><br>
 					{{ $configuracion->director_academico }}<br>
-					<small><strong>Director(a) académica</strong></small>
+					<small><strong>Director(a) académico(a)</strong></small>
 			    </div>
 	    	</div>
 

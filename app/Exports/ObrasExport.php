@@ -4,15 +4,20 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Cell\StringValueBinder;
+use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
+
 
 use App\Obras;
 
-class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMapping, ShouldAutoSize, WithStyles
+class ObrasExport extends StringValueBinder implements FromCollection, WithHeadings, WithTitle, WithMapping, ShouldAutoSize, WithStyles, WithColumnFormatting
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -93,7 +98,6 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
                 'Disponible para consulta externa'
             ];
         }
-        
     }
 
     public function title(): string{
@@ -108,7 +112,7 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
             return [
                 $registro->id,
                 $registro->nombre,
-                $registro->año,
+                $registro->año ? $registro->año->format("Y") : "",
                 $registro->estatus_año,
                 $registro->epoca_id,
                 $registro->estatus_epoca,
@@ -125,10 +129,10 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
                 $registro->lugar_procedencia_original,
                 $registro->lugar_procedencia_actual,
                 $registro->numero_inventario,
-                $registro->fecha_ingreso,
+                $registro->fecha_ingreso ? ExcelDate::dateTimeToExcel($registro->fecha_ingreso) : NULL,
                 $registro->forma_ingreso,
                 $registro->area_id,
-                $registro->fecha_salida,
+                $registro->fecha_salida ? ExcelDate::dateTimeToExcel($registro->fecha_salida) : NULL,
                 $responsablesEcro,
                 $registro->proyecto_id,
                 $temporadasTrabajo,
@@ -142,7 +146,7 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
             return [
                 $registro->folio,
                 $registro->nombre,
-                $registro->año,
+                $registro->año ? $registro->año->format("Y") : "",
                 $registro->estatus_año,
                 ($registro->epoca               ?   $registro->epoca->nombre                :   "N/A"),
                 $registro->estatus_epoca,
@@ -198,5 +202,16 @@ class ObrasExport implements FromCollection, WithHeadings, WithTitle, WithMappin
 
         // Para que la primer columna quede estatica
         $sheet->freezePane('A2');
+    }
+
+    public function columnFormats(): array
+    {
+        if ($this->mostrarIds) {
+            return [
+                'C' => NumberFormat::FORMAT_NUMBER, // Año, solo numero
+                'T' => 'yyyy-mm-dd hh:mm:ss', // Fecha de ingreso, formato de fecha aaaa-mm-dd hh:mm:ss
+                'W' => 'yyyy-mm-dd hh:mm:ss', // Fecha de salida, formato de fecha aaaa-mm-dd hh:mm:ss
+            ];
+        }
     }
 }

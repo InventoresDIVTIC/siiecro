@@ -17,7 +17,9 @@ function asignarUsuario(){
                       "#modal-crear", //Nombre modal
                       "#name", //Elemento al que se le dara focus una vez cargado el modal
                       function(){
-                        $("#_usuario_id, #_status").select2();
+                        $("#_usuario_id, #_status").select2({
+                          dropdownParent: $('#modal-crear')
+                        });
                       }, //Funcion para el success
                       "#form-obras-asignar-usuario", //ID del Formulario
                       "#carga-agregar", //Loading de guardar datos de formulario
