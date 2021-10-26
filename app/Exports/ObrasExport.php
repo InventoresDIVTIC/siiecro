@@ -212,6 +212,8 @@ class ObrasExport extends StringValueBinder implements FromCollection, WithHeadi
                 'T' => 'yyyy-mm-dd hh:mm:ss', // Fecha de ingreso, formato de fecha aaaa-mm-dd hh:mm:ss
                 'W' => 'yyyy-mm-dd hh:mm:ss', // Fecha de salida, formato de fecha aaaa-mm-dd hh:mm:ss
             ];
+        } else{
+            return [];
         }
     }
 }
