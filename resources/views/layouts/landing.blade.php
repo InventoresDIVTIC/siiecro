@@ -153,7 +153,7 @@
 					<div class="row align-items-center justify-content-between">
 						<div class="col-lg-12 text-center">
 							<div class="copyright">
-								Copyright <span class="text-color" style="color: #225854;">ECRO</span> &copy; {{ date('Y') }} - {{ date('Y',strtotime('4 year')) }}
+								Copyright <span class="text-color" style="color: #225854;">ECRO</span> &copy; {{ date('Y') }} - {{ date('Y',strtotime('4 year')) }} | <a href="{{ route('landing.creditos') }}">Integrantes del proyecto</a>
 							</div>
 						</div>
 					</div>

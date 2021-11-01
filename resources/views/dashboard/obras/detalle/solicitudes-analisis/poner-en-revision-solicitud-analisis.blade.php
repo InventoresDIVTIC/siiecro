@@ -1,4 +1,4 @@
-<div class="modal inmodal" id="modal-poner-en-revision-solicitud-analisis" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal inmodal" id="modal-poner-en-revision-solicitud-analisis" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
     	<div class="modal-content animated bounceInRight">
             <div class="modal-header">

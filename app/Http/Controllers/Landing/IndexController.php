@@ -10,4 +10,8 @@ class IndexController extends Controller
 	public function index(){
     	return view('landing.index');
     }
+
+	public function creditos(){
+		return view('landing.creditos');
+	}
 }

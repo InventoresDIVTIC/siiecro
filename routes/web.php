@@ -317,7 +317,8 @@ Auth::routes();
 
 	Route::prefix('/')->namespace('Landing')->group(function () {
 	    ######## INDEX ##################################################################
-			Route::get('/', 	'IndexController@index')->name('landing.index');
+			Route::get('/', 			'IndexController@index')->name('landing.index');
+			Route::get('/creditos', 	'IndexController@creditos')->name('landing.creditos');
 		#################################################################################
 
 	    ######## CONSULTA ###############################################################

@@ -1,4 +1,4 @@
-<div class="modal inmodal" id="modal-crear-resultado" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal inmodal" id="modal-crear-resultado" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
