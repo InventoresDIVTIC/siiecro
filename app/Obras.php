@@ -175,6 +175,10 @@ class Obras extends Model
         return $this->hasOne('App\Proyectos', 'id', 'proyecto_id');
     }
 
+    public function solicitudes_analisis() {
+        return $this->hasMany('App\ObrasSolicitudesAnalisis', 'obra_id', 'id');
+    }
+
     public function responsables_asignados() {
         return $this->hasManyThrough(
             'App\User',

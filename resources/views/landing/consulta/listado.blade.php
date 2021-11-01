@@ -1,4 +1,4 @@
-@if (Auth::user()->id == 1)
+@if (Auth::user()->rol->consulta_general_avanzada)
     <div class="row mt-5">
         <div class="col-lg-3 hid den">
             <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">

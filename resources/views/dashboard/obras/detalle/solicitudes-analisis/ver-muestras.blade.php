@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6 div-input">
-                            <label for="tecnica">Técnica</label>
+                            <label for="tecnica">Técnica de manufactura</label>
                             <input type="text" class="form-control" id="tecnica" name="tecnica" value="{{ $registro->tecnica }}" disabled="" autocomplete="off">
                         </div>
                         <div class="col-md-6 div-input">

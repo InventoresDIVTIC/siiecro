@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-8 div-input required">
-                                <label for="tecnica">Técnica</label>
+                                <label for="tecnica">Técnica de manufactura</label>
                                 <input type="text" class="form-control" id="tecnica" name="tecnica" value="{{ $registro->tecnica }}" required autocomplete="off">
                             </div>
                             <div class="col-md-4 div-input required">
