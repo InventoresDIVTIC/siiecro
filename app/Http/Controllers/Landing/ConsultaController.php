@@ -99,16 +99,8 @@ class ConsultaController extends Controller
 
     public function obtenerObrasRecomendadas(Request $request, $id_obra){
     	if ($request->ajax() || true) {
-    		$base_conocimientos 	= 	Obras::selectRaw('
-															id 		AS ID_OBRAS,
-															tags 	AS TAGS_OBRAS
-														')
-												->whereNotNull("tags")
-												->get();
-
-			$base_conocimientos 	= 	json_encode($base_conocimientos, JSON_UNESCAPED_UNICODE);
-
-			$process 				= 	new Process([public_path()."/scripts/landing/env/Scripts/python.exe", public_path()."/scripts/landing/recomienda.py", "$id_obra", "$base_conocimientos"]);
+			$ruta 					=	\public_path("resources/obras.csv");
+			$process 				= 	new Process([env("DIRECTORIO_PYTHON"), public_path()."/scripts/landing/recomienda.py", "$id_obra", $ruta, env("CANTIDAD_OBRAS_RECOMENDAR", 10)]);
 			$process->run();
 
 			// executes after the command finishes
@@ -116,6 +108,7 @@ class ConsultaController extends Controller
 			    // throw new ProcessFailedException($process);
 			    $obras 				=	collect();
 			} else{
+				// dd($process->getOutput());
 				$obras_ids 			=	json_decode($process->getOutput());
 				$obras 				=	Obras::whereIn("id", $obras_ids)->get();
 			}
