@@ -13,113 +13,223 @@
                             @else
                                 <img src="{{ asset('img/predeterminadas/sin_imagen.png') }}" alt="" class="img-fluid">
                             @endif
-                            
                         </div>
                         <div class="col-6">
-                            <h5 class="mt-3 mb-3">Datos de la obra / pieza / conjunto</h5>
+                            <h5 class="mt-3 mb-3"><i class="fa fa-list"></i>&nbsp;Datos de la obra / pieza / conjunto</h5>
                             <hr>
-                            <span>
-                                <strong>Titulo:</strong> {{ $obra->nombre }}
-                            </span><br>
-                            <span>
-                                <strong>Autor o Cultura:</strong> {{ $obra->autor ?? $obra->cultura }}
-                            </span><br>
-                            <span>
-                                <strong>Año / Época o Temproalidad:</strong> {{ $obra->tipo_bien_cultural->nombre }}
-                            </span><br>
-                            <span>
-                                <strong>Técnica:</strong> Tecnica
-                            </span><br>
-                            <span>
-                                <strong>Dimensiones:</strong> {{ $obra->cadenaDimensiones() }}
-                            </span><br>
-                            <span>
-                                <strong>Tipo de bien cultural:</strong> {{ $obra->tipo_bien_cultural->nombre }}
-                            </span><br>
-                            <span>
-                                <strong>Tipo de objeto:</strong> {{ $obra->tipo_objeto->nombre }}
-                            </span><br>
-                            <span>
-                                <strong>Lugar de procedencia original:</strong> {{ $obra->lugar_procedencia_original }}
-                            </span><br>
-                            <span>
-                                <strong>Lugar de procedencia actual:</strong> {{ $obra->lugar_procedencia_actual }}
-                            </span><br>
-                            <span>
-                                <strong>No. de inventario o código de procedencia:</strong> {{ $obra->numero_inventario }}
-                            </span><br>
-                        </div>
-
-                        <div class="col-12 mt-5">
-                            <div class="row">
-                                <div class="col-6">
-                                    <span>
-                                        <strong>No. de Registro de obra:</strong>
-                                        <small>{{ $obra->folio }}</small>
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    <span>
-                                        <strong>Proyecto ECRO:</strong>
-                                        <small>Proyecto</small>
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    <span>
-                                        <strong>No. de Proyecto ECRO:</strong>
-                                        <small>No de proyecto</small>
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    <span>
-                                        <strong>No de temporada de trabajo:</strong>
-                                        <small>{{ $obra->tipo_bien_cultural->nombre }}</small>
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    <span>
-                                        <strong>Año del proyecto:</strong>
-                                        <small>{{ $obra->tipo_bien_cultural->nombre }}</small>
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    <span>
-                                        <strong>Forma de ingreso:</strong>
-                                        <small>{{ $obra->forma_ingreso }}</small>
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    <span>
-                                        <strong>Sector:</strong>
-                                        <small>SECTOR?</small>
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    <span>
-                                        <strong>Responsables ECRO:</strong>
-                                        <small>{{ $obra->tipo_bien_cultural->nombre }}</small>
-                                    </span>
-                                </div>
-                                <div class="col-12">
-                                    <span>
-                                        <strong>Caracteristicas descriptivas:</strong><br>
-                                        <small>{{ nl2br($obra->caracteristicas_descriptivas) }}</small>
-                                    </span>
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered table-hover w-auto">
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Titulo:</strong> 
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->nombre }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Autor o Cultura:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->autor ?? $obra->cultura }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Año / Época o Temproalidad:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->tipo_bien_cultural->nombre }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Técnica:</strong>
+                                            </span>
+                                        </td>
+                                        <td>Tecnica</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Dimensiones:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->cadenaDimensiones() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Tipo de bien cultural:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->tipo_bien_cultural->nombre }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Tipo de objeto:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->tipo_objeto->nombre }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Lugar de procedencia original:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->lugar_procedencia_original }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Lugar de procedencia actual:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->lugar_procedencia_actual }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>No. de inventario o código de procedencia:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->numero_inventario }}</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="row mt-5">
                         <div class="col-12">
                             <div id="acordeon">
                                 <div class="card">
                                     <div class="card-header">
-                                      <a class="card-link" data-toggle="collapse" href="#registro-fotografico">
-                                        Registro fotográfico
+                                      <a class="collapsed card-link" data-toggle="collapse" href="#datos-de-identificacion">
+                                        <i class="fa fa-desktop"></i>&nbsp;Datos de identificación
                                       </a>
                                     </div>
-                                    <div id="registro-fotografico" class="collapse show" data-parent="#acordeon">
+                                    <div id="datos-de-identificacion" class="collapse" data-parent="#acordeon">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm table-bordered table-hover">
+                                                            <tr>
+                                                                <td scope="col" class="table-active">
+                                                                    <span>
+                                                                        <strong>No. de Registro de obra:</strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    {{ $obra->folio }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td scope="col" class="table-active">
+                                                                    <span>
+                                                                        <strong>No. de Proyecto ECRO:</strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    No de proyecto
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td scope="col" class="table-active">
+                                                                    <span>
+                                                                        <strong>Año del proyecto:</strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    {{ $obra->tipo_bien_cultural->nombre }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td scope="col" class="table-active">
+                                                                    <span>
+                                                                        <strong>Área:</strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    Área
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td scope="col" class="table-active">
+                                                                    <span>
+                                                                        <strong>Caracteristicas descriptivas:</strong><br>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    {{ nl2br($obra->caracteristicas_descriptivas) }}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm table-bordered table-hover">
+                                                            <tr>
+                                                                <td scope="col" class="table-active">
+                                                                    <span>
+                                                                        <strong>Proyecto ECRO:</strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    Proyecto
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td scope="col" class="table-active">
+                                                                    <span>
+                                                                        <strong>No de temporada de trabajo:</strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    {{ $obra->tipo_bien_cultural->nombre }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td scope="col" class="table-active">
+                                                                    <span>
+                                                                        <strong>Forma de ingreso:</strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    {{ $obra->forma_ingreso }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td scope="col" class="table-active">
+                                                                    <span>
+                                                                        <strong>Responsables ECRO:</strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    {{ $obra->tipo_bien_cultural->nombre }}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                      <a class="collapsed card-link" data-toggle="collapse" href="#registro-fotografico">
+                                        <i class="fa fa-camera-retro"></i>&nbsp;Registro fotográfico
+                                      </a>
+                                    </div>
+                                    <div id="registro-fotografico" class="collapse" data-parent="#acordeon">
                                       <div class="card-body">
                                         Contenido Registro fotográfico
                                       </div>
@@ -129,12 +239,271 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <a class="collapsed card-link" data-toggle="collapse" href="#analisis-cientificos">
-                                            Análisis científicos
+                                            <i class="fa fa-calculator"></i>&nbsp;Análisis científicos
                                         </a>
                                     </div>
                                     <div id="analisis-cientificos" class="collapse" data-parent="#acordeon">
                                         <div class="card-body">
-                                            Contenido Análisis científicos
+                                            @foreach($obra->solicitudes_analisis as $solicitudes)
+                                                @foreach($solicitudes->muestras as $muestras)
+                                                    <h3>Resultado de análisis</h3>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm table-bordered table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col" class="table-active">
+                                                                        <span>
+                                                                            <strong>Fotografía</strong>
+                                                                        </span>
+                                                                    </th>
+                                                                    <th scope="col" class="table-active">
+                                                                        <span>
+                                                                            <strong>Nomenclatura</strong>
+                                                                        </span>
+                                                                    </th>
+                                                                    <th scope="col" class="table-active">
+                                                                        <span>
+                                                                            <strong>Lugar de resguardo</strong>
+                                                                        </span>
+                                                                    </th>
+                                                                    <th scope="col" class="table-active">
+                                                                        <span>
+                                                                            <strong>Grupo material</strong>
+                                                                        </span>
+                                                                    </th>
+                                                                    <th scope="col" class="table-active">
+                                                                        <span>
+                                                                            <strong>Interpretaciones materiales</strong>
+                                                                        </span>
+                                                                    </th>
+                                                                    <th scope="col" class="table-active">
+                                                                        <span>
+                                                                            <strong>Temporada de trabajo</strong>
+                                                                        </span>
+                                                                    </th>
+                                                                    <th scope="col" class="table-active">
+                                                                        <span>
+                                                                            <strong>Conclusión general</strong>
+                                                                        </span>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="text-center">
+                                                                        @foreach($muestras->resultados_analisis->imagenes_resultados_esquema_muestra as $esquema_muestra)
+                                                                            <a href="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" height="80"></a>
+                                                                        @endforeach
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ $muestras->nomenclatura }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ $muestras->resultados_analisis->lugar_resguardo_muestra }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ $muestras->resultados_analisis->tipo_material->nombre }}
+                                                                    </td>
+                                                                    <td>
+                                                                        <ul>
+                                                                        @foreach($muestras->resultados_analisis->interpretaciones_particulares as $interpretaciones_particulares)
+                                                                            <li>{{ $interpretaciones_particulares->interpretacion_particular->nombre }}</li>
+                                                                        @endforeach
+                                                                        </ul>
+                                                                    </td>
+                                                                    <td>
+                                                                        <ul>
+                                                                            @foreach($obra->temporadas_trabajo_asignadas as $temporadas)
+                                                                                <li>{{ $temporadas->numero_temporada . ' [ ' . $temporadas->año . ' ] ' }}</li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ $muestras->resultados_analisis->conclusion_general ? 'CONCLUSIÓN GENERAL: ' . $muestras->resultados_analisis->conclusion_general : 'Sin conclusión general'}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="7">
+                                                                        <div id="acordeon-{{ $muestras->id }}">
+                                                                            <div class="card">
+                                                                                <div class="card-header">
+                                                                                    <a class="collapsed card-link" data-toggle="collapse" href="#mas-informacion-{{ $muestras->id }}">
+                                                                                        <i class="fa fa-plus"></i>&nbsp;Más información
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div id="mas-informacion-{{ $muestras->id }}" class="collapse" data-parent="#acordeon-{{ $muestras->id }}">
+                                                                                    <div class="card-body">
+                                                                                        {{-- TABLA MÁS INFORMACION --}}
+                                                                                        <div class="table-responsive">
+                                                                                            <table class="table table-sm table-bordered table-hover">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Fecha del analisis</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Persona que realiza el análisis</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Forma de obtención de la muestra</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Ubicación de la toma de muestra</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Esquema de toma de muestras</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            {{ $muestras->resultados_analisis['fecha_analisis'] }}
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{ $muestras->resultados_analisis->persona_analisis['name'] }}
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{ $muestras->resultados_analisis->forma_obtencion_muestra['nombre'] }}
+                                                                                                        <td>
+                                                                                                            {{ $muestras->resultados_analisis->ubicacion_de_toma_muestra }}
+                                                                                                        </td>
+                                                                                                        <td class="text-center">
+                                                                                                            @foreach($muestras->resultados_analisis->imagenes_resultados_esquema_muestra as $esquema_muestra)
+                                                                                                                <a href="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" height="80"></a>
+                                                                                                            @endforeach
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        {{-- CARACTERISTICAS DE OBSERVACION PRELIMINAR --}}
+                                                                                        <h3>Caracteríticas de observación preliminar</h3>
+                                                                                        <div class="table-responsive">
+                                                                                            <table class="table table-sm table-bordered table-hover">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Descripción</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Fotografía</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Ruta de acceso a microfotografía</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            {{ $muestras->resultados_analisis->descripcion }}
+                                                                                                        </td>
+                                                                                                        <td class="text-center">
+                                                                                                            @foreach($muestras->resultados_analisis->imagenes_resultados_esquema_microfotografia as $esquema_muestra)
+                                                                                                                <a href="{{ asset('/img/obras/resultados-analisis-esquema-microfotografia/'.$esquema_muestra->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-microfotografia/'.$esquema_muestra->imagen) }}" height="80"></a>
+                                                                                                            @endforeach
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{ $muestras->resultados_analisis->ruta_acceso_microfotografia }}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        {{-- RESULTADOS --}}
+                                                                                        <h3>Resultados</h3>
+                                                                                        @foreach($muestras->resultados_analisis->resultados as $resultados)
+                                                                                        <div class="table-responsive">
+                                                                                            <table class="table table-sm table-bordered table-hover">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Análisis a realizar</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Técnica analítica</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Información del equipo</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Interpretación</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Ruta de acceso a microfotografía/imagen datos</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                        <th scope="col" class="table-active">
+                                                                                                            <span>
+                                                                                                                <strong>Microfotografía/Imagen o datos</strong>
+                                                                                                            </span>
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            {{ $resultados->analisis_realizar->nombre }}
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{ $resultados->tecnica_analitica->nombre }}
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{ $resultados->informacion_del_equipo->nombre }}
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{ $resultados->interpretacion }}
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{ $resultados->ruta_acceso_imagen }}
+                                                                                                        </td>
+                                                                                                        <td class="text-center">
+                                                                                                            @foreach($resultados->esquema_analiticos_microfotografias as $esquema_microfotografia)
+                                                                                                                <a href="{{ asset('/img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$esquema_microfotografia->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$esquema_microfotografia->imagen) }}" height="80"></a>
+                                                                                                            @endforeach
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        @endforeach
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                @endforeach
+                                            @endforeach        
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +511,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <a class="collapsed card-link" data-toggle="collapse" href="#informes-intervencion">
-                                            Informes de intervención
+                                            <i class="fa fa-tasks"></i>&nbsp;Informes de intervención
                                         </a>
                                     </div>
                                     <div id="informes-intervencion" class="collapse" data-parent="#acordeon">

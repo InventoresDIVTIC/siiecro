@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-md-12 div-input required">
                                 <label for="informacion_requerida">Información Requerida</label>
-                                <input type="text" class="form-control" id="informacion_requerida" name="informacion_requerida" value="{{ $registro->informacion_requerida }}" placeholder="¿Qué quieres determinar?" required autocomplete="off">
+                                <input type="text" class="form-control" id="informacion_requerida" name="informacion_requerida" value="{{ $registro->informacion_requerida }}" placeholder="¿Qué quieres determinar y con qué técnica analítica?" required autocomplete="off">
                             </div>
                         </div>
                         <div class="row">

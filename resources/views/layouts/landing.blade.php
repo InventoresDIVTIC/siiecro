@@ -30,6 +30,10 @@
 	  	<!--SELECT 2 -->
     	{!!Html::style('css/plugins/select2/select2.min.css')!!}
 
+    	<!-- Blue imp -->
+    	{!!Html::style('css/plugins/blueimp/css/blueimp-gallery.min.css')!!}
+    
+
 	</head>
 
 	<body id="top">
@@ -76,6 +80,17 @@
 		<div class="main-content">
 			@yield('body')
 		</div>
+		
+		<!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+	    <div id="blueimp-gallery" class="blueimp-gallery">
+	        <div class="slides"></div>
+	        <h3 class="title"></h3>
+	        <a class="prev">‹</a>
+	        <a class="next">›</a>
+	        <a class="close">×</a>
+	        <a class="play-pause"></a>
+	        <ol class="indicator"></ol>
+	    </div>
 
 		<!-- footer Start -->
 		<footer class="footer section gray-bg pt-5">
@@ -189,6 +204,10 @@
 
   		<!-- SELECT 2 -->
   			{!!Html::script('js/plugins/select2/select2.full.min.js')!!}
+
+  		<!-- blueimp gallery -->
+			{!!Html::script('js/plugins/blueimp/jquery.blueimp-gallery.min.js')!!}
+
 
 		@yield('scripts')
 	</body>

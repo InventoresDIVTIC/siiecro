@@ -27,4 +27,8 @@ class ObrasSolicitudesAnalisisMuestras extends Model
     public function tipo_analisis() {
         return $this->hasOne('App\ObrasSolicitudesAnalisisTipoAnalisis', 'id', 'tipo_analisis_id');
     }
+
+    public function resultados_analisis() {
+        return $this->hasOne('App\ObrasResultadosAnalisis', 'solicitudes_analisis_muestras_id', 'id');
+    }
 }
