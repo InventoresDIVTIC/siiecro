@@ -108,6 +108,11 @@ class Obras extends Model
     }
 
     public function getFolioAttribute(){
+
+        if ($this->id >= 2181 && $this->id <= 2189) {
+            $this->id   -=  611;
+        }
+
         $folio          =   str_pad($this->id, 4, "0", STR_PAD_LEFT);
 
         if($this->fecha_ingreso){
