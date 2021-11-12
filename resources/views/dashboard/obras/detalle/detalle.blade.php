@@ -384,11 +384,12 @@
                         <li class=""><a data-toggle="tab" href="#tab-registro-fotografico">Registro fotográfico</a></li>
 
                         @if (Auth::user()->rol->captura_de_solicitud_analisis)
-                            <li class=""><a data-toggle="tab" href="#tab-solicitudes-analisis"> Solicitudes de ánalisis</a></li>
+                            {{-- SE LE PONE ID A LOS LI PARA PODER HACER EL JUEGO DE APERTURA Y CIERRE AUTOMÁTICAMENTE CON JQUERY --}}
+                            <li class="" id="li-solicitudes-analisis"><a data-toggle="tab" href="#tab-solicitudes-analisis"> Solicitudes de ánalisis</a></li>
                         @endif
                         
                         @if (Auth::user()->rol->captura_de_resultados)
-                            <li class=""><a data-toggle="tab" href="#tab-resultados-analisis">Resultado de análisis</a></li>
+                            <li class="" id="li-resultados-analisis"><a data-toggle="tab" href="#tab-resultados-analisis">Resultado de análisis</a></li>
                         @endif
 
                         <li class=""><a data-toggle="tab" href="#tab-informes">Informes</a></li>
