@@ -273,7 +273,7 @@
                                                                     </th>
                                                                     <th scope="col" class="table-active">
                                                                         <span>
-                                                                            <strong>Interpretaciones materiales</strong>
+                                                                            <strong>Material(es)</strong>
                                                                         </span>
                                                                     </th>
                                                                     <th scope="col" class="table-active">
@@ -302,7 +302,7 @@
                                                                         {{ $muestras->resultados_analisis->lugar_resguardo_muestra }}
                                                                     </td>
                                                                     <td>
-                                                                        {{ $muestras->resultados_analisis->tipo_material->nombre }}
+                                                                        {{ $muestras->resultados_analisis->tipo_material ? $muestras->resultados_analisis->tipo_material->nombre : '' }}
                                                                     </td>
                                                                     <td>
                                                                         <ul>
@@ -456,12 +456,12 @@
                                                                                                         </th>
                                                                                                         <th scope="col" class="table-active">
                                                                                                             <span>
-                                                                                                                <strong>Ruta de acceso a microfotografía/imagen datos</strong>
+                                                                                                                <strong>Microfotografía/Imagen o datos</strong>
                                                                                                             </span>
                                                                                                         </th>
                                                                                                         <th scope="col" class="table-active">
                                                                                                             <span>
-                                                                                                                <strong>Microfotografía/Imagen o datos</strong>
+                                                                                                                <strong>Ruta de acceso a microfotografía/imagen datos</strong>
                                                                                                             </span>
                                                                                                         </th>
                                                                                                     </tr>
@@ -480,13 +480,13 @@
                                                                                                         <td>
                                                                                                             {{ $resultados->interpretacion }}
                                                                                                         </td>
-                                                                                                        <td>
-                                                                                                            {{ $resultados->ruta_acceso_imagen }}
-                                                                                                        </td>
                                                                                                         <td class="text-center">
                                                                                                             @foreach($resultados->esquema_analiticos_microfotografias as $esquema_microfotografia)
                                                                                                                 <a href="{{ asset('/img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$esquema_microfotografia->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$esquema_microfotografia->imagen) }}" height="80"></a>
                                                                                                             @endforeach
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{ $resultados->ruta_acceso_imagen }}
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </tbody>
