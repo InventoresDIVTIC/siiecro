@@ -1,6 +1,6 @@
- {{-- @if (Auth::user()->rol->consulta_general_avanzada) --}}
+@if (Auth::user()->rol->consulta_general_avanzada)
     <div class="row mt-5">
-        {{-- <div class="col-lg-3 hid den">
+        <div class="col-lg-3 hidden">
             <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
                 <div class="sidebar-widget category mb-2 pb-0">
                     <h5 class="mb-2">Año</h5>
@@ -99,8 +99,8 @@
                     <a href="#">Colorante</a>
                 </div>
             </div>
-        </div> --}}
-        <div class="col-lg-12">
+        </div>
+        <div class="col-lg-9">
             <div class="row">
                 <div class="col-3">
                     <div class="form-group">
@@ -204,7 +204,7 @@
             </div>
             
             <div class="row">
-                {{-- <h4 class="p-5">OBRAS ENCONTRADAS {{ $obras->count() }}</h4> --}}
+                <h4 class="p-5">OBRAS ENCONTRADAS {{ $obras->count() }}</h4>
                 @foreach($obras as $obra)
                     <div class="col-6">
                         <a href="{{ route('consulta.detalle', $obra->seo) }}">
@@ -249,7 +249,6 @@
             </div>
         </div>
     </div>
-{{-- 
 @else
     <div class="middle-box text-center animated fadeInDown">
         <h1>404</h1>
@@ -260,4 +259,3 @@
         </div>
     </div>
 @endif
---}}
