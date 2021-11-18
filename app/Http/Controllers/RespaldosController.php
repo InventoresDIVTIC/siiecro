@@ -16,13 +16,15 @@ class RespaldosController extends Controller
 
     public function realizarTransferenciaClouds(Request $request)
     {
+        ini_set("curl.cainfo", "C:\wamp64\bin\php\php7.3.21\extras\ssl\cacert.pem");
+        // dd(ini_get("curl.cainfo"));
         $carpeta = '/siiecro-respaldos';
 
         try {
         	// crea el respaldo del sistema y la bd
             Artisan::call('backup:run');
         } catch (\Throwable $th) {
-            echo ($th);
+            dd("error", $th->getMessage());
             
             if($request->ajax()){
                 return "No se pudo realizar el respaldo de la base de datos ".$th;

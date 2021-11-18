@@ -37,9 +37,7 @@
 			    	<strong>Tipo de objeto:</strong> {{ $obra->tipo_objeto->nombre }}<br>
 			    	<strong>Lugar de procedencia:</strong> {{ $obra->lugar_procedencia_original }}<br>
 			    	<strong>Lugar de procedencia actual (ubicación o custodio):</strong> {{ $obra->lugar_procedencia_actual }}<br>
-			    	@if (Auth::user()->rol->acceso_a_datos_avanzado)
-			    		<strong>No. de inventarios o códigos de procedencia:</strong> {{ $obra->numero_inventario }}
-			    	@endif
+			    	<strong>No. de inventarios o códigos de procedencia:</strong> {{ $obra->numero_inventario }}
 			    </div>
 	    	</div>
 		    <hr class="semi">

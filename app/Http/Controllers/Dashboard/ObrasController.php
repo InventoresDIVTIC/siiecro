@@ -72,7 +72,6 @@ class ObrasController extends Controller
     
     public function index(){
     	$titulo 		= 	"Obras";
-    	
     	return view("dashboard.obras.index", ["titulo" => $titulo]);
     }
 
@@ -307,37 +306,10 @@ class ObrasController extends Controller
             
             // if que guarda las etiquetas si antes se creo la obra correctamente
             if(!$respuesta->getData()->error){
-                $id_obra = $respuesta->getData()->id;
+                $obra   = Obras::find($respuesta->getData()->id);
 
-                $obra_guardada  = Obras::selectRaw("
-                                                obras.nombre,
-                                                obras.autor,
-                                                obras.cultura,
-                                                obras.año,
-                                                obras.estatus_año,
-                                                obras.estatus_epoca,
-                                                obras.lugar_procedencia_actual,
-                                                obras.numero_inventario,
-                                                obc.nombre as tipo_bien_cultural,
-                                                oe.nombre as epoca,
-                                                ot.nombre as temporalidad,
-                                                oto.nombre as tipo_objeto
-                                            ")
-                                    ->join('obras__tipo_bien_cultural as obc', 'obc.id', 'obras.tipo_bien_cultural_id')
-                                    ->join('obras__tipo_objeto as oto', 'oto.id', 'obras.tipo_objeto_id')
-                                    ->leftJoin('obras__temporalidad as ot', 'ot.id', 'obras.temporalidad_id')
-                                    ->leftJoin('obras__epoca as oe', 'oe.id', 'obras.epoca_id')
-                                    ->whereNull('obras.fecha_aprobacion')
-                                    ->where('obras.id', '=', $id_obra)
-                                    ->first()
-                                    ->toArray();
-
-                // $para_tags = $obra_guardada->toArray();
-                $para_tags = implode("|", $obra_guardada);
-                // guarda los tags de las obras en su campo determinado para ello
-                $obra = Obras::find($id_obra);
-                $obra->tags = $para_tags;
-                $obra->save();
+                $obra->generarTags();
+                Obras::generarCSV();
             }
 
             return $respuesta;
@@ -409,39 +381,8 @@ class ObrasController extends Controller
                     ObrasTemporadasTrabajoAsignadas::reAsignarTemporadas($id, $request->input('_temporadas_trabajo'));
                 }
 
-                // $id_obra = $respuesta->getData()->id;
-
-                $obra_guardada  = Obras::selectRaw("
-                                                obras.nombre,
-                                                obras.autor,
-                                                obras.cultura,
-                                                obras.año,
-                                                obras.estatus_año,
-                                                obras.estatus_epoca,
-                                                obras.lugar_procedencia_actual,
-                                                obras.numero_inventario,
-                                                obc.nombre as tipo_bien_cultural,
-                                                oe.nombre as epoca,
-                                                ot.nombre as temporalidad,
-                                                oto.nombre as tipo_objeto
-                                            ")
-                                    ->join('obras__tipo_bien_cultural as obc', 'obc.id', 'obras.tipo_bien_cultural_id')
-                                    ->join('obras__tipo_objeto as oto', 'oto.id', 'obras.tipo_objeto_id')
-                                    ->leftJoin('obras__temporalidad as ot', 'ot.id', 'obras.temporalidad_id')
-                                    ->leftJoin('obras__epoca as oe', 'oe.id', 'obras.epoca_id')
-                                    // ->whereNull('obras.fecha_aprobacion')
-                                    ->where('obras.id', '=', $id)
-                                    ->first()
-                                    ->toArray();
-
-                // $para_tags = $obra_guardada->toArray();
-                $para_tags = implode("|", $obra_guardada);
-
-                // guarda los tags de las obras en su campo determinado para ello
-                // $obra = Obras::find($id);
-                $obra->tags = $para_tags;
-                $obra->save();                
-
+                $obra->generarTags();
+                Obras::generarCSV();
             }
 
             return $respuesta;
@@ -503,6 +444,7 @@ class ObrasController extends Controller
             }
 
             DB::commit();
+            Obras::generarCSV();
             return Response::json(["mensaje" => "Obras importadas correctamente.", "error" => false], 200);
         }
 

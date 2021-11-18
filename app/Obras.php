@@ -108,6 +108,11 @@ class Obras extends Model
     }
 
     public function getFolioAttribute(){
+
+        if ($this->id >= 2181 && $this->id <= 2189) {
+            $this->id   -=  611;
+        }
+
         $folio          =   str_pad($this->id, 4, "0", STR_PAD_LEFT);
 
         if($this->fecha_ingreso){
@@ -249,105 +254,6 @@ class Obras extends Model
     public function tieneImagenFrontal(){
         return ($this->vista_frontal_grande != "" && $this->vista_frontal_chica != "");
     }
-
-    // public function subirImagenVistaFrontal($file){
-    //     $extension                          =   $file->extension();
-
-    //     // Eliminamos posibles imagenes anteriores
-    //     Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_grande);
-    //     Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_chica);
-
-
-    //     $resultadoImagenGrande              =   Archivos::subirImagen($file, $this->id."_frontal_grande.".$extension, "img/obras", 1200);
-    //     $resultadoImagenChica               =   Archivos::subirImagen($file, $this->id."_frontal_chica.".$extension, "img/obras", 400);
-
-    //     // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
-    //     if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
-    //         // Eliminar imagenes
-    //         Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_grande);
-    //         Archivos::eliminarArchivo("img/obras/".$this->vista_frontal_chica);
-
-    //         $this->vista_frontal_grande     =   "";
-    //         $this->vista_frontal_chica      =   "";
-    //     } else{
-    //         $this->vista_frontal_grande     =   $this->id."_frontal_grande.".$extension;
-    //         $this->vista_frontal_chica      =   $this->id."_frontal_chica.".$extension;
-    //     }
-
-    //     $this->save();
-    // }
-
-    // public function tieneImagenPosterior(){
-    //     return ($this->vista_posterior_grande != "" && $this->vista_posterior_chica != "");
-    // }
-
-    // public function subirImagenVistaPosterior($file){
-    //     $extension                              =   "jpg";
-
-    //     $resultadoImagenGrande                  =   Archivos::subirImagen($file, $this->id."_posterior_grande.".$extension, "img/obras", 1200);
-    //     $resultadoImagenChica                   =   Archivos::subirImagen($file, $this->id."_posterior_chica.".$extension, "img/obras", 400);
-
-    //     // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
-    //     if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
-    //         // Eliminar imagen
-
-    //         $this->vista_posterior_grande       =   "";
-    //         $this->vista_posterior_chica        =   "";
-    //     } else{
-    //         $this->vista_posterior_grande       =   $this->id."_posterior_grande.".$extension;
-    //         $this->vista_posterior_chica        =   $this->id."_posterior_chica.".$extension;
-    //     }
-
-    //     $this->save();
-    // }
-
-    // public function tieneImagenLateralIzquierda(){
-    //     return ($this->vista_lateral_izquierda_grande != "" && $this->vista_lateral_izquierda_chica != "");
-    // }
-
-    // public function subirImagenVistaLateralIzquierda($file){
-    //     $extension                                      =   "jpg";
-
-    //     $resultadoImagenGrande                          =   Archivos::subirImagen($file, $this->id."_lateral_izquierda_grande.".$extension, "img/obras", 1200);
-    //     $resultadoImagenChica                           =   Archivos::subirImagen($file, $this->id."_lateral_izquierda_chica.".$extension, "img/obras", 400);
-
-    //     // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
-    //     if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
-    //         // Eliminar imagen
-
-    //         $this->vista_lateral_izquierda_grande       =   "";
-    //         $this->vista_lateral_izquierda_chica        =   "";
-    //     } else{
-    //         $this->vista_lateral_izquierda_grande       =   $this->id."_lateral_izquierda_grande.".$extension;
-    //         $this->vista_lateral_izquierda_chica        =   $this->id."_lateral_izquierda_chica.".$extension;
-    //     }
-
-    //     $this->save();
-    // }
-
-    // public function tieneImagenLateralDerecha(){
-    //     return ($this->vista_lateral_derecha_chica != "" && $this->vista_lateral_derecha_grande != "");
-    // }
-
-    // public function subirImagenVistaLateralDerecha($file){
-    //     $extension                                  =   "jpg";
-
-    //     $resultadoImagenGrande                      =   Archivos::subirImagen($file, $this->id."_lateral_derecha_grande.".$extension, "img/obras", 1200);
-    //     $resultadoImagenChica                       =   Archivos::subirImagen($file, $this->id."_lateral_derecha_chica.".$extension, "img/obras", 400);
-
-    //     // Si alguna de las imagenes no se subio eliminamos las dos, debido que no podemos dejar una si y otra no
-    //     if($resultadoImagenChica != "" || $resultadoImagenGrande != ""){
-    //         // Eliminar imagen
-
-    //         $this->vista_lateral_derecha_grande     =   "";
-    //         $this->vista_lateral_derecha_chica      =   "";
-    //     } else{
-    //         $this->vista_lateral_derecha_grande     =   $this->id."_lateral_derecha_grande.".$extension;
-    //         $this->vista_lateral_derecha_chica      =   $this->id."_lateral_derecha_chica.".$extension;
-    //     }
-
-    //     $this->save();
-    // }
 
     public static function buscarObraValidandoPermisos($obra_id){
         $obra           =   Obras::selectRaw("obras.*")
@@ -617,5 +523,56 @@ class Obras extends Model
         $obj->total_interno             =   $obras->where('forma_ingreso', 'INT')->count();
         
         return $obj;
+    }
+
+    public function generarTags(){
+        $obra           =   Obras::selectRaw("
+                                                obras.nombre,
+                                                obras.autor,
+                                                obras.cultura,
+                                                obras.año,
+                                                obras.estatus_año,
+                                                obras.estatus_epoca,
+                                                obras.lugar_procedencia_actual,
+                                                obras.numero_inventario,
+                                                obc.nombre as tipo_bien_cultural,
+                                                oe.nombre as epoca,
+                                                ot.nombre as temporalidad,
+                                                oto.nombre as tipo_objeto
+                                            ")
+                                        ->join('obras__tipo_bien_cultural as obc',  'obc.id',   'obras.tipo_bien_cultural_id')
+                                        ->join('obras__tipo_objeto as oto',         'oto.id',   'obras.tipo_objeto_id')
+                                        ->leftJoin('obras__temporalidad as ot',     'ot.id',    'obras.temporalidad_id')
+                                        ->leftJoin('obras__epoca as oe',            'oe.id',    'obras.epoca_id')
+                                        ->where('obras.id', $this->id)
+                                        ->first()
+                                        ->toArray();
+
+        $para_tags      =   implode("|", $obra);
+        $this->tags     =   $para_tags;
+        $this->save();
+    }
+
+    public static function generarCSV(){
+        $path           =   public_path('resources/');
+
+        $fileName       =   'obras.csv';
+
+        $file           =   fopen($path.$fileName, 'w');
+
+        $columns = array('id', 'tags');
+
+        fputcsv($file, $columns);
+
+        Obras::chunk(100, function($obras) use($file){
+            foreach($obras as $obra){
+                $data = [
+                    'id'    =>  $obra->id,  
+                    'tags'  =>  $obra->tags,    
+                ];
+                fputcsv($file, $data);
+            }
+        });
+        fclose($file);
     }
 }

@@ -174,12 +174,11 @@
                                                     <label for="lugar_procedencia_original">Lugar de procedencia original</label>
                                                     <input type="text" class="form-control" id="lugar_procedencia_original" name="lugar_procedencia_original" value="{{ $obra->lugar_procedencia_original }}" required autocomplete="off" disabled placeholder="Lugar de donde proviene la obra/creación." mi-tooltip="Lugar de donde proviene la obra/creación.">
                                                 </div>
-                                                @if (Auth::user()->rol->acceso_a_datos_avanzado)
-                                                    <div class="col-md-2 div-input required">
-                                                        <label for="numero_inventario">No inventario</label>
-                                                        <input type="text" class="form-control" id="numero_inventario" name="numero_inventario" value="{{ $obra->numero_inventario }}" required autocomplete="off" disabled>
-                                                    </div>
-                                                @endif
+                                                
+                                                <div class="col-md-2 div-input required">
+                                                    <label for="numero_inventario">No inventario</label>
+                                                    <input type="text" class="form-control" id="numero_inventario" name="numero_inventario" value="{{ $obra->numero_inventario }}" required autocomplete="off" disabled {{ Auth::user()->rol->edicion_de_registro_avanzada_1 ? "" : "no-editar" }}>
+                                                </div>
 
                                                 <div class="col-md-3 div-input required">
                                                     <label for="alto">Alto (cm)</label>
