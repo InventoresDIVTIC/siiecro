@@ -449,7 +449,7 @@
                                                                                                                 <strong>Información del equipo</strong>
                                                                                                             </span>
                                                                                                         </th>
-                                                                                                        <th scope="col" class="table-active">
+                                                                                                        <th scope="col" class="table-active" style="width:250px">
                                                                                                             <span>
                                                                                                                 <strong>Interpretación</strong>
                                                                                                             </span>

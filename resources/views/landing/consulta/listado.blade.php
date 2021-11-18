@@ -1,6 +1,6 @@
 @if (Auth::user()->rol->consulta_general_avanzada)
     <div class="row mt-5">
-        <div class="col-lg-3 hidden">
+        <div class="col-lg-3">
             <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
                 <div class="sidebar-widget category mb-2 pb-0">
                     <h5 class="mb-2">Año</h5>
