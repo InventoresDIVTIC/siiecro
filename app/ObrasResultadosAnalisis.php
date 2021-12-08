@@ -141,8 +141,8 @@ class ObrasResultadosAnalisis extends Model
     public function cadenaInterpretacionesParticulares(){
         if ($this->interpretaciones_particulares->count()) {
             return $this->interpretaciones_particulares->map(function($registro){
-                        return $registro->interpretacion_particular->nombre;
-                    })->implode(",");
+                    return $registro->interpretacion_particular ? $registro->interpretacion_particular->nombre : null;
+                })->implode(",");
         } else{
             return "";
         }

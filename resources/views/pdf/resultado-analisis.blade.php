@@ -62,7 +62,7 @@
 		    <hr class="semi">
 	    	<div class="col-100">
 	    		<div class="text-left">
-			    	<span class="subtitulo">Análisis a realizar:</span> <br>
+			    	<span class="subtitulo">Esquema de toma de muestra:</span> <br>
 			    	@foreach ($resultadoAnalisis->imagenes_resultados_esquema_muestra as $imagen_muestra)
 			    		<div class="col-100 text-center">
 			    			<img src="{{ asset('img/obras/resultados-analisis-esquema-muestra/'.$imagen_muestra->imagen) }}" style="height: 200px;">
@@ -79,8 +79,9 @@
 			    	<strong>Descripción:</strong> {{ $resultadoAnalisis->descripcion }}<br>
 			    	<strong>Ruta de acceso a microfotografía:</strong> {{ $resultadoAnalisis->ruta_acceso_microfotografia }}<br>
 			    	@foreach ($resultadoAnalisis->imagenes_resultados_esquema_microfotografia as $imagen_muestra)
+					{{$imagen_muestra->imagen}}
 			    		<div class="col-100 text-center mt-md">
-			    			<img src="{{ asset('img/obras/resultados-analisis-esquema-muestra/'.$imagen_muestra->imagen) }}" style="height: 200px;">
+			    			<img src="{{ asset('img/obras/resultados-analisis-esquema-microfotografia/'.$imagen_muestra->imagen) }}" style="height: 200px;">
 			    		</div>
 			    	@endforeach
 			    </div>
@@ -90,7 +91,53 @@
 	    	<div class="col-100">
 	    		<div class="text-left">
 			    	<span class="subtitulo">Datos analíticos (resultados):</span> <br>
-			    	<table>
+
+					@foreach ($resultadoAnalisis->resultados as $resultado)
+						<table class="col-100">
+							<tr>
+								<td>
+									<small class="fs-12"><strong>Información por definir:</strong></small><br>
+									{{ $resultado->informacion_por_definir->nombre }}
+								</td>
+								<td>
+									<small class="fs-12"><strong>Análisis a realizar:</strong></small><br>
+									{{ $resultado->analisis_realizar->nombre }}
+								</td>
+								<td>
+									<small class="fs-12"><strong>Técnica analítica:</strong></small><br>
+									{{ $resultado->tecnica_analitica->nombre }}
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<small class="fs-12"><strong>Información del equipo</strong></small><br>
+									{{ $resultado->informacion_del_equipo ? $resultado->informacion_del_equipo->nombre : "N/A" }}
+								</td>
+							</tr>
+							@if (Auth::user()->rol->acceso_a_datos_avanzado)
+								<tr>
+									<td colspan="3">
+										<small class="fs-12"><strong>Ruta de acceso</strong></small><br>
+										{{ $resultado->ruta_acceso_imagen }}
+									</td>
+								</tr>
+							@endif
+							<tr>
+								<td>
+									<small class="fs-12"><strong>Interpretación</strong></small><br>
+									<i style="font-size:11px;">{!! nl2br($resultado->interpretacion) !!}</i>
+								</td>
+								<td colspan="2" class="text-center">
+									<small class="fs-12"><strong>Microfotografía, datos ó imagen</strong></small>
+									@foreach ($resultado->esquema_analiticos_microfotografias as $imagen)
+										<br><br>
+										<img src="{{ asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$imagen->imagen) }}" width="300px"><br>
+									@endforeach
+								</td>
+							</tr>
+						</table>
+					@endforeach
+			    	{{-- <table>
 			    		<thead>
 				    		<tr>
 					    		<th class="col-10 fs-6">Información por definir</th>
@@ -123,7 +170,7 @@
 				    			</tr>
 				    		@endforeach
 				    	</tbody>
-			    	</table>
+			    	</table> --}}
 			    </div>
 	    	</div>
 
