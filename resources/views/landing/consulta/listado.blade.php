@@ -1,14 +1,16 @@
- {{-- @if (Auth::user()->rol->consulta_general_avanzada) --}}
+@if (Auth::user()->rol->consulta_general_avanzada)
     <div class="row mt-5">
-        {{-- <div class="col-lg-3 hid den">
+        <div class="col-lg-3">
             <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
                 <div class="sidebar-widget category mb-2 pb-0">
                     <h5 class="mb-2">Año</h5>
 
                     <div class="form-group">
-                        <select class="form-control" id="">
-                          <option>2007</option>
-                          <option>2008</option>
+                        <select class="form-control filtros-administrativos" id="anio">
+                            <option></option>
+                            @foreach($anios as $anio)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['anio'] ==  $anio->anio ? 'selected' : '' ) : '' ) : '' }} value="{{ $anio->anio }}">{{ $anio->anio }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -19,10 +21,11 @@
                     <h5 class="mb-2">Época</h5>
 
                     <div class="form-group">
-                        <select class="form-control" id="">
-                          <option>Siglo XXI</option>
-                          <option>Siglo XX</option>
-                          <option>Siglo XIX</option>
+                        <select class="form-control filtros-administrativos" id="epoca">
+                            <option></option>
+                            @foreach($epocas as $epoca)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['epoca'] ==  $epoca->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $epoca->id }}">{{ $epoca->nombre }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -32,23 +35,39 @@
                     <h5 class="mb-2">Temporalidad</h5>
 
                     <div class="form-group">
-                        <select class="form-control" id="">
-                          <option>Desconocida</option>
-                          <option>Clásico temprano (0-300 d.C)</option>
-                          <option>Preclásico medio</option>
+                        <select class="form-control filtros-administrativos" id="temporalidad">
+                            <option></option>
+                            @foreach($temporalidades as $temporalidad)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['temporalidad'] ==  $temporalidad->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $temporalidad->id }}">{{ $temporalidad->nombre }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
             </div>
             <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
                 <div class="sidebar-widget category mb-2 pb-0">
-                    <h5 class="mb-2">Autor o Cultura</h5>
+                    <h5 class="mb-2">Autor</h5>
 
                     <div class="form-group">
-                        <select class="form-control" id="">
-                          <option>Mario Rosilio</option>
-                          <option>Tamara de Lempicka</option>
-                          <option>Capacha, Occidente de México</option>
+                        <select class="form-control filtros-administrativos" id="autor">
+                            <option></option>
+                            @foreach($autores as $autor)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['autor'] ==  $autor->autor ? 'selected' : '' ) : '' ) : '' }} value="{{ $autor->autor }}">{{ $autor->autor }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
+                <div class="sidebar-widget category mb-2 pb-0">
+                    <h5 class="mb-2">Cultura</h5>
+
+                    <div class="form-group">
+                        <select class="form-control filtros-administrativos" id="cultura">
+                            <option></option>
+                            @foreach($culturas as $cultura)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['cultura'] ==  $cultura->cultura ? 'selected' : '' ) : '' ) : '' }} value="{{ $cultura->cultura }}">{{ $cultura->cultura }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -58,9 +77,11 @@
                     <h5 class="mb-2">Lugar de procedencia actual</h5>
 
                     <div class="form-group">
-                        <select class="form-control" id="">
-                          <option>Museo de Mascota</option>
-                          <option>Museo Regional de Guadalajara</option>
+                        <select class="form-control filtros-administrativos" id="lugar_procedencia_actual">
+                            <option></option>
+                            @foreach($lugares_procedencia_actual as $lugar_actual)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['lugar_procedencia_actual'] ==  $lugar_actual->lugar_procedencia_actual ? 'selected' : '' ) : '' ) : '' }} value="{{ $lugar_actual->lugar_procedencia_actual }}">{{ $lugar_actual->lugar_procedencia_actual }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -70,37 +91,59 @@
                     <h5 class="mb-2">Lugar de procedencia original</h5>
 
                     <div class="form-group">
-                        <select class="form-control" id="">
-                          <option>Desconocido</option>
-                          <option>"El Panteon" Mascota, Jalisco</option>
+                        <select class="form-control filtros-administrativos" id="lugar_procedencia_original">
+                            <option></option>
+                            @foreach($lugares_procedencia_original as $lugar_original)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['lugar_procedencia_original'] ==  $lugar_original->lugar_procedencia_original ? 'selected' : '' ) : '' ) : '' }} value="{{ $lugar_original->lugar_procedencia_original }}">{{ $lugar_original->lugar_procedencia_original }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
             </div>
             <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
-                <div class="sidebar-widget tags mb-2 pb-0">
+                <div class="sidebar-widget category mb-2 pb-0">
                     <h5 class="mb-2">Tipo de bien cultural</h5>
 
-                    <a href="#">Etnográfico</a>
-                    <a href="#">Industrial</a>
-                    <a href="#">Religioso</a>
-                    <a href="#">Artístico</a>
-                    <a href="#">Histórico</a>
+                    <div class="form-group">
+                        <select class="form-control filtros-administrativos" id="tipo_bien_cultural">
+                            <option></option>
+                            @foreach($tipos_bien_cultural as $tipo_bien_cultural)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['tipo_bien_cultural'] ==  $tipo_bien_cultural->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $tipo_bien_cultural->id }}">{{ $tipo_bien_cultural->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
-                <div class="sidebar-widget tags mb-2 pb-0">
-                    <h5 class="mb-2">Materiales</h5>
+            <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0 {{ $filtro_visible != '[]' ? $filtro_visible : '' }}">
+                <div class="sidebar-widget category mb-2 pb-0">
+                    <h5 class="mb-2">Tipos de material</h5>
 
-                    <a href="#">Sal</a>
-                    <a href="#">Adhesivo</a>
-                    <a href="#">Capas de superficie </a>
-                    <a href="#">Aglutinante</a>
-                    <a href="#">Colorante</a>
+                    <div class="form-group">
+                        <select class="form-control filtros-administrativos" id="tipo_material">
+                            <option></option>
+                            @foreach($tipos_material as $tipo_material)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['tipo_material'] ==  $tipo_material->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $tipo_material->id }}">{{ $tipo_material->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div> --}}
-        <div class="col-lg-12">
+            <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0 {{ $filtro_visible != '[]' ? $filtro_visible : '' }}">
+                <div class="sidebar-widget category mb-2 pb-0">
+                    <h5 class="mb-2">Interpretación de material</h5>
+
+                    <div class="form-group">
+                        <select class="form-control filtros-administrativos" id="interpretacion_material">
+                            <option></option>
+                            @foreach($interpretaciones_materiales as $interpretacion_material)
+                                <option {{ $filtros != null ? ($filtros != '[]' ? ($filtros['interpretacion_material'] ==  $interpretacion_material->id ? 'selected' : '' ) : '' ) : '' }} value="{{ $interpretacion_material->id }}">{{ $interpretacion_material->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
             <div class="row">
                 <div class="col-3">
                     <div class="form-group">
@@ -202,9 +245,12 @@
                 </div>
 
             </div>
-            
             <div class="row">
-                {{-- <h4 class="p-5">OBRAS ENCONTRADAS {{ $obras->count() }}</h4> --}}
+                <div class="col-12 text-center">
+                    <h4 class="p-5">Obras Encontradas {{ $obras->count() }}</h4>
+                </div>
+            </div>
+            <div class="row">
                 @foreach($obras as $obra)
                     <div class="col-6">
                         <a href="{{ route('consulta.detalle', $obra->seo) }}">
@@ -249,7 +295,6 @@
             </div>
         </div>
     </div>
-{{-- 
 @else
     <div class="middle-box text-center animated fadeInDown">
         <h1>404</h1>
@@ -260,4 +305,3 @@
         </div>
     </div>
 @endif
---}}

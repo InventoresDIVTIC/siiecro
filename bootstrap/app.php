@@ -1,5 +1,6 @@
 <?php
-
+// SE AGREGA YA QUE EL SERVIDOR NO TOMA LAS CONFIGURACIONES HECHAS DESDE EL MODIFICADOR DEL .ini DE CPANEL
+ini_set ('memory_limit', '1024M');
 /*
 |--------------------------------------------------------------------------
 | Create The Application

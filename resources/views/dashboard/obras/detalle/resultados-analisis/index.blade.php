@@ -11,7 +11,7 @@
                 <div class="progress hidden" id="carga-dt-resultados-analisis">
                     <div class="progress-bar-indeterminate"></div>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive" id="index-resultados-analisis">
                     <table class="table table-striped" id="dt-datos-resultados-analisis">
                         <thead>
                             <tr>

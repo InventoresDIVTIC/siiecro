@@ -171,7 +171,7 @@
                                         <div class="progress hidden" id="carga-dt-analisis-realizar-resultados">
                                             <div class="progress-bar-indeterminate"></div>
                                         </div>
-                                        <div class="table-responsive">
+                                        <div class="table-responsive" id="listado-datos-analiticos">
                                             <table class="table table-striped" id="dt-datos-analisis-realizar-resultados">
                                                 <thead>
                                                     <tr>

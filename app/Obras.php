@@ -408,8 +408,8 @@ class Obras extends Model
 
                                     ->join("obras__solicitudes_analisis as solicitud", "solicitud.obra_id", "obras.id")
                                     ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.solicitud_analisis_id", "solicitud.id")
-                                    ->join("obras__resultados_analisis as resultado", "resultado.solicitudes_analisis_muestras_id", "muestra.id")
-                                    ->join("obras__tipo_material as tipo", "tipo.id", "resultado.tipo_material_id")
+                                    ->join("obras__resultados_analisis", "obras__resultados_analisis.solicitudes_analisis_muestras_id", "muestra.id")
+                                    ->join("obras__tipo_material as tipo", "tipo.id", "obras__resultados_analisis.tipo_material_id")
                                     ->where('tipo.nombre', 'like', '%'.$busqueda.'%');
                                     // ->groupBy('obras.id')
 
@@ -428,8 +428,8 @@ class Obras extends Model
 
                                     ->join("obras__solicitudes_analisis as solicitud", "solicitud.obra_id", "obras.id")
                                     ->join("obras__solicitudes_analisis_muestras as muestra", "muestra.solicitud_analisis_id", "solicitud.id")
-                                    ->join("obras__resultados_analisis as resultado", "resultado.solicitudes_analisis_muestras_id", "muestra.id")
-                                    ->join("obras__analisis_a_realizar_resultados as analisis_realizar_resultado", "analisis_realizar_resultado.resultado_analisis_id", "resultado.id")
+                                    ->join("obras__resultados_analisis", "obras__resultados_analisis.solicitudes_analisis_muestras_id", "muestra.id")
+                                    ->join("obras__analisis_a_realizar_resultados as analisis_realizar_resultado", "analisis_realizar_resultado.resultado_analisis_id", "obras__resultados_analisis.id")
                                     ->join("obras__analisis_a_realizar_tecnica as tecnica", "tecnica.id", "analisis_realizar_resultado.tecnica_analitica_id")
                                     ->where('tecnica.nombre', 'like', '%'.$busqueda.'%');
                                     // ->groupBy('obras.id')
@@ -501,6 +501,54 @@ class Obras extends Model
 
             if ($filtros['persona_realiza_analisis'] != '') {
                 $obras->where('resultado.persona_realiza_analisis_id', '=', $filtros['persona_realiza_analisis']);
+            }
+
+            // NO ADMINISTRATIVOS
+            if ($filtros['anio'] != '') {
+                $anio           = $filtros['anio'];
+
+                $fecha_inicial  = $anio.'-01-01';
+                $fecha_final    = $anio.'-12-31';
+
+                $obras->where('obras.año', '>=', $fecha_inicial)
+                        ->where('obras.año', '<=', $fecha_final);
+            }
+
+            if ($filtros['epoca'] != '') {
+                $obras->where('obras.epoca_id', '=', $filtros['epoca']);
+            }
+
+            if ($filtros['temporalidad'] != '') {
+                $obras->where('obras.temporalidad_id', '=', $filtros['temporalidad']);
+            }
+
+            if ($filtros['autor'] != '') {
+                $obras->where('obras.autor', '=', $filtros['autor']);
+            }
+
+            if ($filtros['cultura'] != '') {
+                $obras->where('obras.cultura', '=', $filtros['cultura']);
+            }
+
+            if ($filtros['lugar_procedencia_actual'] != '') {
+                $obras->where('obras.lugar_procedencia_actual', '=', $filtros['lugar_procedencia_actual']);
+            }
+
+            if ($filtros['lugar_procedencia_original'] != '') {
+                $obras->where('obras.lugar_procedencia_original', '=', $filtros['lugar_procedencia_original']);
+            }
+
+            if ($filtros['tipo_bien_cultural'] != '') {
+                $obras->where('obras.tipo_bien_cultural_id', '=', $filtros['tipo_bien_cultural']);
+            }
+
+            if ($filtros['tipo_material'] != '') {
+                $obras->where('obras__resultados_analisis.tipo_material_id', '=', $filtros['tipo_material']);
+            }
+
+            if ($filtros['interpretacion_material'] != '') {
+                $obras->join("obras__resultados_analisis_interpretaciones_particulares", "obras__resultados_analisis_interpretaciones_particulares.obras__resultados_analisis_id", "obras__resultados_analisis.id")
+                        ->where('obras__resultados_analisis_interpretaciones_particulares.obras__tipo_material__interpretacion_particular_id', '=', $filtros['interpretacion_material']);
             }
 
             return $obras;
