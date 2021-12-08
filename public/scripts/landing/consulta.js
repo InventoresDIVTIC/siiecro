@@ -45,9 +45,11 @@ function buscar(e){
 					// console.log(response);
 					$("#div-resultados-busqueda").html(response);
 					$("#div-loading").addClass('hidden');
-					$('#no-registro, #area, #responsable-ecro, #no-proyecto-ecro, #proyecto-ecro, #temporada-ecro, #profe-responsable, #persona-realiza-analisis').select2({
+					$('#no-registro, #area, #responsable-ecro, #no-proyecto-ecro, #proyecto-ecro, #temporada-ecro, #profe-responsable, #persona-realiza-analisis \
+						, #anio, #epoca, #temporalidad, #autor, #cultura, #lugar_procedencia_actual, #lugar_procedencia_original, #tipo_bien_cultural, #tipo_material, #interpretacion_material').select2({
 						placeholder: 'Elige una opción',
-						width: '100%'
+						width: '100%',
+						allowClear: true
 					});
 				},
 				error: function(){
@@ -71,6 +73,18 @@ $(document.body).on('change',".filtros-administrativos", function (e) {
 	let nomenclatura_muestra     = $('#nomenclatura-muestra').val();
 	let persona_realiza_analisis = $('#persona-realiza-analisis').val();
 
+	// GENERALES
+	let anio 						= $('#anio').val();
+	let epoca 						= $('#epoca').val();
+	let temporalidad 				= $('#temporalidad').val();
+	let autor 						= $('#autor').val();
+	let cultura 					= $('#cultura').val();
+	let lugar_procedencia_actual 	= $('#lugar_procedencia_actual').val();
+	let lugar_procedencia_original 	= $('#lugar_procedencia_original').val();
+	let tipo_bien_cultural 			= $('#tipo_bien_cultural').val();
+	let tipo_material 				= $('#tipo_material').val();
+	let interpretacion_material 	= $('#interpretacion_material').val();
+
    const filtros = {
 		no_registro: no_registro,
 		area: area,
@@ -81,6 +95,16 @@ $(document.body).on('change',".filtros-administrativos", function (e) {
 		profe_responsable: profe_responsable,
 		nomenclatura_muestra: nomenclatura_muestra,
 		persona_realiza_analisis: persona_realiza_analisis,
+		anio: anio,
+		epoca: epoca,
+		temporalidad: temporalidad,
+		autor: autor,
+		cultura: cultura,
+		lugar_procedencia_actual: lugar_procedencia_actual,
+		lugar_procedencia_original: lugar_procedencia_original,
+		tipo_bien_cultural: tipo_bien_cultural,
+		tipo_material: tipo_material,
+		interpretacion_material: interpretacion_material,
    }
 
 	// console.log(this.value);
@@ -107,9 +131,11 @@ $(document.body).on('change',".filtros-administrativos", function (e) {
 		success: function(response){
 			$("#div-resultados-busqueda").html(response);
 			$("#div-loading").addClass('hidden');
-			$('#no-registro, #area, #responsable-ecro, #no-proyecto-ecro, #proyecto-ecro, #temporada-ecro, #profe-responsable, #persona-realiza-analisis').select2({
+			$('#no-registro, #area, #responsable-ecro, #no-proyecto-ecro, #proyecto-ecro, #temporada-ecro, #profe-responsable, #persona-realiza-analisis \
+				, #anio, #epoca, #temporalidad, #autor, #cultura, #lugar_procedencia_actual, #lugar_procedencia_original, #tipo_bien_cultural, #tipo_material, #interpretacion_material').select2({
 				placeholder: 'Elige una opción',
-				width: '100%'
+				width: '100%',
+				allowClear: true
 			});
 		},
 		error: function(){

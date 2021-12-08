@@ -14,6 +14,11 @@ use App\User;
 use App\Proyectos;
 use App\ProyectosTemporadasTrabajo;
 use App\ObrasUsuariosAsignados;
+use App\ObrasEpoca;
+use App\ObrasTemporalidad;
+use App\ObrasTipoBienCultural;
+use App\ObrasTipoMaterial;
+use App\ObrasTipoMaterialInterpretacionParticular;
 
 class ConsultaController extends Controller
 {
@@ -49,10 +54,32 @@ class ConsultaController extends Controller
                                         ->join('obras__solicitudes_analisis', 'obras__solicitudes_analisis.obra_id', '=', 'obras__usuarios_asignados.obra_id')
                                         ->where('obras__usuarios_asignados.status', '=', 'Activo')
                                         ->get();
+            
+            // $años 				= Obras::selectRaw('SUBSTRING(obras.año, 1, 4) as año')->whereNotNull('obras.año')->get();
+            $anios 							= Obras::selectRaw('DISTINCT SUBSTRING(obras.año, 1,  4) as anio')->whereNotNull('obras.año')->get();
+            $epocas 						= ObrasEpoca::all();
+            $temporalidades 				= ObrasTemporalidad::all();
+            $autores 						= Obras::selectRaw('DISTINCT obras.autor')->whereNotNull('obras.autor')->get();
+            $culturas 						= Obras::selectRaw('DISTINCT obras.cultura')->whereNotNull('obras.cultura')->get();
+            $lugares_procedencia_actual 	= Obras::selectRaw('DISTINCT obras.lugar_procedencia_actual')->whereNotNull('obras.lugar_procedencia_actual')->get();
+            $lugares_procedencia_original 	= Obras::selectRaw('DISTINCT obras.lugar_procedencia_original')->whereNotNull('obras.lugar_procedencia_original')->get();
+            $tipos_bien_cultural 			= ObrasTipoBienCultural::all();
+            $tipos_material 				= ObrasTipoMaterial::all();
+
+            $interpretaciones_materiales 	= [];
+            // dd($autor);
 
 			if (is_array($filtros) ) {
 				if($filtros['proyecto'] != '') {
 					$temporadas = ProyectosTemporadasTrabajo::where('proyecto_id', $filtros['proyecto'])->get();
+				}
+
+				if($filtros['tipo_material'] != '') {
+            		$interpretaciones_materiales = ObrasTipoMaterialInterpretacionParticular::selectRaw('obras__tipo_material__interpretacion_particular.*')
+            										->join('obras__tipo_material__inter_cruzada as tipo_material_cruzada', 'tipo_material_cruzada.interpretacion_particular_cruzada_id', '=', 'obras__tipo_material__interpretacion_particular.id')
+            										->join('obras__tipo_material', 'obras__tipo_material.id', '=', 'tipo_material_cruzada.tipo_material_cruzada_iter_id')
+            										->where('obras__tipo_material.id', $filtros['tipo_material'])
+            										->get();
 				}
 			}
 
@@ -75,16 +102,26 @@ class ConsultaController extends Controller
 
             // return $obras;
     		return view('landing.consulta.listado', [
-				'obras'                      => $obras,
-				'obras_all'                  => $obras_all,
-				'areas'                      => $areas,
-				'responsables'               => $responsables,
-				'proyectos'                  => $proyectos,
-				'temporadas'                 => $temporadas,
-				'profes_responsables'        => $profes_responsables,
-				'personas_realizan_analisis' => $personas_realizan_analisis,
-				'filtro_visible'             => $visible,
-				'filtros'                    => $filtros
+				'obras'                      	=> $obras,
+				'obras_all'                  	=> $obras_all,
+				'areas'                      	=> $areas,
+				'responsables'               	=> $responsables,
+				'proyectos'                  	=> $proyectos,
+				'temporadas'                 	=> $temporadas,
+				'profes_responsables'        	=> $profes_responsables,
+				'personas_realizan_analisis' 	=> $personas_realizan_analisis,
+				'anios' 					 	=> $anios,
+				'epocas' 					 	=> $epocas,
+				'temporalidades' 			 	=> $temporalidades,
+				'autores' 			 		 	=> $autores,
+				'culturas' 			 		 	=> $culturas,
+				'lugares_procedencia_actual' 	=> $lugares_procedencia_actual,
+				'lugares_procedencia_original' 	=> $lugares_procedencia_original,
+				'tipos_bien_cultural' 			=> $tipos_bien_cultural,
+				'tipos_material' 				=> $tipos_material,
+				'interpretaciones_materiales' 	=> $interpretaciones_materiales,
+				'filtro_visible'             	=> $visible,
+				'filtros'                   	=> $filtros
     		]);
     	}
 
