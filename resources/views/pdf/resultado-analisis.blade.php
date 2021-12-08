@@ -93,7 +93,7 @@
 			    	<span class="subtitulo">Datos analíticos (resultados):</span> <br>
 
 					@foreach ($resultadoAnalisis->resultados as $resultado)
-						<table class="col-100">
+						<table class="col-100 mt-md">
 							<tr>
 								<td>
 									<small class="fs-12"><strong>Información por definir:</strong></small><br>
