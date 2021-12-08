@@ -115,10 +115,10 @@ class ObrasResultadosAnalisisController extends Controller
                             $img    = ObrasResultadosAnalisisEsquemaMuestra::where('resultado_analisis_id',$registro->id)->first();
                             $altura = 40;
                             
-                            $imagen = '<a href="'.asset('img/predeterminadas/sin_imagen.png').'" data-gallery=""><img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'"></a>';
+                            $imagen = '<a href="'.asset('img/predeterminadas/sin_imagen.png').'" data-gallery="#galeria-index-resultados-analisis"><img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'"></a>';
                             
                             if ($img != NULL) {
-                                $imagen = '<a href="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" data-gallery=""><img src="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" height="'.$altura.'"></a>';
+                                $imagen = '<a href="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" data-gallery="#galeria-index-resultados-analisis"><img src="'.asset('img/obras/resultados-analisis-esquema-muestra/'.$img->imagen).'" height="'.$altura.'"></a>';
                             }
                             
                             return $imagen;
@@ -473,10 +473,10 @@ class ObrasResultadosAnalisisController extends Controller
                             $img    = ObrasAnalisisARealizarMicrofotografia::where('analisis_a_realizar_resultado_id',$registro->id_resultado)->first();
                             $altura = 40;
 
-                            $imagen = '<a href="'.asset('img/predeterminadas/sin_imagen.png').'" data-gallery=""><img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'"></a>';
+                            $imagen = '<a href="'.asset('img/predeterminadas/sin_imagen.png').'" data-gallery="#galeria-listado-datos-analiticos"><img src="'.asset('img/predeterminadas/sin_imagen.png').'" height="'.$altura.'"></a>';
                             
                             if ($img != NULL) {
-                                $imagen = '<a href="'. asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen) .'" '. (stripos($img->imagen, '.pdf') == true ? 'target="_blank"' : 'data-gallery=""') .' ><img src="'.asset('img/'. (stripos($img->imagen, '.pdf') == true ? 'predeterminadas/imagen-pdf.png' : 'obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen ) ).'" height="'.$altura.'"></a>';
+                                $imagen = '<a href="'. asset('img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen) .'" '. (stripos($img->imagen, '.pdf') == true ? 'target="_blank"' : 'data-gallery="#galeria-listado-datos-analiticos"') .' ><img src="'.asset('img/'. (stripos($img->imagen, '.pdf') == true ? 'predeterminadas/imagen-pdf.png' : 'obras/resultados-analisis-esquema-analiticos-microfotografia/'.$img->imagen ) ).'" height="'.$altura.'"></a>';
                             }
                             
                             return $imagen;
