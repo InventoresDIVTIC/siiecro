@@ -1,4 +1,9 @@
 @if (Auth::user()->rol->consulta_general_avanzada)
+    <div class="row">
+        <div class="col-12 text-center">
+            <h4>Obras Encontradas {{ $obras->total() }}</h4>
+        </div>
+    </div>
     <div class="row mt-5">
         <div class="col-lg-3">
             <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
@@ -178,7 +183,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 {{ $visibilidad_proyecto != '[]' ? $visibilidad_proyecto : '' }}">
                     <label for="proyecto-ecro">Proyecto ECRO</label>
                     <div class="form-group">
                         <select class="form-control filtros-administrativos" id="proyecto-ecro">
@@ -189,7 +194,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 {{ $visibilidad_no_proyecto != '[]' ? $visibilidad_no_proyecto : '' }}">
                     <label for="proyecto-ecro">No. Proyecto</label>
                     <div class="form-group">
                         <select class="form-control filtros-administrativos" id="no-proyecto-ecro">
@@ -245,11 +250,7 @@
                 </div>
 
             </div>
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h4 class="p-5">Obras Encontradas {{ $obras->count() }}</h4>
-                </div>
-            </div>
+           
             <div class="row">
                 @foreach($obras as $obra)
                     <div class="col-6">
@@ -292,6 +293,11 @@
                 @if ($obras->count() == 0)
                     <h4 class="p-5">No hay obras que coincidan con la búsqueda.</h4>
                 @endif
+            </div>
+            <div class="d-flex">
+                <div class="mx-auto">
+                    {{ $obras->render() }}
+                </div>
             </div>
         </div>
     </div>

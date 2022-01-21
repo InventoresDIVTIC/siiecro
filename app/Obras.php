@@ -338,13 +338,15 @@ class Obras extends Model
         return $this->alto." cm x ".$this->ancho." cm x ".($this->profundidad ?? 0)." cm x ".($this->diametro ?? 0)." cm";
     }
 
-    public static function consulta($busqueda, $tipo, $filtros){
+    public static function consulta($busqueda, $tipo, $filtros, $total_registros = false){
         // dd($busqueda, $tipo, $filtros);
         switch ($tipo) {
             default:
 
             case 'Tipo objeto':
-                $obras      =   Obras::selectRaw("  DISTINCT
+                $obras      =   Obras::selectRaw("  
+                                                    obras__responsables_asignados.usuario_id,
+                                                    obras__responsables_asignados.obra_id,
                                                     obras.*
                                                 ")
                                 ->join("obras__tipo_objeto as tipo", "tipo.id", "obras.tipo_objeto_id")
@@ -366,7 +368,8 @@ class Obras extends Model
 
             case 'Titulo':
                 $obras      =   Obras::selectRaw("
-                                                    DISTINCT
+                                                    obras__responsables_asignados.usuario_id,
+                                                    obras__responsables_asignados.obra_id,
                                                     obras.*
                                                 ")
                                     ->join('areas', 'areas.id', 'obras.area_id')
@@ -382,7 +385,8 @@ class Obras extends Model
 
             case 'Autor o cultura':
                 $obras      =   Obras::selectRaw("
-                                                    DISTINCT
+                                                    obras__responsables_asignados.usuario_id,
+                                                    obras__responsables_asignados.obra_id,
                                                     obras.*
                                                 ")
                                     ->join('areas', 'areas.id', 'obras.area_id')
@@ -400,7 +404,11 @@ class Obras extends Model
 
             case 'Material':
                 $obras      =   Obras::selectRaw("
-                                                    DISTINCT
+                                                    obras__responsables_asignados.usuario_id,
+                                                    obras__responsables_asignados.obra_id,
+                                                    obras__resultados_analisis.profesor_responsable_de_analisis_id,
+                                                    obras__resultados_analisis.persona_realiza_analisis_id,
+                                                    obras__resultados_analisis.tipo_material_id,
                                                     obras.*
                                                 ")
                                     ->join('areas', 'areas.id', 'obras.area_id')
@@ -420,7 +428,10 @@ class Obras extends Model
                 break;
             case 'Técnica analítica':
                 $obras      =   Obras::selectRaw("
-                                                    DISTINCT
+                                                    obras__responsables_asignados.usuario_id,
+                                                    obras__responsables_asignados.obra_id,
+                                                    obras__resultados_analisis.profesor_responsable_de_analisis_id,
+                                                    obras__resultados_analisis.persona_realiza_analisis_id,
                                                     obras.*
                                                 ")
                                     ->join('areas', 'areas.id', 'obras.area_id')
@@ -445,9 +456,19 @@ class Obras extends Model
             $obras          =   $obras->where('disponible_consulta', 1);
         }
 
-        return $obras->whereNotNull('obras.fecha_aprobacion')
+        $obras = $obras->leftJoin("obras__responsables_asignados", "obras__responsables_asignados.obra_id", "obras.id")
+                    ->leftJoin('users', 'users.id', 'obras__responsables_asignados.usuario_id')
+                    ->whereNotNull('obras.fecha_aprobacion')
                     ->orderBy('obras.created_at', 'DESC')
-                    ->get();
+                    ->groupBy('obras.id');
+
+        if ($total_registros == true) {
+            return $obras->get();
+        }
+        else {
+            return $obras->paginate(10);
+        }
+                    // ->toSql();
     }
 
     public static function filtrosAdministrativos($filtros, $obras)
@@ -458,9 +479,10 @@ class Obras extends Model
             }
 
             if ($filtros['responsable_ecro'] != '') {
-                $obras->join("obras__responsables_asignados as responsables", "responsables.obra_id", "obras.id")
-                        ->join('users', 'users.id', 'responsables.usuario_id')
-                        ->where('users.id', '=', $filtros['responsable_ecro']);
+                // $obras->join("obras__responsables_asignados", "obras__responsables_asignados.obra_id", "obras.id")
+                //         ->join('users', 'users.id', 'obras__responsables_asignados.usuario_id')
+                //         ->where('users.id', '=', $filtros['responsable_ecro']);
+                $obras->where('users.id', '=', $filtros['responsable_ecro']);
             }
 
             if ($filtros['area'] != '') {
@@ -492,7 +514,7 @@ class Obras extends Model
             }
 
             if ($filtros['profe_responsable'] != '') {
-                $obras->where('resultado.profesor_responsable_de_analisis_id', '=', $filtros['profe_responsable']);
+                $obras->where('obras__resultados_analisis.profesor_responsable_de_analisis_id', '=', $filtros['profe_responsable']);
             }
 
             if ($filtros['nomenclatura_muestra'] != '') {
@@ -500,7 +522,7 @@ class Obras extends Model
             }
 
             if ($filtros['persona_realiza_analisis'] != '') {
-                $obras->where('resultado.persona_realiza_analisis_id', '=', $filtros['persona_realiza_analisis']);
+                $obras->where('obras__resultados_analisis.persona_realiza_analisis_id', '=', $filtros['persona_realiza_analisis']);
             }
 
             // NO ADMINISTRATIVOS

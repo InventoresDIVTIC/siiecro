@@ -53,7 +53,7 @@ function buscar(e){
 					});
 				},
 				error: function(){
-					alert("error");
+					alert("Error, recarga la página e inténtalo nuevamente...");
 					$("#div-loading").addClass('hidden');
 				}
 			});
@@ -139,8 +139,100 @@ $(document.body).on('change',".filtros-administrativos", function (e) {
 			});
 		},
 		error: function(){
-			alert("error");
+			alert("Error, recarga la página e inténtalo nuevamente...");
 			$("#div-loading").addClass('hidden');
 		}
 	});
+});
+
+
+$(document).on('click', '.pagination a', function(e) {
+	e.preventDefault();
+	let no_registro              = $('#no-registro').val();
+	let area                     = $('#area').val().trim();
+	let responsable_ecro         = $('#responsable-ecro').val().trim();
+	let no_proyecto              = $('#no-proyecto-ecro').val();
+	let proyecto                 = $('#proyecto-ecro').val().trim();
+	let temporada                = $('#temporada-ecro').val();
+	let profe_responsable        = $('#profe-responsable').val();
+	let nomenclatura_muestra     = $('#nomenclatura-muestra').val();
+	let persona_realiza_analisis = $('#persona-realiza-analisis').val();
+
+	// GENERALES
+	let anio 						= $('#anio').val();
+	let epoca 						= $('#epoca').val();
+	let temporalidad 				= $('#temporalidad').val();
+	let autor 						= $('#autor').val();
+	let cultura 					= $('#cultura').val();
+	let lugar_procedencia_actual 	= $('#lugar_procedencia_actual').val();
+	let lugar_procedencia_original 	= $('#lugar_procedencia_original').val();
+	let tipo_bien_cultural 			= $('#tipo_bien_cultural').val();
+	let tipo_material 				= $('#tipo_material').val();
+	let interpretacion_material 	= $('#interpretacion_material').val();
+
+   const filtros = {
+		no_registro: no_registro,
+		area: area,
+		responsable_ecro: responsable_ecro,
+		no_proyecto: no_proyecto,
+		proyecto: proyecto,
+		temporada: temporada,
+		profe_responsable: profe_responsable,
+		nomenclatura_muestra: nomenclatura_muestra,
+		persona_realiza_analisis: persona_realiza_analisis,
+		anio: anio,
+		epoca: epoca,
+		temporalidad: temporalidad,
+		autor: autor,
+		cultura: cultura,
+		lugar_procedencia_actual: lugar_procedencia_actual,
+		lugar_procedencia_original: lugar_procedencia_original,
+		tipo_bien_cultural: tipo_bien_cultural,
+		tipo_material: tipo_material,
+		interpretacion_material: interpretacion_material,
+   }
+
+	// console.log(this.value);
+	var busqueda 		= 	$.trim($("#input-busqueda").val());
+
+	var page = $(this).attr('href').split('page=')[1];
+	// var route = 'http://siiecro/consulta';
+
+	$.ajax({
+		url: '/consulta',
+		type: 'POST',
+		data: {
+			_token: 	$('meta[name="csrf-token"]').attr('content'),
+			page: 		page,
+			busqueda: 	busqueda,
+			tipo: 		tipoBusqueda, 
+			filtros: 	filtros
+		},
+		// dataType: 'json',
+		// success: function(data) {
+		// 	console.log(data);
+		// }
+		
+
+		beforeSend: function(){
+			$("#div-resultados-busqueda").html('');
+			$("#div-loading").removeClass('hidden');
+		},
+		success: function(response){
+			$("#div-resultados-busqueda").html(response);
+			$("#div-loading").addClass('hidden');
+			$('#no-registro, #area, #responsable-ecro, #no-proyecto-ecro, #proyecto-ecro, #temporada-ecro, #profe-responsable, #persona-realiza-analisis \
+				, #anio, #epoca, #temporalidad, #autor, #cultura, #lugar_procedencia_actual, #lugar_procedencia_original, #tipo_bien_cultural, #tipo_material, #interpretacion_material').select2({
+				placeholder: 'Elige una opción',
+				width: '100%',
+				allowClear: true
+			});
+		},
+		error: function(){
+			alert("Error, recarga la página e inténtalo nuevamente...");
+			$("#div-loading").addClass('hidden');
+		}
+	});
+
+	// console.log(page);
 });

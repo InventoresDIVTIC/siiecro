@@ -21,9 +21,9 @@ return [
                 'include' => [
                     // base_path(),
                     // RESPALDO DEL SERVER :
-                    # base_path('/../public/landing/images/'),
-                    # base_path('/../public/img/'),
-                    public_path()."/img/obras",
+                    // base_path('/../public/landing/images/'),
+                    base_path('/../public/img/'),
+                    // base_path()."/../public_html/img/",
                 ],
 
                 /*
@@ -36,6 +36,7 @@ return [
                     base_path('node_modules'),
                     base_path('siiecro-respaldos'),
                     base_path('.git'),
+                    base_path(),
                 ],
 
                 /*
