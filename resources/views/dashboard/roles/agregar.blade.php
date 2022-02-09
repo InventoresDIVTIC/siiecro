@@ -229,13 +229,13 @@
                                 </tr>
                                 {{-- CONSULTA --}}
                                 <tr>
-                                    <th rowspan="5">CONSULTA</th>
+                                    <th rowspan="4">CONSULTA</th>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="i-checks">
                                             <label>
-                                                <input type="checkbox" name="consulta_general_basica"  {{ (($registro->consulta_general_basica == 1) ? 'checked=""' : '') }} ><i></i> Consulta general basica
+                                                <input type="checkbox" name="consulta_general_basica"  {{ (($registro->consulta_general_basica == 1) ? 'checked=""' : '') }} ><i></i> Consulta basica
                                             </label>
                                         </div>                            
                                     </td>
@@ -244,11 +244,12 @@
                                     <td>
                                         <div class="i-checks">
                                             <label>
-                                                <input type="checkbox" name="consulta_general_avanzada"  {{ (($registro->consulta_general_avanzada == 1) ? 'checked=""' : '') }} ><i></i> Consulta general avanzada
+                                                <input type="checkbox" name="consulta_general_avanzada"  {{ (($registro->consulta_general_avanzada == 1) ? 'checked=""' : '') }} ><i></i> Consulta avanzada
                                             </label>
                                         </div>                            
                                     </td>
                                 </tr>
+                                {{-- 
                                 <tr>
                                     <td>
                                         <div class="i-checks">
@@ -258,6 +259,7 @@
                                         </div>                            
                                     </td>
                                 </tr>
+                                 --}}
                                 <tr>
                                     <td>
                                         <div class="i-checks">

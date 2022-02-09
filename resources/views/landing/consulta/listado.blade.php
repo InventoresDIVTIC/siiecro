@@ -1,4 +1,4 @@
-@if (Auth::user()->rol->consulta_general_avanzada)
+@if (Auth::user()->rol->consulta_general_avanzada || Auth::user()->rol->consulta_general_basica)
     <div class="row">
         <div class="col-12 text-center">
             <h4>Obras Encontradas {{ $obras->total() }}</h4>
@@ -149,6 +149,9 @@
             </div>
         </div>
         <div class="col-lg-9">
+            
+            @if(Auth::user()->rol->consulta_general_avanzada)
+            
             <div class="row">
                 <div class="col-3">
                     <div class="form-group">
@@ -248,8 +251,9 @@
                         </select>
                     </div>
                 </div>
-
             </div>
+
+            @endif
            
             <div class="row">
                 @foreach($obras as $obra)

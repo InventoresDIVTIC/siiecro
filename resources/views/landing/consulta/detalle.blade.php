@@ -130,6 +130,8 @@
                                                                     {{ $obra->folio }}
                                                                 </td>
                                                             </tr>
+
+                                                            @if(Auth::user()->rol->consulta_general_avanzada)
                                                             <tr>
                                                                 <td scope="col" class="table-active">
                                                                     <span>
@@ -137,9 +139,11 @@
                                                                     </span>
                                                                 </td>
                                                                 <td>
-                                                                    No de proyecto
+                                                                    {{ $obra->proyecto->folio }}
                                                                 </td>
                                                             </tr>
+                                                            @endif
+
                                                             <tr>
                                                                 <td scope="col" class="table-active">
                                                                     <span>
@@ -147,7 +151,11 @@
                                                                     </span>
                                                                 </td>
                                                                 <td>
-                                                                    {{ $obra->tipo_bien_cultural->nombre }}
+                                                                    <ul>
+                                                                    @foreach( $obra->temporadas_trabajo_asignadas as $temporada_trabajo_asignada)
+                                                                        <li>{{ $temporada_trabajo_asignada->año }}</li>
+                                                                    @endforeach
+                                                                    </ul>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -157,9 +165,11 @@
                                                                     </span>
                                                                 </td>
                                                                 <td>
-                                                                    Área
+                                                                    {{ $obra->area->nombre }}
                                                                 </td>
                                                             </tr>
+
+                                                            @if(Auth::user()->rol->consulta_general_avanzada)
                                                             <tr>
                                                                 <td scope="col" class="table-active">
                                                                     <span>
@@ -170,6 +180,8 @@
                                                                     {{ nl2br($obra->caracteristicas_descriptivas) }}
                                                                 </td>
                                                             </tr>
+                                                            @endif
+
                                                         </table>
                                                     </div>
                                                 </div>
@@ -183,7 +195,7 @@
                                                                     </span>
                                                                 </td>
                                                                 <td>
-                                                                    Proyecto
+                                                                    {{ $obra->proyecto->nombre }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -193,9 +205,15 @@
                                                                     </span>
                                                                 </td>
                                                                 <td>
-                                                                    {{ $obra->tipo_bien_cultural->nombre }}
+                                                                    <ul>
+                                                                    @foreach( $obra->temporadas_trabajo_asignadas as $temporada_trabajo_asignada)
+                                                                        <li>{{ $temporada_trabajo_asignada->numero_temporada }}</li>
+                                                                    @endforeach
+                                                                    </ul>
                                                                 </td>
                                                             </tr>
+
+                                                            @if(Auth::user()->rol->consulta_general_avanzada)
                                                             <tr>
                                                                 <td scope="col" class="table-active">
                                                                     <span>
@@ -213,9 +231,15 @@
                                                                     </span>
                                                                 </td>
                                                                 <td>
-                                                                    {{ $obra->tipo_bien_cultural->nombre }}
+                                                                    <ul>
+                                                                    @foreach( $obra->responsables_asignados as $responsables_asignados)
+                                                                        <li>{{ $responsables_asignados->name ? $responsables_asignados->name : '' }}</li>
+                                                                    @endforeach
+                                                                    </ul>
                                                                 </td>
                                                             </tr>
+                                                            @endif
+
                                                         </table>
                                                     </div>
                                                 </div>
@@ -570,7 +594,7 @@
             </div>
         </div>
 
-
+{{-- 
         <div class="mb-5 hidden" id="div-obras-recomendadas">
             <h3 class="font-weight-normal">Te recomendamos visitar:</h3>
 
@@ -580,6 +604,7 @@
                 </h3>
             </div>
         </div>
+ --}}
     </div>
     <input type="hidden" id="obra_id" value="{{ $obra->id }}">
 @endsection
