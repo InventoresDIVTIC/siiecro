@@ -229,7 +229,7 @@
                                 </tr>
                                 {{-- CONSULTA --}}
                                 <tr>
-                                    <th rowspan="4">CONSULTA</th>
+                                    <th rowspan="3">CONSULTA</th>
                                 </tr>
                                 <tr>
                                     <td>
@@ -259,7 +259,7 @@
                                         </div>                            
                                     </td>
                                 </tr>
-                                 --}}
+                                
                                 <tr>
                                     <td>
                                         <div class="i-checks">
@@ -269,6 +269,7 @@
                                         </div>                            
                                     </td>
                                 </tr>
+                                --}}
                                 {{-- IMPRIMIR --}}
                                 <tr>
                                     <th rowspan="3">IMPRESIÓN</th>

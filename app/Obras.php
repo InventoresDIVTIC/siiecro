@@ -456,6 +456,12 @@ class Obras extends Model
             $obras          =   $obras->where('disponible_consulta', 1);
         }
 
+        // SI NO TIENE ROL DE CONSULTA AVANZADA (ANTES ERA CONSULTA GENERAL AVANZADA) 
+        // NO PUEDE VER OBRAS QUE NO TENGAN ACTIVADO EL CAMPO disponble_consulta
+        if ( ! Auth::user()->rol->consulta_general_avanzada ) {
+            $obras          =   $obras->where('disponible_consulta', 1);
+        }
+
         $obras = $obras->leftJoin("obras__responsables_asignados", "obras__responsables_asignados.obra_id", "obras.id")
                     ->leftJoin('users', 'users.id', 'obras__responsables_asignados.usuario_id')
                     ->whereNotNull('obras.fecha_aprobacion')

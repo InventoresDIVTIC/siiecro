@@ -27,22 +27,62 @@
                                         </td>
                                         <td>{{ $obra->nombre }}</td>
                                     </tr>
+
+                                    @if($obra->autor)
                                     <tr>
                                         <td scope="col" class="table-active">
                                             <span>
-                                                <strong>Autor o Cultura:</strong>
+                                                <strong>Autor:</strong>
                                             </span>
                                         </td>
-                                        <td>{{ $obra->autor ?? $obra->cultura }}</td>
+                                        <td>{{ $obra->autor }}</td>
                                     </tr>
+                                    @endif
+
+                                    @if($obra->cultura)
                                     <tr>
                                         <td scope="col" class="table-active">
                                             <span>
-                                                <strong>Año / Época o Temproalidad:</strong>
+                                                <strong>Cultura:</strong>
                                             </span>
                                         </td>
-                                        <td>{{ $obra->tipo_bien_cultural->nombre }}</td>
+                                        <td>{{ $obra->cultura }}</td>
                                     </tr>
+                                    @endif
+
+                                    @if($obra->año)
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Año:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ \Carbon\Carbon::parse($obra->año)->format('Y') }}</td>
+                                    </tr>
+                                    @endif
+
+                                    @if($obra->epoca)
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Época:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->epoca->nombre }}</td>
+                                    </tr>
+                                    @endif
+
+                                    @if($obra->temporalidad)
+                                    <tr>
+                                        <td scope="col" class="table-active">
+                                            <span>
+                                                <strong>Temporalidad:</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{ $obra->temporalidad->nombre }}</td>
+                                    </tr>
+                                    @endif
+
                                     <tr>
                                         <td scope="col" class="table-active">
                                             <span>
@@ -173,7 +213,7 @@
                                                             <tr>
                                                                 <td scope="col" class="table-active">
                                                                     <span>
-                                                                        <strong>Caracteristicas descriptivas:</strong><br>
+                                                                        <strong>Características descriptivas:</strong><br>
                                                                     </span>
                                                                 </td>
                                                                 <td>
@@ -201,14 +241,21 @@
                                                             <tr>
                                                                 <td scope="col" class="table-active">
                                                                     <span>
-                                                                        <strong>No de temporada de trabajo:</strong>
+                                                                        <strong>No de temporadas de trabajo:</strong>
                                                                     </span>
                                                                 </td>
                                                                 <td>
                                                                     <ul>
+                                                                    @php
+                                                                        $sumatoria_temporadas = 0;
+                                                                    @endphp
                                                                     @foreach( $obra->temporadas_trabajo_asignadas as $temporada_trabajo_asignada)
-                                                                        <li>{{ $temporada_trabajo_asignada->numero_temporada }}</li>
+                                                                        {{-- <li>{{ $temporada_trabajo_asignada->numero_temporada }}</li> --}}
+                                                                        @php
+                                                                            $sumatoria_temporadas ++;
+                                                                        @endphp
                                                                     @endforeach
+                                                                        <p>@php echo $sumatoria_temporadas @endphp</p>
                                                                     </ul>
                                                                 </td>
                                                             </tr>
@@ -255,7 +302,7 @@
                                     </div>
                                     <div id="registro-fotografico" class="collapse" data-parent="#acordeon">
                                       <div class="card-body">
-                                        Contenido Registro fotográfico
+                                        Información aún no disponible
                                       </div>
                                     </div>
                                 </div>
@@ -326,7 +373,8 @@
                                                                         {{ $muestras->resultados_analisis->lugar_resguardo_muestra }}
                                                                     </td>
                                                                     <td>
-                                                                        {{ $muestras->resultados_analisis->tipo_material ? $muestras->resultados_analisis->tipo_material->nombre : '' }}
+                                                                        {{-- {{ $muestras->resultados_analisis->tipo_material ? $muestras->resultados_analisis->tipo_material->nombre : '' }} --}}
+                                                                        {{ $muestras->tipo_analisis->nombre }}
                                                                     </td>
                                                                     <td>
                                                                         <ul>
@@ -369,7 +417,7 @@
                                                                                                         </th>
                                                                                                         <th scope="col" class="table-active">
                                                                                                             <span>
-                                                                                                                <strong>Persona que realiza el análisis</strong>
+                                                                                                                <strong>Persona que realizó el análisis</strong>
                                                                                                             </span>
                                                                                                         </th>
                                                                                                         <th scope="col" class="table-active">
@@ -540,7 +588,7 @@
                                     </div>
                                     <div id="informes-intervencion" class="collapse" data-parent="#acordeon">
                                         <div class="card-body">
-                                            Contenido Informes de intervención
+                                            Información aún no disponible
                                         </div>
                                     </div>
                                 </div>
