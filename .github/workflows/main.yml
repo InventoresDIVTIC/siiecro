@@ -1,31 +1,17 @@
+on: push
 name: 🚀 Deploy website on push
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-    inputs:
-
 jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Report trigger
-        if: always()
-        uses: ravsamhq/notify-slack-action@v1
-        with:
-          status: "warning"
-          notification_title: 'Workflow: *{workflow}* ha sido lanzado por ${{ github.actor }}'
-          message_format: '*{workflow}* se ha lanzado desde el repo <{repo_url}|{repo}> unsando GIT REF: <{commit_url}|{commit_sha}>'
-          footer: '<{run_url}|View Run>'    
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
     
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
-        with:
-         server: 66.225.201.137
-         username: siiecro1@siiecro.com.mx
-         password: ${{ secrets.FTP_ACCESO }}
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: 66.225.201.137
+        username: siiecro1@siiecro.com.mx
+        password: ${{ secrets.FTP_ACCESO }}
  
