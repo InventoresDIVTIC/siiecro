@@ -272,3 +272,7 @@ th{
 .fs-30{
   font-size: 30px;
 }
+
+.no-break{
+  page-break-inside: avoid;
+}

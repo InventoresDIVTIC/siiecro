@@ -27,7 +27,7 @@
 	    		<div class="text-left">
 			    	<span class="subtitulo">Información de identificación:</span><br>
 			    	<strong>Proyecto ECRO:</strong> {{ $temporada->proyecto->nombre }}<br>
-			    	<strong>No. de Proyecto ECRO:</strong> {{ $temporada->proyecto->nombre }}<br>
+			    	<strong>No. de Proyecto ECRO:</strong> {{ $temporada->proyecto->folio }}<br>
 			    	<strong>Temporada del Proyecto:</strong> {{ $temporada->año }} - {{ $temporada->numero_temporada }}<br>
 			    </div>
 	    	</div>
@@ -69,34 +69,36 @@
 		    </div>
 		    <hr class="semi">
 			<div style="height: 50px"></div>
-	    	<div class="col-100 mt-lg text-center">
-			    <div class="col-50 inline-block">
-			    	<strong>Recibió</strong><br>
-					@if (isset($obra))
-						<small>{{ $obra->persona_recibio != "" ? $obra->persona_recibio : "N/A" }}</small>
-					@endif<br>
-					<small><strong>Propietario o custodio</strong></small>
-			    </div>
-			    <div class="col-50 inline-block">
-			    	<strong>Entregó</strong><br>
-					@if (isset($obra))
-						<small>{{ $obra->usuario_entrego ? $obra->usuario_entrego->name : "N/A" }}</small>
-					@endif<br>
-					<small><strong>Profesor(a) STR</strong></small>
-			    </div>
-	    	</div>
-	    	<div class="col-100 mt-lg text-center">
-			    <div class="col-50 inline-block">
-			    	<strong>Vo.Bo</strong><br>
-					{{ $configuracion->director_general }}<br>
-					<small><strong>Director(a) general</strong></small>
-			    </div>
-			    <div class="col-50 inline-block">
-			    	<strong>Vo.Bo</strong><br>
-					{{ $configuracion->director_academico }}<br>
-					<small><strong>Director(a) académica</strong></small>
-			    </div>
-	    	</div>
+	    	<div class="no-break">
+				<div class="col-100 mt-lg text-center">
+					<div class="col-50 inline-block">
+						<strong>Recibió</strong><br>
+						@if (isset($obra))
+							<small>{{ $obra->persona_recibio != "" ? $obra->persona_recibio : "N/A" }}</small>
+						@endif<br>
+						<small><strong>Propietario o custodio</strong></small>
+					</div>
+					<div class="col-50 inline-block">
+						<strong>Entregó</strong><br>
+						@if (isset($obra))
+							<small>{{ $obra->usuario_entrego ? $obra->usuario_entrego->name : "N/A" }}</small>
+						@endif<br>
+						<small><strong>Profesor(a) STR</strong></small>
+					</div>
+				</div>
+				<div class="col-100 mt-lg text-center">
+					<div class="col-50 inline-block">
+						<strong>Vo.Bo</strong><br>
+						{{ $configuracion->director_general }}<br>
+						<small><strong>Director(a) general</strong></small>
+					</div>
+					<div class="col-50 inline-block">
+						<strong>Vo.Bo</strong><br>
+						{{ $configuracion->director_academico }}<br>
+						<small><strong>Director(a) académica</strong></small>
+					</div>
+				</div>
+			</div>
 
 		</main>
 	</body>

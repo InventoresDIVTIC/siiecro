@@ -23,7 +23,7 @@
 	    	<div class="col-100">
 	    		<div class="text-left">
 	    			<strong>Área a la que ingresa:</strong> {{ $obra->area ? $obra->area->nombre : "Sin asignar" }}<br>
-	    			<strong>Fecha de entrada:</strong> {{ $obra->fecha_ingreso ? $obra->fecha_ingreso->format('Y-m-d h:i A') : "N/A" }}<br>
+	    			<strong>Fecha de entrada:</strong> {{ $obra->fecha_ingreso ? $obra->fecha_ingreso->format('Y-m-d') : "N/A" }}<br>
 	    		</div>
 	    	</div>
 	    	<div class="col-100">
@@ -60,31 +60,33 @@
 	    	</div>
 		    <hr class="semi">
 			<div style="height: 50px"></div>
-	    	<div class="col-100 mt-lg text-center">
-			    <div class="col-50 inline-block">
-			    	<strong>Recibió</strong><br>
-			    	<small>{{ $obra->usuario_recibio ? $obra->usuario_recibio->name : "N/A" }}</small><br>
-					<small><strong>Profesor(a) STR</strong></small>
-			    </div>
-			    <div class="col-50 inline-block">
-			    	<strong>Entregó</strong><br>
-			    	<small>{{ $obra->persona_entrego != "" ? $obra->persona_entrego : "N/A" }}</small><br>
-					<small><strong>Propietario o custodio</strong></small>
-			    </div>
-	    	</div>
-
-	    	<div class="col-100 mt-lg text-center">
-			    <div class="col-50 inline-block">
-			    	<strong>Vo.Bo</strong><br>
-					{{ $configuracion->director_general }}<br>
-					<small><strong>Director(a) general</strong></small>
-			    </div>
-			    <div class="col-50 inline-block">
-			    	<strong>Vo.Bo</strong><br>
-					{{ $configuracion->director_academico }}<br>
-					<small><strong>Director(a) académica</strong></small>
-			    </div>
-	    	</div>
+	    	<div class="no-break">
+				<div class="col-100 mt-lg text-center">
+					<div class="col-50 inline-block">
+						<strong>Recibió</strong><br>
+						<small>{{ $obra->usuario_recibio ? $obra->usuario_recibio->name : "N/A" }}</small><br>
+						<small><strong>Profesor(a) STR</strong></small>
+					</div>
+					<div class="col-50 inline-block">
+						<strong>Entregó</strong><br>
+						<small>{{ $obra->persona_entrego != "" ? $obra->persona_entrego : "N/A" }}</small><br>
+						<small><strong>Propietario o custodio</strong></small>
+					</div>
+				</div>
+	
+				<div class="col-100 mt-lg text-center">
+					<div class="col-50 inline-block">
+						<strong>Vo.Bo</strong><br>
+						{{ $configuracion->director_general }}<br>
+						<small><strong>Director(a) general</strong></small>
+					</div>
+					<div class="col-50 inline-block">
+						<strong>Vo.Bo</strong><br>
+						{{ $configuracion->director_academico }}<br>
+						<small><strong>Director(a) académica</strong></small>
+					</div>
+				</div>
+			</div>
 
 		</main>
 	</body>
