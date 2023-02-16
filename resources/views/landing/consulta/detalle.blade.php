@@ -313,6 +313,7 @@
                                             <i class="fa fa-calculator"></i>&nbsp;Análisis científicos
                                         </a>
                                     </div>
+                                    
                                     <div id="analisis-cientificos" class="collapse" data-parent="#acordeon">
                                         <div class="card-body">
                                             @foreach($obra->solicitudes_analisis as $solicitudes)
@@ -362,15 +363,19 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td class="text-center">
-                                                                        @foreach($muestras->resultados_analisis->imagenes_resultados_esquema_muestra as $esquema_muestra)
-                                                                            <a href="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" height="80"></a>
-                                                                        @endforeach
+                                                                        @if ($muestras->resultados_analisis)
+                                                                            @foreach($muestras->resultados_analisis->imagenes_resultados_esquema_muestra as $esquema_muestra)
+                                                                                <a href="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" height="80"></a>
+                                                                            @endforeach
+                                                                        @else
+                                                                            N/A
+                                                                        @endif
                                                                     </td>
                                                                     <td>
                                                                         {{ $muestras->nomenclatura }}
                                                                     </td>
                                                                     <td>
-                                                                        {{ $muestras->resultados_analisis->lugar_resguardo_muestra }}
+                                                                        {{ $muestras->resultados_analisis->lugar_resguardo_muestra ?? "N/A" }}
                                                                     </td>
                                                                     <td>
                                                                         {{-- {{ $muestras->resultados_analisis->tipo_material ? $muestras->resultados_analisis->tipo_material->nombre : '' }} --}}
@@ -378,9 +383,13 @@
                                                                     </td>
                                                                     <td>
                                                                         <ul>
-                                                                        @foreach($muestras->resultados_analisis->interpretaciones_particulares as $interpretaciones_particulares)
-                                                                            <li>{{ $interpretaciones_particulares->interpretacion_particular->nombre }}</li>
-                                                                        @endforeach
+                                                                            @if ($muestras->resultados_analisis)
+                                                                                @foreach($muestras->resultados_analisis->interpretaciones_particulares as $interpretaciones_particulares)
+                                                                                    <li>{{ $interpretaciones_particulares->interpretacion_particular->nombre }}</li>
+                                                                                @endforeach 
+                                                                            @else
+                                                                                N/A
+                                                                            @endif
                                                                         </ul>
                                                                     </td>
                                                                     <td>
@@ -391,7 +400,7 @@
                                                                         </ul>
                                                                     </td>
                                                                     <td>
-                                                                        {{ $muestras->resultados_analisis->conclusion_general ? 'CONCLUSIÓN GENERAL: ' . $muestras->resultados_analisis->conclusion_general : 'Sin conclusión general'}}
+                                                                        {{ ($muestras->resultados_analisis->conclusion_general ?? null) ? 'CONCLUSIÓN GENERAL: ' . $muestras->resultados_analisis->conclusion_general : 'Sin conclusión general'}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -440,20 +449,25 @@
                                                                                                 <tbody>
                                                                                                     <tr>
                                                                                                         <td>
-                                                                                                            {{ $muestras->resultados_analisis['fecha_analisis'] }}
+                                                                                                            {{ $muestras->resultados_analisis->fecha_analisis ?? 'N/A' }}
                                                                                                         </td>
                                                                                                         <td>
-                                                                                                            {{ $muestras->resultados_analisis->persona_analisis['name'] }}
+                                                                                                            {{ $muestras->resultados_analisis->persona_analisis->name ?? 'N/A' }}
                                                                                                         </td>
                                                                                                         <td>
-                                                                                                            {{ $muestras->resultados_analisis->forma_obtencion_muestra['nombre'] }}
+                                                                                                            {{ $muestras->resultados_analisis->forma_obtencion_muestra->nombre ?? 'N/A' }}
                                                                                                         <td>
-                                                                                                            {{ $muestras->resultados_analisis->ubicacion_de_toma_muestra }}
+                                                                                                            {{ $muestras->resultados_analisis->ubicacion_de_toma_muestra ?? 'N/A' }}
                                                                                                         </td>
                                                                                                         <td class="text-center">
-                                                                                                            @foreach($muestras->resultados_analisis->imagenes_resultados_esquema_muestra as $esquema_muestra)
-                                                                                                                <a href="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" height="80"></a>
-                                                                                                            @endforeach
+                                                                                                            @if ($muestras->resultados_analisis)
+                                                                                                                @foreach($muestras->resultados_analisis->imagenes_resultados_esquema_muestra as $esquema_muestra)
+                                                                                                                    <a href="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-muestra/'.$esquema_muestra->imagen) }}" height="80"></a>
+                                                                                                                @endforeach
+                                                                                                            @else
+                                                                                                                N/A
+                                                                                                            @endif
+                                                                                                            
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </tbody>
@@ -485,86 +499,94 @@
                                                                                                 <tbody>
                                                                                                     <tr>
                                                                                                         <td>
-                                                                                                            {{ $muestras->resultados_analisis->descripcion }}
+                                                                                                            {{ $muestras->resultados_analisis->descripcion ?? 'N/A' }}
                                                                                                         </td>
                                                                                                         <td class="text-center">
-                                                                                                            @foreach($muestras->resultados_analisis->imagenes_resultados_esquema_microfotografia as $esquema_muestra)
-                                                                                                                <a href="{{ asset('/img/obras/resultados-analisis-esquema-microfotografia/'.$esquema_muestra->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-microfotografia/'.$esquema_muestra->imagen) }}" height="80"></a>
-                                                                                                            @endforeach
+                                                                                                            @if ($muestras->resultados_analisis)
+                                                                                                                @foreach($muestras->resultados_analisis->imagenes_resultados_esquema_microfotografia as $esquema_muestra)
+                                                                                                                    <a href="{{ asset('/img/obras/resultados-analisis-esquema-microfotografia/'.$esquema_muestra->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-microfotografia/'.$esquema_muestra->imagen) }}" height="80"></a>
+                                                                                                                @endforeach
+                                                                                                            @else
+                                                                                                                N/A
+                                                                                                            @endif
                                                                                                         </td>
                                                                                                         <td>
-                                                                                                            {{ $muestras->resultados_analisis->ruta_acceso_microfotografia }}
+                                                                                                            {{ $muestras->resultados_analisis->ruta_acceso_microfotografia ?? 'N/A' }}
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </tbody>
                                                                                             </table>
                                                                                         </div>
+
                                                                                         {{-- RESULTADOS --}}
-                                                                                        <h3>Resultados</h3>
-                                                                                        @foreach($muestras->resultados_analisis->resultados as $resultados)
-                                                                                        <div class="table-responsive">
-                                                                                            <table class="table table-sm table-bordered table-hover">
-                                                                                                <thead>
-                                                                                                    <tr>
-                                                                                                        <th scope="col" class="table-active">
-                                                                                                            <span>
-                                                                                                                <strong>Análisis a realizar</strong>
-                                                                                                            </span>
-                                                                                                        </th>
-                                                                                                        <th scope="col" class="table-active">
-                                                                                                            <span>
-                                                                                                                <strong>Técnica analítica</strong>
-                                                                                                            </span>
-                                                                                                        </th>
-                                                                                                        <th scope="col" class="table-active">
-                                                                                                            <span>
-                                                                                                                <strong>Información del equipo</strong>
-                                                                                                            </span>
-                                                                                                        </th>
-                                                                                                        <th scope="col" class="table-active" style="width:250px">
-                                                                                                            <span>
-                                                                                                                <strong>Interpretación</strong>
-                                                                                                            </span>
-                                                                                                        </th>
-                                                                                                        <th scope="col" class="table-active">
-                                                                                                            <span>
-                                                                                                                <strong>Microfotografía/Imagen o datos</strong>
-                                                                                                            </span>
-                                                                                                        </th>
-                                                                                                        <th scope="col" class="table-active">
-                                                                                                            <span>
-                                                                                                                <strong>Ruta de acceso a microfotografía/imagen datos</strong>
-                                                                                                            </span>
-                                                                                                        </th>
-                                                                                                    </tr>
-                                                                                                </thead>
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <td>
-                                                                                                            {{ $resultados->analisis_realizar->nombre }}
-                                                                                                        </td>
-                                                                                                        <td>
-                                                                                                            {{ $resultados->tecnica_analitica->nombre }}
-                                                                                                        </td>
-                                                                                                        <td>
-                                                                                                            {{ $resultados->informacion_del_equipo->nombre }}
-                                                                                                        </td>
-                                                                                                        <td>
-                                                                                                            {{ $resultados->interpretacion }}
-                                                                                                        </td>
-                                                                                                        <td class="text-center">
-                                                                                                            @foreach($resultados->esquema_analiticos_microfotografias as $esquema_microfotografia)
-                                                                                                                <a href="{{ asset('/img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$esquema_microfotografia->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$esquema_microfotografia->imagen) }}" height="80"></a>
-                                                                                                            @endforeach
-                                                                                                        </td>
-                                                                                                        <td>
-                                                                                                            {{ $resultados->ruta_acceso_imagen }}
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </div>
-                                                                                        @endforeach
+                                                                                        @if ($muestras->resultados_analisis)
+                                                                                            <h3>Resultados</h3>
+                                                                                            @foreach($muestras->resultados_analisis->resultados as $resultados)
+                                                                                                <div class="table-responsive">
+                                                                                                    <table class="table table-sm table-bordered table-hover">
+                                                                                                        <thead>
+                                                                                                            <tr>
+                                                                                                                <th scope="col" class="table-active">
+                                                                                                                    <span>
+                                                                                                                        <strong>Análisis a realizar</strong>
+                                                                                                                    </span>
+                                                                                                                </th>
+                                                                                                                <th scope="col" class="table-active">
+                                                                                                                    <span>
+                                                                                                                        <strong>Técnica analítica</strong>
+                                                                                                                    </span>
+                                                                                                                </th>
+                                                                                                                <th scope="col" class="table-active">
+                                                                                                                    <span>
+                                                                                                                        <strong>Información del equipo</strong>
+                                                                                                                    </span>
+                                                                                                                </th>
+                                                                                                                <th scope="col" class="table-active" style="width:250px">
+                                                                                                                    <span>
+                                                                                                                        <strong>Interpretación</strong>
+                                                                                                                    </span>
+                                                                                                                </th>
+                                                                                                                <th scope="col" class="table-active">
+                                                                                                                    <span>
+                                                                                                                        <strong>Microfotografía/Imagen o datos</strong>
+                                                                                                                    </span>
+                                                                                                                </th>
+                                                                                                                <th scope="col" class="table-active">
+                                                                                                                    <span>
+                                                                                                                        <strong>Ruta de acceso a microfotografía/imagen datos</strong>
+                                                                                                                    </span>
+                                                                                                                </th>
+                                                                                                            </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td>
+                                                                                                                    {{ $resultados->analisis_realizar->nombre }}
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    {{ $resultados->tecnica_analitica->nombre }}
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    {{ $resultados->informacion_del_equipo->nombre }}
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    {{ $resultados->interpretacion }}
+                                                                                                                </td>
+                                                                                                                <td class="text-center">
+                                                                                                                    @foreach($resultados->esquema_analiticos_microfotografias as $esquema_microfotografia)
+                                                                                                                        <a href="{{ asset('/img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$esquema_microfotografia->imagen) }}" data-gallery=""><img src="{{ asset('/img/obras/resultados-analisis-esquema-analiticos-microfotografia/'.$esquema_microfotografia->imagen) }}" height="80"></a>
+                                                                                                                    @endforeach
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    {{ $resultados->ruta_acceso_imagen }}
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </div>
+                                                                                            @endforeach
+                                                                                        @endif
+                                                                                        
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

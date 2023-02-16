@@ -53,7 +53,7 @@
 				    				@if($obra->tipo_bien_cultural->calcular_temporalidad == "si")
 				    					{{ $obra->temporalidad ? $obra->temporalidad->nombre : "N/A" }}
 				    				@else
-										@if ($obra->estatus_epoca == "Aproximado")
+										@if ($obra->estatus_epoca != "Confirmado")
 											{{ $obra->epoca->nombre }}
 										@else
 				    						{{ $obra->año->format('Y') }} / {{ $obra->epoca->nombre }}

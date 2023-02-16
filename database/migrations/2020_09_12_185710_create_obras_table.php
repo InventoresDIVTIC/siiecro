@@ -38,10 +38,10 @@ class CreateObrasTable extends Migration
             $table->date('año')->nullable();
             $table->enum('estatus_año', config('valores.status_años_obras'))->nullable();
             $table->enum('estatus_epoca', config('valores.status_años_obras'))->nullable();
-            $table->integer('alto')->unsigned();
-            $table->integer('diametro')->unsigned()->nullable();
-            $table->integer('profundidad')->unsigned()->nullable();
-            $table->integer('ancho')->unsigned();
+            $table->decimal('alto', 8, 2)->unsigned();
+            $table->decimal('diametro', 8, 2)->unsigned()->nullable();
+            $table->decimal('profundidad', 8, 2)->unsigned()->nullable();
+            $table->decimal('ancho', 8, 2)->unsigned();
 
             $table->datetime('fecha_ingreso')->nullable();
             $table->string('persona_entrego')->nullable()->comment("Persona que entrego a la ECRO");
