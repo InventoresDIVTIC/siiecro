@@ -1,4 +1,4 @@
-#/vendor/
+vendor/
 node_modules/
 npm-debug.log
 yarn-error.log
@@ -24,3 +24,4 @@ Homestead.json
 
 /public/scripts/landing/env/
 .idea
+.vscode/
