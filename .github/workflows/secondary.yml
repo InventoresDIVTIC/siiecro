@@ -20,7 +20,7 @@ jobs:
       run: |
         $ftpHost = "66.225.201.137"
         $ftpUser = "siiecro1@siiecro.com.mx"
-        $ftpPass = ${{ secrets.FTP_ACCESO }}
+        $ftpPass = "${{ secrets.FTP_ACCESO }}"
         $ftpPath = "/path/to/remote/directory"
         $localPath = "${{ github.workspace }}"
         $webclient = New-Object System.Net.WebClient
