@@ -12,6 +12,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
         ftp-server: 66.225.201.137
-        username: siiecro1@siiecro.com.mx
-        password: ${{ secrets.FTP_ACCESO }}
+        ftp-username: siiecro1@siiecro.com.mx
+        ftp-password: ${{ secrets.FTP_ACCESO }}
  
