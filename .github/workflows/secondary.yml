@@ -18,17 +18,27 @@ jobs:
 
     - name: Upload files via FTP
       run: |
-        $ftpHost = "66.225.201.137"
+        $ftpHost = "ftp://66.225.201.137"
         $ftpUser = "siiecro1@siiecro.com.mx"
         $ftpPass = "${{ secrets.FTP_ACCESO }}"
         $ftpPath = "./"
         $localPath = "${{ github.workspace }}"
         $webclient = New-Object System.Net.WebClient
         $webclient.Credentials = New-Object System.Net.NetworkCredential($ftpUser, $ftpPass)
-        $files = Get-ChildItem -Recurse $localPath
-        foreach ($file in $files) {
-          $relativePath = $file.FullName.Substring($localPath.Length + 1).Replace("\", "/")
-          $destination = "$ftpHost/$ftpPath/$relativePath"
-          $webclient.UploadFile($destination, $file.FullName)
+        try {
+          $files = Get-ChildItem -Recurse $localPath
+          foreach ($file in $files) {
+            $relativePath = $file.FullName.Substring($localPath.Length + 1).Replace("\", "/")
+            $destination = "$ftpHost/$ftpPath/$relativePath"
+            Write-Output "Uploading $file.FullName to $destination"
+            $webclient.UploadFile($destination, $file.FullName)
+          }
+        } catch {
+          Write-Error "Failed to upload file: $_"
+          if ($_.Exception.Response -ne $null) {
+            $statusDescription = $_.Exception.Response.StatusDescription
+            Write-Error "Status: $statusDescription"
+          }
+          exit 1
         }
       shell: powershell
