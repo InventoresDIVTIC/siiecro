@@ -14,5 +14,5 @@ jobs:
         server: 66.225.201.137
         username: siiecro1@siiecro.com.mx
         password: ${{ secrets.FTP_ACCESO }}
-        protocol: ftps
+        protocol: ftp
  
